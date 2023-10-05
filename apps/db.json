@@ -1,0 +1,194 @@
+{
+   "user": [
+      {
+         "id": 8494472,
+         "username": "admin",
+         "email": "admin@pt.ac.id",
+         "code": null,
+         "password": "",
+         "role": 9,
+         "active": 1
+      },
+      {
+         "id": 9996608,
+         "username": "dosen",
+         "email": "dosen@pt.ac.id",
+         "code": null,
+         "password": "1234",
+         "role": 0,
+         "active": true
+      },
+      {
+         "id": 2493621,
+         "username": "dosen.lain",
+         "email": "dosen.lain@pt.ac.id",
+         "code": null,
+         "password": "1234",
+         "role": 0,
+         "active": true
+      },
+      {
+         "id": 2937034,
+         "username": "sdr.approval.1",
+         "email": "sdr.approval.1@pt.ac.id",
+         "code": 2937034,
+         "password": "",
+         "role": 11,
+         "active": true
+      },
+      {
+         "id": 2944935,
+         "username": "sdr.approval.2",
+         "email": "sdr.approval.2@pt.ac.id",
+         "code": 2944935,
+         "password": "",
+         "role": 12,
+         "active": true
+      },
+      {
+         "id": 2952318,
+         "username": "sdr.approval.3",
+         "email": "sdr.approval.3@pt.ac.id",
+         "code": 2952318,
+         "password": "",
+         "role": 13,
+         "active": true
+      },
+      {
+         "id": 472197,
+         "username": "reviewer",
+         "email": "reviewer@pt.ac.id",
+         "code": 472197,
+         "password": "",
+         "role": 10,
+         "active": true
+      }
+   ],
+   "profile": [
+      {
+         "id": 9996627,
+         "uid": 9996608,
+         "nama_lengkap": "Yulmizar",
+         "NIP": "6998289",
+         "NIDN": "",
+         "tempat_lahir": "Duri",
+         "tanggal_lahir": "25/10/1969",
+         "alamat_rumah": "Perumdin Segunting",
+         "alamat_kantor": "",
+         "nomor_handphone": "",
+         "nomor_whatsapp": "",
+         "perguruan_tinggi_asal": "",
+         "program_studi": "",
+         "jabatan_fungsional": "",
+         "pangkat__golongan": ""
+      },
+      {
+         "id": 2493793,
+         "uid": 2493621,
+         "nama_lengkap": "Dosen Lain",
+         "NIP": "",
+         "NIDN": "",
+         "tempat_lahir": "",
+         "tanggal_lahir": "",
+         "alamat_rumah": "",
+         "alamat_kantor": "",
+         "nomor_handphone": "",
+         "nomor_whatsapp": "",
+         "perguruan_tinggi_asal": "",
+         "program_studi": "",
+         "jabatan_fungsional": "",
+         "pangkat__golongan": ""
+      },
+      {
+         "id": 2937052,
+         "uid": 2937034,
+         "nama_lengkap": "",
+         "NIP": "",
+         "NIDN": "",
+         "tempat_lahir": "",
+         "tanggal_lahir": "",
+         "alamat_rumah": "",
+         "alamat_kantor": "",
+         "nomor_handphone": "",
+         "nomor_whatsapp": "",
+         "perguruan_tinggi_asal": "",
+         "program_studi": "",
+         "jabatan_fungsional": "",
+         "pangkat__golongan": ""
+      },
+      {
+         "id": 2944947,
+         "uid": 2944935,
+         "nama_lengkap": "",
+         "NIP": "",
+         "NIDN": "",
+         "tempat_lahir": "",
+         "tanggal_lahir": "",
+         "alamat_rumah": "",
+         "alamat_kantor": "",
+         "nomor_handphone": "",
+         "nomor_whatsapp": "",
+         "perguruan_tinggi_asal": "",
+         "program_studi": "",
+         "jabatan_fungsional": "",
+         "pangkat__golongan": ""
+      },
+      {
+         "id": 2952329,
+         "uid": 2952318,
+         "nama_lengkap": "",
+         "NIP": "",
+         "NIDN": "",
+         "tempat_lahir": "",
+         "tanggal_lahir": "",
+         "alamat_rumah": "",
+         "alamat_kantor": "",
+         "nomor_handphone": "",
+         "nomor_whatsapp": "",
+         "perguruan_tinggi_asal": "",
+         "program_studi": "",
+         "jabatan_fungsional": "",
+         "pangkat__golongan": ""
+      },
+      {
+         "id": 472213,
+         "uid": 472197,
+         "nama_lengkap": "",
+         "NIP": "",
+         "NIDN": "",
+         "tempat_lahir": "",
+         "tanggal_lahir": "",
+         "alamat_rumah": "",
+         "alamat_kantor": "",
+         "nomor_handphone": "",
+         "nomor_whatsapp": "",
+         "perguruan_tinggi_asal": "",
+         "program_studi": "",
+         "jabatan_fungsional": "",
+         "pangkat__golongan": ""
+      }
+   ],
+   "research": [
+      {
+         "id": 3412899,
+         "uid": 9996608,
+         "judul": "Pengaruh Otentikasi pada Aplikasi",
+         "abstract": "Abstract Pengaruh Otentikasi pada Aplikasi adalah, dolor sit amet consectetur adipisicing elit. Reprehenderit maxime facere dolor deleniti, dolorem doloribus eum! Debitis et corrupti est fugit quidem perspiciatis dolorum exercitationem nulla? Magni provident sit alias.",
+         "status": 2
+      },
+      {
+         "id": 3412898,
+         "uid": 9996608,
+         "judul": "Frontend Development dalam Perusahaan...",
+         "abstract": "Abstract Frontend Development dalam Perusahaan adalah, ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum facilis velit ut harum voluptas molestias, quasi ea sunt laudantium provident corrupti eveniet repellendus esse voluptatibus commodi accusamus rerum voluptatem rem!",
+         "status": 5
+      },
+      {
+         "id": 3412890,
+         "uid": 2493621,
+         "judul": "Bajakan Frontend Development dalam Perusahaan",
+         "abstract": "Abstract Frontend Development dalam Perusahaan adalah, ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum facilis velit ut harum voluptas molestias, quasi ea sunt laudantium provident corrupti eveniet repellendus esse voluptatibus commodi accusamus rerum voluptatem rem!",
+         "status": 1
+      }
+   ]
+}
