@@ -1,6 +1,6 @@
 <script>
    import { Article, Icon } from "@cmp";
-   import { account } from "../../store/icons";
+   import { menu } from "../../store/icons";
 </script>
 
 <Article>
@@ -13,14 +13,14 @@
    </p>
 
    <a href="/">
-      <Icon id="orang" src={account} />
+      <Icon id="orang" src={menu} />
       Home
    </a>
 </Article>
 
 <style>
    :global(#orang) {
-      color: red;
+      color: #b8b8b8;
    }
 
    a {

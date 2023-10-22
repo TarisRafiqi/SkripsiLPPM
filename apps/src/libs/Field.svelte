@@ -3,15 +3,17 @@
 
    export let name = "";
    export let value = "";
+   // export let type = "";
    export let selected;
    export let textarea = false;
+   export let datepicker = false;
    export let select = false;
    export let view;
    export let href;
    export let onclick;
+   export let userId;
 
    // export let user;
-   export let userId;
 
    // onMount(async () => {
    //    const id = params["1"];
@@ -65,6 +67,8 @@
       </a>
    {:else if textarea && !view}
       <textarea bind:value on:click={onclick} />
+   {:else if datepicker && !view}
+      <input type="month" bind:value on:click={onclick} />
    {:else if select && view}
       <!-- true && !false-->
       <!-- true && true -->
@@ -82,6 +86,20 @@
 </div>
 
 <style>
+   input[type="month"] {
+      background-color: #5ca7f1;
+      color: #ffffff;
+      border: none;
+      outline: none;
+      /* border-radius: 5px; */
+   }
+
+   ::-webkit-calendar-picker-indicator {
+      background-color: #ffffff;
+      padding: 6px;
+      cursor: pointer;
+      border-radius: 20px;
+   }
    div {
       display: grid;
       grid-template-columns: 12rem auto;

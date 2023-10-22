@@ -71,8 +71,12 @@ module.exports = async function (fastify, opts) {
 
    fastify.post("/", async function (request, reply) {
       let data = request.body;
+      // reply.send({
+      //    data,
+      // });
+      // return;
       const sql =
-         "INSERT INTO ppm (uid, judul, abstrak, status) values(?, ?, ?, ?)";
+         "INSERT INTO ppm (uid, judul, abstrak, status, tahun_pelaksanaan) values(?, ?, ?, ?, ?)";
       let connection;
 
       try {
@@ -82,6 +86,7 @@ module.exports = async function (fastify, opts) {
             data.judul,
             data.abstrak,
             data.status,
+            data.tahunPelaksanaan,
          ]);
          connection.release();
          reply.send({

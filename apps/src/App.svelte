@@ -4,7 +4,7 @@
    import routes from "./routes";
    import { route } from "./store";
 
-   import { E404, Sidebar } from "@cmp";
+   import { E404, Sidebar, Navbar } from "@cmp";
 
    let cmp, params;
    let auth, role;
@@ -27,7 +27,7 @@
    // $: auth = sessionStorage.getItem("auth");
 
    if (location.pathname === "/") {
-      if (!auth) $route("/about");
+      if (!auth) $route("/");
       else {
          if (role === "admin") $route("/admin");
          else $route("/dosen");
@@ -41,6 +41,7 @@
       };
 </script>
 
+<Navbar />
 {#if auth}
    <Sidebar />
 {/if}

@@ -128,6 +128,7 @@
    async function findRole(role) {
       const response = await fetch("/api/role/" + role);
       const result = await response.json();
+      // console.log(result);
 
       if (response.ok) {
          options = result;

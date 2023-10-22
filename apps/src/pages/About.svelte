@@ -1,54 +1,23 @@
-<script>
-   import { Hero } from "src";
-   import { route } from "../store";
-
-   function handleLogin(ev) {
-      $route("/login");
-   }
-</script>
-
-<Hero>
-   <div middle slot="left">
-      <h1>Application</h1>
-      <p>
-         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum ex
-         numquam, accusantium eligendi praesentium eum molestiae porro
-         voluptatum ipsam consequuntur, soluta aliquid aliquam at voluptas odit
-         tempora! Natus, quo eum.
-      </p>
-      <p>
-         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex facilis
-         doloribus voluptate asperiores, similique non repellat iste corrupti
-         voluptatem ullam ad labore harum impedit itaque error sed molestias
-         dolorum deleniti?
-      </p>
-   </div>
-   <div middle slot="right">
-      <a href="/login">Login</a>
-      <p>
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ea quos
-         commodi blanditiis sint perferendis at eaque rem obcaecati corporis,
-         soluta excepturi dolor eveniet amet vitae natus? Officia, quia nam.
-      </p>
-
-      <span>
-         <button on:click={$route("/login")}>Login</button>
-         <button on:click={$route("/register")}>Register</button>
-      </span>
-   </div>
-</Hero>
-
 <article class="container">
+   <h1>Profil</h1>
    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
-      asperiores ducimus nemo! Assumenda nihil, mollitia pariatur repellat,
-      laudantium nemo delectus exercitationem, quos magnam architecto eaque
-      perferendis distinctio unde. Veritatis, alias.
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos repellendus
+      nulla soluta odio. Vitae elementum curabitur vitae nunc. Sem nulla
+      pharetra diam sit amet nisl suscipit. Odio ut enim blandit volutpat
+      maecenas volutpat. Nec ultrices dui sapien eget mi proin sed libero enim.
+      Ultrices gravida dictum fusce ut placerat orci nulla. Eget duis at tellus
+      at urna. Est velit egestas dui id ornare arcu. Suscipit adipiscing
+      bibendum est ultricies.
    </p>
-   <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium
-      dolorem sed nulla rerum eligendi modi nam impedit debitis nostrum at? Id
-      doloremque libero debitis! Accusantium sapiente aspernatur quas harum
-      cumque.
-   </p>
+   <!-- <a href="/about">about</a>
+   &nbsp;
+   <a href="/admin">admin</a>
+   &nbsp;
+   <a href="/404">404</a> -->
 </article>
+
+<style>
+   article {
+      text-align: center;
+   }
+</style>
