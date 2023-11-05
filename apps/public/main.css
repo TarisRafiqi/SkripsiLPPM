@@ -124,7 +124,7 @@ button {
   padding: 0 1.125em;
   line-height: 2.25;
   outline: 0;
-  border-radius: 0.6em;
+  border-radius: 1.5em;
   gap: 0.25em;
   cursor: pointer;
 }

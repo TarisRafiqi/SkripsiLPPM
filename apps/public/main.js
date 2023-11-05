@@ -773,7 +773,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance25, create_fragment32, not_equal, props, append_styles2, dirty = [-1]) {
+  function init(component, options, instance25, create_fragment33, not_equal, props, append_styles2, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -812,7 +812,7 @@
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment32 ? create_fragment32($$.ctx) : false;
+    $$.fragment = create_fragment33 ? create_fragment33($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -1160,6 +1160,35 @@
   };
   var About_default = About;
 
+  // src/pages/AuthGoogle.svelte
+  function create_fragment3(ctx) {
+    let h2;
+    return {
+      c() {
+        h2 = element("h2");
+        h2.textContent = "Login With Google";
+      },
+      m(target, anchor) {
+        insert(target, h2, anchor);
+      },
+      p: noop,
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(h2);
+        }
+      }
+    };
+  }
+  var AuthGoogle = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment3, safe_not_equal, {});
+    }
+  };
+  var AuthGoogle_default = AuthGoogle;
+
   // ../node_modules/svelte/src/runtime/transition/index.js
   function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
     const o = +getComputedStyle(node).opacity;
@@ -1172,7 +1201,7 @@
   }
 
   // src/libs/Article.svelte
-  function create_fragment3(ctx) {
+  function create_fragment4(ctx) {
     let article;
     let article_intro;
     let current;
@@ -1263,7 +1292,7 @@
   var Article = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment3, safe_not_equal, {});
+      init(this, options, instance, create_fragment4, safe_not_equal, {});
     }
   };
   var Article_default = Article;
@@ -1695,7 +1724,7 @@
       }
     };
   }
-  function create_fragment4(ctx) {
+  function create_fragment5(ctx) {
     let div;
     let b;
     let t0;
@@ -1922,7 +1951,7 @@
         this,
         options,
         instance2,
-        create_fragment4,
+        create_fragment5,
         safe_not_equal,
         {
           name: 0,
@@ -1946,7 +1975,7 @@
   function add_css4(target) {
     append_styles(target, "svelte-s3y2lf", "div.svelte-s3y2lf{display:grid;min-height:15rem;background:var(--hero-background);color:var(--hero-color);padding:1rem 2rem;gap:2rem;align-items:center;text-align:center;justify-content:center}div.svelte-s3y2lf>*{display:inline-flex;flex-direction:column}@media(min-width: 768px){}");
   }
-  function create_fragment5(ctx) {
+  function create_fragment6(ctx) {
     let div;
     let current;
     const default_slot_template = (
@@ -2029,13 +2058,13 @@
   var Hero = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance3, create_fragment5, safe_not_equal, {}, add_css4);
+      init(this, options, instance3, create_fragment6, safe_not_equal, {}, add_css4);
     }
   };
   var Hero_default = Hero;
 
   // src/libs/Icon.svelte
-  function create_fragment6(ctx) {
+  function create_fragment7(ctx) {
     let svg;
     let path;
     return {
@@ -2122,7 +2151,7 @@
   var Icon = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance4, create_fragment6, safe_not_equal, { id: 0, src: 1, size: 4 });
+      init(this, options, instance4, create_fragment7, safe_not_equal, { id: 0, src: 1, size: 4 });
     }
   };
   var Icon_default = Icon;
@@ -2133,7 +2162,7 @@
   }
   var get_header_slot_changes = (dirty) => ({});
   var get_header_slot_context = (ctx) => ({});
-  function create_fragment7(ctx) {
+  function create_fragment8(ctx) {
     let b;
     let div;
     let t0;
@@ -2307,7 +2336,7 @@
   var Modal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance5, create_fragment7, safe_not_equal, { show: 0 }, add_css5);
+      init(this, options, instance5, create_fragment8, safe_not_equal, { show: 0 }, add_css5);
     }
   };
   var Modal_default = Modal;
@@ -2316,7 +2345,7 @@
   function add_css6(target) {
     append_styles(target, "svelte-12yf9li", "article.svelte-12yf9li{text-align:center}");
   }
-  function create_fragment8(ctx) {
+  function create_fragment9(ctx) {
     let article;
     return {
       c() {
@@ -2340,7 +2369,7 @@
   var E404 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment8, safe_not_equal, {}, add_css6);
+      init(this, options, null, create_fragment9, safe_not_equal, {}, add_css6);
     }
   };
   var E404_default = E404;
@@ -2399,7 +2428,7 @@
   function add_css7(target) {
     append_styles(target, "svelte-5za9if", ".svelte-5za9if.svelte-5za9if{padding:0}header.svelte-5za9if.svelte-5za9if{background-color:#2a2d2e;color:white;position:relative;padding:0 2rem}li.svelte-5za9if.svelte-5za9if{list-style:none}a.svelte-5za9if.svelte-5za9if{cursor:pointer;text-decoration:none;font-size:1rem}a.svelte-5za9if.svelte-5za9if:hover{color:orange}.navbar.svelte-5za9if.svelte-5za9if{width:100%;height:60px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}.navbar.svelte-5za9if .logo a.svelte-5za9if{font-size:1.5rem;font-weight:bold}.navbar.svelte-5za9if .links.svelte-5za9if{display:flex;gap:2rem}.navbar.svelte-5za9if .toggle_btn.svelte-5za9if{font-size:1.5rem;cursor:pointer;display:none}.action_btn.svelte-5za9if.svelte-5za9if{background-color:orange;color:#fff;padding:0.5rem 1rem;border:none;outline:none;border-radius:0.6em;font-size:0.8rem;font-weight:bold;cursor:pointer;transition:scale 0.2 ease}.action_btn.svelte-5za9if.svelte-5za9if:hover{scale:1.05;color:#fff}.action_btn.svelte-5za9if.svelte-5za9if:active{scale:0.95}.dropdown_menu.svelte-5za9if.svelte-5za9if{display:none;position:absolute;right:2rem;top:60px;height:0;width:300px;background:rgba(255, 255, 255, 0.1);backdrop-filter:blur(15px);border-radius:10px;overflow:hidden;transition:height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)}.dropdown_menu.open.svelte-5za9if.svelte-5za9if{height:300px}.dropdown_menu.svelte-5za9if li.svelte-5za9if{padding:0.7rem;display:flex;align-items:center;justify-content:center}.dropdown_menu.svelte-5za9if .action_btn.svelte-5za9if{width:100%;display:flex;justify-content:center}@media screen and (max-width: 576px){.dropdown_menu.svelte-5za9if.svelte-5za9if{right:1rem;left:1rem;width:unset}}@media screen and (max-width: 768px){.navbar.svelte-5za9if .links.svelte-5za9if,.navbar.svelte-5za9if .action_btn.svelte-5za9if{display:none}.navbar.svelte-5za9if .toggle_btn.svelte-5za9if{display:block}.dropdown_menu.svelte-5za9if.svelte-5za9if{display:block}}@media screen and (max-width: 992px){}@media screen and (max-width: 1200px){}@media screen and (max-width: 1400px){}");
   }
-  function create_fragment9(ctx) {
+  function create_fragment10(ctx) {
     let header;
     let div2;
     let div0;
@@ -2483,7 +2512,7 @@
   var Navbar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment9, safe_not_equal, {}, add_css7);
+      init(this, options, null, create_fragment10, safe_not_equal, {}, add_css7);
     }
   };
   var Navbar_default = Navbar;
@@ -2657,7 +2686,7 @@
       }
     };
   }
-  function create_fragment10(ctx) {
+  function create_fragment11(ctx) {
     let aside;
     let if_block = (
       /*items*/
@@ -2715,7 +2744,7 @@
   var Sidebar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance6, create_fragment10, safe_not_equal, {}, add_css8);
+      init(this, options, instance6, create_fragment11, safe_not_equal, {}, add_css8);
     }
   };
   var Sidebar_default = Sidebar;
@@ -2945,7 +2974,7 @@
       }
     };
   }
-  function create_fragment11(ctx) {
+  function create_fragment12(ctx) {
     let if_block_anchor;
     function select_block_type(ctx2, dirty) {
       if (
@@ -3066,7 +3095,7 @@
   var Status = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance7, create_fragment11, safe_not_equal, { code: 0 });
+      init(this, options, instance7, create_fragment12, safe_not_equal, { code: 0 });
     }
   };
   var Status_default = Status;
@@ -3215,7 +3244,7 @@
       }
     };
   }
-  function create_fragment12(ctx) {
+  function create_fragment13(ctx) {
     let hero;
     let t0;
     let section;
@@ -3378,18 +3407,18 @@
   var Index = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance8, create_fragment12, safe_not_equal, {}, add_css9);
+      init(this, options, instance8, create_fragment13, safe_not_equal, {}, add_css9);
     }
   };
   var Index_default = Index;
 
   // src/pages/Login.svelte
   function add_css10(target) {
-    append_styles(target, "svelte-f1u2iy", "article.container.svelte-f1u2iy.svelte-f1u2iy{text-align:center}div.box.svelte-f1u2iy.svelte-f1u2iy{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-f1u2iy div.svelte-f1u2iy{text-align:left}button.svelte-f1u2iy.svelte-f1u2iy{width:100%}");
+    append_styles(target, "svelte-mtixvm", '.gsi-material-button.svelte-mtixvm.svelte-mtixvm{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#f2f2f2;background-image:none;border:1px solid var(--border, #dadce0);-webkit-border-radius:20px;border-radius:20px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#1f1f1f;cursor:pointer;font-family:"Roboto", arial, sans-serif;font-size:14px;height:40px;letter-spacing:0.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;-webkit-transition:background-color 0.218s, border-color 0.218s,\r\n         box-shadow 0.218s;transition:background-color 0.218s, border-color 0.218s,\r\n         box-shadow 0.218s;vertical-align:middle;white-space:nowrap}.gsi-material-button.svelte-mtixvm .gsi-material-button-icon.svelte-mtixvm{height:20px;margin-right:12px;min-width:20px;width:20px}.gsi-material-button.svelte-mtixvm .gsi-material-button-content-wrapper.svelte-mtixvm{-webkit-align-items:center;align-items:center;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;justify-content:space-between;position:relative;width:100%}.gsi-material-button.svelte-mtixvm .gsi-material-button-contents.svelte-mtixvm{-webkit-flex-grow:1;flex-grow:1;font-family:"Roboto", arial, sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.gsi-material-button.svelte-mtixvm .gsi-material-button-state.svelte-mtixvm{-webkit-transition:opacity 0.218s;transition:opacity 0.218s;bottom:0;left:0;opacity:0;position:absolute;right:0;top:0}.gsi-material-button.svelte-mtixvm.svelte-mtixvm:disabled{cursor:default;background-color:#ffffff61}.gsi-material-button.svelte-mtixvm:disabled .gsi-material-button-state.svelte-mtixvm{background-color:#1f1f1f1f}.gsi-material-button.svelte-mtixvm:disabled .gsi-material-button-contents.svelte-mtixvm{opacity:38%}.gsi-material-button.svelte-mtixvm:disabled .gsi-material-button-icon.svelte-mtixvm{opacity:38%}.gsi-material-button.svelte-mtixvm:not(:disabled):active .gsi-material-button-state.svelte-mtixvm,.gsi-material-button.svelte-mtixvm:not(:disabled):focus .gsi-material-button-state.svelte-mtixvm{background-color:#001d35;opacity:12%}.gsi-material-button.svelte-mtixvm.svelte-mtixvm:not(:disabled):hover{-webkit-box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15);box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15)}.gsi-material-button.svelte-mtixvm:not(:disabled):hover .gsi-material-button-state.svelte-mtixvm{background-color:#001d35;opacity:8%}article.container.svelte-mtixvm.svelte-mtixvm{text-align:center}div.box.svelte-mtixvm.svelte-mtixvm{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-mtixvm div.svelte-mtixvm{text-align:left}button.svelte-mtixvm.svelte-mtixvm{width:100%}');
   }
-  function create_fragment13(ctx) {
+  function create_fragment14(ctx) {
     let article;
-    let div5;
+    let div9;
     let h2;
     let t1;
     let div1;
@@ -3405,13 +3434,16 @@
     let div4;
     let br;
     let t8;
-    let button;
+    let button0;
+    let t10;
+    let div8;
+    let button1;
     let mounted;
     let dispose;
     return {
       c() {
         article = element("article");
-        div5 = element("div");
+        div9 = element("div");
         h2 = element("h2");
         h2.textContent = "LOGIN";
         t1 = space();
@@ -3430,25 +3462,31 @@
         div4 = element("div");
         br = element("br");
         t8 = space();
-        button = element("button");
-        button.textContent = "Submit";
-        attr(div0, "class", "svelte-f1u2iy");
+        button0 = element("button");
+        button0.textContent = "Submit";
+        t10 = space();
+        div8 = element("div");
+        button1 = element("button");
+        button1.innerHTML = `<div class="gsi-material-button-state svelte-mtixvm"></div> <div class="gsi-material-button-content-wrapper svelte-mtixvm"><div class="gsi-material-button-icon svelte-mtixvm"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg></div> <span class="gsi-material-button-contents svelte-mtixvm">Sign in with Google</span> <span style="display: none;">Sign in with Google</span></div>`;
+        attr(div0, "class", "svelte-mtixvm");
         attr(input0, "type", "text");
-        attr(div1, "class", "svelte-f1u2iy");
-        attr(div2, "class", "svelte-f1u2iy");
+        attr(div1, "class", "svelte-mtixvm");
+        attr(div2, "class", "svelte-mtixvm");
         attr(input1, "type", "password");
-        attr(div3, "class", "svelte-f1u2iy");
-        attr(button, "class", "svelte-f1u2iy");
-        attr(div4, "class", "svelte-f1u2iy");
-        attr(div5, "class", "box svelte-f1u2iy");
-        attr(article, "class", "container svelte-f1u2iy");
+        attr(div3, "class", "svelte-mtixvm");
+        attr(button0, "class", "svelte-mtixvm");
+        attr(div4, "class", "svelte-mtixvm");
+        attr(button1, "class", "gsi-material-button svelte-mtixvm");
+        attr(div8, "class", "svelte-mtixvm");
+        attr(div9, "class", "box svelte-mtixvm");
+        attr(article, "class", "container svelte-mtixvm");
       },
       m(target, anchor) {
         insert(target, article, anchor);
-        append(article, div5);
-        append(div5, h2);
-        append(div5, t1);
-        append(div5, div1);
+        append(article, div9);
+        append(div9, h2);
+        append(div9, t1);
+        append(div9, div1);
         append(div1, div0);
         append(div1, t3);
         append(div1, input0);
@@ -3457,8 +3495,8 @@
           /*username*/
           ctx[0]
         );
-        append(div5, t4);
-        append(div5, div3);
+        append(div9, t4);
+        append(div9, div3);
         append(div3, div2);
         append(div3, t6);
         append(div3, input1);
@@ -3467,11 +3505,14 @@
           /*password*/
           ctx[1]
         );
-        append(div5, t7);
-        append(div5, div4);
+        append(div9, t7);
+        append(div9, div4);
         append(div4, br);
         append(div4, t8);
-        append(div4, button);
+        append(div4, button0);
+        append(div9, t10);
+        append(div9, div8);
+        append(div8, button1);
         if (!mounted) {
           dispose = [
             listen(
@@ -3487,11 +3528,12 @@
               ctx[4]
             ),
             listen(
-              button,
+              button0,
               "click",
               /*handleSubmit*/
               ctx[2]
-            )
+            ),
+            listen(button1, "click", signGoogle)
           ];
           mounted = true;
         }
@@ -3527,6 +3569,12 @@
       }
     };
   }
+  async function signGoogle() {
+    console.log("Sign google");
+    location.pathname = "/api/auth/google";
+    console.log(response);
+    return;
+  }
   function instance9($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
@@ -3538,8 +3586,8 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       };
-      const response = await fetch("/api/auth", payload);
-      const result = await response.json();
+      const response2 = await fetch("/api/auth", payload);
+      const result = await response2.json();
       console.log(result);
       if (result.sukses) {
         const { id, username: username2, role, token } = result;
@@ -3566,7 +3614,7 @@
   var Login = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment13, safe_not_equal, {}, add_css10);
+      init(this, options, instance9, create_fragment14, safe_not_equal, {}, add_css10);
     }
   };
   var Login_default = Login;
@@ -3575,7 +3623,7 @@
   function add_css11(target) {
     append_styles(target, "svelte-ppcz1w", "article.svelte-ppcz1w{margin:0 auto;text-align:center}");
   }
-  function create_fragment14(ctx) {
+  function create_fragment15(ctx) {
     let article;
     return {
       c() {
@@ -3609,7 +3657,7 @@
   var Logout = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance10, create_fragment14, safe_not_equal, {}, add_css11);
+      init(this, options, instance10, create_fragment15, safe_not_equal, {}, add_css11);
     }
   };
   var Logout_default = Logout;
@@ -3618,7 +3666,7 @@
   function add_css12(target) {
     append_styles(target, "svelte-12yf9li", "article.svelte-12yf9li{text-align:center}");
   }
-  function create_fragment15(ctx) {
+  function create_fragment16(ctx) {
     let article;
     return {
       c() {
@@ -3645,7 +3693,7 @@
   var Penelitian = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment15, safe_not_equal, {}, add_css12);
+      init(this, options, null, create_fragment16, safe_not_equal, {}, add_css12);
     }
   };
   var Penelitian_default = Penelitian;
@@ -3654,7 +3702,7 @@
   function add_css13(target) {
     append_styles(target, "svelte-f1u2iy", "article.container.svelte-f1u2iy.svelte-f1u2iy{text-align:center}div.box.svelte-f1u2iy.svelte-f1u2iy{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-f1u2iy div.svelte-f1u2iy{text-align:left}button.svelte-f1u2iy.svelte-f1u2iy{width:100%}");
   }
-  function create_fragment16(ctx) {
+  function create_fragment17(ctx) {
     let article;
     let div5;
     let h2;
@@ -3805,9 +3853,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email })
       };
-      const response = await fetch("/api/user", payload);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/user", payload);
+      const result = await response2.json();
+      if (response2.ok) {
         console.log(result);
         sessionStorage.setItem("code", result.code);
         $route("/verify");
@@ -3835,7 +3883,7 @@
   var Register = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment16, safe_not_equal, {}, add_css13);
+      init(this, options, instance11, create_fragment17, safe_not_equal, {}, add_css13);
     }
   };
   var Register_default = Register;
@@ -3844,7 +3892,7 @@
   function add_css14(target) {
     append_styles(target, "svelte-f1u2iy", "article.container.svelte-f1u2iy.svelte-f1u2iy{text-align:center}div.box.svelte-f1u2iy.svelte-f1u2iy{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-f1u2iy div.svelte-f1u2iy{text-align:left}button.svelte-f1u2iy.svelte-f1u2iy{width:100%}");
   }
-  function create_fragment17(ctx) {
+  function create_fragment18(ctx) {
     let article;
     let div7;
     let h2;
@@ -4060,10 +4108,10 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, code, password })
       };
-      const response = await fetch("/api/verify", payload);
-      if (response.status === 204) {
+      const response2 = await fetch("/api/verify", payload);
+      if (response2.status === 204) {
         console.log("Gagal");
-      } else if (response.status === 200) {
+      } else if (response2.status === 200) {
         console.log("sukses");
         $route("/login");
       }
@@ -4093,7 +4141,7 @@
   var Verify = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance12, create_fragment17, safe_not_equal, {}, add_css14);
+      init(this, options, instance12, create_fragment18, safe_not_equal, {}, add_css14);
     }
   };
   var Verify_default = Verify;
@@ -4178,7 +4226,7 @@
       }
     };
   }
-  function create_fragment18(ctx) {
+  function create_fragment19(ctx) {
     let article;
     let current;
     article = new Article_default({
@@ -4221,7 +4269,7 @@
   var Home = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment18, safe_not_equal, {}, add_css15);
+      init(this, options, null, create_fragment19, safe_not_equal, {}, add_css15);
     }
   };
   var home_default = Home;
@@ -4254,7 +4302,7 @@
       }
     };
   }
-  function create_fragment19(ctx) {
+  function create_fragment20(ctx) {
     let article;
     let current;
     article = new Article_default({
@@ -4297,7 +4345,7 @@
   var Pengumuman = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment19, safe_not_equal, {});
+      init(this, options, null, create_fragment20, safe_not_equal, {});
     }
   };
   var pengumuman_default = Pengumuman;
@@ -4622,7 +4670,7 @@
       }
     };
   }
-  function create_fragment20(ctx) {
+  function create_fragment21(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -4693,9 +4741,9 @@
     const id = params["1"];
     let msgNip2;
     onMount(async () => {
-      const response = await fetch("/api/user/" + id);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/user/" + id);
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result[0])) {
           items.push({ field, value });
@@ -4801,16 +4849,16 @@
           }
         }
       });
-      const response = await fetch("/api/userprofile", {
+      const response2 = await fetch("/api/userprofile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     function field_value_binding(value, item) {
@@ -4835,7 +4883,7 @@
   var Profile = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance13, create_fragment20, safe_not_equal, { params: 3 });
+      init(this, options, instance13, create_fragment21, safe_not_equal, { params: 3 });
     }
   };
   var profile_default = Profile;
@@ -5723,7 +5771,7 @@
       }
     };
   }
-  function create_fragment21(ctx) {
+  function create_fragment22(ctx) {
     let t;
     let modal;
     let updating_show;
@@ -5848,9 +5896,9 @@
       $$invalidate(3, ka_lppm = await findRole(12));
       $$invalidate(5, ka_pusat_kajian = await findRole(13));
       $$invalidate(4, reviewer = await findRole(10));
-      const response = await fetch("/api/ppm/" + id);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/ppm/" + id);
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result)) {
           let obj = { field, value };
@@ -5878,16 +5926,16 @@
         kpkSelected: kpkSelected2,
         reviewerSelected: reviewerSelected2
       };
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     async function handlePass() {
@@ -5904,34 +5952,34 @@
         reviewerSelected: reviewerSelected2
       };
       console.log("reviewerSelected", reviewerSelected2);
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     async function searchUser(ev) {
-      const response = await fetch("/api/user");
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/user");
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(6, showModal = true);
       }
     }
     let options;
     async function findRole(role) {
-      const response = await fetch("/api/role/" + role);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/role/" + role);
+      const result = await response2.json();
+      if (response2.ok) {
         options = result;
         return options;
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     function field0_value_binding(value) {
@@ -6008,7 +6056,7 @@
   var Proposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance14, create_fragment21, safe_not_equal, { params: 13 }, null, [-1, -1]);
+      init(this, options, instance14, create_fragment22, safe_not_equal, { params: 13 }, null, [-1, -1]);
     }
   };
   var proposal_default = Proposal;
@@ -6274,7 +6322,7 @@
       }
     };
   }
-  function create_fragment22(ctx) {
+  function create_fragment23(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -6342,9 +6390,9 @@
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     let items;
     onMount(async () => {
-      const response = await fetch("/api/ppm");
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/ppm");
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = result.dbData);
       }
     });
@@ -6357,7 +6405,7 @@
   var Proposals = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance15, create_fragment22, safe_not_equal, {}, add_css16);
+      init(this, options, instance15, create_fragment23, safe_not_equal, {}, add_css16);
     }
   };
   var proposals_default = Proposals;
@@ -6754,7 +6802,7 @@
       }
     };
   }
-  function create_fragment23(ctx) {
+  function create_fragment24(ctx) {
     let article;
     let current;
     article = new Article_default({
@@ -6801,9 +6849,9 @@
     let profile;
     let items;
     async function populateTable() {
-      const response = await fetch("/api/user");
-      const result = await response.json();
-      if (response.status === 200) {
+      const response2 = await fetch("/api/user");
+      const result = await response2.json();
+      if (response2.status === 200) {
         $$invalidate(0, items = result.dbData);
       }
     }
@@ -6815,16 +6863,16 @@
         active: !items[id].active,
         role: Number(value)
       };
-      const response = await fetch("/api/user", {
+      const response2 = await fetch("/api/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         populateTable();
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     async function handleGroup(ev) {
@@ -6835,24 +6883,24 @@
         role: Number(value),
         active: items[id].active
       };
-      const response = await fetch("/api/user", {
+      const response2 = await fetch("/api/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         populateTable();
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     async function getPage() {
       if (params["1"] === "profile") {
         let id = params["2"];
-        const response = await fetch("/api/user/" + id);
-        const result = await response.json();
-        if (response.ok) {
+        const response2 = await fetch("/api/user/" + id);
+        const result = await response2.json();
+        if (response2.ok) {
           if (!result.length)
             return;
           $$invalidate(5, profile = []);
@@ -6888,7 +6936,7 @@
   var Users = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance16, create_fragment23, safe_not_equal, { params: 4 }, add_css17);
+      init(this, options, instance16, create_fragment24, safe_not_equal, { params: 4 }, add_css17);
     }
   };
   var users_default = Users;
@@ -7001,7 +7049,7 @@
       }
     };
   }
-  function create_fragment24(ctx) {
+  function create_fragment25(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -7087,7 +7135,7 @@
   var Index2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance17, create_fragment24, safe_not_equal, { params: 0 });
+      init(this, options, instance17, create_fragment25, safe_not_equal, { params: 0 });
     }
   };
   var Index_default2 = Index2;
@@ -7332,7 +7380,7 @@
       }
     };
   }
-  function create_fragment25(ctx) {
+  function create_fragment26(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -7401,12 +7449,12 @@
     const id = sessionStorage.id;
     let items;
     onMount(async () => {
-      const response = await fetch("/api/approval/" + id);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/approval/" + id);
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = result.dbData);
       } else {
-        console.log(response);
+        console.log(response2);
       }
     });
     function detail(ev) {
@@ -7418,7 +7466,7 @@
   var Approval = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance18, create_fragment25, safe_not_equal, {}, add_css18);
+      init(this, options, instance18, create_fragment26, safe_not_equal, {}, add_css18);
     }
   };
   var approval_default = Approval;
@@ -7676,7 +7724,7 @@
       }
     };
   }
-  function create_fragment26(ctx) {
+  function create_fragment27(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -7745,13 +7793,13 @@
     const id = sessionStorage.id;
     let items;
     onMount(async () => {
-      const response = await fetch("/api/ppm/all/" + id);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/ppm/all/" + id);
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = result.dbData);
       } else {
         console.log(
-          response
+          response2
         );
       }
     });
@@ -7767,7 +7815,7 @@
   var Home2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance19, create_fragment26, safe_not_equal, {}, add_css19);
+      init(this, options, instance19, create_fragment27, safe_not_equal, {}, add_css19);
     }
   };
   var home_default2 = Home2;
@@ -7980,7 +8028,7 @@
       }
     };
   }
-  function create_fragment27(ctx) {
+  function create_fragment28(ctx) {
     let article;
     let h1;
     let t1;
@@ -8056,9 +8104,9 @@
     let items;
     const id = sessionStorage.getItem("id");
     onMount(async () => {
-      const response = await fetch("/api/user/" + id);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/user/" + id);
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result[0])) {
           items.push({ field, value });
@@ -8164,17 +8212,17 @@
           }
         }
       });
-      const response = await fetch("/api/userprofile", {
+      const response2 = await fetch("/api/userprofile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
+      const result = await response2.json();
       console.log(result);
-      if (response.ok) {
+      if (response2.ok) {
         $route("/dosen");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     function field_value_binding(value, item) {
@@ -8188,7 +8236,7 @@
   var Profile2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance20, create_fragment27, safe_not_equal, {});
+      init(this, options, instance20, create_fragment28, safe_not_equal, {});
     }
   };
   var profile_default2 = Profile2;
@@ -8324,7 +8372,7 @@
       }
     };
   }
-  function create_fragment28(ctx) {
+  function create_fragment29(ctx) {
     let article;
     let h1;
     let t1;
@@ -8552,13 +8600,13 @@
         status: 0,
         tahunPelaksanaan
       };
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         console.log(result);
         $route("/dosen");
       } else {
@@ -8573,13 +8621,13 @@
         status: 2,
         tahunPelaksanaan
       };
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/dosen");
       } else {
         console.log(result.msg);
@@ -8634,7 +8682,7 @@
   var Proposal2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance21, create_fragment28, safe_not_equal, {});
+      init(this, options, instance21, create_fragment29, safe_not_equal, {});
     }
   };
   var proposal_default2 = Proposal2;
@@ -9325,7 +9373,7 @@
       }
     };
   }
-  function create_fragment29(ctx) {
+  function create_fragment30(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -9402,9 +9450,9 @@
     let statusProposal;
     const id = params["1"];
     onMount(async () => {
-      const response = await fetch("/api/ppm/" + id);
-      const result = await response.json();
-      if (response.ok) {
+      const response2 = await fetch("/api/ppm/" + id);
+      const result = await response2.json();
+      if (response2.ok) {
         $$invalidate(0, items = []);
         data2 = result;
         for (const [key, value] of Object.entries(result)) {
@@ -9421,7 +9469,7 @@
         kpkSelected = items[8].value;
         reviewerSelected = items[9].value;
       } else {
-        console.log(response);
+        console.log(response2);
       }
     });
     async function remediasi() {
@@ -9438,16 +9486,16 @@
         kpkSelected,
         reviewerSelected
       };
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/dosen");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     async function submitProposal() {
@@ -9459,16 +9507,16 @@
         abstrak: data3.abstrak,
         status: Number(data3.status) + 2
       };
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/dosen");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     async function simpanProposal() {
@@ -9480,16 +9528,16 @@
         abstrak: data3.abstrak,
         status: Number(data3.status)
       };
-      const response = await fetch("/api/ppm", {
+      const response2 = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response.json();
-      if (response.ok) {
+      const result = await response2.json();
+      if (response2.ok) {
         $route("/dosen");
       } else {
-        console.log(response);
+        console.log(response2);
       }
     }
     function field_value_binding(value, item) {
@@ -9516,7 +9564,7 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance22, create_fragment29, safe_not_equal, { params: 6 });
+      init(this, options, instance22, create_fragment30, safe_not_equal, { params: 6 });
     }
   };
   var proposals_default2 = Proposals2;
@@ -9629,7 +9677,7 @@
       }
     };
   }
-  function create_fragment30(ctx) {
+  function create_fragment31(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -9715,7 +9763,7 @@
   var Index3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance23, create_fragment30, safe_not_equal, { params: 0 });
+      init(this, options, instance23, create_fragment31, safe_not_equal, { params: 0 });
     }
   };
   var Index_default3 = Index3;
@@ -9724,6 +9772,7 @@
   var routes_default = [
     { path: "/abdimas", page: Abdimas_default },
     { path: "/about", page: About_default },
+    { path: "/authgoogle", page: AuthGoogle_default },
     { path: "/", page: Index_default },
     { path: "/login", page: Login_default },
     { path: "/logout", page: Logout_default },
@@ -9844,7 +9893,7 @@
       }
     };
   }
-  function create_fragment31(ctx) {
+  function create_fragment32(ctx) {
     let navbar;
     let t0;
     let t1;
@@ -9991,7 +10040,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance24, create_fragment31, safe_not_equal, {}, add_css20);
+      init(this, options, instance24, create_fragment32, safe_not_equal, {}, add_css20);
     }
   };
   var App_default = App;

@@ -1,5 +1,6 @@
 import Abdimas from "./pages/Abdimas.svelte";
 import About from "./pages/About.svelte";
+import AuthGoogle from "./pages/AuthGoogle.svelte";
 import Index from "./pages/Index.svelte";
 import Login from "./pages/Login.svelte";
 import Logout from "./pages/Logout.svelte";
@@ -12,6 +13,7 @@ import dosenIndex from "./pages/dosen/Index.svelte";
 export default [
 	{ path: "/abdimas", page: Abdimas },
 	{ path: "/about", page: About },
+	{ path: "/authgoogle", page: AuthGoogle },
 	{ path: "/", page: Index },
 	{ path: "/login", page: Login },
 	{ path: "/logout", page: Logout },
