@@ -773,7 +773,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance25, create_fragment33, not_equal, props, append_styles2, dirty = [-1]) {
+  function init(component, options, instance27, create_fragment36, not_equal, props, append_styles2, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -799,7 +799,7 @@
     };
     append_styles2 && append_styles2($$.root);
     let ready = false;
-    $$.ctx = instance25 ? instance25(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance27 ? instance27(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -812,7 +812,7 @@
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment33 ? create_fragment33($$.ctx) : false;
+    $$.fragment = create_fragment36 ? create_fragment36($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -1181,10 +1181,19 @@
       }
     };
   }
+  function instance($$self, $$props, $$invalidate) {
+    let { params = {} } = $$props;
+    console.log(params);
+    $$self.$$set = ($$props2) => {
+      if ("params" in $$props2)
+        $$invalidate(0, params = $$props2.params);
+    };
+    return [params];
+  }
   var AuthGoogle = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment3, safe_not_equal, {});
+      init(this, options, instance, create_fragment3, safe_not_equal, { params: 0 });
     }
   };
   var AuthGoogle_default = AuthGoogle;
@@ -1281,7 +1290,7 @@
       }
     };
   }
-  function instance($$self, $$props, $$invalidate) {
+  function instance2($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
     $$self.$$set = ($$props2) => {
       if ("$$scope" in $$props2)
@@ -1292,7 +1301,7 @@
   var Article = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment4, safe_not_equal, {});
+      init(this, options, instance2, create_fragment4, safe_not_equal, {});
     }
   };
   var Article_default = Article;
@@ -1857,7 +1866,7 @@
       }
     };
   }
-  function instance2($$self, $$props, $$invalidate) {
+  function instance3($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
     let { name = "" } = $$props;
     let { value = "" } = $$props;
@@ -1950,7 +1959,7 @@
       init(
         this,
         options,
-        instance2,
+        instance3,
         create_fragment5,
         safe_not_equal,
         {
@@ -2047,7 +2056,7 @@
       }
     };
   }
-  function instance3($$self, $$props, $$invalidate) {
+  function instance4($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
     $$self.$$set = ($$props2) => {
       if ("$$scope" in $$props2)
@@ -2058,7 +2067,7 @@
   var Hero = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance3, create_fragment6, safe_not_equal, {}, add_css4);
+      init(this, options, instance4, create_fragment6, safe_not_equal, {}, add_css4);
     }
   };
   var Hero_default = Hero;
@@ -2132,7 +2141,7 @@
       }
     };
   }
-  function instance4($$self, $$props, $$invalidate) {
+  function instance5($$self, $$props, $$invalidate) {
     let { id } = $$props;
     let { src } = $$props;
     let { size = 1 } = $$props;
@@ -2151,7 +2160,7 @@
   var Icon = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance4, create_fragment7, safe_not_equal, { id: 0, src: 1, size: 4 });
+      init(this, options, instance5, create_fragment7, safe_not_equal, { id: 0, src: 1, size: 4 });
     }
   };
   var Icon_default = Icon;
@@ -2318,7 +2327,7 @@
       }
     };
   }
-  function instance5($$self, $$props, $$invalidate) {
+  function instance6($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
     let { show = false } = $$props;
     function handleClick() {
@@ -2336,7 +2345,7 @@
   var Modal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance5, create_fragment8, safe_not_equal, { show: 0 }, add_css5);
+      init(this, options, instance6, create_fragment8, safe_not_equal, { show: 0 }, add_css5);
     }
   };
   var Modal_default = Modal;
@@ -2732,7 +2741,7 @@
       }
     };
   }
-  function instance6($$self, $$props, $$invalidate) {
+  function instance7($$self, $$props, $$invalidate) {
     const role = sessionStorage.getItem("role");
     let items;
     if (role === "admin")
@@ -2744,7 +2753,7 @@
   var Sidebar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance6, create_fragment11, safe_not_equal, {}, add_css8);
+      init(this, options, instance7, create_fragment11, safe_not_equal, {}, add_css8);
     }
   };
   var Sidebar_default = Sidebar;
@@ -3084,7 +3093,7 @@
       }
     };
   }
-  function instance7($$self, $$props, $$invalidate) {
+  function instance8($$self, $$props, $$invalidate) {
     let { code } = $$props;
     $$self.$$set = ($$props2) => {
       if ("code" in $$props2)
@@ -3095,7 +3104,7 @@
   var Status = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance7, create_fragment12, safe_not_equal, { code: 0 });
+      init(this, options, instance8, create_fragment12, safe_not_equal, { code: 0 });
     }
   };
   var Status_default = Status;
@@ -3128,7 +3137,7 @@
         h1.textContent = "Welcome to LPPM UISI";
         t1 = space();
         p_1 = element("p");
-        p_1.textContent = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo in\n         doloribus voluptate? Culpa, sit architecto. Consequuntur impedit\n         necessitatibus harum sed corrupti deleniti, ratione consequatur\n         quisquam perferendis, vitae eum. Consequuntur, sed?";
+        p_1.textContent = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo in\r\n         doloribus voluptate? Culpa, sit architecto. Consequuntur impedit\r\n         necessitatibus harum sed corrupti deleniti, ratione consequatur\r\n         quisquam perferendis, vitae eum. Consequuntur, sed?";
         t3 = space();
         span = element("span");
         button0 = element("button");
@@ -3375,7 +3384,7 @@
       }
     };
   }
-  function instance8($$self, $$props, $$invalidate) {
+  function instance9($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(0, $route = $$value));
     function handleLogin(ev) {
@@ -3407,7 +3416,7 @@
   var Index = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance8, create_fragment13, safe_not_equal, {}, add_css9);
+      init(this, options, instance9, create_fragment13, safe_not_equal, {}, add_css9);
     }
   };
   var Index_default = Index;
@@ -3572,10 +3581,9 @@
   async function signGoogle() {
     console.log("Sign google");
     location.pathname = "/api/auth/google";
-    console.log(response);
     return;
   }
-  function instance9($$self, $$props, $$invalidate) {
+  function instance10($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
     let username = "admin";
@@ -3586,8 +3594,8 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       };
-      const response2 = await fetch("/api/auth", payload);
-      const result = await response2.json();
+      const response = await fetch("/api/auth", payload);
+      const result = await response.json();
       console.log(result);
       if (result.sukses) {
         const { id, username: username2, role, token } = result;
@@ -3614,7 +3622,7 @@
   var Login = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment14, safe_not_equal, {}, add_css10);
+      init(this, options, instance10, create_fragment14, safe_not_equal, {}, add_css10);
     }
   };
   var Login_default = Login;
@@ -3644,7 +3652,7 @@
       }
     };
   }
-  function instance10($$self) {
+  function instance11($$self) {
     sessionStorage.clear();
     setTimeout(
       () => {
@@ -3657,7 +3665,7 @@
   var Logout = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance10, create_fragment15, safe_not_equal, {}, add_css11);
+      init(this, options, instance11, create_fragment15, safe_not_equal, {}, add_css11);
     }
   };
   var Logout_default = Logout;
@@ -3842,7 +3850,7 @@
       }
     };
   }
-  function instance11($$self, $$props, $$invalidate) {
+  function instance12($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
     let username = "dosen";
@@ -3853,9 +3861,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email })
       };
-      const response2 = await fetch("/api/user", payload);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user", payload);
+      const result = await response.json();
+      if (response.ok) {
         console.log(result);
         sessionStorage.setItem("code", result.code);
         $route("/verify");
@@ -3883,7 +3891,7 @@
   var Register = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment17, safe_not_equal, {}, add_css13);
+      init(this, options, instance12, create_fragment17, safe_not_equal, {}, add_css13);
     }
   };
   var Register_default = Register;
@@ -4096,7 +4104,7 @@
       }
     };
   }
-  function instance12($$self, $$props, $$invalidate) {
+  function instance13($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(7, $route = $$value));
     let username = "dosen";
@@ -4108,10 +4116,10 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, code, password })
       };
-      const response2 = await fetch("/api/verify", payload);
-      if (response2.status === 204) {
+      const response = await fetch("/api/verify", payload);
+      if (response.status === 204) {
         console.log("Gagal");
-      } else if (response2.status === 200) {
+      } else if (response.status === 200) {
         console.log("sukses");
         $route("/login");
       }
@@ -4141,7 +4149,7 @@
   var Verify = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance12, create_fragment18, safe_not_equal, {}, add_css14);
+      init(this, options, instance13, create_fragment18, safe_not_equal, {}, add_css14);
     }
   };
   var Verify_default = Verify;
@@ -4733,7 +4741,7 @@
       }
     };
   }
-  function instance13($$self, $$props, $$invalidate) {
+  function instance14($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
     let { params } = $$props;
@@ -4741,9 +4749,9 @@
     const id = params["1"];
     let msgNip2;
     onMount(async () => {
-      const response2 = await fetch("/api/user/" + id);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user/" + id);
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result[0])) {
           items.push({ field, value });
@@ -4849,16 +4857,16 @@
           }
         }
       });
-      const response2 = await fetch("/api/userprofile", {
+      const response = await fetch("/api/userprofile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     function field_value_binding(value, item) {
@@ -4883,7 +4891,7 @@
   var Profile = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance13, create_fragment21, safe_not_equal, { params: 3 });
+      init(this, options, instance14, create_fragment21, safe_not_equal, { params: 3 });
     }
   };
   var profile_default = Profile;
@@ -5873,7 +5881,7 @@
       }
     };
   }
-  function instance14($$self, $$props, $$invalidate) {
+  function instance15($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(28, $route = $$value));
     let { params } = $$props;
@@ -5896,9 +5904,9 @@
       $$invalidate(3, ka_lppm = await findRole(12));
       $$invalidate(5, ka_pusat_kajian = await findRole(13));
       $$invalidate(4, reviewer = await findRole(10));
-      const response2 = await fetch("/api/ppm/" + id);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/ppm/" + id);
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result)) {
           let obj = { field, value };
@@ -5926,16 +5934,16 @@
         kpkSelected: kpkSelected2,
         reviewerSelected: reviewerSelected2
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function handlePass() {
@@ -5952,34 +5960,34 @@
         reviewerSelected: reviewerSelected2
       };
       console.log("reviewerSelected", reviewerSelected2);
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function searchUser(ev) {
-      const response2 = await fetch("/api/user");
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user");
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(6, showModal = true);
       }
     }
     let options;
     async function findRole(role) {
-      const response2 = await fetch("/api/role/" + role);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/role/" + role);
+      const result = await response.json();
+      if (response.ok) {
         options = result;
         return options;
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     function field0_value_binding(value) {
@@ -6056,7 +6064,7 @@
   var Proposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance14, create_fragment22, safe_not_equal, { params: 13 }, null, [-1, -1]);
+      init(this, options, instance15, create_fragment22, safe_not_equal, { params: 13 }, null, [-1, -1]);
     }
   };
   var proposal_default = Proposal;
@@ -6385,14 +6393,14 @@
       }
     };
   }
-  function instance15($$self, $$props, $$invalidate) {
+  function instance16($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     let items;
     onMount(async () => {
-      const response2 = await fetch("/api/ppm");
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/ppm");
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = result.dbData);
       }
     });
@@ -6405,7 +6413,7 @@
   var Proposals = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance15, create_fragment23, safe_not_equal, {}, add_css16);
+      init(this, options, instance16, create_fragment23, safe_not_equal, {}, add_css16);
     }
   };
   var proposals_default = Proposals;
@@ -6842,16 +6850,16 @@
       }
     };
   }
-  function instance16($$self, $$props, $$invalidate) {
+  function instance17($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(6, $route = $$value));
     let { params } = $$props;
     let profile;
     let items;
     async function populateTable() {
-      const response2 = await fetch("/api/user");
-      const result = await response2.json();
-      if (response2.status === 200) {
+      const response = await fetch("/api/user");
+      const result = await response.json();
+      if (response.status === 200) {
         $$invalidate(0, items = result.dbData);
       }
     }
@@ -6863,16 +6871,16 @@
         active: !items[id].active,
         role: Number(value)
       };
-      const response2 = await fetch("/api/user", {
+      const response = await fetch("/api/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         populateTable();
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function handleGroup(ev) {
@@ -6883,24 +6891,24 @@
         role: Number(value),
         active: items[id].active
       };
-      const response2 = await fetch("/api/user", {
+      const response = await fetch("/api/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         populateTable();
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function getPage() {
       if (params["1"] === "profile") {
         let id = params["2"];
-        const response2 = await fetch("/api/user/" + id);
-        const result = await response2.json();
-        if (response2.ok) {
+        const response = await fetch("/api/user/" + id);
+        const result = await response.json();
+        if (response.ok) {
           if (!result.length)
             return;
           $$invalidate(5, profile = []);
@@ -6936,7 +6944,7 @@
   var Users = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance16, create_fragment24, safe_not_equal, { params: 4 }, add_css17);
+      init(this, options, instance17, create_fragment24, safe_not_equal, { params: 4 }, add_css17);
     }
   };
   var users_default = Users;
@@ -7116,7 +7124,7 @@
       }
     };
   }
-  function instance17($$self, $$props, $$invalidate) {
+  function instance18($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -7135,16 +7143,284 @@
   var Index2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance17, create_fragment25, safe_not_equal, { params: 0 });
+      init(this, options, instance18, create_fragment25, safe_not_equal, { params: 0 });
     }
   };
   var Index_default2 = Index2;
 
-  // src/pages/dosen/pages.js
+  // src/pages/auth/pages.js
   var pages_exports2 = {};
   __export(pages_exports2, {
+    google: () => google_default,
+    home: () => home_default2
+  });
+
+  // src/pages/auth/+google.svelte
+  function create_fragment26(ctx) {
+    let article;
+    return {
+      c() {
+        article = element("article");
+        article.innerHTML = `<h1>Google</h1>`;
+      },
+      m(target, anchor) {
+        insert(target, article, anchor);
+      },
+      p: noop,
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(article);
+        }
+      }
+    };
+  }
+  var Google = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment26, safe_not_equal, {});
+    }
+  };
+  var google_default = Google;
+
+  // src/pages/auth/+home.svelte
+  function create_fragment27(ctx) {
+    let article;
+    return {
+      c() {
+        article = element("article");
+        article.innerHTML = `<h1>Home</h1>`;
+      },
+      m(target, anchor) {
+        insert(target, article, anchor);
+      },
+      p: noop,
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(article);
+        }
+      }
+    };
+  }
+  var Home2 = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment27, safe_not_equal, {});
+    }
+  };
+  var home_default2 = Home2;
+
+  // src/pages/auth/Index.svelte
+  function create_else_block4(ctx) {
+    let e404;
+    let current;
+    e404 = new E404_default({});
+    return {
+      c() {
+        create_component(e404.$$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(e404, target, anchor);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(e404.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(e404.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(e404, detaching);
+      }
+    };
+  }
+  function create_if_block9(ctx) {
+    let switch_instance;
+    let switch_instance_anchor;
+    let current;
+    var switch_value = (
+      /*page*/
+      ctx[1]
+    );
+    function switch_props(ctx2, dirty) {
+      return { props: { params: (
+        /*params*/
+        ctx2[0]
+      ) } };
+    }
+    if (switch_value) {
+      switch_instance = construct_svelte_component(switch_value, switch_props(ctx));
+    }
+    return {
+      c() {
+        if (switch_instance)
+          create_component(switch_instance.$$.fragment);
+        switch_instance_anchor = empty();
+      },
+      m(target, anchor) {
+        if (switch_instance)
+          mount_component(switch_instance, target, anchor);
+        insert(target, switch_instance_anchor, anchor);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*page*/
+        2 && switch_value !== (switch_value = /*page*/
+        ctx2[1])) {
+          if (switch_instance) {
+            group_outros();
+            const old_component = switch_instance;
+            transition_out(old_component.$$.fragment, 1, 0, () => {
+              destroy_component(old_component, 1);
+            });
+            check_outros();
+          }
+          if (switch_value) {
+            switch_instance = construct_svelte_component(switch_value, switch_props(ctx2, dirty));
+            create_component(switch_instance.$$.fragment);
+            transition_in(switch_instance.$$.fragment, 1);
+            mount_component(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
+          } else {
+            switch_instance = null;
+          }
+        } else if (switch_value) {
+          const switch_instance_changes = {};
+          if (dirty & /*params*/
+          1)
+            switch_instance_changes.params = /*params*/
+            ctx2[0];
+          switch_instance.$set(switch_instance_changes);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        if (switch_instance)
+          transition_in(switch_instance.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        if (switch_instance)
+          transition_out(switch_instance.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(switch_instance_anchor);
+        }
+        if (switch_instance)
+          destroy_component(switch_instance, detaching);
+      }
+    };
+  }
+  function create_fragment28(ctx) {
+    let current_block_type_index;
+    let if_block;
+    let if_block_anchor;
+    let current;
+    const if_block_creators = [create_if_block9, create_else_block4];
+    const if_blocks = [];
+    function select_block_type(ctx2, dirty) {
+      if (
+        /*page*/
+        ctx2[1]
+      )
+        return 0;
+      return 1;
+    }
+    current_block_type_index = select_block_type(ctx, -1);
+    if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    return {
+      c() {
+        if_block.c();
+        if_block_anchor = empty();
+      },
+      m(target, anchor) {
+        if_blocks[current_block_type_index].m(target, anchor);
+        insert(target, if_block_anchor, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        let previous_block_index = current_block_type_index;
+        current_block_type_index = select_block_type(ctx2, dirty);
+        if (current_block_type_index === previous_block_index) {
+          if_blocks[current_block_type_index].p(ctx2, dirty);
+        } else {
+          group_outros();
+          transition_out(if_blocks[previous_block_index], 1, 1, () => {
+            if_blocks[previous_block_index] = null;
+          });
+          check_outros();
+          if_block = if_blocks[current_block_type_index];
+          if (!if_block) {
+            if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx2);
+            if_block.c();
+          } else {
+            if_block.p(ctx2, dirty);
+          }
+          transition_in(if_block, 1);
+          if_block.m(if_block_anchor.parentNode, if_block_anchor);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(if_block);
+        current = true;
+      },
+      o(local) {
+        transition_out(if_block);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(if_block_anchor);
+        }
+        if_blocks[current_block_type_index].d(detaching);
+      }
+    };
+  }
+  function instance19($$self, $$props, $$invalidate) {
+    let { params = {} } = $$props;
+    let page;
+    console.log("Muncul:", params["1"]);
+    if (params["1"]) {
+      console.log(params["1"]);
+    }
+    $$self.$$set = ($$props2) => {
+      if ("params" in $$props2)
+        $$invalidate(0, params = $$props2.params);
+    };
+    $$self.$$.update = () => {
+      if ($$self.$$.dirty & /*params*/
+      1) {
+        $:
+          params, $$invalidate(1, page = !params.page ? home_default2 : pages_exports2[params.page?.replace(/[^a-zA-Z0-9_]/g, "_")]);
+      }
+    };
+    return [params, page];
+  }
+  var Index3 = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance19, create_fragment28, safe_not_equal, { params: 0 });
+    }
+  };
+  var Index_default3 = Index3;
+
+  // src/pages/dosen/pages.js
+  var pages_exports3 = {};
+  __export(pages_exports3, {
     approval: () => approval_default,
-    home: () => home_default2,
+    home: () => home_default3,
     profile: () => profile_default2,
     proposal: () => proposal_default2,
     proposals: () => proposals_default2
@@ -7159,7 +7435,7 @@
     child_ctx[4] = list[i];
     return child_ctx;
   }
-  function create_if_block9(ctx) {
+  function create_if_block10(ctx) {
     let article;
     let h1;
     let t1;
@@ -7380,12 +7656,12 @@
       }
     };
   }
-  function create_fragment26(ctx) {
+  function create_fragment29(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
       /*items*/
-      ctx[0] && create_if_block9(ctx)
+      ctx[0] && create_if_block10(ctx)
     );
     return {
       c() {
@@ -7411,7 +7687,7 @@
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block9(ctx2);
+            if_block = create_if_block10(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -7443,18 +7719,18 @@
       }
     };
   }
-  function instance18($$self, $$props, $$invalidate) {
+  function instance20($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     const id = sessionStorage.id;
     let items;
     onMount(async () => {
-      const response2 = await fetch("/api/approval/" + id);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/approval/" + id);
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = result.dbData);
       } else {
-        console.log(response2);
+        console.log(response);
       }
     });
     function detail(ev) {
@@ -7466,7 +7742,7 @@
   var Approval = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance18, create_fragment26, safe_not_equal, {}, add_css18);
+      init(this, options, instance20, create_fragment29, safe_not_equal, {}, add_css18);
     }
   };
   var approval_default = Approval;
@@ -7480,7 +7756,7 @@
     child_ctx[5] = list[i];
     return child_ctx;
   }
-  function create_if_block10(ctx) {
+  function create_if_block11(ctx) {
     let article;
     let h1;
     let t1;
@@ -7724,12 +8000,12 @@
       }
     };
   }
-  function create_fragment27(ctx) {
+  function create_fragment30(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
       /*items*/
-      ctx[0] && create_if_block10(ctx)
+      ctx[0] && create_if_block11(ctx)
     );
     return {
       c() {
@@ -7755,7 +8031,7 @@
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block10(ctx2);
+            if_block = create_if_block11(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -7787,19 +8063,19 @@
       }
     };
   }
-  function instance19($$self, $$props, $$invalidate) {
+  function instance21($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
     const id = sessionStorage.id;
     let items;
     onMount(async () => {
-      const response2 = await fetch("/api/ppm/all/" + id);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/ppm/all/" + id);
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = result.dbData);
       } else {
         console.log(
-          response2
+          response
         );
       }
     });
@@ -7812,13 +8088,13 @@
     }
     return [items, detail, addProposal];
   }
-  var Home2 = class extends SvelteComponent {
+  var Home3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance19, create_fragment27, safe_not_equal, {}, add_css19);
+      init(this, options, instance21, create_fragment30, safe_not_equal, {}, add_css19);
     }
   };
-  var home_default2 = Home2;
+  var home_default3 = Home3;
 
   // src/pages/dosen/+profile.svelte
   function get_each_context10(ctx, list, i) {
@@ -7828,7 +8104,7 @@
     child_ctx[7] = i;
     return child_ctx;
   }
-  function create_if_block11(ctx) {
+  function create_if_block12(ctx) {
     let t0;
     let br;
     let t1;
@@ -8028,14 +8304,14 @@
       }
     };
   }
-  function create_fragment28(ctx) {
+  function create_fragment31(ctx) {
     let article;
     let h1;
     let t1;
     let current;
     let if_block = (
       /*items*/
-      ctx[0] && create_if_block11(ctx)
+      ctx[0] && create_if_block12(ctx)
     );
     return {
       c() {
@@ -8066,7 +8342,7 @@
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block11(ctx2);
+            if_block = create_if_block12(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(article, null);
@@ -8098,15 +8374,15 @@
       }
     };
   }
-  function instance20($$self, $$props, $$invalidate) {
+  function instance22($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
     let items;
     const id = sessionStorage.getItem("id");
     onMount(async () => {
-      const response2 = await fetch("/api/user/" + id);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user/" + id);
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result[0])) {
           items.push({ field, value });
@@ -8212,17 +8488,17 @@
           }
         }
       });
-      const response2 = await fetch("/api/userprofile", {
+      const response = await fetch("/api/userprofile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
+      const result = await response.json();
       console.log(result);
-      if (response2.ok) {
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     function field_value_binding(value, item) {
@@ -8236,7 +8512,7 @@
   var Profile2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance20, create_fragment28, safe_not_equal, {});
+      init(this, options, instance22, create_fragment31, safe_not_equal, {});
     }
   };
   var profile_default2 = Profile2;
@@ -8372,7 +8648,7 @@
       }
     };
   }
-  function create_fragment29(ctx) {
+  function create_fragment32(ctx) {
     let article;
     let h1;
     let t1;
@@ -8585,7 +8861,7 @@
     let valueId = el.value;
     console.log(valueId);
   }
-  function instance21($$self, $$props, $$invalidate) {
+  function instance23($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(9, $route = $$value));
     let judul2 = "";
@@ -8600,13 +8876,13 @@
         status: 0,
         tahunPelaksanaan
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         console.log(result);
         $route("/dosen");
       } else {
@@ -8621,13 +8897,13 @@
         status: 2,
         tahunPelaksanaan
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
         console.log(result.msg);
@@ -8682,7 +8958,7 @@
   var Proposal2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance21, create_fragment29, safe_not_equal, {});
+      init(this, options, instance23, create_fragment32, safe_not_equal, {});
     }
   };
   var proposal_default2 = Proposal2;
@@ -8695,7 +8971,7 @@
     child_ctx[13] = i;
     return child_ctx;
   }
-  function create_if_block12(ctx) {
+  function create_if_block13(ctx) {
     let article;
     let h1;
     let t1;
@@ -9148,7 +9424,7 @@
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block_24, create_else_block4];
+    const if_block_creators = [create_if_block_24, create_else_block5];
     const if_blocks = [];
     function select_block_type_1(ctx2, dirty) {
       if (!/*statusProposal*/
@@ -9214,7 +9490,7 @@
       }
     };
   }
-  function create_else_block4(ctx) {
+  function create_else_block5(ctx) {
     let field;
     let current;
     field = new Field_default({
@@ -9373,12 +9649,12 @@
       }
     };
   }
-  function create_fragment30(ctx) {
+  function create_fragment33(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
       /*items*/
-      ctx[0] && create_if_block12(ctx)
+      ctx[0] && create_if_block13(ctx)
     );
     return {
       c() {
@@ -9404,7 +9680,7 @@
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block12(ctx2);
+            if_block = create_if_block13(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -9440,7 +9716,7 @@
     const edit = [0, 1, 3, 5, 9];
     return edit.some((x) => x === code);
   }
-  function instance22($$self, $$props, $$invalidate) {
+  function instance24($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(9, $route = $$value));
     let { params } = $$props;
@@ -9450,9 +9726,9 @@
     let statusProposal;
     const id = params["1"];
     onMount(async () => {
-      const response2 = await fetch("/api/ppm/" + id);
-      const result = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/ppm/" + id);
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = []);
         data2 = result;
         for (const [key, value] of Object.entries(result)) {
@@ -9469,7 +9745,7 @@
         kpkSelected = items[8].value;
         reviewerSelected = items[9].value;
       } else {
-        console.log(response2);
+        console.log(response);
       }
     });
     async function remediasi() {
@@ -9486,16 +9762,16 @@
         kpkSelected,
         reviewerSelected
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function submitProposal() {
@@ -9507,16 +9783,16 @@
         abstrak: data3.abstrak,
         status: Number(data3.status) + 2
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function simpanProposal() {
@@ -9528,16 +9804,16 @@
         abstrak: data3.abstrak,
         status: Number(data3.status)
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     function field_value_binding(value, item) {
@@ -9564,13 +9840,13 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance22, create_fragment30, safe_not_equal, { params: 6 });
+      init(this, options, instance24, create_fragment33, safe_not_equal, { params: 6 });
     }
   };
   var proposals_default2 = Proposals2;
 
   // src/pages/dosen/Index.svelte
-  function create_else_block5(ctx) {
+  function create_else_block6(ctx) {
     let e404;
     let current;
     e404 = new E404_default({});
@@ -9598,7 +9874,7 @@
       }
     };
   }
-  function create_if_block13(ctx) {
+  function create_if_block14(ctx) {
     let switch_instance;
     let switch_instance_anchor;
     let current;
@@ -9677,12 +9953,12 @@
       }
     };
   }
-  function create_fragment31(ctx) {
+  function create_fragment34(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block13, create_else_block5];
+    const if_block_creators = [create_if_block14, create_else_block6];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
@@ -9744,7 +10020,7 @@
       }
     };
   }
-  function instance23($$self, $$props, $$invalidate) {
+  function instance25($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -9755,18 +10031,18 @@
       if ($$self.$$.dirty & /*params*/
       1) {
         $:
-          params, $$invalidate(1, page = !params.page ? home_default2 : pages_exports2[params.page?.replace(/[^a-zA-Z0-9_]/g, "_")]);
+          params, $$invalidate(1, page = !params.page ? home_default3 : pages_exports3[params.page?.replace(/[^a-zA-Z0-9_]/g, "_")]);
       }
     };
     return [params, page];
   }
-  var Index3 = class extends SvelteComponent {
+  var Index4 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance23, create_fragment31, safe_not_equal, { params: 0 });
+      init(this, options, instance25, create_fragment34, safe_not_equal, { params: 0 });
     }
   };
-  var Index_default3 = Index3;
+  var Index_default4 = Index4;
 
   // src/routes.js
   var routes_default = [
@@ -9780,7 +10056,8 @@
     { path: "/register", page: Register_default },
     { path: "/verify", page: Verify_default },
     { path: "/admin/:page", page: Index_default2 },
-    { path: "/dosen/:page", page: Index_default3 }
+    { path: "/auth/:page", page: Index_default3 },
+    { path: "/dosen/:page", page: Index_default4 }
   ];
 
   // src/App.svelte
@@ -9814,7 +10091,7 @@
       }
     };
   }
-  function create_if_block14(ctx) {
+  function create_if_block15(ctx) {
     let main;
     let switch_instance;
     let current;
@@ -9893,7 +10170,7 @@
       }
     };
   }
-  function create_fragment32(ctx) {
+  function create_fragment35(ctx) {
     let navbar;
     let t0;
     let t1;
@@ -9906,7 +10183,7 @@
     );
     let if_block1 = (
       /*cmp*/
-      ctx[0] && create_if_block14(ctx)
+      ctx[0] && create_if_block15(ctx)
     );
     return {
       c() {
@@ -9964,7 +10241,7 @@
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block14(ctx2);
+            if_block1 = create_if_block15(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
             if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
@@ -10005,7 +10282,7 @@
       }
     };
   }
-  function instance24($$self, $$props, $$invalidate) {
+  function instance26($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(4, $route = $$value));
     let cmp, params;
@@ -10040,7 +10317,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance24, create_fragment32, safe_not_equal, {}, add_css20);
+      init(this, options, instance26, create_fragment35, safe_not_equal, {}, add_css20);
     }
   };
   var App_default = App;

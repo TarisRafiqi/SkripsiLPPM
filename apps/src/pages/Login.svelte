@@ -40,7 +40,7 @@
       location.pathname = "/api/auth/google";
       // location.pathname = "/api/auth/google";
       //const result = await response.json();
-      console.log(response);
+      //console.log(response);
       return;
    }
 </script>

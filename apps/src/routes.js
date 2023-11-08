@@ -8,6 +8,7 @@ import Penelitian from "./pages/Penelitian.svelte";
 import Register from "./pages/Register.svelte";
 import Verify from "./pages/Verify.svelte";
 import adminIndex from "./pages/admin/Index.svelte";
+import authIndex from "./pages/auth/Index.svelte";
 import dosenIndex from "./pages/dosen/Index.svelte";
 
 export default [
@@ -21,5 +22,6 @@ export default [
 	{ path: "/register", page: Register },
 	{ path: "/verify", page: Verify },
 	{ path: "/admin/:page", page: adminIndex },
+	{ path: "/auth/:page", page: authIndex },
 	{ path: "/dosen/:page", page: dosenIndex },
 ]

@@ -49,8 +49,20 @@ module.exports = async function (fastify, opts) {
       });
 
       const { data } = await oauth2.userinfo.get();
+      
+      console.log(data.email);
 
-      reply.send({ data });
+      const token = "This_is_fake_token";
+      // token = fastify.jwt.sign({
+      //    id,
+      //    username,
+      //    role,
+      //    // type: "google"
+      // });
+
+      reply.redirect(`/auth/google/${token}`)
+
+      //reply.send({ data });
    });
 
    fastify.post("/", async function (request, reply) {
@@ -89,6 +101,7 @@ module.exports = async function (fastify, opts) {
                id,
                username,
                role,
+               // type: "db"
             });
          } else {
             reply.send({
