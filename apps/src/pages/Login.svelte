@@ -19,13 +19,15 @@
       const response = await fetch("/api/auth", payload);
       const result = await response.json();
       console.log(result);
+      // console.log(result.token);
 
       if (result.sukses) {
          const { id, username, role, token } = result;
-         sessionStorage.setItem("id", id);
-         sessionStorage.setItem("username", username);
-         sessionStorage.setItem("role", role);
-         sessionStorage.setItem("auth", token);
+         localStorage.setItem("id", id);
+         localStorage.setItem("username", username);
+         localStorage.setItem("role", role);
+         localStorage.setItem("auth", token);
+         // return;
          if (role === "admin") $route("/admin");
          else $route("/dosen");
       }

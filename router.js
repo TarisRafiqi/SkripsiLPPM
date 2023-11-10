@@ -29,6 +29,22 @@ function router() {
       history.pushState(x, null, x);
 
       let params = {};
+
+      let query = x.includes("?");
+
+      if (query) {
+         query = x
+            .replace(/.*\?/, "")
+            .replace(/\=\=/g, "=")
+            .replace(/\&\&/g, "&")
+            .split("&");
+         query.map((q) => {
+            params[q.split("=")[0]] = q.split("=")[1];
+         });
+      }
+
+      console.log("token:", query);
+
       let match = routes.filter((route) => {
          let path = route.path;
          let keys = path.match(/\/:\w+/g);
@@ -65,7 +81,8 @@ function router() {
    return {
       route,
       listen() {
-         route(location.pathname);
+         // console.log(":::", location.pathname + location.search);
+         route(location.pathname + location.search);
       },
       unlisten() {
          // removeEventListener("replacestate", route);

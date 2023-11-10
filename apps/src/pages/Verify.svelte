@@ -2,7 +2,7 @@
    import { route } from "../store";
 
    let username = "dosen";
-   let code = sessionStorage.getItem("code");
+   let code = localStorage.getItem("code");
    let password = "1234";
 
    async function handleSubmit(ev) {

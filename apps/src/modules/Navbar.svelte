@@ -4,7 +4,7 @@
    import { menu } from "../store/icons";
 
    function handleLogout(ev) {
-      sessionStorage.clear();
+      localStorage.clear();
       location.pathname = "/";
    }
 </script>

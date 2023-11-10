@@ -13,18 +13,18 @@
       cmp = route.page;
       params = route.params;
 
-      auth = sessionStorage.getItem("auth");
-      role = sessionStorage.getItem("role");
+      auth = localStorage.getItem("auth");
+      role = localStorage.getItem("role");
    });
 
    $route = router.route;
-   $route(location.pathname);
+   $route(location.pathname + location.search);
 
    router.listen();
 
    onDestroy(router.unlisten);
 
-   // $: auth = sessionStorage.getItem("auth");
+   // $: auth = localStorage.getItem("auth");
 
    if (location.pathname === "/") {
       if (!auth) $route("/");

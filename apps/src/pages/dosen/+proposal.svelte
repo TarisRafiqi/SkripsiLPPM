@@ -8,7 +8,7 @@
    let tahunPelaksanaan = "";
    let kodeProgram = "";
 
-   const id = Number(sessionStorage.getItem("id"));
+   const id = Number(localStorage.getItem("id"));
 
    async function simpanProposal() {
       let payload = {

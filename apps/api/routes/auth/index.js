@@ -49,19 +49,26 @@ module.exports = async function (fastify, opts) {
       });
 
       const { data } = await oauth2.userinfo.get();
-      
-      console.log(data.email);
 
-      const token = "This_is_fake_token";
-      // token = fastify.jwt.sign({
-      //    id,
-      //    username,
-      //    role,
-      //    // type: "google"
-      // });
+      // console.log(data.email);
+      console.log(data);
 
-      reply.redirect(`/auth/google/${token}`)
+      let username = data.given_name;
+      // let role = 0;
 
+      // 1. cek apakah user sudah terdaftar pada db
+      // 2. jika belum, langsung buatkan akun dg role default 'dosen', setelahnya berikan token dan role
+      // 3. jika sudah, langsung berikan token dan role (role dari db).
+
+      const token = fastify.jwt.sign({
+         username,
+         // type: "google"
+         // id,
+         // role,
+      });
+
+      // reply.redirect(`/auth/google/${token}`);
+      reply.redirect(`/auth/home?token=${token}&&username=${username}`);
       //reply.send({ data });
    });
 
@@ -117,7 +124,10 @@ module.exports = async function (fastify, opts) {
       }
 
       reply.send({
-         ...dbData,
+         // ...dbData,
+         id: dbData.id,
+         username: dbData.username,
+         role: dbData.role,
          token,
          sukses,
       });

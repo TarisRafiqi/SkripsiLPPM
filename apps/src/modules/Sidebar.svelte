@@ -2,7 +2,7 @@
    import menu from "../store/menu";
 
    // get group info
-   const role = sessionStorage.getItem("role");
+   const role = localStorage.getItem("role");
 
    let items;
    if (role === "admin") items = menu["admin"];

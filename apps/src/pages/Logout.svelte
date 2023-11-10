@@ -1,5 +1,5 @@
 <script>
-   sessionStorage.clear();
+   localStorage.clear();
 
    setTimeout(() => {
       location.pathname = "/";

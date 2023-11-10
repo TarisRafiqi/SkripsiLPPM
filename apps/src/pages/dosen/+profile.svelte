@@ -5,7 +5,7 @@
 
    let items;
 
-   const id = sessionStorage.getItem("id");
+   const id = localStorage.getItem("id");
 
    onMount(async () => {
       const response = await fetch("/api/user/" + id);

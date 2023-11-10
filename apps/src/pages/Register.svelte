@@ -21,7 +21,7 @@
 
       if (response.ok) {
          console.log(result);
-         sessionStorage.setItem("code", result.code);
+         localStorage.setItem("code", result.code);
          $route("/verify");
       } else {
          console.log(result);

@@ -57,6 +57,14 @@
             x = location.pathname;
           history.pushState(x, null, x);
           let params = {};
+          let query = x.includes("?");
+          if (query) {
+            query = x.replace(/.*\?/, "").replace(/\=\=/g, "=").replace(/\&\&/g, "&").split("&");
+            query.map((q) => {
+              params[q.split("=")[0]] = q.split("=")[1];
+            });
+          }
+          console.log("token:", query);
           let match = routes.filter((route3) => {
             let path = route3.path;
             let keys = path.match(/\/:\w+/g);
@@ -91,7 +99,7 @@
         return {
           route: route2,
           listen() {
-            route2(location.pathname);
+            route2(location.pathname + location.search);
           },
           unlisten() {
             removeEventListener("popstate", route2);
@@ -773,7 +781,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance27, create_fragment36, not_equal, props, append_styles2, dirty = [-1]) {
+  function init(component, options, instance28, create_fragment35, not_equal, props, append_styles2, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -799,7 +807,7 @@
     };
     append_styles2 && append_styles2($$.root);
     let ready = false;
-    $$.ctx = instance27 ? instance27(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance28 ? instance28(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -812,7 +820,7 @@
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment36 ? create_fragment36($$.ctx) : false;
+    $$.fragment = create_fragment35 ? create_fragment35($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -2742,7 +2750,7 @@
     };
   }
   function instance7($$self, $$props, $$invalidate) {
-    const role = sessionStorage.getItem("role");
+    const role = localStorage.getItem("role");
     let items;
     if (role === "admin")
       items = menu_default["admin"];
@@ -3599,10 +3607,10 @@
       console.log(result);
       if (result.sukses) {
         const { id, username: username2, role, token } = result;
-        sessionStorage.setItem("id", id);
-        sessionStorage.setItem("username", username2);
-        sessionStorage.setItem("role", role);
-        sessionStorage.setItem("auth", token);
+        localStorage.setItem("id", id);
+        localStorage.setItem("username", username2);
+        localStorage.setItem("role", role);
+        localStorage.setItem("auth", token);
         if (role === "admin")
           $route("/admin");
         else
@@ -3653,7 +3661,7 @@
     };
   }
   function instance11($$self) {
-    sessionStorage.clear();
+    localStorage.clear();
     setTimeout(
       () => {
         location.pathname = "/";
@@ -3865,7 +3873,7 @@
       const result = await response.json();
       if (response.ok) {
         console.log(result);
-        sessionStorage.setItem("code", result.code);
+        localStorage.setItem("code", result.code);
         $route("/verify");
       } else {
         console.log(result);
@@ -4108,7 +4116,7 @@
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(7, $route = $$value));
     let username = "dosen";
-    let code = sessionStorage.getItem("code");
+    let code = localStorage.getItem("code");
     let password = "1234";
     async function handleSubmit(ev) {
       const payload = {
@@ -7151,17 +7159,16 @@
   // src/pages/auth/pages.js
   var pages_exports2 = {};
   __export(pages_exports2, {
-    google: () => google_default,
     home: () => home_default2
   });
 
-  // src/pages/auth/+google.svelte
+  // src/pages/auth/+home.svelte
   function create_fragment26(ctx) {
     let article;
     return {
       c() {
         article = element("article");
-        article.innerHTML = `<h1>Google</h1>`;
+        article.innerHTML = `<h1>Auth Google</h1>`;
       },
       m(target, anchor) {
         insert(target, article, anchor);
@@ -7176,39 +7183,22 @@
       }
     };
   }
-  var Google = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, null, create_fragment26, safe_not_equal, {});
+  function instance19($$self, $$props, $$invalidate) {
+    let { params } = $$props;
+    const token = params.token || null;
+    if (token) {
+      localStorage.setItem("username", params.username);
     }
-  };
-  var google_default = Google;
-
-  // src/pages/auth/+home.svelte
-  function create_fragment27(ctx) {
-    let article;
-    return {
-      c() {
-        article = element("article");
-        article.innerHTML = `<h1>Home</h1>`;
-      },
-      m(target, anchor) {
-        insert(target, article, anchor);
-      },
-      p: noop,
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(article);
-        }
-      }
+    $$self.$$set = ($$props2) => {
+      if ("params" in $$props2)
+        $$invalidate(0, params = $$props2.params);
     };
+    return [params];
   }
   var Home2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment27, safe_not_equal, {});
+      init(this, options, instance19, create_fragment26, safe_not_equal, { params: 0 });
     }
   };
   var home_default2 = Home2;
@@ -7321,7 +7311,7 @@
       }
     };
   }
-  function create_fragment28(ctx) {
+  function create_fragment27(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -7388,13 +7378,9 @@
       }
     };
   }
-  function instance19($$self, $$props, $$invalidate) {
+  function instance20($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
-    console.log("Muncul:", params["1"]);
-    if (params["1"]) {
-      console.log(params["1"]);
-    }
     $$self.$$set = ($$props2) => {
       if ("params" in $$props2)
         $$invalidate(0, params = $$props2.params);
@@ -7411,7 +7397,7 @@
   var Index3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance19, create_fragment28, safe_not_equal, { params: 0 });
+      init(this, options, instance20, create_fragment27, safe_not_equal, { params: 0 });
     }
   };
   var Index_default3 = Index3;
@@ -7656,7 +7642,7 @@
       }
     };
   }
-  function create_fragment29(ctx) {
+  function create_fragment28(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -7719,10 +7705,10 @@
       }
     };
   }
-  function instance20($$self, $$props, $$invalidate) {
+  function instance21($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
-    const id = sessionStorage.id;
+    const id = localStorage.id;
     let items;
     onMount(async () => {
       const response = await fetch("/api/approval/" + id);
@@ -7742,7 +7728,7 @@
   var Approval = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance20, create_fragment29, safe_not_equal, {}, add_css18);
+      init(this, options, instance21, create_fragment28, safe_not_equal, {}, add_css18);
     }
   };
   var approval_default = Approval;
@@ -8000,7 +7986,7 @@
       }
     };
   }
-  function create_fragment30(ctx) {
+  function create_fragment29(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -8063,10 +8049,10 @@
       }
     };
   }
-  function instance21($$self, $$props, $$invalidate) {
+  function instance22($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
-    const id = sessionStorage.id;
+    const id = localStorage.id;
     let items;
     onMount(async () => {
       const response = await fetch("/api/ppm/all/" + id);
@@ -8091,7 +8077,7 @@
   var Home3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance21, create_fragment30, safe_not_equal, {}, add_css19);
+      init(this, options, instance22, create_fragment29, safe_not_equal, {}, add_css19);
     }
   };
   var home_default3 = Home3;
@@ -8304,7 +8290,7 @@
       }
     };
   }
-  function create_fragment31(ctx) {
+  function create_fragment30(ctx) {
     let article;
     let h1;
     let t1;
@@ -8374,11 +8360,11 @@
       }
     };
   }
-  function instance22($$self, $$props, $$invalidate) {
+  function instance23($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
     let items;
-    const id = sessionStorage.getItem("id");
+    const id = localStorage.getItem("id");
     onMount(async () => {
       const response = await fetch("/api/user/" + id);
       const result = await response.json();
@@ -8512,7 +8498,7 @@
   var Profile2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance22, create_fragment31, safe_not_equal, {});
+      init(this, options, instance23, create_fragment30, safe_not_equal, {});
     }
   };
   var profile_default2 = Profile2;
@@ -8648,7 +8634,7 @@
       }
     };
   }
-  function create_fragment32(ctx) {
+  function create_fragment31(ctx) {
     let article;
     let h1;
     let t1;
@@ -8861,13 +8847,13 @@
     let valueId = el.value;
     console.log(valueId);
   }
-  function instance23($$self, $$props, $$invalidate) {
+  function instance24($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(9, $route = $$value));
     let judul2 = "";
     let abstrak2 = "";
     let tahunPelaksanaan = "";
-    const id = Number(sessionStorage.getItem("id"));
+    const id = Number(localStorage.getItem("id"));
     async function simpanProposal() {
       let payload = {
         id,
@@ -8958,7 +8944,7 @@
   var Proposal2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance23, create_fragment32, safe_not_equal, {});
+      init(this, options, instance24, create_fragment31, safe_not_equal, {});
     }
   };
   var proposal_default2 = Proposal2;
@@ -9649,7 +9635,7 @@
       }
     };
   }
-  function create_fragment33(ctx) {
+  function create_fragment32(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -9716,7 +9702,7 @@
     const edit = [0, 1, 3, 5, 9];
     return edit.some((x) => x === code);
   }
-  function instance24($$self, $$props, $$invalidate) {
+  function instance25($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(9, $route = $$value));
     let { params } = $$props;
@@ -9840,7 +9826,7 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance24, create_fragment33, safe_not_equal, { params: 6 });
+      init(this, options, instance25, create_fragment32, safe_not_equal, { params: 6 });
     }
   };
   var proposals_default2 = Proposals2;
@@ -9953,7 +9939,7 @@
       }
     };
   }
-  function create_fragment34(ctx) {
+  function create_fragment33(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -10020,7 +10006,7 @@
       }
     };
   }
-  function instance25($$self, $$props, $$invalidate) {
+  function instance26($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -10039,7 +10025,7 @@
   var Index4 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance25, create_fragment34, safe_not_equal, { params: 0 });
+      init(this, options, instance26, create_fragment33, safe_not_equal, { params: 0 });
     }
   };
   var Index_default4 = Index4;
@@ -10170,7 +10156,7 @@
       }
     };
   }
-  function create_fragment35(ctx) {
+  function create_fragment34(ctx) {
     let navbar;
     let t0;
     let t1;
@@ -10282,7 +10268,7 @@
       }
     };
   }
-  function instance26($$self, $$props, $$invalidate) {
+  function instance27($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(4, $route = $$value));
     let cmp, params;
@@ -10290,11 +10276,11 @@
     const router = (0, import_router.default)(routes_default, E404_default, (route2) => {
       $$invalidate(0, cmp = route2.page);
       $$invalidate(1, params = route2.params);
-      $$invalidate(2, auth = sessionStorage.getItem("auth"));
-      role = sessionStorage.getItem("role");
+      $$invalidate(2, auth = localStorage.getItem("auth"));
+      role = localStorage.getItem("role");
     });
     set_store_value(route, $route = router.route, $route);
-    $route(location.pathname);
+    $route(location.pathname + location.search);
     router.listen();
     onDestroy(router.unlisten);
     if (location.pathname === "/") {
@@ -10317,7 +10303,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance26, create_fragment35, safe_not_equal, {}, add_css20);
+      init(this, options, instance27, create_fragment34, safe_not_equal, {}, add_css20);
     }
   };
   var App_default = App;

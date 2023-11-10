@@ -3,7 +3,7 @@
    import { route } from "src/store";
    import { Status } from "@cmp";
 
-   const id = sessionStorage.id;
+   const id = localStorage.id;
    let items;
 
    onMount(async () => {
