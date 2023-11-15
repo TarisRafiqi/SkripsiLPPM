@@ -50,25 +50,82 @@ module.exports = async function (fastify, opts) {
 
       const { data } = await oauth2.userinfo.get();
 
-      // console.log(data.email);
-      console.log(data);
+      let username = data.email;
+      let role;
+      let dbData;
+      let connection;
+      let id;
 
-      let username = data.given_name;
-      // let role = 0;
+      const sql = "SELECT * FROM users WHERE username = ?";
+      try {
+         connection = await fastify.mysql.getConnection();
+         const [rows] = await connection.query(sql, [username]);
+         dbData = rows[0] || false;
+         connection.release();
+         console.log("\n\n");
+         console.log(dbData);
+         console.log(username);
+         console.log("\n\n");
 
-      // 1. cek apakah user sudah terdaftar pada db
-      // 2. jika belum, langsung buatkan akun dg role default 'dosen', setelahnya berikan token dan role
-      // 3. jika sudah, langsung berikan token dan role (role dari db).
+         if (!dbData) {
+            // jika tidak ada, daftarkan sebagai user baru kemudian kirimkan id, username, role dan token
+            let aktif = 1;
+            const sql =
+               "INSERT INTO users (username, email, active) values(?, ?, ?)";
+            connection = await fastify.mysql.getConnection();
+            await connection.query(sql, [data.email, data.email, aktif]);
+            connection.release();
+
+            console.log("Not found");
+         } else {
+            // jika ada, kirimkan id, username, role dan token
+            const sql = "SELECT * FROM users WHERE username = ?";
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, [username]);
+            dbData = rows[0];
+            connection.release();
+
+            id = dbData.id;
+            role = groupMap[rows[0].role];
+
+            console.log("data ada");
+         }
+      } catch (error) {
+         reply.send({
+            msg: "gagal terkoneksi ke db",
+            error,
+         });
+      }
 
       const token = fastify.jwt.sign({
          username,
+         role,
+         id,
          // type: "google"
-         // id,
-         // role,
       });
 
-      // reply.redirect(`/auth/google/${token}`);
-      reply.redirect(`/auth/home?token=${token}&&username=${username}`);
+      reply.redirect(
+         `/auth/home?token=${token}&id=${id}&role=${role}&username=${username}&tes=oke`
+      );
+
+      // return;
+
+      // Query ke db, SELECT db where username = data.email
+      // jika tidak ada, daftarkan sebagai user baru
+      // query ke db lagi, CREATE user
+      // jika ada, bandingkan data dengan db
+      // jika benar, maka beri token, username, dan role ke FE
+
+      // const token = fastify.jwt.sign({
+      //    username,
+      //    role,
+      //    // type: "google"
+      //    // id,
+      // });
+
+      // reply.redirect(
+      //    `/auth/home?token=${token}&&role=${role}&&username=${username}`
+      // );
       //reply.send({ data });
    });
 
