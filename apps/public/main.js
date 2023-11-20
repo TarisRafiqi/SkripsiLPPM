@@ -7187,10 +7187,10 @@
     let { params } = $$props;
     const token = params.token || null;
     if (token) {
-      localStorage.setItem("token", params.token);
       localStorage.setItem("id", params.id);
-      localStorage.setItem("role", params.role);
       localStorage.setItem("username", params.username);
+      localStorage.setItem("role", params.role);
+      localStorage.setItem("token", params.token);
     }
     $$self.$$set = ($$props2) => {
       if ("params" in $$props2)

@@ -9,10 +9,10 @@
    if (token) {
       // save to local storage
       // localStorage.setItem("")
-      localStorage.setItem("token", params.token);
       localStorage.setItem("id", params.id);
-      localStorage.setItem("role", params.role);
       localStorage.setItem("username", params.username);
+      localStorage.setItem("role", params.role);
+      localStorage.setItem("token", params.token);
       // if (role === "admin") $route("/admin");
       // else $route("/dosen");
    }

@@ -70,10 +70,20 @@ module.exports = async function (fastify, opts) {
          if (!dbData) {
             // jika tidak ada, daftarkan sebagai user baru kemudian kirimkan id, username, role dan token
             let aktif = 1;
+            // Buat akun
             const sql =
                "INSERT INTO users (username, email, active) values(?, ?, ?)";
             connection = await fastify.mysql.getConnection();
             await connection.query(sql, [data.email, data.email, aktif]);
+
+            // Ambil Data Akun
+            const sql2 = "SELECT * FROM users WHERE username = ?";
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql2, [username]);
+            dbData = rows[0];
+            id = dbData.id;
+            role = groupMap[rows[0].role];
+
             connection.release();
 
             console.log("Not found");
