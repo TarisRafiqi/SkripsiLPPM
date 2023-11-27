@@ -7,13 +7,14 @@
    import { E404, Sidebar, Navbar } from "@cmp";
 
    let cmp, params;
-   let auth, role;
+   let token, role;
 
    const router = Router(routes, E404, (route) => {
       cmp = route.page;
       params = route.params;
 
-      auth = localStorage.getItem("auth");
+      // auth = localStorage.getItem("auth");
+      token = localStorage.getItem("token");
       role = localStorage.getItem("role");
    });
 
@@ -27,7 +28,7 @@
    // $: auth = localStorage.getItem("auth");
 
    if (location.pathname === "/") {
-      if (!auth) $route("/");
+      if (!token) $route("/");
       else {
          if (role === "admin") $route("/admin");
          else $route("/dosen");
@@ -42,7 +43,7 @@
 </script>
 
 <Navbar />
-{#if auth}
+{#if token}
    <Sidebar />
 {/if}
 

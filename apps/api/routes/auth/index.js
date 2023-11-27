@@ -62,10 +62,10 @@ module.exports = async function (fastify, opts) {
          const [rows] = await connection.query(sql, [username]);
          dbData = rows[0] || false;
          connection.release();
-         console.log("\n\n");
-         console.log(dbData);
-         console.log(username);
-         console.log("\n\n");
+         // console.log("\n\n");
+         // console.log(dbData);
+         // console.log(username);
+         // console.log("\n\n");
 
          if (!dbData) {
             // jika tidak ada, daftarkan sebagai user baru kemudian kirimkan id, username, role dan token

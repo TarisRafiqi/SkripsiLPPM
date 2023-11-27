@@ -90,7 +90,7 @@
    function goSelect(el) {
       // console.log(el);
       let valueId = el.value;
-      console.log(valueId);
+      // console.log(valueId);
    }
 </script>
 

@@ -13,8 +13,15 @@
       localStorage.setItem("username", params.username);
       localStorage.setItem("role", params.role);
       localStorage.setItem("token", params.token);
-      // if (role === "admin") $route("/admin");
-      // else $route("/dosen");
+
+      let role = params.role;
+
+      if (role === "admin") $route("/admin");
+      else $route("/dosen");
+   } else {
+      // jika tidak punya akun, arahkan ke halaman login
+      // console.log("Akun anda tidak memiliki hak untuk mengakses website ini");
+      $route("/login");
    }
 </script>
 

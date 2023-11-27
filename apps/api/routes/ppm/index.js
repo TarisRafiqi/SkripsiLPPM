@@ -30,21 +30,39 @@ module.exports = async function (fastify, opts) {
    fastify.get("/:id/:uid", async function (request, reply) {
       // id hanya hiasan, agar bisa membuat 2 GET didalam 1 API
       const uid = Number(request.params.uid);
+      const token = request.headers.authorization;
+      const decodedToken = fastify.jwt.decode(token);
+      const idFromToken = decodedToken.id;
       let dbData;
       let connection;
-      const sql = "SELECT * FROM ppm WHERE uid = ?";
-      try {
-         connection = await fastify.mysql.getConnection();
-         const [rows] = await connection.query(sql, [uid]);
-         dbData = rows;
-         connection.release();
-         reply.send({
-            dbData,
-         });
-      } catch (error) {
-         reply.send({
-            msg: "gagal terkoneksi ke db",
-         });
+
+      // reply.send({
+      //    token,
+      //    decodedToken,
+      //    uid,
+      //    idFromToken,
+      // });
+      // return;
+
+      // kalau role dosen
+      // ambil uid di token, bandingkan dengan uid dari params
+
+      if (idFromToken === uid) {
+         const sql = "SELECT * FROM ppm WHERE uid = ?";
+         try {
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, [uid]);
+            dbData = rows;
+            connection.release();
+
+            reply.send({
+               dbData,
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db",
+            });
+         }
       }
    });
 

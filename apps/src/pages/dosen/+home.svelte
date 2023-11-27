@@ -7,13 +7,24 @@
    let items;
 
    onMount(async () => {
-      const response = await fetch("/api/ppm/all/" + id);
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
+      const response = await fetch("/api/ppm/all/" + id, {
+         method: "GET",
+         headers: headers,
+      });
       const result = await response.json();
       if (response.ok) {
          items = result.dbData;
          // console.log(result);
       } else {
          console.log(response);
+         // console.log("gagal");
       }
    });
 

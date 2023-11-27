@@ -3431,7 +3431,7 @@
 
   // src/pages/Login.svelte
   function add_css10(target) {
-    append_styles(target, "svelte-mtixvm", '.gsi-material-button.svelte-mtixvm.svelte-mtixvm{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#f2f2f2;background-image:none;border:1px solid var(--border, #dadce0);-webkit-border-radius:20px;border-radius:20px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#1f1f1f;cursor:pointer;font-family:"Roboto", arial, sans-serif;font-size:14px;height:40px;letter-spacing:0.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;-webkit-transition:background-color 0.218s, border-color 0.218s,\r\n         box-shadow 0.218s;transition:background-color 0.218s, border-color 0.218s,\r\n         box-shadow 0.218s;vertical-align:middle;white-space:nowrap}.gsi-material-button.svelte-mtixvm .gsi-material-button-icon.svelte-mtixvm{height:20px;margin-right:12px;min-width:20px;width:20px}.gsi-material-button.svelte-mtixvm .gsi-material-button-content-wrapper.svelte-mtixvm{-webkit-align-items:center;align-items:center;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;justify-content:space-between;position:relative;width:100%}.gsi-material-button.svelte-mtixvm .gsi-material-button-contents.svelte-mtixvm{-webkit-flex-grow:1;flex-grow:1;font-family:"Roboto", arial, sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.gsi-material-button.svelte-mtixvm .gsi-material-button-state.svelte-mtixvm{-webkit-transition:opacity 0.218s;transition:opacity 0.218s;bottom:0;left:0;opacity:0;position:absolute;right:0;top:0}.gsi-material-button.svelte-mtixvm.svelte-mtixvm:disabled{cursor:default;background-color:#ffffff61}.gsi-material-button.svelte-mtixvm:disabled .gsi-material-button-state.svelte-mtixvm{background-color:#1f1f1f1f}.gsi-material-button.svelte-mtixvm:disabled .gsi-material-button-contents.svelte-mtixvm{opacity:38%}.gsi-material-button.svelte-mtixvm:disabled .gsi-material-button-icon.svelte-mtixvm{opacity:38%}.gsi-material-button.svelte-mtixvm:not(:disabled):active .gsi-material-button-state.svelte-mtixvm,.gsi-material-button.svelte-mtixvm:not(:disabled):focus .gsi-material-button-state.svelte-mtixvm{background-color:#001d35;opacity:12%}.gsi-material-button.svelte-mtixvm.svelte-mtixvm:not(:disabled):hover{-webkit-box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15);box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15)}.gsi-material-button.svelte-mtixvm:not(:disabled):hover .gsi-material-button-state.svelte-mtixvm{background-color:#001d35;opacity:8%}article.container.svelte-mtixvm.svelte-mtixvm{text-align:center}div.box.svelte-mtixvm.svelte-mtixvm{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-mtixvm div.svelte-mtixvm{text-align:left}button.svelte-mtixvm.svelte-mtixvm{width:100%}');
+    append_styles(target, "svelte-12kpeo2", '.gsi-material-button.svelte-12kpeo2.svelte-12kpeo2{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#f2f2f2;background-image:none;border:1px solid var(--border, #dadce0);-webkit-border-radius:20px;border-radius:20px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#1f1f1f;cursor:pointer;font-family:"Roboto", arial, sans-serif;font-size:14px;height:40px;letter-spacing:0.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;-webkit-transition:background-color 0.218s,\r\n         border-color 0.218s,\r\n         box-shadow 0.218s;transition:background-color 0.218s,\r\n         border-color 0.218s,\r\n         box-shadow 0.218s;vertical-align:middle;white-space:nowrap}.gsi-material-button.svelte-12kpeo2 .gsi-material-button-icon.svelte-12kpeo2{height:20px;margin-right:12px;min-width:20px;width:20px}.gsi-material-button.svelte-12kpeo2 .gsi-material-button-content-wrapper.svelte-12kpeo2{-webkit-align-items:center;align-items:center;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;justify-content:space-between;position:relative;width:100%}.gsi-material-button.svelte-12kpeo2 .gsi-material-button-contents.svelte-12kpeo2{-webkit-flex-grow:1;flex-grow:1;font-family:"Roboto", arial, sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.gsi-material-button.svelte-12kpeo2 .gsi-material-button-state.svelte-12kpeo2{-webkit-transition:opacity 0.218s;transition:opacity 0.218s;bottom:0;left:0;opacity:0;position:absolute;right:0;top:0}.gsi-material-button.svelte-12kpeo2.svelte-12kpeo2:disabled{cursor:default;background-color:#ffffff61}.gsi-material-button.svelte-12kpeo2:disabled .gsi-material-button-state.svelte-12kpeo2{background-color:#1f1f1f1f}.gsi-material-button.svelte-12kpeo2:disabled .gsi-material-button-contents.svelte-12kpeo2{opacity:38%}.gsi-material-button.svelte-12kpeo2:disabled .gsi-material-button-icon.svelte-12kpeo2{opacity:38%}.gsi-material-button.svelte-12kpeo2:not(:disabled):active .gsi-material-button-state.svelte-12kpeo2,.gsi-material-button.svelte-12kpeo2:not(:disabled):focus .gsi-material-button-state.svelte-12kpeo2{background-color:#001d35;opacity:12%}.gsi-material-button.svelte-12kpeo2.svelte-12kpeo2:not(:disabled):hover{-webkit-box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15);box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15)}.gsi-material-button.svelte-12kpeo2:not(:disabled):hover .gsi-material-button-state.svelte-12kpeo2{background-color:#001d35;opacity:8%}article.container.svelte-12kpeo2.svelte-12kpeo2{text-align:center}div.box.svelte-12kpeo2.svelte-12kpeo2{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-12kpeo2 div.svelte-12kpeo2{text-align:left}button.svelte-12kpeo2.svelte-12kpeo2{width:100%}');
   }
   function create_fragment14(ctx) {
     let article;
@@ -3484,19 +3484,19 @@
         t10 = space();
         div8 = element("div");
         button1 = element("button");
-        button1.innerHTML = `<div class="gsi-material-button-state svelte-mtixvm"></div> <div class="gsi-material-button-content-wrapper svelte-mtixvm"><div class="gsi-material-button-icon svelte-mtixvm"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg></div> <span class="gsi-material-button-contents svelte-mtixvm">Sign in with Google</span> <span style="display: none;">Sign in with Google</span></div>`;
-        attr(div0, "class", "svelte-mtixvm");
+        button1.innerHTML = `<div class="gsi-material-button-state svelte-12kpeo2"></div> <div class="gsi-material-button-content-wrapper svelte-12kpeo2"><div class="gsi-material-button-icon svelte-12kpeo2"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg></div> <span class="gsi-material-button-contents svelte-12kpeo2">Sign in with Google</span> <span style="display: none;">Sign in with Google</span></div>`;
+        attr(div0, "class", "svelte-12kpeo2");
         attr(input0, "type", "text");
-        attr(div1, "class", "svelte-mtixvm");
-        attr(div2, "class", "svelte-mtixvm");
+        attr(div1, "class", "svelte-12kpeo2");
+        attr(div2, "class", "svelte-12kpeo2");
         attr(input1, "type", "password");
-        attr(div3, "class", "svelte-mtixvm");
-        attr(button0, "class", "svelte-mtixvm");
-        attr(div4, "class", "svelte-mtixvm");
-        attr(button1, "class", "gsi-material-button svelte-mtixvm");
-        attr(div8, "class", "svelte-mtixvm");
-        attr(div9, "class", "box svelte-mtixvm");
-        attr(article, "class", "container svelte-mtixvm");
+        attr(div3, "class", "svelte-12kpeo2");
+        attr(button0, "class", "svelte-12kpeo2");
+        attr(div4, "class", "svelte-12kpeo2");
+        attr(button1, "class", "gsi-material-button svelte-12kpeo2");
+        attr(div8, "class", "svelte-12kpeo2");
+        attr(div9, "class", "box svelte-12kpeo2");
+        attr(article, "class", "container svelte-12kpeo2");
       },
       m(target, anchor) {
         insert(target, article, anchor);
@@ -3604,13 +3604,12 @@
       };
       const response = await fetch("/api/auth", payload);
       const result = await response.json();
-      console.log(result);
       if (result.sukses) {
         const { id, username: username2, role, token } = result;
         localStorage.setItem("id", id);
         localStorage.setItem("username", username2);
         localStorage.setItem("role", role);
-        localStorage.setItem("auth", token);
+        localStorage.setItem("token", token);
         if (role === "admin")
           $route("/admin");
         else
@@ -4175,7 +4174,7 @@
 
   // src/pages/admin/+home.svelte
   function add_css15(target) {
-    append_styles(target, "svelte-1ben65p", "#orang{color:#b8b8b8}a.svelte-1ben65p{display:flex;align-items:center;gap:0.5rem}");
+    append_styles(target, "svelte-18wwe8f", "#orang{color:#b8b8b8}");
   }
   function create_default_slot2(ctx) {
     let h1;
@@ -4183,12 +4182,6 @@
     let hr;
     let t2;
     let p;
-    let t4;
-    let a;
-    let icon;
-    let t5;
-    let current;
-    icon = new Icon_default({ props: { id: "orang", src: menu } });
     return {
       c() {
         h1 = element("h1");
@@ -4198,12 +4191,6 @@
         t2 = space();
         p = element("p");
         p.textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga dolorum\r\n      inventore eius ratione. Animi, aperiam dolore. Aut iure earum reiciendis\r\n      iste rerum eveniet tempora nisi porro, animi molestiae obcaecati unde?";
-        t4 = space();
-        a = element("a");
-        create_component(icon.$$.fragment);
-        t5 = text("\r\n      Home");
-        attr(a, "href", "/");
-        attr(a, "class", "svelte-1ben65p");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -4211,23 +4198,8 @@
         insert(target, hr, anchor);
         insert(target, t2, anchor);
         insert(target, p, anchor);
-        insert(target, t4, anchor);
-        insert(target, a, anchor);
-        mount_component(icon, a, null);
-        append(a, t5);
-        current = true;
       },
       p: noop,
-      i(local) {
-        if (current)
-          return;
-        transition_in(icon.$$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(icon.$$.fragment, local);
-        current = false;
-      },
       d(detaching) {
         if (detaching) {
           detach(h1);
@@ -4235,10 +4207,7 @@
           detach(hr);
           detach(t2);
           detach(p);
-          detach(t4);
-          detach(a);
         }
-        destroy_component(icon);
       }
     };
   }
@@ -7184,6 +7153,8 @@
     };
   }
   function instance19($$self, $$props, $$invalidate) {
+    let $route;
+    component_subscribe($$self, route, ($$value) => $$invalidate(1, $route = $$value));
     let { params } = $$props;
     const token = params.token || null;
     if (token) {
@@ -7191,6 +7162,13 @@
       localStorage.setItem("username", params.username);
       localStorage.setItem("role", params.role);
       localStorage.setItem("token", params.token);
+      let role = params.role;
+      if (role === "admin")
+        $route("/admin");
+      else
+        $route("/dosen");
+    } else {
+      $route("/login");
     }
     $$self.$$set = ($$props2) => {
       if ("params" in $$props2)
@@ -8058,7 +8036,12 @@
     const id = localStorage.id;
     let items;
     onMount(async () => {
-      const response = await fetch("/api/ppm/all/" + id);
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      const response = await fetch("/api/ppm/all/" + id, { method: "GET", headers });
       const result = await response.json();
       if (response.ok) {
         $$invalidate(0, items = result.dbData);
@@ -8848,7 +8831,6 @@
   }
   function goSelect(el) {
     let valueId = el.value;
-    console.log(valueId);
   }
   function instance24($$self, $$props, $$invalidate) {
     let $route;
@@ -10167,7 +10149,7 @@
     let current;
     navbar = new Navbar_default({});
     let if_block0 = (
-      /*auth*/
+      /*token*/
       ctx[2] && create_if_block_18(ctx)
     );
     let if_block1 = (
@@ -10198,11 +10180,11 @@
       },
       p(ctx2, [dirty]) {
         if (
-          /*auth*/
+          /*token*/
           ctx2[2]
         ) {
           if (if_block0) {
-            if (dirty & /*auth*/
+            if (dirty & /*token*/
             4) {
               transition_in(if_block0, 1);
             }
@@ -10275,11 +10257,11 @@
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(4, $route = $$value));
     let cmp, params;
-    let auth, role;
+    let token, role;
     const router = (0, import_router.default)(routes_default, E404_default, (route2) => {
       $$invalidate(0, cmp = route2.page);
       $$invalidate(1, params = route2.params);
-      $$invalidate(2, auth = localStorage.getItem("auth"));
+      $$invalidate(2, token = localStorage.getItem("token"));
       role = localStorage.getItem("role");
     });
     set_store_value(route, $route = router.route, $route);
@@ -10287,7 +10269,7 @@
     router.listen();
     onDestroy(router.unlisten);
     if (location.pathname === "/") {
-      if (!auth)
+      if (!token)
         $route("/");
       else {
         if (role === "admin")
@@ -10301,7 +10283,7 @@
         if (location.pathname === "/") {
         }
       };
-    return [cmp, params, auth];
+    return [cmp, params, token];
   }
   var App = class extends SvelteComponent {
     constructor(options) {

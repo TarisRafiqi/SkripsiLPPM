@@ -18,7 +18,7 @@
 
       const response = await fetch("/api/auth", payload);
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       // console.log(result.token);
 
       if (result.sukses) {
@@ -26,7 +26,7 @@
          localStorage.setItem("id", id);
          localStorage.setItem("username", username);
          localStorage.setItem("role", role);
-         localStorage.setItem("auth", token);
+         localStorage.setItem("token", token);
          // return;
          if (role === "admin") $route("/admin");
          else $route("/dosen");
@@ -129,9 +129,13 @@
       padding: 0 12px;
       position: relative;
       text-align: center;
-      -webkit-transition: background-color 0.218s, border-color 0.218s,
+      -webkit-transition:
+         background-color 0.218s,
+         border-color 0.218s,
          box-shadow 0.218s;
-      transition: background-color 0.218s, border-color 0.218s,
+      transition:
+         background-color 0.218s,
+         border-color 0.218s,
          box-shadow 0.218s;
       vertical-align: middle;
       white-space: nowrap;
@@ -206,9 +210,11 @@
    }
 
    .gsi-material-button:not(:disabled):hover {
-      -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+      -webkit-box-shadow:
+         0 1px 2px 0 rgba(60, 64, 67, 0.3),
          0 1px 3px 1px rgba(60, 64, 67, 0.15);
-      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+      box-shadow:
+         0 1px 2px 0 rgba(60, 64, 67, 0.3),
          0 1px 3px 1px rgba(60, 64, 67, 0.15);
    }
 

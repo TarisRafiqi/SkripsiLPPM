@@ -12,10 +12,10 @@
       iste rerum eveniet tempora nisi porro, animi molestiae obcaecati unde?
    </p>
 
-   <a href="/">
+   <!-- <a href="/">
       <Icon id="orang" src={menu} />
       Home
-   </a>
+   </a> -->
 </Article>
 
 <style>
@@ -23,9 +23,9 @@
       color: #b8b8b8;
    }
 
-   a {
+   /* a {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-   }
+   } */
 </style>
