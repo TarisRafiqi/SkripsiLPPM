@@ -18,10 +18,14 @@
          method: "GET",
          headers: headers,
       });
+
       const result = await response.json();
+      // console.log(result);
+      // return;
+
       if (response.ok) {
          items = result.dbData;
-         // console.log(result);
+         console.log(result);
       } else {
          console.log(response);
          // console.log("gagal");

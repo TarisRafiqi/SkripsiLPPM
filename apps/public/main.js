@@ -8045,10 +8045,9 @@
       const result = await response.json();
       if (response.ok) {
         $$invalidate(0, items = result.dbData);
+        console.log(result);
       } else {
-        console.log(
-          response
-        );
+        console.log(response);
       }
     });
     function detail(ev) {

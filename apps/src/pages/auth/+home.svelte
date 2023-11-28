@@ -20,7 +20,6 @@
       else $route("/dosen");
    } else {
       // jika tidak punya akun, arahkan ke halaman login
-      // console.log("Akun anda tidak memiliki hak untuk mengakses website ini");
       $route("/login");
    }
 </script>

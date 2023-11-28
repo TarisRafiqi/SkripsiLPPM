@@ -19,7 +19,7 @@
       const response = await fetch("/api/auth", payload);
       const result = await response.json();
       // console.log(result);
-      // console.log(result.token);
+      // return;
 
       if (result.sukses) {
          const { id, username, role, token } = result;

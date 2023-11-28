@@ -33,6 +33,7 @@ module.exports = async function (fastify, opts) {
       const token = request.headers.authorization;
       const decodedToken = fastify.jwt.decode(token);
       const idFromToken = decodedToken.id;
+      const roleFromToken = decodedToken.role;
       let dbData;
       let connection;
 
@@ -44,8 +45,15 @@ module.exports = async function (fastify, opts) {
       // });
       // return;
 
-      // kalau role dosen
-      // ambil uid di token, bandingkan dengan uid dari params
+      // if (roleFromToken === "dosen") {
+      //    console.log("yes, this account role is dosen");
+      //    // fungsi selanjutnya atau beri data ke FE
+      // } else {
+      //    reply.send({
+      //       pesan: "Anda tidak memiliki hak akses halaman ini",
+      //    });
+      //    console.log("this role account is not dosen");
+      // }
 
       if (idFromToken === uid) {
          const sql = "SELECT * FROM ppm WHERE uid = ?";
@@ -56,6 +64,10 @@ module.exports = async function (fastify, opts) {
             connection.release();
 
             reply.send({
+               // token,
+               // decodedToken,
+               // uid,
+               // idFromToken,
                dbData,
             });
          } catch (error) {

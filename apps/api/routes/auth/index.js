@@ -4,9 +4,9 @@ const groupMap = {
    0: "dosen",
    9: "admin",
    10: "reviewer",
-   11: "Ka. Departemen",
-   12: "Ka. LPPM",
-   13: "Ka. Pusat Kajian",
+   11: "Ka.Departemen",
+   12: "Ka.LPPM",
+   13: "Ka.Pusat Kajian",
 };
 
 const clientId =
@@ -98,7 +98,7 @@ module.exports = async function (fastify, opts) {
             id = dbData.id;
             role = groupMap[rows[0].role];
 
-            console.log("data ada");
+            // console.log("data ada");
          }
       } catch (error) {
          reply.send({
@@ -172,9 +172,9 @@ module.exports = async function (fastify, opts) {
       if (password === dbData.password && username === dbData.username) {
          if (dbData.active) {
             token = fastify.jwt.sign({
-               id,
                username,
-               role,
+               role: dbData.role,
+               id: dbData.id,
                // type: "db"
             });
          } else {
