@@ -20,15 +20,26 @@
    let reviewerSelected;
    let judul, abstrak;
 
+   // pakai akses token, hanya uid yang bersangkutan, dan role admin yang boleh mengakses halaman ini
    onMount(async () => {
-      //
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
       ka_departemen = await findRole(11);
       ka_lppm = await findRole(12);
       ka_pusat_kajian = await findRole(13);
       reviewer = await findRole(10);
 
-      const response = await fetch("/api/ppm/" + id);
+      const response = await fetch("/api/ppm/" + id, {
+         method: "GET",
+         headers: headers,
+      });
       const result = await response.json();
+      console.log(result);
 
       if (response.ok) {
          items = [];
@@ -40,7 +51,7 @@
             };
             items.push(obj);
          }
-         console.log(items);
+         // console.log(items);
          judul = items[2].value;
          abstrak = items[3].value;
          kdeptSelected = items[6].value;
@@ -141,7 +152,7 @@
 
 {#if items}
    <Article>
-      <h1>Proposal</h1>
+      <h1>Detail Proposal</h1>
 
       <br />
 

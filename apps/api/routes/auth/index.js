@@ -6,7 +6,7 @@ const groupMap = {
    10: "reviewer",
    11: "Ka.Departemen",
    12: "Ka.LPPM",
-   13: "Ka.Pusat Kajian",
+   13: "Ka.PusatKajian",
 };
 
 const clientId =

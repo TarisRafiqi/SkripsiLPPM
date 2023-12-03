@@ -12,9 +12,21 @@
 
    const id = params["1"];
 
+   // pakai akses token, hanya uid yang bersangkutan dan role Admin yang boleh mengakses halaman ini
    onMount(async () => {
-      const response = await fetch("/api/ppm/" + id);
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
+      const response = await fetch("/api/ppm/" + id, {
+         method: "GET",
+         headers: headers,
+      });
       const result = await response.json();
+      console.log(result);
 
       if (response.ok) {
          items = [];

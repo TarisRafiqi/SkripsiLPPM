@@ -7,12 +7,25 @@
    let profile;
    let items;
 
+   // Pakai akses token, Hanya tole Admin yang bisa mengakses halaman ini
    async function populateTable() {
-      const response = await fetch("/api/user");
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
+      const response = await fetch("/api/user", {
+         method: "GET",
+         headers: headers,
+      });
       const result = await response.json();
+      console.log(result);
 
       if (response.status === 200) {
          items = result.dbData;
+         // console.log(items);
       }
    }
 
@@ -69,6 +82,7 @@
       }
    }
 
+   // Pakai akses Token, hanya uid pemilik dan role Admin yang bisa mengakses halaman ini
    async function getPage() {
       if (params["1"] === "profile") {
          let id = params["2"];
@@ -98,19 +112,18 @@
 </script>
 
 <Article>
-   <h2>User Management</h2>
-   <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quae
-      dolores veniam doloremque, est excepturi. Esse, amet est, tempore
-      molestias, aut iusto voluptate soluta distinctio voluptatem unde ad.
-      Accusantium, sint.
-   </p>
-
-   <p>
-      <button on:click={addUser}>+ Add User</button>
-   </p>
-
    {#if items}
+      <h1>User Management</h1>
+      <p>
+         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quae
+         dolores veniam doloremque, est excepturi. Esse, amet est, tempore
+         molestias, aut iusto voluptate soluta distinctio voluptatem unde ad.
+         Accusantium, sint.
+      </p>
+
+      <p>
+         <button on:click={addUser}>+ Add User</button>
+      </p>
       <table>
          <tr>
             <th>Username</th>

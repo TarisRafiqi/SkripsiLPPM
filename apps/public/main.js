@@ -4270,7 +4270,7 @@
         h1.textContent = "Pengumuman";
         t1 = space();
         p = element("p");
-        p.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum dicta voluptatibus sequi! Saepe eos quo et\r\n      incidunt mollitia assumenda, quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.";
+        p.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum\r\n      dicta voluptatibus sequi! Saepe eos quo et incidunt mollitia assumenda,\r\n      quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.";
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -4726,7 +4726,12 @@
     const id = params["1"];
     let msgNip2;
     onMount(async () => {
-      const response = await fetch("/api/user/" + id);
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      const response = await fetch("/api/user/" + id, { method: "GET", headers });
       const result = await response.json();
       if (response.ok) {
         $$invalidate(0, items = []);
@@ -5497,7 +5502,7 @@
     return {
       c() {
         h1 = element("h1");
-        h1.textContent = "Proposal";
+        h1.textContent = "Detail Proposal";
         t1 = space();
         br0 = element("br");
         t2 = space();
@@ -5877,19 +5882,24 @@
     let reviewerSelected2;
     let judul2, abstrak2;
     onMount(async () => {
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
       $$invalidate(2, ka_departemen = await findRole(11));
       $$invalidate(3, ka_lppm = await findRole(12));
       $$invalidate(5, ka_pusat_kajian = await findRole(13));
       $$invalidate(4, reviewer = await findRole(10));
-      const response = await fetch("/api/ppm/" + id);
+      const response = await fetch("/api/ppm/" + id, { method: "GET", headers });
       const result = await response.json();
+      console.log(result);
       if (response.ok) {
         $$invalidate(0, items = []);
         for (const [field, value] of Object.entries(result)) {
           let obj = { field, value };
           items.push(obj);
         }
-        console.log(items);
         judul2 = items[2].value;
         abstrak2 = items[3].value;
         $$invalidate(7, kdeptSelected2 = items[6].value);
@@ -6375,7 +6385,12 @@
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     let items;
     onMount(async () => {
-      const response = await fetch("/api/ppm");
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      const response = await fetch("/api/ppm", { method: "GET", headers });
       const result = await response.json();
       if (response.ok) {
         $$invalidate(0, items = result.dbData);
@@ -6406,9 +6421,18 @@
     return child_ctx;
   }
   function create_if_block7(ctx) {
+    let h1;
+    let t1;
+    let p0;
+    let t3;
+    let p1;
+    let button;
+    let t5;
     let table;
     let tr;
-    let t7;
+    let t13;
+    let mounted;
+    let dispose;
     let each_value = ensure_array_like(
       /*items*/
       ctx[0]
@@ -6419,22 +6443,48 @@
     }
     return {
       c() {
+        h1 = element("h1");
+        h1.textContent = "User Management";
+        t1 = space();
+        p0 = element("p");
+        p0.textContent = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quae\r\n         dolores veniam doloremque, est excepturi. Esse, amet est, tempore\r\n         molestias, aut iusto voluptate soluta distinctio voluptatem unde ad.\r\n         Accusantium, sint.";
+        t3 = space();
+        p1 = element("p");
+        button = element("button");
+        button.textContent = "+ Add User";
+        t5 = space();
         table = element("table");
         tr = element("tr");
         tr.innerHTML = `<th>Username</th> <th>Email</th> <th>Role</th> <th>Active</th>`;
-        t7 = space();
+        t13 = space();
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
       },
       m(target, anchor) {
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, p0, anchor);
+        insert(target, t3, anchor);
+        insert(target, p1, anchor);
+        append(p1, button);
+        insert(target, t5, anchor);
         insert(target, table, anchor);
         append(table, tr);
-        append(table, t7);
+        append(table, t13);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(table, null);
           }
+        }
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*addUser*/
+            ctx[3]
+          );
+          mounted = true;
         }
       },
       p(ctx2, dirty) {
@@ -6463,9 +6513,17 @@
       },
       d(detaching) {
         if (detaching) {
+          detach(h1);
+          detach(t1);
+          detach(p0);
+          detach(t3);
+          detach(p1);
+          detach(t5);
           detach(table);
         }
         destroy_each(each_blocks, detaching);
+        mounted = false;
+        dispose();
       }
     };
   }
@@ -6702,56 +6760,21 @@
     };
   }
   function create_default_slot7(ctx) {
-    let h2;
-    let t1;
-    let p0;
-    let t3;
-    let p1;
-    let button;
-    let t5;
     let if_block_anchor;
-    let mounted;
-    let dispose;
     let if_block = (
       /*items*/
       ctx[0] && create_if_block7(ctx)
     );
     return {
       c() {
-        h2 = element("h2");
-        h2.textContent = "User Management";
-        t1 = space();
-        p0 = element("p");
-        p0.textContent = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quae\r\n      dolores veniam doloremque, est excepturi. Esse, amet est, tempore\r\n      molestias, aut iusto voluptate soluta distinctio voluptatem unde ad.\r\n      Accusantium, sint.";
-        t3 = space();
-        p1 = element("p");
-        button = element("button");
-        button.textContent = "+ Add User";
-        t5 = space();
         if (if_block)
           if_block.c();
         if_block_anchor = empty();
       },
       m(target, anchor) {
-        insert(target, h2, anchor);
-        insert(target, t1, anchor);
-        insert(target, p0, anchor);
-        insert(target, t3, anchor);
-        insert(target, p1, anchor);
-        append(p1, button);
-        insert(target, t5, anchor);
         if (if_block)
           if_block.m(target, anchor);
         insert(target, if_block_anchor, anchor);
-        if (!mounted) {
-          dispose = listen(
-            button,
-            "click",
-            /*addUser*/
-            ctx[3]
-          );
-          mounted = true;
-        }
       },
       p(ctx2, dirty) {
         if (
@@ -6772,18 +6795,10 @@
       },
       d(detaching) {
         if (detaching) {
-          detach(h2);
-          detach(t1);
-          detach(p0);
-          detach(t3);
-          detach(p1);
-          detach(t5);
           detach(if_block_anchor);
         }
         if (if_block)
           if_block.d(detaching);
-        mounted = false;
-        dispose();
       }
     };
   }
@@ -6834,8 +6849,14 @@
     let profile;
     let items;
     async function populateTable() {
-      const response = await fetch("/api/user");
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      const response = await fetch("/api/user", { method: "GET", headers });
       const result = await response.json();
+      console.log(result);
       if (response.status === 200) {
         $$invalidate(0, items = result.dbData);
       }
@@ -8351,7 +8372,12 @@
     let items;
     const id = localStorage.getItem("id");
     onMount(async () => {
-      const response = await fetch("/api/user/" + id);
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      const response = await fetch("/api/user/" + id, { method: "GET", headers });
       const result = await response.json();
       if (response.ok) {
         $$invalidate(0, items = []);
@@ -8839,6 +8865,7 @@
     let tahunPelaksanaan = "";
     const id = Number(localStorage.getItem("id"));
     async function simpanProposal() {
+      const accessToken = localStorage.getItem("token");
       let payload = {
         id,
         judul: judul2,
@@ -8848,7 +8875,10 @@
       };
       const response = await fetch("/api/ppm", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `${accessToken}`,
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(payload)
       });
       const result = await response.json();
@@ -8860,6 +8890,7 @@
       }
     }
     async function submitProposal() {
+      const accessToken = localStorage.getItem("token");
       let payload = {
         id,
         judul: judul2,
@@ -8869,7 +8900,10 @@
       };
       const response = await fetch("/api/ppm", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `${accessToken}`,
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(payload)
       });
       const result = await response.json();
@@ -9696,8 +9730,14 @@
     let statusProposal;
     const id = params["1"];
     onMount(async () => {
-      const response = await fetch("/api/ppm/" + id);
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      const response = await fetch("/api/ppm/" + id, { method: "GET", headers });
       const result = await response.json();
+      console.log(result);
       if (response.ok) {
         $$invalidate(0, items = []);
         data2 = result;

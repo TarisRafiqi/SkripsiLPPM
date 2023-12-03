@@ -5,9 +5,21 @@
 
    let items;
 
+   // Pakai akses token, Hanya role admin yang bisa mengakses halaman ini
    onMount(async () => {
-      const response = await fetch("/api/ppm");
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
+      const response = await fetch("/api/ppm", {
+         method: "GET",
+         headers: headers,
+      });
       const result = await response.json();
+      // console.log(result);
 
       if (response.ok) {
          items = result.dbData;

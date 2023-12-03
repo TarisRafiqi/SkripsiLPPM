@@ -11,6 +11,8 @@
    const id = Number(localStorage.getItem("id"));
 
    async function simpanProposal() {
+      const accessToken = localStorage.getItem("token");
+
       let payload = {
          id,
          judul,
@@ -22,6 +24,7 @@
       const response = await fetch("/api/ppm", {
          method: "POST",
          headers: {
+            Authorization: `${accessToken}`,
             "Content-Type": "application/json",
          },
          body: JSON.stringify(payload),
@@ -39,6 +42,8 @@
    }
 
    async function submitProposal() {
+      const accessToken = localStorage.getItem("token");
+
       let payload = {
          id,
          judul,
@@ -50,6 +55,7 @@
       const response = await fetch("/api/ppm", {
          method: "POST",
          headers: {
+            Authorization: `${accessToken}`,
             "Content-Type": "application/json",
          },
          body: JSON.stringify(payload),

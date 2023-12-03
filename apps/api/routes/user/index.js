@@ -10,42 +10,80 @@ module.exports = async function (fastify, opts) {
    // get detail user aka profile
    fastify.get("/:id", async function (request, reply) {
       const id = Number(request.params.id);
+      const token = request.headers.authorization;
+      const decodedToken = fastify.jwt.decode(token);
+      const idFromToken = decodedToken.id;
+      const roleFromToken = decodedToken.role;
       let dbData;
       let connection;
-      const sql = "SELECT * FROM profile WHERE uid = ?";
 
-      try {
-         connection = await fastify.mysql.getConnection();
-         const [rows] = await connection.query(sql, [id]);
-         dbData = rows;
-         connection.release();
+      if (idFromToken === id) {
+         const sql = "SELECT * FROM profile WHERE uid = ?";
+
+         try {
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, [id]);
+            dbData = rows;
+            connection.release();
+            reply.send({
+               ...dbData,
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db profile",
+            });
+         }
+      } else if (roleFromToken === "admin") {
+         const sql = "SELECT * FROM profile WHERE uid = ?";
+
+         try {
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, [id]);
+            dbData = rows;
+            connection.release();
+            reply.send({
+               ...dbData,
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db profile",
+            });
+         }
+      } else {
          reply.send({
-            ...dbData,
-         });
-      } catch (error) {
-         reply.send({
-            msg: "gagal terkoneksi ke db profile",
+            msg: "Anda tidak memiliki hak akses halaman ini",
          });
       }
    });
 
    // get users
    fastify.get("/", async function (request, reply) {
+      const token = request.headers.authorization;
+      const decodedToken = fastify.jwt.decode(token);
+      // const idFromToken = decodedToken.id;
+      const roleFromToken = decodedToken.role;
+
       let dbData;
       const sql = "SELECT id, username, email, role, active FROM users";
       let connection;
 
-      try {
-         connection = await fastify.mysql.getConnection();
-         const [rows] = await connection.query(sql, []);
-         dbData = rows;
-         connection.release();
+      if (roleFromToken === "admin") {
+         try {
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, []);
+            dbData = rows;
+            connection.release();
+            reply.send({
+               dbData,
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db",
+            });
+         }
+      } else {
          reply.send({
-            dbData,
-         });
-      } catch (error) {
-         reply.send({
-            msg: "gagal terkoneksi ke db",
+            msg: "Anda tidak memiliki hak akses halaman ini",
          });
       }
    });

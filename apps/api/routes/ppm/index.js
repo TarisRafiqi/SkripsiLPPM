@@ -5,27 +5,47 @@ const e404 = `Code 400\nServer tidak dapat atau tidak akan memproses permintaan 
 const e500 = `The server has encountered a situation it does not know how to handle.`;
 
 module.exports = async function (fastify, opts) {
+   // API ini diakses oleh halaman Detail Proposal untuk meminta detail proposal dari id tsb
    // Get detail proposal
    fastify.get("/:id", async function (request, reply) {
       const id = Number(request.params.id);
+      const token = request.headers.authorization;
+      const decodedToken = fastify.jwt.decode(token);
+      const idFromToken = decodedToken.id;
+      const roleFromToken = decodedToken.role;
       let dbData;
       let connection;
-      const sql = "SELECT * FROM ppm WHERE id = ?";
-      try {
-         connection = await fastify.mysql.getConnection();
-         const [rows] = await connection.query(sql, [id]);
-         dbData = rows[0];
-         connection.release();
+
+      if (
+         roleFromToken === "admin" ||
+         roleFromToken === "dosen" ||
+         roleFromToken === "reviewer" ||
+         roleFromToken === "Ka.Departemen" ||
+         roleFromToken === "Ka.LPPM" ||
+         roleFromToken === "Ka.PusatKajian"
+      ) {
+         const sql = "SELECT * FROM ppm WHERE id = ?";
+         try {
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, [id]);
+            dbData = rows[0];
+            connection.release();
+            reply.send({
+               ...dbData,
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db",
+            });
+         }
+      } else {
          reply.send({
-            ...dbData,
-         });
-      } catch (error) {
-         reply.send({
-            msg: "gagal terkoneksi ke db",
+            msg: "Anda tidak memiliki hak akses halaman ini",
          });
       }
    });
 
+   // API ini diakses oleh halaman List Proposal untuk mengambil semua proposal/penelitian milik id tersebut.
    // Reseach by Id
    fastify.get("/:id/:uid", async function (request, reply) {
       // id hanya hiasan, agar bisa membuat 2 GET didalam 1 API
@@ -80,26 +100,49 @@ module.exports = async function (fastify, opts) {
 
    // Get all research
    fastify.get("/", async function (request, reply) {
-      let dbData;
+      const token = request.headers.authorization;
+      const decodedToken = fastify.jwt.decode(token);
+      // const idFromToken = decodedToken.id;
+      const roleFromToken = decodedToken.role;
+
       const sql = "SELECT id, uid, judul, abstrak, status FROM ppm";
+      let dbData;
       let connection;
 
-      try {
-         connection = await fastify.mysql.getConnection();
-         const [rows] = await connection.query(sql, []);
-         dbData = rows;
-         connection.release();
+      // reply.send({
+      //    token,
+      //    decodedToken,
+      //    idFromToken,
+      // });
+      // return;
+
+      if (roleFromToken === "admin") {
+         try {
+            connection = await fastify.mysql.getConnection();
+            const [rows] = await connection.query(sql, []);
+            dbData = rows;
+            connection.release();
+            reply.send({
+               dbData,
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db",
+            });
+         }
+      } else {
          reply.send({
-            dbData,
-         });
-      } catch (error) {
-         reply.send({
-            msg: "gagal terkoneksi ke db",
+            pesan: "anda tidak memiliki hak akses halaman ini",
          });
       }
    });
 
    fastify.post("/", async function (request, reply) {
+      const token = request.headers.authorization;
+      const decodedToken = fastify.jwt.decode(token);
+      // const idFromToken = decodedToken.id;
+      const roleFromToken = decodedToken.role;
+
       let data = request.body;
       // reply.send({
       //    data,
@@ -109,22 +152,36 @@ module.exports = async function (fastify, opts) {
          "INSERT INTO ppm (uid, judul, abstrak, status, tahun_pelaksanaan) values(?, ?, ?, ?, ?)";
       let connection;
 
-      try {
-         connection = await fastify.mysql.getConnection();
-         await connection.query(sql, [
-            data.id,
-            data.judul,
-            data.abstrak,
-            data.status,
-            data.tahunPelaksanaan,
-         ]);
-         connection.release();
+      if (
+         roleFromToken === "admin" ||
+         roleFromToken === "dosen" ||
+         roleFromToken === "reviewer" ||
+         roleFromToken === "Ka.Departemen" ||
+         roleFromToken === "Ka.LPPM" ||
+         roleFromToken === "Ka.PusatKajian"
+      ) {
+         try {
+            connection = await fastify.mysql.getConnection();
+            await connection.query(sql, [
+               data.id,
+               data.judul,
+               data.abstrak,
+               data.status,
+               data.tahunPelaksanaan,
+            ]);
+            connection.release();
+            reply.send({
+               msg: "Sukses Menambahkan Proposal",
+            });
+         } catch (error) {
+            reply.send({
+               msg: "gagal terkoneksi ke db",
+               error,
+            });
+         }
+      } else {
          reply.send({
-            msg: "Sukses Menambahkan Proposal",
-         });
-      } catch (error) {
-         reply.send({
-            msg: "gagal terkoneksi ke db",
+            msg: "anda tidak memiliki hak akses halaman ini",
             error,
          });
       }

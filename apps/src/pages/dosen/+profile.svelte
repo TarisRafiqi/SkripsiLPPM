@@ -7,8 +7,19 @@
 
    const id = localStorage.getItem("id");
 
+   // Pakai akses Token, hanya uid pemilik dan role Admin yang bisa mengakses halaman ini
    onMount(async () => {
-      const response = await fetch("/api/user/" + id);
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
+      const response = await fetch("/api/user/" + id, {
+         method: "GET",
+         headers: headers,
+      });
       const result = await response.json();
 
       if (response.ok) {
