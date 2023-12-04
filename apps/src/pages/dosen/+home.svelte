@@ -38,7 +38,8 @@
    }
 
    function addProposal() {
-      $route("/dosen/proposal");
+      // $route("/dosen/proposal");
+      location.href = "/dosen/proposal";
    }
 </script>
 
@@ -60,7 +61,7 @@
          {#each items as item}
             <tr>
                <td>{item.judul}</td>
-               <td>{item.abstrak}</td>
+               <td>{@html item.abstrak}</td>
                <td class="status" pid={item.id}>
                   <Status code={item.status} />
                </td>

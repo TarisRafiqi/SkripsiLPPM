@@ -1,4 +1,5 @@
 <script>
+   import { onMount } from "svelte";
    import { Field } from "@cmp";
    import { route } from "../../store";
    import Editor from "@tinymce/tinymce-svelte";
@@ -7,16 +8,40 @@
    let abstrak = "";
    let tahunPelaksanaan = "";
    let kodeProgram = "";
+   let myAbstract;
 
    const id = Number(localStorage.getItem("id"));
 
+   onMount(() => {
+      tinymce.init({
+         selector: "textarea",
+         plugins:
+            "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
+         toolbar:
+            "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+         tinycomments_mode: "embedded",
+         tinycomments_author: "Author name",
+         mergetags_list: [
+            { value: "First.Name", title: "First Name" },
+            { value: "Email", title: "Email" },
+         ],
+         ai_request: (request, respondWith) =>
+            respondWith.string(() =>
+               Promise.reject("See docs to implement AI Assistant")
+            ),
+      });
+   });
+
    async function simpanProposal() {
       const accessToken = localStorage.getItem("token");
+      myAbstract = tinymce.get("abstract").getContent();
+
+      console.log(myAbstract);
 
       let payload = {
          id,
          judul,
-         abstrak,
+         myAbstract,
          status: 0,
          tahunPelaksanaan,
       };
@@ -98,6 +123,9 @@
       let valueId = el.value;
       // console.log(valueId);
    }
+
+   // $: abstrak, console.log(abstrak);
+   // $: judul, console.log(judul);
 </script>
 
 <article>
@@ -105,16 +133,18 @@
 
    <br />
 
-   <select>
+   <!-- <Editor apiKey="your-tiny-cloud-api-key" /> -->
+
+   <!-- <select>
       {#each listKodeProgram as it}
          <option value={it.idKodeProgram} use:goSelect>{it.namaProgram}</option>
       {/each}
-   </select>
+   </select> -->
 
    <Field datepicker name="Tahun Pelaksanaan" bind:value={tahunPelaksanaan} />
    <!-- <Field select name="Kode Program" bind:value={kodeProgram} /> -->
    <Field name="Judul" bind:value={judul} />
-   <Field textarea name="Abstrak" bind:value={abstrak} />
+   <Field id="abstract" textarea name="Abstrak" />
    <!-- <Editor /> -->
 
    <br />
@@ -122,6 +152,8 @@
       <button on:click={simpanProposal}>Simpan</button>
       <button on:click={submitProposal}>Submit</button>
    </Field>
+
+   <!-- <textarea> Welcome to TinyMCE! </textarea> -->
 </article>
 
 <style>

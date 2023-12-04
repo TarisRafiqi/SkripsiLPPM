@@ -1320,7 +1320,7 @@
   }
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[20] = list[i];
+    child_ctx[21] = list[i];
     return child_ctx;
   }
   function create_else_block(ctx) {
@@ -1346,14 +1346,14 @@
               input,
               "input",
               /*input_input_handler_1*/
-              ctx[17]
+              ctx[18]
             ),
             listen(input, "click", function() {
               if (is_function(
                 /*onclick*/
-                ctx[7]
+                ctx[8]
               ))
-                ctx[7].apply(this, arguments);
+                ctx[8].apply(this, arguments);
             })
           ];
           mounted = true;
@@ -1396,7 +1396,7 @@
           a,
           "href",
           /*href*/
-          ctx[6]
+          ctx[7]
         );
         attr(a, "class", "svelte-mpro9n");
       },
@@ -1413,12 +1413,12 @@
             ctx2[1]
           );
         if (dirty & /*href*/
-        64) {
+        128) {
           attr(
             a,
             "href",
             /*href*/
-            ctx2[6]
+            ctx2[7]
           );
         }
       },
@@ -1463,7 +1463,7 @@
             select_1,
             "change",
             /*fillSelect*/
-            ctx[9]
+            ctx[10]
           );
           mounted = true;
         }
@@ -1527,14 +1527,14 @@
               input,
               "input",
               /*input_input_handler*/
-              ctx[16]
+              ctx[17]
             ),
             listen(input, "click", function() {
               if (is_function(
                 /*onclick*/
-                ctx[7]
+                ctx[8]
               ))
-                ctx[7].apply(this, arguments);
+                ctx[8].apply(this, arguments);
             })
           ];
           mounted = true;
@@ -1569,6 +1569,12 @@
     return {
       c() {
         textarea_1 = element("textarea");
+        attr(
+          textarea_1,
+          "id",
+          /*id*/
+          ctx[2]
+        );
         attr(textarea_1, "class", "svelte-mpro9n");
       },
       m(target, anchor) {
@@ -1584,14 +1590,14 @@
               textarea_1,
               "input",
               /*textarea_1_input_handler*/
-              ctx[15]
+              ctx[16]
             ),
             listen(textarea_1, "click", function() {
               if (is_function(
                 /*onclick*/
-                ctx[7]
+                ctx[8]
               ))
-                ctx[7].apply(this, arguments);
+                ctx[8].apply(this, arguments);
             })
           ];
           mounted = true;
@@ -1599,6 +1605,15 @@
       },
       p(new_ctx, dirty) {
         ctx = new_ctx;
+        if (dirty & /*id*/
+        4) {
+          attr(
+            textarea_1,
+            "id",
+            /*id*/
+            ctx[2]
+          );
+        }
         if (dirty & /*value*/
         2) {
           set_input_value(
@@ -1624,13 +1639,13 @@
     let current;
     const default_slot_template = (
       /*#slots*/
-      ctx[14].default
+      ctx[15].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$$scope*/
-      ctx[13],
+      ctx[14],
       null
     );
     return {
@@ -1650,20 +1665,20 @@
       p(ctx2, dirty) {
         if (default_slot) {
           if (default_slot.p && (!current || dirty & /*$$scope*/
-          8192)) {
+          16384)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$$scope*/
-              ctx2[13],
+              ctx2[14],
               !current ? get_all_dirty_from_scope(
                 /*$$scope*/
-                ctx2[13]
+                ctx2[14]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$$scope*/
-                ctx2[13],
+                ctx2[14],
                 dirty,
                 null
               ),
@@ -1695,7 +1710,7 @@
     let option;
     let t_value = (
       /*it*/
-      ctx[20].username + ""
+      ctx[21].username + ""
     );
     let t;
     let option_value_value;
@@ -1707,7 +1722,7 @@
         option = element("option");
         t = text(t_value);
         option.__value = option_value_value = /*it*/
-        ctx[20].id;
+        ctx[21].id;
         set_input_value(option, option.__value);
         attr(option, "class", "svelte-mpro9n");
       },
@@ -1716,18 +1731,18 @@
         append(option, t);
         if (!mounted) {
           dispose = action_destroyer(goSelect_action = /*goSelect*/
-          ctx[10].call(null, option));
+          ctx[11].call(null, option));
           mounted = true;
         }
       },
       p(ctx2, dirty) {
         if (dirty & /*value*/
         2 && t_value !== (t_value = /*it*/
-        ctx2[20].username + ""))
+        ctx2[21].username + ""))
           set_data(t, t_value);
         if (dirty & /*value*/
         2 && option_value_value !== (option_value_value = /*it*/
-        ctx2[20].id)) {
+        ctx2[21].id)) {
           option.__value = option_value_value;
           set_input_value(option, option.__value);
         }
@@ -1761,30 +1776,30 @@
     function select_block_type(ctx2, dirty) {
       if (
         /*hasSlot*/
-        ctx2[8]
+        ctx2[9]
       )
         return 0;
       if (
         /*textarea*/
-        ctx2[2] && !/*view*/
-        ctx2[5]
+        ctx2[3] && !/*view*/
+        ctx2[6]
       )
         return 1;
       if (
         /*datepicker*/
-        ctx2[3] && !/*view*/
-        ctx2[5]
+        ctx2[4] && !/*view*/
+        ctx2[6]
       )
         return 2;
       if (
         /*select*/
-        ctx2[4] && /*view*/
-        ctx2[5]
+        ctx2[5] && /*view*/
+        ctx2[6]
       )
         return 3;
       if (
         /*view*/
-        ctx2[5]
+        ctx2[6]
       )
         return 4;
       return 5;
@@ -1807,7 +1822,7 @@
           div,
           "view",
           /*view*/
-          ctx[5]
+          ctx[6]
         );
       },
       m(target, anchor) {
@@ -1847,12 +1862,12 @@
           if_block.m(div, null);
         }
         if (!current || dirty & /*view*/
-        32) {
+        64) {
           toggle_class(
             div,
             "view",
             /*view*/
-            ctx2[5]
+            ctx2[6]
           );
         }
       },
@@ -1876,6 +1891,7 @@
   }
   function instance3($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
+    let { id } = $$props;
     let { name = "" } = $$props;
     let { value = "" } = $$props;
     let { selected } = $$props;
@@ -1894,9 +1910,9 @@
     }
     function fillSelect(event) {
       let select2 = event.target;
-      $$invalidate(11, selected = Number(select2.value));
+      $$invalidate(12, selected = Number(select2.value));
     }
-    function goSelect2(el) {
+    function goSelect(el) {
       let valueId = el.value;
       if (Number(valueId) === userId) {
         el.setAttribute("selected", "");
@@ -1915,34 +1931,37 @@
       $$invalidate(1, value);
     }
     $$self.$$set = ($$new_props) => {
-      $$invalidate(19, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+      $$invalidate(20, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+      if ("id" in $$new_props)
+        $$invalidate(2, id = $$new_props.id);
       if ("name" in $$new_props)
         $$invalidate(0, name = $$new_props.name);
       if ("value" in $$new_props)
         $$invalidate(1, value = $$new_props.value);
       if ("selected" in $$new_props)
-        $$invalidate(11, selected = $$new_props.selected);
+        $$invalidate(12, selected = $$new_props.selected);
       if ("textarea" in $$new_props)
-        $$invalidate(2, textarea = $$new_props.textarea);
+        $$invalidate(3, textarea = $$new_props.textarea);
       if ("datepicker" in $$new_props)
-        $$invalidate(3, datepicker = $$new_props.datepicker);
+        $$invalidate(4, datepicker = $$new_props.datepicker);
       if ("select" in $$new_props)
-        $$invalidate(4, select = $$new_props.select);
+        $$invalidate(5, select = $$new_props.select);
       if ("view" in $$new_props)
-        $$invalidate(5, view = $$new_props.view);
+        $$invalidate(6, view = $$new_props.view);
       if ("href" in $$new_props)
-        $$invalidate(6, href = $$new_props.href);
+        $$invalidate(7, href = $$new_props.href);
       if ("onclick" in $$new_props)
-        $$invalidate(7, onclick = $$new_props.onclick);
+        $$invalidate(8, onclick = $$new_props.onclick);
       if ("userId" in $$new_props)
-        $$invalidate(12, userId = $$new_props.userId);
+        $$invalidate(13, userId = $$new_props.userId);
       if ("$$scope" in $$new_props)
-        $$invalidate(13, $$scope = $$new_props.$$scope);
+        $$invalidate(14, $$scope = $$new_props.$$scope);
     };
     $$props = exclude_internal_props($$props);
     return [
       name,
       value,
+      id,
       textarea,
       datepicker,
       select,
@@ -1951,7 +1970,7 @@
       onclick,
       hasSlot,
       fillSelect,
-      goSelect2,
+      goSelect,
       selected,
       userId,
       $$scope,
@@ -1971,16 +1990,17 @@
         create_fragment5,
         safe_not_equal,
         {
+          id: 2,
           name: 0,
           value: 1,
-          selected: 11,
-          textarea: 2,
-          datepicker: 3,
-          select: 4,
-          view: 5,
-          href: 6,
-          onclick: 7,
-          userId: 12
+          selected: 12,
+          textarea: 3,
+          datepicker: 4,
+          select: 5,
+          view: 6,
+          href: 7,
+          onclick: 8,
+          userId: 13
         },
         add_css3
       );
@@ -5880,7 +5900,7 @@
     let klppmSelected2;
     let kpkSelected2;
     let reviewerSelected2;
-    let judul2, abstrak2;
+    let judul2, abstrak3;
     onMount(async () => {
       const accessToken = localStorage.getItem("token");
       const headers = {
@@ -5901,7 +5921,7 @@
           items.push(obj);
         }
         judul2 = items[2].value;
-        abstrak2 = items[3].value;
+        abstrak3 = items[3].value;
         $$invalidate(7, kdeptSelected2 = items[6].value);
         $$invalidate(8, klppmSelected2 = items[7].value);
         $$invalidate(9, kpkSelected2 = items[8].value);
@@ -5913,7 +5933,7 @@
       const payload = {
         id,
         judul: judul2,
-        abstrak: abstrak2,
+        abstrak: abstrak3,
         status,
         comment,
         kdeptSelected: kdeptSelected2,
@@ -5938,7 +5958,7 @@
       const payload = {
         id,
         judul: judul2,
-        abstrak: abstrak2,
+        abstrak: abstrak3,
         status,
         comment: "",
         kdeptSelected: kdeptSelected2,
@@ -7741,7 +7761,7 @@
   }
   function get_each_context9(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[5] = list[i];
+    child_ctx[4] = list[i];
     return child_ctx;
   }
   function create_if_block11(ctx) {
@@ -7803,12 +7823,7 @@
         }
         current = true;
         if (!mounted) {
-          dispose = listen(
-            button,
-            "click",
-            /*addProposal*/
-            ctx[2]
-          );
+          dispose = listen(button, "click", addProposal);
           mounted = true;
         }
       },
@@ -7869,31 +7884,30 @@
     let td0;
     let t0_value = (
       /*item*/
-      ctx[5].judul + ""
+      ctx[4].judul + ""
     );
     let t0;
     let t1;
     let td1;
-    let t2_value = (
+    let raw_value = (
       /*item*/
-      ctx[5].abstrak + ""
+      ctx[4].abstrak + ""
     );
     let t2;
-    let t3;
     let td2;
     let status;
     let td2_pid_value;
-    let t4;
+    let t3;
     let td3;
-    let t5;
+    let t4;
     let td3_pid_value;
-    let t6;
+    let t5;
     let current;
     let mounted;
     let dispose;
     status = new Status_default({ props: { code: (
       /*item*/
-      ctx[5].status
+      ctx[4].status
     ) } });
     return {
       c() {
@@ -7902,20 +7916,19 @@
         t0 = text(t0_value);
         t1 = space();
         td1 = element("td");
-        t2 = text(t2_value);
-        t3 = space();
+        t2 = space();
         td2 = element("td");
         create_component(status.$$.fragment);
-        t4 = space();
+        t3 = space();
         td3 = element("td");
-        t5 = text("Detail");
-        t6 = space();
+        t4 = text("Detail");
+        t5 = space();
         attr(td2, "class", "status svelte-123mmn1");
         attr(td2, "pid", td2_pid_value = /*item*/
-        ctx[5].id);
+        ctx[4].id);
         attr(td3, "class", "view svelte-123mmn1");
         attr(td3, "pid", td3_pid_value = /*item*/
-        ctx[5].id);
+        ctx[4].id);
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -7923,14 +7936,14 @@
         append(td0, t0);
         append(tr, t1);
         append(tr, td1);
-        append(td1, t2);
-        append(tr, t3);
+        td1.innerHTML = raw_value;
+        append(tr, t2);
         append(tr, td2);
         mount_component(status, td2, null);
-        append(tr, t4);
+        append(tr, t3);
         append(tr, td3);
-        append(td3, t5);
-        append(tr, t6);
+        append(td3, t4);
+        append(tr, t5);
         current = true;
         if (!mounted) {
           dispose = listen(
@@ -7945,26 +7958,27 @@
       p(ctx2, dirty) {
         if ((!current || dirty & /*items*/
         1) && t0_value !== (t0_value = /*item*/
-        ctx2[5].judul + ""))
+        ctx2[4].judul + ""))
           set_data(t0, t0_value);
         if ((!current || dirty & /*items*/
-        1) && t2_value !== (t2_value = /*item*/
-        ctx2[5].abstrak + ""))
-          set_data(t2, t2_value);
+        1) && raw_value !== (raw_value = /*item*/
+        ctx2[4].abstrak + ""))
+          td1.innerHTML = raw_value;
+        ;
         const status_changes = {};
         if (dirty & /*items*/
         1)
           status_changes.code = /*item*/
-          ctx2[5].status;
+          ctx2[4].status;
         status.$set(status_changes);
         if (!current || dirty & /*items*/
         1 && td2_pid_value !== (td2_pid_value = /*item*/
-        ctx2[5].id)) {
+        ctx2[4].id)) {
           attr(td2, "pid", td2_pid_value);
         }
         if (!current || dirty & /*items*/
         1 && td3_pid_value !== (td3_pid_value = /*item*/
-        ctx2[5].id)) {
+        ctx2[4].id)) {
           attr(td3, "pid", td3_pid_value);
         }
       },
@@ -8051,9 +8065,12 @@
       }
     };
   }
+  function addProposal() {
+    location.href = "/dosen/proposal";
+  }
   function instance22($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     const id = localStorage.id;
     let items;
     onMount(async () => {
@@ -8075,10 +8092,7 @@
       let propId = ev.target.getAttribute("pid");
       $route("/dosen/proposals/" + propId);
     }
-    function addProposal() {
-      $route("/dosen/proposal");
-    }
-    return [items, detail, addProposal];
+    return [items, detail];
   }
   var Home3 = class extends SvelteComponent {
     constructor(options) {
@@ -8555,48 +8569,6 @@
   var scriptLoader = createScriptLoader();
 
   // src/pages/dosen/+proposal.svelte
-  function get_each_context11(ctx, list, i) {
-    const child_ctx = ctx.slice();
-    child_ctx[11] = list[i];
-    return child_ctx;
-  }
-  function create_each_block11(ctx) {
-    let option;
-    let t_value = (
-      /*it*/
-      ctx[11].namaProgram + ""
-    );
-    let t;
-    let option_value_value;
-    let goSelect_action;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        option = element("option");
-        t = text(t_value);
-        option.__value = option_value_value = /*it*/
-        ctx[11].idKodeProgram;
-        set_input_value(option, option.__value);
-      },
-      m(target, anchor) {
-        insert(target, option, anchor);
-        append(option, t);
-        if (!mounted) {
-          dispose = action_destroyer(goSelect_action = goSelect.call(null, option));
-          mounted = true;
-        }
-      },
-      p: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(option);
-        }
-        mounted = false;
-        dispose();
-      }
-    };
-  }
   function create_default_slot9(ctx) {
     let button0;
     let t1;
@@ -8621,13 +8593,13 @@
               button0,
               "click",
               /*simpanProposal*/
-              ctx[3]
+              ctx[2]
             ),
             listen(
               button1,
               "click",
               /*submitProposal*/
-              ctx[4]
+              ctx[3]
             )
           ];
           mounted = true;
@@ -8651,31 +8623,20 @@
     let t1;
     let br0;
     let t2;
-    let select;
-    let t3;
     let field0;
     let updating_value;
-    let t4;
+    let t3;
     let field1;
     let updating_value_1;
-    let t5;
+    let t4;
     let field2;
-    let updating_value_2;
-    let t6;
+    let t5;
     let br1;
-    let t7;
+    let t6;
     let field3;
     let current;
-    let each_value = ensure_array_like(
-      /*listKodeProgram*/
-      ctx[5]
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block11(get_each_context11(ctx, each_value, i));
-    }
     function field0_value_binding(value) {
-      ctx[6](value);
+      ctx[4](value);
     }
     let field0_props = {
       datepicker: true,
@@ -8683,15 +8644,15 @@
     };
     if (
       /*tahunPelaksanaan*/
-      ctx[2] !== void 0
+      ctx[1] !== void 0
     ) {
       field0_props.value = /*tahunPelaksanaan*/
-      ctx[2];
+      ctx[1];
     }
     field0 = new Field_default({ props: field0_props });
     binding_callbacks.push(() => bind(field0, "value", field0_value_binding));
     function field1_value_binding(value) {
-      ctx[7](value);
+      ctx[5](value);
     }
     let field1_props = { name: "Judul" };
     if (
@@ -8703,19 +8664,13 @@
     }
     field1 = new Field_default({ props: field1_props });
     binding_callbacks.push(() => bind(field1, "value", field1_value_binding));
-    function field2_value_binding(value) {
-      ctx[8](value);
-    }
-    let field2_props = { textarea: true, name: "Abstrak" };
-    if (
-      /*abstrak*/
-      ctx[1] !== void 0
-    ) {
-      field2_props.value = /*abstrak*/
-      ctx[1];
-    }
-    field2 = new Field_default({ props: field2_props });
-    binding_callbacks.push(() => bind(field2, "value", field2_value_binding));
+    field2 = new Field_default({
+      props: {
+        id: "abstract",
+        textarea: true,
+        name: "Abstrak"
+      }
+    });
     field3 = new Field_default({
       props: {
         $$slots: { default: [create_default_slot9] },
@@ -8730,19 +8685,14 @@
         t1 = space();
         br0 = element("br");
         t2 = space();
-        select = element("select");
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
-        t3 = space();
         create_component(field0.$$.fragment);
-        t4 = space();
+        t3 = space();
         create_component(field1.$$.fragment);
-        t5 = space();
+        t4 = space();
         create_component(field2.$$.fragment);
-        t6 = space();
+        t5 = space();
         br1 = element("br");
-        t7 = space();
+        t6 = space();
         create_component(field3.$$.fragment);
       },
       m(target, anchor) {
@@ -8751,53 +8701,24 @@
         append(article, t1);
         append(article, br0);
         append(article, t2);
-        append(article, select);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(select, null);
-          }
-        }
-        append(article, t3);
         mount_component(field0, article, null);
-        append(article, t4);
+        append(article, t3);
         mount_component(field1, article, null);
-        append(article, t5);
+        append(article, t4);
         mount_component(field2, article, null);
-        append(article, t6);
+        append(article, t5);
         append(article, br1);
-        append(article, t7);
+        append(article, t6);
         mount_component(field3, article, null);
         current = true;
       },
       p(ctx2, [dirty]) {
-        if (dirty & /*listKodeProgram*/
-        32) {
-          each_value = ensure_array_like(
-            /*listKodeProgram*/
-            ctx2[5]
-          );
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context11(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-            } else {
-              each_blocks[i] = create_each_block11(child_ctx);
-              each_blocks[i].c();
-              each_blocks[i].m(select, null);
-            }
-          }
-          for (; i < each_blocks.length; i += 1) {
-            each_blocks[i].d(1);
-          }
-          each_blocks.length = each_value.length;
-        }
         const field0_changes = {};
         if (!updating_value && dirty & /*tahunPelaksanaan*/
-        4) {
+        2) {
           updating_value = true;
           field0_changes.value = /*tahunPelaksanaan*/
-          ctx2[2];
+          ctx2[1];
           add_flush_callback(() => updating_value = false);
         }
         field0.$set(field0_changes);
@@ -8810,18 +8731,9 @@
           add_flush_callback(() => updating_value_1 = false);
         }
         field1.$set(field1_changes);
-        const field2_changes = {};
-        if (!updating_value_2 && dirty & /*abstrak*/
-        2) {
-          updating_value_2 = true;
-          field2_changes.value = /*abstrak*/
-          ctx2[1];
-          add_flush_callback(() => updating_value_2 = false);
-        }
-        field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty & /*$$scope*/
-        16384) {
+        1024) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
@@ -8846,7 +8758,6 @@
         if (detaching) {
           detach(article);
         }
-        destroy_each(each_blocks, detaching);
         destroy_component(field0);
         destroy_component(field1);
         destroy_component(field2);
@@ -8854,22 +8765,36 @@
       }
     };
   }
-  function goSelect(el) {
-    let valueId = el.value;
-  }
+  var abstrak2 = "";
   function instance24($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(9, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(7, $route = $$value));
     let judul2 = "";
-    let abstrak2 = "";
     let tahunPelaksanaan = "";
+    let myAbstract;
     const id = Number(localStorage.getItem("id"));
+    onMount(() => {
+      tinymce.init({
+        selector: "textarea",
+        plugins: "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
+        toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        tinycomments_mode: "embedded",
+        tinycomments_author: "Author name",
+        mergetags_list: [
+          { value: "First.Name", title: "First Name" },
+          { value: "Email", title: "Email" }
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+      });
+    });
     async function simpanProposal() {
       const accessToken = localStorage.getItem("token");
+      myAbstract = tinymce.get("abstract").getContent();
+      console.log(myAbstract);
       let payload = {
         id,
         judul: judul2,
-        abstrak: abstrak2,
+        myAbstract,
         status: 0,
         tahunPelaksanaan
       };
@@ -8937,26 +8862,19 @@
     ];
     function field0_value_binding(value) {
       tahunPelaksanaan = value;
-      $$invalidate(2, tahunPelaksanaan);
+      $$invalidate(1, tahunPelaksanaan);
     }
     function field1_value_binding(value) {
       judul2 = value;
       $$invalidate(0, judul2);
     }
-    function field2_value_binding(value) {
-      abstrak2 = value;
-      $$invalidate(1, abstrak2);
-    }
     return [
       judul2,
-      abstrak2,
       tahunPelaksanaan,
       simpanProposal,
       submitProposal,
-      listKodeProgram,
       field0_value_binding,
-      field1_value_binding,
-      field2_value_binding
+      field1_value_binding
     ];
   }
   var Proposal2 = class extends SvelteComponent {
@@ -8968,7 +8886,7 @@
   var proposal_default2 = Proposal2;
 
   // src/pages/dosen/+proposals.svelte
-  function get_each_context12(ctx, list, i) {
+  function get_each_context11(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[11] = list[i];
     child_ctx[12] = list;
@@ -8987,7 +8905,7 @@
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block12(get_each_context12(ctx, each_value, i));
+      each_blocks[i] = create_each_block11(get_each_context11(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -9030,12 +8948,12 @@
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context12(ctx2, each_value, i);
+            const child_ctx = get_each_context11(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block12(child_ctx);
+              each_blocks[i] = create_each_block11(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(article, t2);
@@ -9332,7 +9250,7 @@
       }
     };
   }
-  function create_each_block12(ctx) {
+  function create_each_block11(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (

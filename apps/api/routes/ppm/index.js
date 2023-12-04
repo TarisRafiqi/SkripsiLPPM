@@ -165,7 +165,7 @@ module.exports = async function (fastify, opts) {
             await connection.query(sql, [
                data.id,
                data.judul,
-               data.abstrak,
+               data.myAbstract,
                data.status,
                data.tahunPelaksanaan,
             ]);

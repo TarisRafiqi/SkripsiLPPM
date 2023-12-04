@@ -1,6 +1,7 @@
 <script>
    import { onMount } from "svelte";
 
+   export let id;
    export let name = "";
    export let value = "";
    // export let type = "";
@@ -66,7 +67,7 @@
          <slot />
       </a>
    {:else if textarea && !view}
-      <textarea bind:value on:click={onclick} />
+      <textarea {id} bind:value on:click={onclick} />
    {:else if datepicker && !view}
       <input type="month" bind:value on:click={onclick} />
    {:else if select && view}
