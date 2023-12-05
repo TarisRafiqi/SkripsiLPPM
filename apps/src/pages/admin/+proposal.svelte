@@ -18,7 +18,7 @@
    let klppmSelected;
    let kpkSelected;
    let reviewerSelected;
-   let judul, abstrak;
+   let judul, abstrak, isi;
 
    // pakai akses token, hanya uid yang bersangkutan, dan role admin yang boleh mengakses halaman ini
    onMount(async () => {
@@ -51,22 +51,24 @@
             };
             items.push(obj);
          }
-         // console.log(items);
+         console.log(items);
          judul = items[2].value;
          abstrak = items[3].value;
-         kdeptSelected = items[6].value;
-         klppmSelected = items[7].value;
-         kpkSelected = items[8].value;
-         reviewerSelected = items[9].value;
+         isi = items[4].value;
+         kdeptSelected = items[7].value;
+         klppmSelected = items[8].value;
+         kpkSelected = items[9].value;
+         reviewerSelected = items[10].value;
       }
    });
 
    async function handleRevisi() {
-      status = items[4].value - 1;
+      status = items[5].value - 1;
       const payload = {
          id: id,
          judul,
          abstrak,
+         isi,
          status,
          comment,
          kdeptSelected,
@@ -93,11 +95,12 @@
    }
 
    async function handlePass() {
-      status = items[4].value + 2;
+      status = items[5].value + 2;
       const payload = {
          id: id,
          judul,
          abstrak,
+         isi,
          status,
          comment: "",
          kdeptSelected,
@@ -117,6 +120,8 @@
       });
 
       const result = await response.json();
+      // console.log(result);
+      // return;
 
       if (response.ok) {
          $route("/admin/proposals");

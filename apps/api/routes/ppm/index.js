@@ -193,14 +193,20 @@ module.exports = async function (fastify, opts) {
       let dbData;
       let connection;
       let data = request.body;
+      reply.send({
+         data,
+         msg: ">>>>>",
+      });
+      // return;
       const sql =
-         "UPDATE ppm SET judul = ?, abstrak = ?, comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
+         "UPDATE ppm SET judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
 
       try {
          connection = await fastify.mysql.getConnection();
          const [rows] = await connection.query(sql, [
             data.judul,
             data.abstrak,
+            data.isi,
             data.comment,
             data.status,
             data.kdeptSelected,

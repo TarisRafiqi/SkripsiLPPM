@@ -40,13 +40,15 @@
                value,
             });
          }
+         console.log(items);
          judul = items[2].value;
          abstrak = items[3].value;
-         statusProposal = items[4].value;
-         kdeptSelected = items[6].value;
-         klppmSelected = items[7].value;
-         kpkSelected = items[8].value;
-         reviewerSelected = items[9].value;
+         isi = items[4].value;
+         statusProposal = items[5].value;
+         kdeptSelected = items[7].value;
+         klppmSelected = items[8].value;
+         kpkSelected = items[9].value;
+         reviewerSelected = items[10].value;
       } else {
          console.log(response);
       }
@@ -66,6 +68,7 @@
          id: data.id,
          judul: data.judul,
          abstrak: data.abstrak,
+         isi: data.isi,
          status: Number(data.status) + 1,
          comment: "",
          kdeptSelected,
@@ -82,6 +85,8 @@
       });
 
       const result = await response.json();
+      // console.log(result);
+      // return;
 
       if (response.ok) {
          $route("/dosen");
@@ -98,6 +103,7 @@
          id: data.id,
          judul: data.judul,
          abstrak: data.abstrak,
+         isi: data.isi,
          status: Number(data.status) + 2,
       };
       const response = await fetch("/api/ppm", {

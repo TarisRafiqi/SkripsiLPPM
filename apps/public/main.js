@@ -4901,7 +4901,7 @@
   // src/pages/admin/+proposal.svelte
   function get_each_context5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[32] = list[i];
+    child_ctx[33] = list[i];
     return child_ctx;
   }
   function create_if_block5(ctx) {
@@ -4925,7 +4925,7 @@
         const article_changes = {};
         if (dirty[0] & /*kpkSelected, ka_pusat_kajian, reviewerSelected, reviewer, klppmSelected, ka_lppm, kdeptSelected, ka_departemen, comment, items*/
         1983 | dirty[1] & /*$$scope*/
-        16) {
+        32) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -4955,12 +4955,12 @@
     function select_block_type(ctx2, dirty) {
       if (
         /*item*/
-        ctx2[32].field === "uid"
+        ctx2[33].field === "uid"
       )
         return 0;
       if (
         /*item*/
-        ctx2[32].field === "status"
+        ctx2[33].field === "status"
       )
         return 1;
       return 2;
@@ -5025,11 +5025,11 @@
         view: true,
         name: (
           /*item*/
-          ctx[32].field
+          ctx[33].field
         ),
         value: (
           /*item*/
-          ctx[32].value
+          ctx[33].value
         )
       }
     });
@@ -5046,11 +5046,11 @@
         if (dirty[0] & /*items*/
         1)
           field_changes.name = /*item*/
-          ctx2[32].field;
+          ctx2[33].field;
         if (dirty[0] & /*items*/
         1)
           field_changes.value = /*item*/
-          ctx2[32].value;
+          ctx2[33].value;
         field.$set(field_changes);
       },
       i(local) {
@@ -5076,7 +5076,7 @@
         view: true,
         name: (
           /*item*/
-          ctx[32].field
+          ctx[33].field
         ),
         $$slots: { default: [create_default_slot_3] },
         $$scope: { ctx }
@@ -5095,10 +5095,10 @@
         if (dirty[0] & /*items*/
         1)
           field_changes.name = /*item*/
-          ctx2[32].field;
+          ctx2[33].field;
         if (dirty[0] & /*items*/
         1 | dirty[1] & /*$$scope*/
-        16) {
+        32) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -5126,14 +5126,14 @@
         view: true,
         name: (
           /*item*/
-          ctx[32].field
+          ctx[33].field
         ),
         value: (
           /*item*/
-          ctx[32].value
+          ctx[33].value
         ),
         href: "/admin/profile/" + /*item*/
-        ctx[32].value
+        ctx[33].value
       }
     });
     return {
@@ -5149,15 +5149,15 @@
         if (dirty[0] & /*items*/
         1)
           field_changes.name = /*item*/
-          ctx2[32].field;
+          ctx2[33].field;
         if (dirty[0] & /*items*/
         1)
           field_changes.value = /*item*/
-          ctx2[32].value;
+          ctx2[33].value;
         if (dirty[0] & /*items*/
         1)
           field_changes.href = "/admin/profile/" + /*item*/
-          ctx2[32].value;
+          ctx2[33].value;
         field.$set(field_changes);
       },
       i(local) {
@@ -5180,7 +5180,7 @@
     let current;
     status_1 = new Status_default({ props: { code: (
       /*item*/
-      ctx[32].value
+      ctx[33].value
     ) } });
     return {
       c() {
@@ -5195,7 +5195,7 @@
         if (dirty[0] & /*items*/
         1)
           status_1_changes.code = /*item*/
-          ctx2[32].value;
+          ctx2[33].value;
         status_1.$set(status_1_changes);
       },
       i(local) {
@@ -5218,12 +5218,12 @@
     let current;
     let if_block = (
       /*item*/
-      ctx[32].field !== "comment" && /*item*/
-      ctx[32].field !== "uid_kdept" && /*item*/
-      ctx[32].field !== "uid_klppm" && /*item*/
-      ctx[32].field !== "uid_kpk" && /*item*/
-      ctx[32].field !== "uid_reviewer" && /*item*/
-      ctx[32].field !== "update" && create_if_block_16(ctx)
+      ctx[33].field !== "comment" && /*item*/
+      ctx[33].field !== "uid_kdept" && /*item*/
+      ctx[33].field !== "uid_klppm" && /*item*/
+      ctx[33].field !== "uid_kpk" && /*item*/
+      ctx[33].field !== "uid_reviewer" && /*item*/
+      ctx[33].field !== "update" && create_if_block_16(ctx)
     );
     return {
       c() {
@@ -5240,12 +5240,12 @@
       p(ctx2, dirty) {
         if (
           /*item*/
-          ctx2[32].field !== "comment" && /*item*/
-          ctx2[32].field !== "uid_kdept" && /*item*/
-          ctx2[32].field !== "uid_klppm" && /*item*/
-          ctx2[32].field !== "uid_kpk" && /*item*/
-          ctx2[32].field !== "uid_reviewer" && /*item*/
-          ctx2[32].field !== "update"
+          ctx2[33].field !== "comment" && /*item*/
+          ctx2[33].field !== "uid_kdept" && /*item*/
+          ctx2[33].field !== "uid_klppm" && /*item*/
+          ctx2[33].field !== "uid_kpk" && /*item*/
+          ctx2[33].field !== "uid_reviewer" && /*item*/
+          ctx2[33].field !== "update"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -5689,7 +5689,7 @@
         field4.$set(field4_changes);
         const field5_changes = {};
         if (dirty[1] & /*$$scope*/
-        16) {
+        32) {
           field5_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field5.$set(field5_changes);
@@ -5851,7 +5851,7 @@
         }
         const modal_changes = {};
         if (dirty[1] & /*$$scope*/
-        16) {
+        32) {
           modal_changes.$$scope = { dirty, ctx: ctx2 };
         }
         if (!updating_show && dirty[0] & /*showModal*/
@@ -5887,7 +5887,7 @@
   }
   function instance15($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(28, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(29, $route = $$value));
     let { params } = $$props;
     const id = params["1"];
     let items;
@@ -5902,7 +5902,7 @@
     let klppmSelected2;
     let kpkSelected2;
     let reviewerSelected2;
-    let judul2, abstrak2;
+    let judul2, abstrak2, isi2;
     onMount(async () => {
       const accessToken = localStorage.getItem("token");
       const headers = {
@@ -5922,20 +5922,23 @@
           let obj = { field, value };
           items.push(obj);
         }
+        console.log(items);
         judul2 = items[2].value;
         abstrak2 = items[3].value;
-        $$invalidate(7, kdeptSelected2 = items[6].value);
-        $$invalidate(8, klppmSelected2 = items[7].value);
-        $$invalidate(9, kpkSelected2 = items[8].value);
-        $$invalidate(10, reviewerSelected2 = items[9].value);
+        isi2 = items[4].value;
+        $$invalidate(7, kdeptSelected2 = items[7].value);
+        $$invalidate(8, klppmSelected2 = items[8].value);
+        $$invalidate(9, kpkSelected2 = items[9].value);
+        $$invalidate(10, reviewerSelected2 = items[10].value);
       }
     });
     async function handleRevisi() {
-      status = items[4].value - 1;
+      status = items[5].value - 1;
       const payload = {
         id,
         judul: judul2,
         abstrak: abstrak2,
+        isi: isi2,
         status,
         comment,
         kdeptSelected: kdeptSelected2,
@@ -5956,11 +5959,12 @@
       }
     }
     async function handlePass() {
-      status = items[4].value + 2;
+      status = items[5].value + 2;
       const payload = {
         id,
         judul: judul2,
         abstrak: abstrak2,
+        isi: isi2,
         status,
         comment: "",
         kdeptSelected: kdeptSelected2,
@@ -10004,13 +10008,15 @@
           }
           items.push({ key, value });
         }
+        console.log(items);
         judul = items[2].value;
         abstrak = items[3].value;
-        $$invalidate(2, statusProposal = items[4].value);
-        kdeptSelected = items[6].value;
-        klppmSelected = items[7].value;
-        kpkSelected = items[8].value;
-        reviewerSelected = items[9].value;
+        isi = items[4].value;
+        $$invalidate(2, statusProposal = items[5].value);
+        kdeptSelected = items[7].value;
+        klppmSelected = items[8].value;
+        kpkSelected = items[9].value;
+        reviewerSelected = items[10].value;
       } else {
         console.log(response);
       }
@@ -10022,6 +10028,7 @@
         id: data3.id,
         judul: data3.judul,
         abstrak: data3.abstrak,
+        isi: data3.isi,
         status: Number(data3.status) + 1,
         comment: "",
         kdeptSelected,
@@ -10048,6 +10055,7 @@
         id: data3.id,
         judul: data3.judul,
         abstrak: data3.abstrak,
+        isi: data3.isi,
         status: Number(data3.status) + 2
       };
       const response = await fetch("/api/ppm", {
