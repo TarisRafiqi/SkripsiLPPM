@@ -149,7 +149,7 @@
       <h1>Detail Proposal</h1>
 
       {#each items as item}
-         {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "jenis_kegiatan" && item.key !== "kode_program" && item.key !== "tipe_proposal" && item.key !== "kelompok_keahlian" && item.key !== "tahun_pelaksanaan" && item.key !== "topik" && item.key !== "biaya_penelitian" && item.key !== "anggota_tim"}
+         {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "jenis_kegiatan" && item.key !== "kode_program" && item.key !== "tipe_proposal" && item.key !== "kelompok_keahlian" && item.key !== "tahun_pelaksanaan" && item.key !== "topik" && item.key !== "biaya_penelitian" && item.key !== "anggota_tim" && item.key !== "update"}
             {#if item.key === "status"}
                <Field name={item.key}>
                   <Status code={item.value} />

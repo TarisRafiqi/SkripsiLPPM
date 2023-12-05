@@ -5222,7 +5222,8 @@
       ctx[32].field !== "uid_kdept" && /*item*/
       ctx[32].field !== "uid_klppm" && /*item*/
       ctx[32].field !== "uid_kpk" && /*item*/
-      ctx[32].field !== "uid_reviewer" && create_if_block_16(ctx)
+      ctx[32].field !== "uid_reviewer" && /*item*/
+      ctx[32].field !== "update" && create_if_block_16(ctx)
     );
     return {
       c() {
@@ -5243,7 +5244,8 @@
           ctx2[32].field !== "uid_kdept" && /*item*/
           ctx2[32].field !== "uid_klppm" && /*item*/
           ctx2[32].field !== "uid_kpk" && /*item*/
-          ctx2[32].field !== "uid_reviewer"
+          ctx2[32].field !== "uid_reviewer" && /*item*/
+          ctx2[32].field !== "update"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -5900,7 +5902,7 @@
     let klppmSelected2;
     let kpkSelected2;
     let reviewerSelected2;
-    let judul2, abstrak3;
+    let judul2, abstrak2;
     onMount(async () => {
       const accessToken = localStorage.getItem("token");
       const headers = {
@@ -5921,7 +5923,7 @@
           items.push(obj);
         }
         judul2 = items[2].value;
-        abstrak3 = items[3].value;
+        abstrak2 = items[3].value;
         $$invalidate(7, kdeptSelected2 = items[6].value);
         $$invalidate(8, klppmSelected2 = items[7].value);
         $$invalidate(9, kpkSelected2 = items[8].value);
@@ -5933,7 +5935,7 @@
       const payload = {
         id,
         judul: judul2,
-        abstrak: abstrak3,
+        abstrak: abstrak2,
         status,
         comment,
         kdeptSelected: kdeptSelected2,
@@ -5958,7 +5960,7 @@
       const payload = {
         id,
         judul: judul2,
-        abstrak: abstrak3,
+        abstrak: abstrak2,
         status,
         comment: "",
         kdeptSelected: kdeptSelected2,
@@ -8593,13 +8595,13 @@
               button0,
               "click",
               /*simpanProposal*/
-              ctx[2]
+              ctx[10]
             ),
             listen(
               button1,
               "click",
               /*submitProposal*/
-              ctx[3]
+              ctx[11]
             )
           ];
           mounted = true;
@@ -8627,51 +8629,191 @@
     let updating_value;
     let t3;
     let field1;
-    let updating_value_1;
     let t4;
     let field2;
     let t5;
-    let br1;
-    let t6;
     let field3;
+    let updating_value_1;
+    let t6;
+    let field4;
+    let updating_value_2;
+    let t7;
+    let field5;
+    let updating_value_3;
+    let t8;
+    let field6;
+    let updating_value_4;
+    let t9;
+    let field7;
+    let updating_value_5;
+    let t10;
+    let field8;
+    let updating_value_6;
+    let t11;
+    let field9;
+    let updating_value_7;
+    let t12;
+    let field10;
+    let updating_value_8;
+    let t13;
+    let field11;
+    let updating_value_9;
+    let t14;
+    let br1;
+    let t15;
+    let field12;
     let current;
     function field0_value_binding(value) {
-      ctx[4](value);
+      ctx[12](value);
     }
-    let field0_props = {
-      datepicker: true,
-      name: "Tahun Pelaksanaan"
-    };
+    let field0_props = { name: "Judul" };
     if (
-      /*tahunPelaksanaan*/
-      ctx[1] !== void 0
+      /*judul*/
+      ctx[4] !== void 0
     ) {
-      field0_props.value = /*tahunPelaksanaan*/
-      ctx[1];
+      field0_props.value = /*judul*/
+      ctx[4];
     }
     field0 = new Field_default({ props: field0_props });
     binding_callbacks.push(() => bind(field0, "value", field0_value_binding));
-    function field1_value_binding(value) {
-      ctx[5](value);
-    }
-    let field1_props = { name: "Judul" };
-    if (
-      /*judul*/
-      ctx[0] !== void 0
-    ) {
-      field1_props.value = /*judul*/
-      ctx[0];
-    }
-    field1 = new Field_default({ props: field1_props });
-    binding_callbacks.push(() => bind(field1, "value", field1_value_binding));
-    field2 = new Field_default({
+    field1 = new Field_default({
       props: {
         id: "abstract",
         textarea: true,
         name: "Abstrak"
       }
     });
-    field3 = new Field_default({
+    field2 = new Field_default({
+      props: {
+        id: "isi",
+        textarea: true,
+        name: "Isi Proposal"
+      }
+    });
+    function field3_value_binding(value) {
+      ctx[13](value);
+    }
+    let field3_props = { select: true, name: "Jenis Kegiatan" };
+    if (
+      /*jenisKegiatan*/
+      ctx[0] !== void 0
+    ) {
+      field3_props.value = /*jenisKegiatan*/
+      ctx[0];
+    }
+    field3 = new Field_default({ props: field3_props });
+    binding_callbacks.push(() => bind(field3, "value", field3_value_binding));
+    function field4_value_binding(value) {
+      ctx[14](value);
+    }
+    let field4_props = { select: true, name: "Jenis Skema" };
+    if (
+      /*jenisSkema*/
+      ctx[2] !== void 0
+    ) {
+      field4_props.value = /*jenisSkema*/
+      ctx[2];
+    }
+    field4 = new Field_default({ props: field4_props });
+    binding_callbacks.push(() => bind(field4, "value", field4_value_binding));
+    function field5_value_binding(value) {
+      ctx[15](value);
+    }
+    let field5_props = { select: true, name: "Jenis Proposal" };
+    if (
+      /*jenisProposal*/
+      ctx[1] !== void 0
+    ) {
+      field5_props.value = /*jenisProposal*/
+      ctx[1];
+    }
+    field5 = new Field_default({ props: field5_props });
+    binding_callbacks.push(() => bind(field5, "value", field5_value_binding));
+    function field6_value_binding(value) {
+      ctx[16](value);
+    }
+    let field6_props = { select: true, name: "Kelompok Keahlian" };
+    if (
+      /*kelompokKeahlian*/
+      ctx[3] !== void 0
+    ) {
+      field6_props.value = /*kelompokKeahlian*/
+      ctx[3];
+    }
+    field6 = new Field_default({ props: field6_props });
+    binding_callbacks.push(() => bind(field6, "value", field6_value_binding));
+    function field7_value_binding(value) {
+      ctx[17](value);
+    }
+    let field7_props = {
+      datepicker: true,
+      name: "Tahun Pelaksanaan"
+    };
+    if (
+      /*tahunPelaksanaan*/
+      ctx[5] !== void 0
+    ) {
+      field7_props.value = /*tahunPelaksanaan*/
+      ctx[5];
+    }
+    field7 = new Field_default({ props: field7_props });
+    binding_callbacks.push(() => bind(field7, "value", field7_value_binding));
+    function field8_value_binding(value) {
+      ctx[18](value);
+    }
+    let field8_props = { select: true, name: "Topik" };
+    if (
+      /*Topik*/
+      ctx[6] !== void 0
+    ) {
+      field8_props.value = /*Topik*/
+      ctx[6];
+    }
+    field8 = new Field_default({ props: field8_props });
+    binding_callbacks.push(() => bind(field8, "value", field8_value_binding));
+    function field9_value_binding(value) {
+      ctx[19](value);
+    }
+    let field9_props = { select: true, name: "Biaya Penelitian" };
+    if (
+      /*biayaPenelitian*/
+      ctx[7] !== void 0
+    ) {
+      field9_props.value = /*biayaPenelitian*/
+      ctx[7];
+    }
+    field9 = new Field_default({ props: field9_props });
+    binding_callbacks.push(() => bind(field9, "value", field9_value_binding));
+    function field10_value_binding(value) {
+      ctx[20](value);
+    }
+    let field10_props = { select: true, name: "Anggota Tim" };
+    if (
+      /*anggotaTim*/
+      ctx[8] !== void 0
+    ) {
+      field10_props.value = /*anggotaTim*/
+      ctx[8];
+    }
+    field10 = new Field_default({ props: field10_props });
+    binding_callbacks.push(() => bind(field10, "value", field10_value_binding));
+    function field11_value_binding(value) {
+      ctx[21](value);
+    }
+    let field11_props = {
+      select: true,
+      name: "Rincian Anggaran Biaya (RAB)"
+    };
+    if (
+      /*rab*/
+      ctx[9] !== void 0
+    ) {
+      field11_props.value = /*rab*/
+      ctx[9];
+    }
+    field11 = new Field_default({ props: field11_props });
+    binding_callbacks.push(() => bind(field11, "value", field11_value_binding));
+    field12 = new Field_default({
       props: {
         $$slots: { default: [create_default_slot9] },
         $$scope: { ctx }
@@ -8691,9 +8833,27 @@
         t4 = space();
         create_component(field2.$$.fragment);
         t5 = space();
-        br1 = element("br");
-        t6 = space();
         create_component(field3.$$.fragment);
+        t6 = space();
+        create_component(field4.$$.fragment);
+        t7 = space();
+        create_component(field5.$$.fragment);
+        t8 = space();
+        create_component(field6.$$.fragment);
+        t9 = space();
+        create_component(field7.$$.fragment);
+        t10 = space();
+        create_component(field8.$$.fragment);
+        t11 = space();
+        create_component(field9.$$.fragment);
+        t12 = space();
+        create_component(field10.$$.fragment);
+        t13 = space();
+        create_component(field11.$$.fragment);
+        t14 = space();
+        br1 = element("br");
+        t15 = space();
+        create_component(field12.$$.fragment);
       },
       m(target, anchor) {
         insert(target, article, anchor);
@@ -8707,36 +8867,126 @@
         append(article, t4);
         mount_component(field2, article, null);
         append(article, t5);
-        append(article, br1);
-        append(article, t6);
         mount_component(field3, article, null);
+        append(article, t6);
+        mount_component(field4, article, null);
+        append(article, t7);
+        mount_component(field5, article, null);
+        append(article, t8);
+        mount_component(field6, article, null);
+        append(article, t9);
+        mount_component(field7, article, null);
+        append(article, t10);
+        mount_component(field8, article, null);
+        append(article, t11);
+        mount_component(field9, article, null);
+        append(article, t12);
+        mount_component(field10, article, null);
+        append(article, t13);
+        mount_component(field11, article, null);
+        append(article, t14);
+        append(article, br1);
+        append(article, t15);
+        mount_component(field12, article, null);
         current = true;
       },
       p(ctx2, [dirty]) {
         const field0_changes = {};
-        if (!updating_value && dirty & /*tahunPelaksanaan*/
-        2) {
+        if (!updating_value && dirty & /*judul*/
+        16) {
           updating_value = true;
-          field0_changes.value = /*tahunPelaksanaan*/
-          ctx2[1];
+          field0_changes.value = /*judul*/
+          ctx2[4];
           add_flush_callback(() => updating_value = false);
         }
         field0.$set(field0_changes);
-        const field1_changes = {};
-        if (!updating_value_1 && dirty & /*judul*/
+        const field3_changes = {};
+        if (!updating_value_1 && dirty & /*jenisKegiatan*/
         1) {
           updating_value_1 = true;
-          field1_changes.value = /*judul*/
+          field3_changes.value = /*jenisKegiatan*/
           ctx2[0];
           add_flush_callback(() => updating_value_1 = false);
         }
-        field1.$set(field1_changes);
-        const field3_changes = {};
-        if (dirty & /*$$scope*/
-        1024) {
-          field3_changes.$$scope = { dirty, ctx: ctx2 };
-        }
         field3.$set(field3_changes);
+        const field4_changes = {};
+        if (!updating_value_2 && dirty & /*jenisSkema*/
+        4) {
+          updating_value_2 = true;
+          field4_changes.value = /*jenisSkema*/
+          ctx2[2];
+          add_flush_callback(() => updating_value_2 = false);
+        }
+        field4.$set(field4_changes);
+        const field5_changes = {};
+        if (!updating_value_3 && dirty & /*jenisProposal*/
+        2) {
+          updating_value_3 = true;
+          field5_changes.value = /*jenisProposal*/
+          ctx2[1];
+          add_flush_callback(() => updating_value_3 = false);
+        }
+        field5.$set(field5_changes);
+        const field6_changes = {};
+        if (!updating_value_4 && dirty & /*kelompokKeahlian*/
+        8) {
+          updating_value_4 = true;
+          field6_changes.value = /*kelompokKeahlian*/
+          ctx2[3];
+          add_flush_callback(() => updating_value_4 = false);
+        }
+        field6.$set(field6_changes);
+        const field7_changes = {};
+        if (!updating_value_5 && dirty & /*tahunPelaksanaan*/
+        32) {
+          updating_value_5 = true;
+          field7_changes.value = /*tahunPelaksanaan*/
+          ctx2[5];
+          add_flush_callback(() => updating_value_5 = false);
+        }
+        field7.$set(field7_changes);
+        const field8_changes = {};
+        if (!updating_value_6 && dirty & /*Topik*/
+        64) {
+          updating_value_6 = true;
+          field8_changes.value = /*Topik*/
+          ctx2[6];
+          add_flush_callback(() => updating_value_6 = false);
+        }
+        field8.$set(field8_changes);
+        const field9_changes = {};
+        if (!updating_value_7 && dirty & /*biayaPenelitian*/
+        128) {
+          updating_value_7 = true;
+          field9_changes.value = /*biayaPenelitian*/
+          ctx2[7];
+          add_flush_callback(() => updating_value_7 = false);
+        }
+        field9.$set(field9_changes);
+        const field10_changes = {};
+        if (!updating_value_8 && dirty & /*anggotaTim*/
+        256) {
+          updating_value_8 = true;
+          field10_changes.value = /*anggotaTim*/
+          ctx2[8];
+          add_flush_callback(() => updating_value_8 = false);
+        }
+        field10.$set(field10_changes);
+        const field11_changes = {};
+        if (!updating_value_9 && dirty & /*rab*/
+        512) {
+          updating_value_9 = true;
+          field11_changes.value = /*rab*/
+          ctx2[9];
+          add_flush_callback(() => updating_value_9 = false);
+        }
+        field11.$set(field11_changes);
+        const field12_changes = {};
+        if (dirty & /*$$scope*/
+        134217728) {
+          field12_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        field12.$set(field12_changes);
       },
       i(local) {
         if (current)
@@ -8745,6 +8995,15 @@
         transition_in(field1.$$.fragment, local);
         transition_in(field2.$$.fragment, local);
         transition_in(field3.$$.fragment, local);
+        transition_in(field4.$$.fragment, local);
+        transition_in(field5.$$.fragment, local);
+        transition_in(field6.$$.fragment, local);
+        transition_in(field7.$$.fragment, local);
+        transition_in(field8.$$.fragment, local);
+        transition_in(field9.$$.fragment, local);
+        transition_in(field10.$$.fragment, local);
+        transition_in(field11.$$.fragment, local);
+        transition_in(field12.$$.fragment, local);
         current = true;
       },
       o(local) {
@@ -8752,6 +9011,15 @@
         transition_out(field1.$$.fragment, local);
         transition_out(field2.$$.fragment, local);
         transition_out(field3.$$.fragment, local);
+        transition_out(field4.$$.fragment, local);
+        transition_out(field5.$$.fragment, local);
+        transition_out(field6.$$.fragment, local);
+        transition_out(field7.$$.fragment, local);
+        transition_out(field8.$$.fragment, local);
+        transition_out(field9.$$.fragment, local);
+        transition_out(field10.$$.fragment, local);
+        transition_out(field11.$$.fragment, local);
+        transition_out(field12.$$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -8762,16 +9030,33 @@
         destroy_component(field1);
         destroy_component(field2);
         destroy_component(field3);
+        destroy_component(field4);
+        destroy_component(field5);
+        destroy_component(field6);
+        destroy_component(field7);
+        destroy_component(field8);
+        destroy_component(field9);
+        destroy_component(field10);
+        destroy_component(field11);
+        destroy_component(field12);
       }
     };
   }
-  var abstrak2 = "";
   function instance24($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(7, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(24, $route = $$value));
+    let jenisKegiatan = "";
+    let jenisProposal = "";
+    let jenisSkema = "";
+    let kelompokKeahlian = "";
     let judul2 = "";
     let tahunPelaksanaan = "";
+    let Topik = "";
+    let biayaPenelitian = "";
+    let anggotaTim = "";
+    let rab = "";
     let myAbstract;
+    let myIsi;
     const id = Number(localStorage.getItem("id"));
     onMount(() => {
       tinymce.init({
@@ -8790,11 +9075,12 @@
     async function simpanProposal() {
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
-      console.log(myAbstract);
+      myIsi = tinymce.get("isi").getContent();
       let payload = {
         id,
         judul: judul2,
         myAbstract,
+        myIsi,
         status: 0,
         tahunPelaksanaan
       };
@@ -8816,10 +9102,13 @@
     }
     async function submitProposal() {
       const accessToken = localStorage.getItem("token");
+      myAbstract = tinymce.get("abstract").getContent();
+      myIsi = tinymce.get("isi").getContent();
       let payload = {
         id,
         judul: judul2,
-        abstrak: abstrak2,
+        myAbstract,
+        myIsi,
         status: 2,
         tahunPelaksanaan
       };
@@ -8861,20 +9150,68 @@
       }
     ];
     function field0_value_binding(value) {
-      tahunPelaksanaan = value;
-      $$invalidate(1, tahunPelaksanaan);
-    }
-    function field1_value_binding(value) {
       judul2 = value;
-      $$invalidate(0, judul2);
+      $$invalidate(4, judul2);
+    }
+    function field3_value_binding(value) {
+      jenisKegiatan = value;
+      $$invalidate(0, jenisKegiatan);
+    }
+    function field4_value_binding(value) {
+      jenisSkema = value;
+      $$invalidate(2, jenisSkema);
+    }
+    function field5_value_binding(value) {
+      jenisProposal = value;
+      $$invalidate(1, jenisProposal);
+    }
+    function field6_value_binding(value) {
+      kelompokKeahlian = value;
+      $$invalidate(3, kelompokKeahlian);
+    }
+    function field7_value_binding(value) {
+      tahunPelaksanaan = value;
+      $$invalidate(5, tahunPelaksanaan);
+    }
+    function field8_value_binding(value) {
+      Topik = value;
+      $$invalidate(6, Topik);
+    }
+    function field9_value_binding(value) {
+      biayaPenelitian = value;
+      $$invalidate(7, biayaPenelitian);
+    }
+    function field10_value_binding(value) {
+      anggotaTim = value;
+      $$invalidate(8, anggotaTim);
+    }
+    function field11_value_binding(value) {
+      rab = value;
+      $$invalidate(9, rab);
     }
     return [
+      jenisKegiatan,
+      jenisProposal,
+      jenisSkema,
+      kelompokKeahlian,
       judul2,
       tahunPelaksanaan,
+      Topik,
+      biayaPenelitian,
+      anggotaTim,
+      rab,
       simpanProposal,
       submitProposal,
       field0_value_binding,
-      field1_value_binding
+      field3_value_binding,
+      field4_value_binding,
+      field5_value_binding,
+      field6_value_binding,
+      field7_value_binding,
+      field8_value_binding,
+      field9_value_binding,
+      field10_value_binding,
+      field11_value_binding
     ];
   }
   var Proposal2 = class extends SvelteComponent {
@@ -9268,7 +9605,8 @@
       ctx[11].key !== "tahun_pelaksanaan" && /*item*/
       ctx[11].key !== "topik" && /*item*/
       ctx[11].key !== "biaya_penelitian" && /*item*/
-      ctx[11].key !== "anggota_tim" && create_if_block_34(ctx)
+      ctx[11].key !== "anggota_tim" && /*item*/
+      ctx[11].key !== "update" && create_if_block_34(ctx)
     );
     return {
       c() {
@@ -9298,7 +9636,8 @@
           ctx2[11].key !== "tahun_pelaksanaan" && /*item*/
           ctx2[11].key !== "topik" && /*item*/
           ctx2[11].key !== "biaya_penelitian" && /*item*/
-          ctx2[11].key !== "anggota_tim"
+          ctx2[11].key !== "anggota_tim" && /*item*/
+          ctx2[11].key !== "update"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);

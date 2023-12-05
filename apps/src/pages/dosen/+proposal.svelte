@@ -4,11 +4,20 @@
    import { route } from "../../store";
    import Editor from "@tinymce/tinymce-svelte";
 
+   // let abstrak = "";
+   let jenisKegiatan = "";
+   let jenisProposal = "";
+   let jenisSkema = "";
+   let kelompokKeahlian = "";
    let judul = "";
-   let abstrak = "";
    let tahunPelaksanaan = "";
-   let kodeProgram = "";
+   let Topik = "";
+   let biayaPenelitian = "";
+   let anggotaTim = "";
+   let rab = "";
+
    let myAbstract;
+   let myIsi;
 
    const id = Number(localStorage.getItem("id"));
 
@@ -35,13 +44,13 @@
    async function simpanProposal() {
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
-
-      console.log(myAbstract);
+      myIsi = tinymce.get("isi").getContent();
 
       let payload = {
          id,
          judul,
          myAbstract,
+         myIsi,
          status: 0,
          tahunPelaksanaan,
       };
@@ -68,11 +77,14 @@
 
    async function submitProposal() {
       const accessToken = localStorage.getItem("token");
+      myAbstract = tinymce.get("abstract").getContent();
+      myIsi = tinymce.get("isi").getContent();
 
       let payload = {
          id,
          judul,
-         abstrak,
+         myAbstract,
+         myIsi,
          status: 2,
          tahunPelaksanaan,
       };
@@ -123,9 +135,6 @@
       let valueId = el.value;
       // console.log(valueId);
    }
-
-   // $: abstrak, console.log(abstrak);
-   // $: judul, console.log(judul);
 </script>
 
 <article>
@@ -133,19 +142,18 @@
 
    <br />
 
-   <!-- <Editor apiKey="your-tiny-cloud-api-key" /> -->
-
-   <!-- <select>
-      {#each listKodeProgram as it}
-         <option value={it.idKodeProgram} use:goSelect>{it.namaProgram}</option>
-      {/each}
-   </select> -->
-
-   <Field datepicker name="Tahun Pelaksanaan" bind:value={tahunPelaksanaan} />
-   <!-- <Field select name="Kode Program" bind:value={kodeProgram} /> -->
    <Field name="Judul" bind:value={judul} />
    <Field id="abstract" textarea name="Abstrak" />
-   <!-- <Editor /> -->
+   <Field id="isi" textarea name="Isi Proposal" />
+   <Field select name="Jenis Kegiatan" bind:value={jenisKegiatan} />
+   <Field select name="Jenis Skema" bind:value={jenisSkema} />
+   <Field select name="Jenis Proposal" bind:value={jenisProposal} />
+   <Field select name="Kelompok Keahlian" bind:value={kelompokKeahlian} />
+   <Field datepicker name="Tahun Pelaksanaan" bind:value={tahunPelaksanaan} />
+   <Field select name="Topik" bind:value={Topik} />
+   <Field select name="Biaya Penelitian" bind:value={biayaPenelitian} />
+   <Field select name="Anggota Tim" bind:value={anggotaTim} />
+   <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab} />
 
    <br />
    <Field>

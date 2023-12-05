@@ -149,7 +149,7 @@ module.exports = async function (fastify, opts) {
       // });
       // return;
       const sql =
-         "INSERT INTO ppm (uid, judul, abstrak, status, tahun_pelaksanaan) values(?, ?, ?, ?, ?)";
+         "INSERT INTO ppm (uid, judul, abstrak, isi, status, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?)";
       let connection;
 
       if (
@@ -166,6 +166,7 @@ module.exports = async function (fastify, opts) {
                data.id,
                data.judul,
                data.myAbstract,
+               data.myIsi,
                data.status,
                data.tahunPelaksanaan,
             ]);

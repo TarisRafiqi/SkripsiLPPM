@@ -157,7 +157,7 @@
       <br />
 
       {#each items as item}
-         {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer"}
+         {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update"}
             {#if item.field === "uid"}
                <Field
                   view
