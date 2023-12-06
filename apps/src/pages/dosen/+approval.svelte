@@ -18,13 +18,15 @@
 
    function detail(ev) {
       let propId = ev.target.getAttribute("pid");
-      $route("/dosen/proposals/" + propId);
+      // $route("/dosen/proposals/" + propId);
+      // $route("/dosen/detailApproval/" + propId);
+      $route("/dosen/detailproposal/" + propId);
    }
 </script>
 
 {#if items}
    <article>
-      <h1>Approval</h1>
+      <h1>List Approval</h1>
       <table>
          <tr>
             <th>Judul</th>
