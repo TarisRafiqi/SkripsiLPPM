@@ -10,7 +10,6 @@ import Verify from "./pages/Verify.svelte";
 import adminIndex from "./pages/admin/Index.svelte";
 import authIndex from "./pages/auth/Index.svelte";
 import dosenIndex from "./pages/dosen/Index.svelte";
-import dosendetailApproval from "./pages/dosen/+detailApproval.svelte";
 
 export default [
    { path: "/abdimas", page: Abdimas },
@@ -25,5 +24,4 @@ export default [
    { path: "/admin/:page", page: adminIndex },
    { path: "/auth/:page", page: authIndex },
    { path: "/dosen/:page", page: dosenIndex },
-   { path: "/dosen/detailapproval", page: dosendetailApproval },
 ];

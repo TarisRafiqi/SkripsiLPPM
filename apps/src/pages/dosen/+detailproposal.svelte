@@ -56,6 +56,7 @@
          judul = items[2].value;
          abstrak = items[3].value;
          isi = items[4].value;
+         status = items[5].value;
          kdeptSelected = items[7].value;
          klppmSelected = items[8].value;
          kpkSelected = items[9].value;
@@ -154,6 +155,8 @@
          console.log(response);
       }
    }
+
+   // $: console.log(status);
 </script>
 
 {#if items}
@@ -162,16 +165,12 @@
 
       <br />
 
-      <!-- {#if role === "Ka.Departemen"}
-         <h3>Saya Kepala Departemen</h3>
-      {/if} -->
-
       {#each items as item}
          {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update"}
             <!-- {#if item.field === "uid"}
-               <Field
-                  view
-                  name={item.field}
+         <Field
+         view
+         name={item.field}
                   value={item.value}
                   href={"/admin/profile/" + item.value}
                /> -->
@@ -189,10 +188,42 @@
 
       <br />
 
-      <Field>
-         <button on:click={handleRevisi}>Revisi</button>
-         <button on:click={handlePass}>Proses</button>
-      </Field>
+      {#if role === "Ka.Departemen"}
+         {#if status === 4}
+            <Field>
+               <button on:click={handleRevisi}>Revisi</button>
+               <button on:click={handlePass}>Proses</button>
+            </Field>
+         {/if}
+      {/if}
+
+      {#if role === "Ka.LPPM"}
+         {#if status === 6}
+            <Field>
+               <button on:click={handleRevisi}>Revisi</button>
+               <button on:click={handlePass}>Proses</button>
+            </Field>
+         {/if}
+      {/if}
+
+      {#if role === "reviewer"}
+         {#if status === 8}
+            <Field>
+               <button on:click={handleRevisi}>Revisi</button>
+               <button on:click={handlePass}>Proses</button>
+            </Field>
+         {/if}
+      {/if}
+
+      {#if role === "Ka.PusatKajian"}
+         {#if status === 10}
+            <Field>
+               <button on:click={handleRevisi}>Revisi</button>
+               <button>Ditolak</button>
+               <button on:click={handlePass}>Proses</button>
+            </Field>
+         {/if}
+      {/if}
    </Article>
 {/if}
 
