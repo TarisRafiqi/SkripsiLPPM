@@ -5,7 +5,7 @@
    import { route } from "./store";
 
    import { E404, Sidebar, Navbar } from "@cmp";
-   import Bulmanavbar from "./modules/Bulmanavbar.svelte";
+   import Navbarmenu from "./modules/Navbarmenu.svelte";
 
    let cmp, params;
    let token, role;
@@ -43,7 +43,7 @@
       };
 </script>
 
-<Bulmanavbar />
+<Navbarmenu />
 {#if token}
    <Sidebar />
 {/if}

@@ -1,5 +1,5 @@
 <script>
-   import { route } from "../store";
+   import { route, isLogin } from "../store";
 
    let username = "admin";
    let password = "1234";
@@ -22,6 +22,7 @@
       // return;
 
       if (result.sukses) {
+         $isLogin = true;
          const { id, username, role, token } = result;
          localStorage.setItem("id", id);
          localStorage.setItem("username", username);
@@ -225,6 +226,7 @@
 
    article.container {
       text-align: center;
+      z-index: 101;
    }
 
    div.box {

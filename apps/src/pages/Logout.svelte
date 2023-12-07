@@ -1,5 +1,8 @@
 <script>
+   import { isLogin } from "../store";
+
    localStorage.clear();
+   $isLogin = false;
 
    setTimeout(() => {
       location.pathname = "/";

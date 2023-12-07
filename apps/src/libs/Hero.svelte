@@ -10,7 +10,9 @@
       min-height: 15rem;
       background: var(--hero-background);
       color: var(--hero-color);
-      padding: 1rem 2rem;
+      padding: 5rem 2rem;
+      /* topdown leftright */
+      /* top right bottom left */
       gap: 2rem;
       align-items: center;
       text-align: center;
