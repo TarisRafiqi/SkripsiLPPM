@@ -4,12 +4,8 @@
    import { menu } from "../store/icons";
    import { onMount } from "svelte";
 
-   let token = localStorage.getItem("token");
-
-   function handleLogout(ev) {
-      localStorage.clear();
-      location.pathname = "/";
-   }
+   // let token = localStorage.getItem("token");
+   let navbarMenu;
 
    // onMount(() => {
    // const burgerIcon = document.querySelector("#burger");
@@ -18,8 +14,6 @@
    //    navbarMenu.classList.toggle("is-active");
    // });
    // });
-
-   let navbarMenu;
 
    function test() {
       navbarMenu.classList.toggle("is-active");
@@ -54,34 +48,34 @@
             <a class="navbar-item" href="/about"> About UISI </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
-               <a class="navbar-link" href="javascript"> Penelitian </a>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a class="navbar-link"> Penelitian </a>
 
                <div class="navbar-dropdown">
-                  <a class="navbar-item" href="javascript">
+                  <a class="navbar-item" href="/penelitian">
                      Penelitian Internal
                   </a>
-                  <a class="navbar-item" href="javascript">
+                  <a class="navbar-item" href="/penelitian">
                      Penelitian Eksternal
                   </a>
-                  <a class="navbar-item" href="javascript">
+                  <a class="navbar-item" href="/penelitian">
                      Penelitian Mandiri
                   </a>
                </div>
             </div>
 
             <div class="navbar-item has-dropdown is-hoverable">
-               <a class="navbar-link" href="javascript">
-                  Pengabdian Masyarakat
-               </a>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a class="navbar-link"> Pengabdian Masyarakat </a>
 
                <div class="navbar-dropdown">
-                  <a class="navbar-item" href="javascript">
+                  <a class="navbar-item" href="/abdimas">
                      Pengabdian Masyarakat Internal
                   </a>
-                  <a class="navbar-item" href="javascript">
+                  <a class="navbar-item" href="/abdimas">
                      Pengabdian Masyarakat Eksternal
                   </a>
-                  <a class="navbar-item" href="javascript">
+                  <a class="navbar-item" href="/abdimas">
                      Pengabdian Masyarakat Mandiri
                   </a>
                </div>

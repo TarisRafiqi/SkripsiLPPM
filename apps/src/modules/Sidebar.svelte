@@ -9,21 +9,63 @@
    else items = menu["dosen"];
 </script>
 
-<aside>
+<!-- <aside>
    {#if items}
       <header>Profile</header>
-      <!-- svelte-ignore component-name-lowercase -->
+      svelte-ignore component-name-lowercase
       <menu>
          {#each items as item}
             <a href={item.href}>{item.title}</a>
          {/each}
       </menu>
-      <footer>Info</footer>
    {/if}
+</aside> -->
+
+<aside class="menu">
+   <p class="menu-label">General</p>
+   {#each items as item}
+      <ul class="menu-list">
+         <!-- svelte-ignore a11y-missing-attribute -->
+         <li><a href={item.href}>{item.title}</a></li>
+      </ul>
+   {/each}
+
+   <p class="menu-label">Website Settings</p>
+   <ul class="menu-list">
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <li><a>Pengumuman</a></li>
+      <!-- svelte-ignore a11y-missing-attribute -->
+
+      <li><a>About UISI</a></li>
+      <!-- svelte-ignore a11y-missing-attribute -->
+
+      <button class="button is-normal is-fullwidth">Logout</button>
+   </ul>
 </aside>
 
 <style>
+   .menu-label {
+      color: white;
+   }
    aside {
+      /* padding-top: 3.5rem; */
+      padding-top: 5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      color: var(--sb-color);
+      background: var(--sb-background);
+      width: var(--wide);
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-between; */
+      position: fixed;
+      top: 0;
+      bottom: 0;
+   }
+
+   /* aside {
+      margin-top: 3.5rem;
+      padding-top: 3.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -33,19 +75,20 @@
       color: var(--sb-color);
       background: var(--sb-background);
       width: var(--wide);
-   }
+   } */
 
-   menu {
+   /* menu {
       padding: 0.5rem 1rem;
       flex: 1;
-   }
+   } */
 
    a {
-      display: flex;
-      align-items: center;
-      height: 2em;
-      flex-wrap: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: white;
+      /* display: flex; */
+      /* align-items: center; */
+      /* height: 2em; */
+      /* flex-wrap: nowrap; */
+      /* overflow: hidden; */
+      /* text-overflow: ellipsis; */
    }
 </style>

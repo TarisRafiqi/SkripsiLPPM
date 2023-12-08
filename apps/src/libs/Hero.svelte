@@ -61,7 +61,7 @@
       margin-left: 1.5rem;
       margin-right: 1.5rem;
       border-radius: 20px;
-      background-image: url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-2-2048x1152.jpg");
+      background-image: url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-12-2048x1152.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: 100% 100%;

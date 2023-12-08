@@ -1,10 +1,11 @@
 <script>
-   import { Hero, Pengumuman } from "src";
+   import { Hero, Pengumuman, Footer } from "src";
    import { route } from "../store";
 </script>
 
-<Hero></Hero>
-<Pengumuman></Pengumuman>
+<Hero />
+<Pengumuman />
+<Footer />
 
 <style>
 </style>
