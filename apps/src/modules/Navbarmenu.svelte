@@ -51,7 +51,7 @@
       <div class="navbar-menu" id="nav-links" bind:this={navbarMenu}>
          <div class="navbar-end">
             <a class="navbar-item" href="/"> Beranda </a>
-            <a class="navbar-item" href="/about"> Profile </a>
+            <a class="navbar-item" href="/about"> About UISI </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
                <a class="navbar-link" href="javascript"> Penelitian </a>
@@ -87,27 +87,25 @@
                </div>
             </div>
 
-            <!-- {#if !$isLogin} -->
             <div class="navbar-item">
                <div class="buttons">
                   {#if $isLogin}
-                     <a class="button is-success is-focused" href="/logout">
+                     <a
+                        class="button is-white is-focused is-rounded"
+                        href="/logout"
+                     >
                         Logout
                      </a>
                   {:else}
-                     <a class="button is-success is-focused" href="/login">
+                     <a
+                        class="button is-white is-focused is-rounded"
+                        href="/login"
+                     >
                         Login
                      </a>
                   {/if}
                </div>
             </div>
-            <!-- {:else} -->
-            <!-- <div class="navbar-item">
-               <div class="buttons"> -->
-            <!-- <a class="button is-success is-focused" href="/logout"> Log out </a> -->
-            <!-- </div>
-            </div> -->
-            <!-- {/if} -->
          </div>
       </div>
    </nav>

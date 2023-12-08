@@ -778,7 +778,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance29, create_fragment35, not_equal, props, append_styles2, dirty = [-1]) {
+  function init(component, options, instance28, create_fragment36, not_equal, props, append_styles2, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -804,7 +804,7 @@
     };
     append_styles2 && append_styles2($$.root);
     let ready = false;
-    $$.ctx = instance29 ? instance29(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance28 ? instance28(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -817,7 +817,7 @@
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment35 ? create_fragment35($$.ctx) : false;
+    $$.fragment = create_fragment36 ? create_fragment36($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -1128,7 +1128,7 @@
 
   // src/pages/About.svelte
   function add_css2(target) {
-    append_styles(target, "svelte-12yf9li", "article.svelte-12yf9li{text-align:center}");
+    append_styles(target, "svelte-9f6d4p", "article.svelte-9f6d4p{margin-top:3.5rem;text-align:center}");
   }
   function create_fragment2(ctx) {
     let article;
@@ -1142,7 +1142,7 @@
       Ultrices gravida dictum fusce ut placerat orci nulla. Eget duis at tellus
       at urna. Est velit egestas dui id ornare arcu. Suscipit adipiscing
       bibendum est ultricies.</p>`;
-        attr(article, "class", "container svelte-12yf9li");
+        attr(article, "class", "container svelte-9f6d4p");
       },
       m(target, anchor) {
         insert(target, article, anchor);
@@ -2007,92 +2007,39 @@
 
   // src/libs/Hero.svelte
   function add_css4(target) {
-    append_styles(target, "svelte-1ty7kjg", "div.svelte-1ty7kjg{display:grid;min-height:15rem;background:var(--hero-background);color:var(--hero-color);padding:5rem 2rem;gap:2rem;align-items:center;text-align:center;justify-content:center}div.svelte-1ty7kjg>*{display:inline-flex;flex-direction:column}@media(min-width: 768px){}");
+    append_styles(target, "svelte-a9elxa", '.title.svelte-a9elxa{color:black}.subtitle.svelte-a9elxa{color:black;text-align:justify}@media(min-width: 768px){}.hero-body.svelte-a9elxa{margin-top:5rem;margin-left:1.5rem;margin-right:1.5rem;border-radius:20px;background-image:url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-2-2048x1152.jpg");background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%}');
   }
   function create_fragment6(ctx) {
-    let div;
-    let current;
-    const default_slot_template = (
-      /*#slots*/
-      ctx[1].default
-    );
-    const default_slot = create_slot(
-      default_slot_template,
-      ctx,
-      /*$$scope*/
-      ctx[0],
-      null
-    );
+    let section;
     return {
       c() {
-        div = element("div");
-        if (default_slot)
-          default_slot.c();
-        attr(div, "class", "svelte-1ty7kjg");
+        section = element("section");
+        section.innerHTML = `<div class="hero-body svelte-a9elxa"><p class="title svelte-a9elxa">LPPM Universitas Internasional Semen Indonesia</p> <p class="subtitle svelte-a9elxa">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+         commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+         velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+         mollit anim id est laborum.</p> <div class="buttons"><a class="button is-white is-focused is-rounded" href="/login">Login</a></div></div>`;
+        attr(section, "class", "hero is-medium");
       },
       m(target, anchor) {
-        insert(target, div, anchor);
-        if (default_slot) {
-          default_slot.m(div, null);
-        }
-        current = true;
+        insert(target, section, anchor);
       },
-      p(ctx2, [dirty]) {
-        if (default_slot) {
-          if (default_slot.p && (!current || dirty & /*$$scope*/
-          1)) {
-            update_slot_base(
-              default_slot,
-              default_slot_template,
-              ctx2,
-              /*$$scope*/
-              ctx2[0],
-              !current ? get_all_dirty_from_scope(
-                /*$$scope*/
-                ctx2[0]
-              ) : get_slot_changes(
-                default_slot_template,
-                /*$$scope*/
-                ctx2[0],
-                dirty,
-                null
-              ),
-              null
-            );
-          }
-        }
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(default_slot, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(default_slot, local);
-        current = false;
-      },
+      p: noop,
+      i: noop,
+      o: noop,
       d(detaching) {
         if (detaching) {
-          detach(div);
+          detach(section);
         }
-        if (default_slot)
-          default_slot.d(detaching);
       }
     };
-  }
-  function instance4($$self, $$props, $$invalidate) {
-    let { $$slots: slots = {}, $$scope } = $$props;
-    $$self.$$set = ($$props2) => {
-      if ("$$scope" in $$props2)
-        $$invalidate(0, $$scope = $$props2.$$scope);
-    };
-    return [$$scope, slots];
   }
   var Hero = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance4, create_fragment6, safe_not_equal, {}, add_css4);
+      init(this, options, null, create_fragment6, safe_not_equal, {}, add_css4);
     }
   };
   var Hero_default = Hero;
@@ -2259,7 +2206,7 @@
       }
     };
   }
-  function instance5($$self, $$props, $$invalidate) {
+  function instance4($$self, $$props, $$invalidate) {
     let { $$slots: slots = {}, $$scope } = $$props;
     let { show = false } = $$props;
     function handleClick() {
@@ -2277,7 +2224,7 @@
   var Modal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance5, create_fragment7, safe_not_equal, { show: 0 }, add_css5);
+      init(this, options, instance4, create_fragment7, safe_not_equal, { show: 0 }, add_css5);
     }
   };
   var Modal_default = Modal;
@@ -2373,7 +2320,7 @@
       c() {
         a = element("a");
         a.textContent = "Login";
-        attr(a, "class", "button is-success is-focused");
+        attr(a, "class", "button is-white is-focused is-rounded");
         attr(a, "href", "/login");
       },
       m(target, anchor) {
@@ -2392,7 +2339,7 @@
       c() {
         a = element("a");
         a.textContent = "Logout";
-        attr(a, "class", "button is-success is-focused");
+        attr(a, "class", "button is-white is-focused is-rounded");
         attr(a, "href", "/logout");
       },
       m(target, anchor) {
@@ -2454,7 +2401,7 @@
         a2.textContent = "Beranda";
         t5 = space();
         a3 = element("a");
-        a3.textContent = "Profile";
+        a3.textContent = "About UISI";
         t7 = space();
         div2 = element("div");
         div2.innerHTML = `<a class="navbar-link" href="javascript">Penelitian</a> <div class="navbar-dropdown"><a class="navbar-item" href="javascript">Penelitian Internal</a> <a class="navbar-item" href="javascript">Penelitian Eksternal</a> <a class="navbar-item" href="javascript">Penelitian Mandiri</a></div>`;
@@ -2539,7 +2486,7 @@
       }
     };
   }
-  function instance6($$self, $$props, $$invalidate) {
+  function instance5($$self, $$props, $$invalidate) {
     let $isLogin;
     component_subscribe($$self, isLogin, ($$value) => $$invalidate(1, $isLogin = $$value));
     let token = localStorage.getItem("token");
@@ -2558,10 +2505,204 @@
   var Navbarmenu = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance6, create_fragment9, safe_not_equal, {}, add_css7);
+      init(this, options, instance5, create_fragment9, safe_not_equal, {}, add_css7);
     }
   };
   var Navbarmenu_default = Navbarmenu;
+
+  // src/modules/Pengumuman.svelte
+  function add_css8(target) {
+    append_styles(target, "svelte-1k7wu1i", ".content.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i{text-align:center}section.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i{padding:60px 0}#accordion.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i{list-style-type:none;margin:0;padding:0}#accordion.svelte-1k7wu1i li.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i{width:100%;margin-bottom:10px;background:#f7f7f7;padding:10px;border-radius:10px}#accordion.svelte-1k7wu1i li label.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i{padding:10px;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:500;cursor:pointer;color:#2dabf9}#accordion.svelte-1k7wu1i label.svelte-1k7wu1i+[hidden].svelte-1k7wu1i.svelte-1k7wu1i{display:none}#accordion.svelte-1k7wu1i label.svelte-1k7wu1i+[hidden].svelte-1k7wu1i:checked+.content.svelte-1k7wu1i{max-height:400px}#accordion.svelte-1k7wu1i .content.svelte-1k7wu1i.svelte-1k7wu1i.svelte-1k7wu1i{padding:0 10px;line-height:26px;max-height:0;overflow:hidden;transition:max-height 0.6s}");
+  }
+  function get_each_context2(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[2] = list[i];
+    return child_ctx;
+  }
+  function create_each_block2(ctx) {
+    let li;
+    let label;
+    let t0_value = (
+      /*p*/
+      ctx[2].title + ""
+    );
+    let t0;
+    let label_for_value;
+    let t1;
+    let input;
+    let input_id_value;
+    let t2;
+    let div;
+    let p_1;
+    let t4;
+    return {
+      c() {
+        li = element("li");
+        label = element("label");
+        t0 = text(t0_value);
+        t1 = space();
+        input = element("input");
+        t2 = space();
+        div = element("div");
+        p_1 = element("p");
+        p_1.textContent = `${/*p*/
+        ctx[2].content}`;
+        t4 = space();
+        attr(label, "for", label_for_value = /*p*/
+        ctx[2].label);
+        attr(label, "class", "svelte-1k7wu1i");
+        input.hidden = true;
+        attr(input, "type", "checkbox");
+        attr(
+          input,
+          "name",
+          /*accordionName*/
+          ctx[0]
+        );
+        attr(input, "id", input_id_value = /*p*/
+        ctx[2].idPengumuman);
+        attr(input, "class", "svelte-1k7wu1i");
+        attr(div, "class", "content svelte-1k7wu1i");
+        attr(li, "class", "svelte-1k7wu1i");
+      },
+      m(target, anchor) {
+        insert(target, li, anchor);
+        append(li, label);
+        append(label, t0);
+        append(li, t1);
+        append(li, input);
+        append(li, t2);
+        append(li, div);
+        append(div, p_1);
+        append(li, t4);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(li);
+        }
+      }
+    };
+  }
+  function create_fragment10(ctx) {
+    let section;
+    let article;
+    let div0;
+    let t3;
+    let br;
+    let t4;
+    let div1;
+    let ul;
+    let each_value = ensure_array_like(
+      /*pengumuman*/
+      ctx[1]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+    }
+    return {
+      c() {
+        section = element("section");
+        article = element("article");
+        div0 = element("div");
+        div0.innerHTML = `<h2>PENGUMUMAN</h2> <p>Daftar Pengumuman terkait kegiatan Penelitian &amp; Pengabdian
+            Masyarakat LPPM UISI</p>`;
+        t3 = space();
+        br = element("br");
+        t4 = space();
+        div1 = element("div");
+        ul = element("ul");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(div0, "class", "content svelte-1k7wu1i");
+        attr(ul, "id", "accordion");
+        attr(ul, "class", "svelte-1k7wu1i");
+        attr(div1, "class", "list pengumuman");
+        attr(article, "class", "container");
+        attr(section, "class", "svelte-1k7wu1i");
+      },
+      m(target, anchor) {
+        insert(target, section, anchor);
+        append(section, article);
+        append(article, div0);
+        append(article, t3);
+        append(article, br);
+        append(article, t4);
+        append(article, div1);
+        append(div1, ul);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(ul, null);
+          }
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & /*pengumuman, accordionName*/
+        3) {
+          each_value = ensure_array_like(
+            /*pengumuman*/
+            ctx2[1]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context2(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(ul, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(section);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function instance6($$self) {
+    let accordionName;
+    let pengumuman = [
+      {
+        label: "1",
+        idPengumuman: "1",
+        title: "Perpanjangan Batas Akhir Upload Proposal",
+        content: " Pengumuman 1 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus ex dolorem, consequatur tenetur at cupiditate ab corporis quos sed. Deserunt qui nostrum ullam praesentium sed unde placeat, dolorum aliquid? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore asperiores blanditiis repellendus velit id? Doloribus dolor neque aut expedita, nam nostrum."
+      },
+      {
+        label: "2",
+        idPengumuman: "2",
+        title: "Daftar proposal lolos pendanaan",
+        content: " Pengumuman 2 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus ex dolorem, consequatur tenetur at cupiditate ab corporis quos sed. Deserunt qui nostrum ullam praesentium sed unde placeat, dolorum aliquid? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore asperiores blanditiis repellendus velit id? Doloribus dolor neque aut expedita, nam nostrum."
+      },
+      {
+        label: "3",
+        idPengumuman: "3",
+        title: "Pembukaan Pendaftaran Proposal Penelitian & Pengabdian",
+        content: " Pengumuman 3 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus ex dolorem, consequatur tenetur at cupiditate ab corporis quos sed. Deserunt qui nostrum ullam praesentium sed unde placeat, dolorum aliquid? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore asperiores blanditiis repellendus velit id? Doloribus dolor neque aut expedita, nam nostrum."
+      }
+    ];
+    return [accordionName, pengumuman];
+  }
+  var Pengumuman = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance6, create_fragment10, safe_not_equal, {}, add_css8);
+    }
+  };
+  var Pengumuman_default = Pengumuman;
 
   // src/store/menu.js
   var admin = [
@@ -2610,10 +2751,10 @@
   };
 
   // src/modules/Sidebar.svelte
-  function add_css8(target) {
+  function add_css9(target) {
     append_styles(target, "svelte-16ehuu5", "aside.svelte-16ehuu5{display:flex;flex-direction:column;justify-content:space-between;position:fixed;top:0;bottom:0;color:var(--sb-color);background:var(--sb-background);width:var(--wide)}menu.svelte-16ehuu5{padding:0.5rem 1rem;flex:1}a.svelte-16ehuu5{display:flex;align-items:center;height:2em;flex-wrap:nowrap;overflow:hidden;text-overflow:ellipsis}");
   }
-  function get_each_context2(ctx, list, i) {
+  function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[2] = list[i];
     return child_ctx;
@@ -2630,7 +2771,7 @@
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
     }
     return {
       c() {
@@ -2667,11 +2808,11 @@
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context2(ctx2, each_value, i);
+            const child_ctx = get_each_context3(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
             } else {
-              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i] = create_each_block3(child_ctx);
               each_blocks[i].c();
               each_blocks[i].m(menu_1, null);
             }
@@ -2694,7 +2835,7 @@
       }
     };
   }
-  function create_each_block2(ctx) {
+  function create_each_block3(ctx) {
     let a;
     let t_value = (
       /*item*/
@@ -2732,7 +2873,7 @@
       }
     };
   }
-  function create_fragment10(ctx) {
+  function create_fragment11(ctx) {
     let aside;
     let if_block = (
       /*items*/
@@ -2790,7 +2931,7 @@
   var Sidebar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance7, create_fragment10, safe_not_equal, {}, add_css8);
+      init(this, options, instance7, create_fragment11, safe_not_equal, {}, add_css9);
     }
   };
   var Sidebar_default = Sidebar;
@@ -3020,7 +3161,7 @@
       }
     };
   }
-  function create_fragment11(ctx) {
+  function create_fragment12(ctx) {
     let if_block_anchor;
     function select_block_type(ctx2, dirty) {
       if (
@@ -3141,328 +3282,66 @@
   var Status = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance8, create_fragment11, safe_not_equal, { code: 0 });
+      init(this, options, instance8, create_fragment12, safe_not_equal, { code: 0 });
     }
   };
   var Status_default = Status;
 
   // src/pages/Index.svelte
-  function add_css9(target) {
-    append_styles(target, "svelte-gv2w4f", ".head-pengumuman.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f{text-align:center}section.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f{background-color:#f3f5fa;padding:60px 0}#accordion.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f{list-style-type:none;margin:0;padding:0}#accordion.svelte-gv2w4f li.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f{width:100%;margin-bottom:10px;background:#ffffff;padding:10px;border-radius:10px}#accordion.svelte-gv2w4f li label.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f{padding:10px;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:500;cursor:pointer;color:#2dabf9}#accordion.svelte-gv2w4f label.svelte-gv2w4f+[hidden].svelte-gv2w4f.svelte-gv2w4f{display:none}#accordion.svelte-gv2w4f label.svelte-gv2w4f+[hidden].svelte-gv2w4f:checked+.content.svelte-gv2w4f{max-height:400px}#accordion.svelte-gv2w4f .content.svelte-gv2w4f.svelte-gv2w4f.svelte-gv2w4f{padding:0 10px;line-height:26px;max-height:0;overflow:hidden;transition:max-height 0.6s}");
-  }
-  function get_each_context3(ctx, list, i) {
-    const child_ctx = ctx.slice();
-    child_ctx[4] = list[i];
-    return child_ctx;
-  }
-  function create_default_slot(ctx) {
-    let div;
-    let h1;
-    let t1;
-    let p_1;
-    let t3;
-    let span;
-    let button0;
-    let t5;
-    let button1;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        div = element("div");
-        h1 = element("h1");
-        h1.textContent = "Welcome to LPPM UISI";
-        t1 = space();
-        p_1 = element("p");
-        p_1.textContent = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo in\r\n         doloribus voluptate? Culpa, sit architecto. Consequuntur impedit\r\n         necessitatibus harum sed corrupti deleniti, ratione consequatur\r\n         quisquam perferendis, vitae eum. Consequuntur, sed?";
-        t3 = space();
-        span = element("span");
-        button0 = element("button");
-        button0.textContent = "Login";
-        t5 = space();
-        button1 = element("button");
-        button1.textContent = "Register";
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        append(div, h1);
-        append(div, t1);
-        append(div, p_1);
-        append(div, t3);
-        append(div, span);
-        append(span, button0);
-        append(span, t5);
-        append(span, button1);
-        if (!mounted) {
-          dispose = [
-            listen(button0, "click", function() {
-              if (is_function(
-                /*$route*/
-                ctx[0]("/login")
-              ))
-                ctx[0]("/login").apply(this, arguments);
-            }),
-            listen(button1, "click", function() {
-              if (is_function(
-                /*$route*/
-                ctx[0]("/register")
-              ))
-                ctx[0]("/register").apply(this, arguments);
-            })
-          ];
-          mounted = true;
-        }
-      },
-      p(new_ctx, dirty) {
-        ctx = new_ctx;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        mounted = false;
-        run_all(dispose);
-      }
-    };
-  }
-  function create_each_block3(ctx) {
-    let li;
-    let label;
-    let t0_value = (
-      /*p*/
-      ctx[4].title + ""
-    );
-    let t0;
-    let label_for_value;
-    let t1;
-    let input;
-    let input_id_value;
-    let t2;
-    let div;
-    let p_1;
-    let t4;
-    return {
-      c() {
-        li = element("li");
-        label = element("label");
-        t0 = text(t0_value);
-        t1 = space();
-        input = element("input");
-        t2 = space();
-        div = element("div");
-        p_1 = element("p");
-        p_1.textContent = `${/*p*/
-        ctx[4].content}`;
-        t4 = space();
-        attr(label, "for", label_for_value = /*p*/
-        ctx[4].label);
-        attr(label, "class", "svelte-gv2w4f");
-        input.hidden = true;
-        attr(input, "type", "checkbox");
-        attr(
-          input,
-          "name",
-          /*accordionName*/
-          ctx[1]
-        );
-        attr(input, "id", input_id_value = /*p*/
-        ctx[4].idPengumuman);
-        attr(input, "class", "svelte-gv2w4f");
-        attr(div, "class", "content svelte-gv2w4f");
-        attr(li, "class", "svelte-gv2w4f");
-      },
-      m(target, anchor) {
-        insert(target, li, anchor);
-        append(li, label);
-        append(label, t0);
-        append(li, t1);
-        append(li, input);
-        append(li, t2);
-        append(li, div);
-        append(div, p_1);
-        append(li, t4);
-      },
-      p: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(li);
-        }
-      }
-    };
-  }
-  function create_fragment12(ctx) {
+  function create_fragment13(ctx) {
     let hero;
-    let t0;
-    let section;
-    let article0;
-    let div0;
-    let t5;
-    let br0;
-    let t6;
-    let div1;
-    let ul;
-    let t7;
-    let article1;
+    let t;
+    let pengumuman;
     let current;
-    hero = new Hero_default({
-      props: {
-        $$slots: { default: [create_default_slot] },
-        $$scope: { ctx }
-      }
-    });
-    let each_value = ensure_array_like(
-      /*pengumuman*/
-      ctx[2]
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
-    }
+    hero = new Hero_default({});
+    pengumuman = new Pengumuman_default({});
     return {
       c() {
         create_component(hero.$$.fragment);
-        t0 = space();
-        section = element("section");
-        article0 = element("article");
-        div0 = element("div");
-        div0.innerHTML = `<h2>PENGUMUMAN</h2> <hr class="style-two"/> <p>Daftar Pengumuman terkait kegiatan Penelitian &amp; Pengabdian
-            Masyarakat LPPM UISI</p>`;
-        t5 = space();
-        br0 = element("br");
-        t6 = space();
-        div1 = element("div");
-        ul = element("ul");
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
-        t7 = space();
-        article1 = element("article");
-        article1.innerHTML = `<br/> <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
-      asperiores ducimus nemo! Assumenda nihil, mollitia pariatur repellat,
-      laudantium nemo delectus exercitationem, quos magnam architecto eaque
-      perferendis distinctio unde. Veritatis, alias.</p>`;
-        attr(div0, "class", "head-pengumuman svelte-gv2w4f");
-        attr(ul, "id", "accordion");
-        attr(ul, "class", "svelte-gv2w4f");
-        attr(div1, "class", "list pengumuman");
-        attr(article0, "class", "container");
-        attr(section, "class", "svelte-gv2w4f");
-        attr(article1, "class", "container");
+        t = space();
+        create_component(pengumuman.$$.fragment);
       },
       m(target, anchor) {
         mount_component(hero, target, anchor);
-        insert(target, t0, anchor);
-        insert(target, section, anchor);
-        append(section, article0);
-        append(article0, div0);
-        append(article0, t5);
-        append(article0, br0);
-        append(article0, t6);
-        append(article0, div1);
-        append(div1, ul);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(ul, null);
-          }
-        }
-        insert(target, t7, anchor);
-        insert(target, article1, anchor);
+        insert(target, t, anchor);
+        mount_component(pengumuman, target, anchor);
         current = true;
       },
-      p(ctx2, [dirty]) {
-        const hero_changes = {};
-        if (dirty & /*$$scope, $route*/
-        129) {
-          hero_changes.$$scope = { dirty, ctx: ctx2 };
-        }
-        hero.$set(hero_changes);
-        if (dirty & /*pengumuman, accordionName*/
-        6) {
-          each_value = ensure_array_like(
-            /*pengumuman*/
-            ctx2[2]
-          );
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context3(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-            } else {
-              each_blocks[i] = create_each_block3(child_ctx);
-              each_blocks[i].c();
-              each_blocks[i].m(ul, null);
-            }
-          }
-          for (; i < each_blocks.length; i += 1) {
-            each_blocks[i].d(1);
-          }
-          each_blocks.length = each_value.length;
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
         transition_in(hero.$$.fragment, local);
+        transition_in(pengumuman.$$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(hero.$$.fragment, local);
+        transition_out(pengumuman.$$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(t0);
-          detach(section);
-          detach(t7);
-          detach(article1);
+          detach(t);
         }
         destroy_component(hero, detaching);
-        destroy_each(each_blocks, detaching);
+        destroy_component(pengumuman, detaching);
       }
     };
-  }
-  function instance9($$self, $$props, $$invalidate) {
-    let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(0, $route = $$value));
-    function handleLogin(ev) {
-      $route("/login");
-    }
-    let accordionName;
-    let pengumuman = [
-      {
-        label: "1",
-        idPengumuman: "1",
-        title: "Perpanjangan Batas Akhir Upload Proposal",
-        content: " Pengumuman 1 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus ex dolorem, consequatur tenetur at cupiditate ab corporis quos sed. Deserunt qui nostrum ullam praesentium sed unde placeat, dolorum aliquid? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore asperiores blanditiis repellendus velit id? Doloribus dolor neque aut expedita, nam nostrum."
-      },
-      {
-        label: "2",
-        idPengumuman: "2",
-        title: "Daftar proposal lolos pendanaan",
-        content: " Pengumuman 2 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus ex dolorem, consequatur tenetur at cupiditate ab corporis quos sed. Deserunt qui nostrum ullam praesentium sed unde placeat, dolorum aliquid? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore asperiores blanditiis repellendus velit id? Doloribus dolor neque aut expedita, nam nostrum."
-      },
-      {
-        label: "3",
-        idPengumuman: "3",
-        title: "Pembukaan Pendaftaran Proposal Penelitian & Pengabdian",
-        content: " Pengumuman 3 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus ex dolorem, consequatur tenetur at cupiditate ab corporis quos sed. Deserunt qui nostrum ullam praesentium sed unde placeat, dolorum aliquid? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore asperiores blanditiis repellendus velit id? Doloribus dolor neque aut expedita, nam nostrum."
-      }
-    ];
-    return [$route, accordionName, pengumuman];
   }
   var Index = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment12, safe_not_equal, {}, add_css9);
+      init(this, options, null, create_fragment13, safe_not_equal, {});
     }
   };
   var Index_default = Index;
 
   // src/pages/Login.svelte
   function add_css10(target) {
-    append_styles(target, "svelte-xqejvc", '.gsi-material-button.svelte-xqejvc.svelte-xqejvc{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#f2f2f2;background-image:none;border:1px solid var(--border, #dadce0);-webkit-border-radius:20px;border-radius:20px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#1f1f1f;cursor:pointer;font-family:"Roboto", arial, sans-serif;font-size:14px;height:40px;letter-spacing:0.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;-webkit-transition:background-color 0.218s,\r\n         border-color 0.218s,\r\n         box-shadow 0.218s;transition:background-color 0.218s,\r\n         border-color 0.218s,\r\n         box-shadow 0.218s;vertical-align:middle;white-space:nowrap}.gsi-material-button.svelte-xqejvc .gsi-material-button-icon.svelte-xqejvc{height:20px;margin-right:12px;min-width:20px;width:20px}.gsi-material-button.svelte-xqejvc .gsi-material-button-content-wrapper.svelte-xqejvc{-webkit-align-items:center;align-items:center;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;justify-content:space-between;position:relative;width:100%}.gsi-material-button.svelte-xqejvc .gsi-material-button-contents.svelte-xqejvc{-webkit-flex-grow:1;flex-grow:1;font-family:"Roboto", arial, sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.gsi-material-button.svelte-xqejvc .gsi-material-button-state.svelte-xqejvc{-webkit-transition:opacity 0.218s;transition:opacity 0.218s;bottom:0;left:0;opacity:0;position:absolute;right:0;top:0}.gsi-material-button.svelte-xqejvc.svelte-xqejvc:disabled{cursor:default;background-color:#ffffff61}.gsi-material-button.svelte-xqejvc:disabled .gsi-material-button-state.svelte-xqejvc{background-color:#1f1f1f1f}.gsi-material-button.svelte-xqejvc:disabled .gsi-material-button-contents.svelte-xqejvc{opacity:38%}.gsi-material-button.svelte-xqejvc:disabled .gsi-material-button-icon.svelte-xqejvc{opacity:38%}.gsi-material-button.svelte-xqejvc:not(:disabled):active .gsi-material-button-state.svelte-xqejvc,.gsi-material-button.svelte-xqejvc:not(:disabled):focus .gsi-material-button-state.svelte-xqejvc{background-color:#001d35;opacity:12%}.gsi-material-button.svelte-xqejvc.svelte-xqejvc:not(:disabled):hover{-webkit-box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15);box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15)}.gsi-material-button.svelte-xqejvc:not(:disabled):hover .gsi-material-button-state.svelte-xqejvc{background-color:#001d35;opacity:8%}article.container.svelte-xqejvc.svelte-xqejvc{text-align:center;z-index:101}div.box.svelte-xqejvc.svelte-xqejvc{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-xqejvc div.svelte-xqejvc{text-align:left}button.svelte-xqejvc.svelte-xqejvc{width:100%}');
+    append_styles(target, "svelte-1ohw7ce", '.gsi-material-button.svelte-1ohw7ce.svelte-1ohw7ce{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#f2f2f2;background-image:none;border:1px solid var(--border, #dadce0);-webkit-border-radius:20px;border-radius:20px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#1f1f1f;cursor:pointer;font-family:"Roboto", arial, sans-serif;font-size:14px;height:40px;letter-spacing:0.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;-webkit-transition:background-color 0.218s,\r\n         border-color 0.218s,\r\n         box-shadow 0.218s;transition:background-color 0.218s,\r\n         border-color 0.218s,\r\n         box-shadow 0.218s;vertical-align:middle;white-space:nowrap}.gsi-material-button.svelte-1ohw7ce .gsi-material-button-icon.svelte-1ohw7ce{height:20px;margin-right:12px;min-width:20px;width:20px}.gsi-material-button.svelte-1ohw7ce .gsi-material-button-content-wrapper.svelte-1ohw7ce{-webkit-align-items:center;align-items:center;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;justify-content:space-between;position:relative;width:100%}.gsi-material-button.svelte-1ohw7ce .gsi-material-button-contents.svelte-1ohw7ce{-webkit-flex-grow:1;flex-grow:1;font-family:"Roboto", arial, sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.gsi-material-button.svelte-1ohw7ce .gsi-material-button-state.svelte-1ohw7ce{-webkit-transition:opacity 0.218s;transition:opacity 0.218s;bottom:0;left:0;opacity:0;position:absolute;right:0;top:0}.gsi-material-button.svelte-1ohw7ce.svelte-1ohw7ce:disabled{cursor:default;background-color:#ffffff61}.gsi-material-button.svelte-1ohw7ce:disabled .gsi-material-button-state.svelte-1ohw7ce{background-color:#1f1f1f1f}.gsi-material-button.svelte-1ohw7ce:disabled .gsi-material-button-contents.svelte-1ohw7ce{opacity:38%}.gsi-material-button.svelte-1ohw7ce:disabled .gsi-material-button-icon.svelte-1ohw7ce{opacity:38%}.gsi-material-button.svelte-1ohw7ce:not(:disabled):active .gsi-material-button-state.svelte-1ohw7ce,.gsi-material-button.svelte-1ohw7ce:not(:disabled):focus .gsi-material-button-state.svelte-1ohw7ce{background-color:#001d35;opacity:12%}.gsi-material-button.svelte-1ohw7ce.svelte-1ohw7ce:not(:disabled):hover{-webkit-box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15);box-shadow:0 1px 2px 0 rgba(60, 64, 67, 0.3),\r\n         0 1px 3px 1px rgba(60, 64, 67, 0.15)}.gsi-material-button.svelte-1ohw7ce:not(:disabled):hover .gsi-material-button-state.svelte-1ohw7ce{background-color:#001d35;opacity:8%}article.container.svelte-1ohw7ce.svelte-1ohw7ce{padding-top:10rem;text-align:center}div.box.svelte-1ohw7ce.svelte-1ohw7ce{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-1ohw7ce div.svelte-1ohw7ce{text-align:left}button.svelte-1ohw7ce.svelte-1ohw7ce{width:100%}');
   }
-  function create_fragment13(ctx) {
+  function create_fragment14(ctx) {
     let article;
     let div9;
     let h2;
@@ -3513,19 +3392,19 @@
         t10 = space();
         div8 = element("div");
         button1 = element("button");
-        button1.innerHTML = `<div class="gsi-material-button-state svelte-xqejvc"></div> <div class="gsi-material-button-content-wrapper svelte-xqejvc"><div class="gsi-material-button-icon svelte-xqejvc"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg></div> <span class="gsi-material-button-contents svelte-xqejvc">Sign in with Google</span> <span style="display: none;">Sign in with Google</span></div>`;
-        attr(div0, "class", "svelte-xqejvc");
+        button1.innerHTML = `<div class="gsi-material-button-state svelte-1ohw7ce"></div> <div class="gsi-material-button-content-wrapper svelte-1ohw7ce"><div class="gsi-material-button-icon svelte-1ohw7ce"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg></div> <span class="gsi-material-button-contents svelte-1ohw7ce">Sign in with Google</span> <span style="display: none;">Sign in with Google</span></div>`;
+        attr(div0, "class", "svelte-1ohw7ce");
         attr(input0, "type", "text");
-        attr(div1, "class", "svelte-xqejvc");
-        attr(div2, "class", "svelte-xqejvc");
+        attr(div1, "class", "svelte-1ohw7ce");
+        attr(div2, "class", "svelte-1ohw7ce");
         attr(input1, "type", "password");
-        attr(div3, "class", "svelte-xqejvc");
-        attr(button0, "class", "svelte-xqejvc");
-        attr(div4, "class", "svelte-xqejvc");
-        attr(button1, "class", "gsi-material-button svelte-xqejvc");
-        attr(div8, "class", "svelte-xqejvc");
-        attr(div9, "class", "box svelte-xqejvc");
-        attr(article, "class", "container svelte-xqejvc");
+        attr(div3, "class", "svelte-1ohw7ce");
+        attr(button0, "class", "svelte-1ohw7ce");
+        attr(div4, "class", "svelte-1ohw7ce");
+        attr(button1, "class", "gsi-material-button svelte-1ohw7ce");
+        attr(div8, "class", "svelte-1ohw7ce");
+        attr(div9, "class", "box svelte-1ohw7ce");
+        attr(article, "class", "container svelte-1ohw7ce");
       },
       m(target, anchor) {
         insert(target, article, anchor);
@@ -3620,7 +3499,7 @@
     location.pathname = "/api/auth/google";
     return;
   }
-  function instance10($$self, $$props, $$invalidate) {
+  function instance9($$self, $$props, $$invalidate) {
     let $route;
     let $isLogin;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
@@ -3661,7 +3540,7 @@
   var Login = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance10, create_fragment13, safe_not_equal, {}, add_css10);
+      init(this, options, instance9, create_fragment14, safe_not_equal, {}, add_css10);
     }
   };
   var Login_default = Login;
@@ -3670,7 +3549,7 @@
   function add_css11(target) {
     append_styles(target, "svelte-ppcz1w", "article.svelte-ppcz1w{margin:0 auto;text-align:center}");
   }
-  function create_fragment14(ctx) {
+  function create_fragment15(ctx) {
     let article;
     return {
       c() {
@@ -3691,7 +3570,7 @@
       }
     };
   }
-  function instance11($$self, $$props, $$invalidate) {
+  function instance10($$self, $$props, $$invalidate) {
     let $isLogin;
     component_subscribe($$self, isLogin, ($$value) => $$invalidate(0, $isLogin = $$value));
     localStorage.clear();
@@ -3707,7 +3586,7 @@
   var Logout = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment14, safe_not_equal, {}, add_css11);
+      init(this, options, instance10, create_fragment15, safe_not_equal, {}, add_css11);
     }
   };
   var Logout_default = Logout;
@@ -3716,7 +3595,7 @@
   function add_css12(target) {
     append_styles(target, "svelte-12yf9li", "article.svelte-12yf9li{text-align:center}");
   }
-  function create_fragment15(ctx) {
+  function create_fragment16(ctx) {
     let article;
     return {
       c() {
@@ -3743,7 +3622,7 @@
   var Penelitian = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment15, safe_not_equal, {}, add_css12);
+      init(this, options, null, create_fragment16, safe_not_equal, {}, add_css12);
     }
   };
   var Penelitian_default = Penelitian;
@@ -3752,7 +3631,7 @@
   function add_css13(target) {
     append_styles(target, "svelte-f1u2iy", "article.container.svelte-f1u2iy.svelte-f1u2iy{text-align:center}div.box.svelte-f1u2iy.svelte-f1u2iy{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-f1u2iy div.svelte-f1u2iy{text-align:left}button.svelte-f1u2iy.svelte-f1u2iy{width:100%}");
   }
-  function create_fragment16(ctx) {
+  function create_fragment17(ctx) {
     let article;
     let div5;
     let h2;
@@ -3892,7 +3771,7 @@
       }
     };
   }
-  function instance12($$self, $$props, $$invalidate) {
+  function instance11($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
     let username = "dosen";
@@ -3933,7 +3812,7 @@
   var Register = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance12, create_fragment16, safe_not_equal, {}, add_css13);
+      init(this, options, instance11, create_fragment17, safe_not_equal, {}, add_css13);
     }
   };
   var Register_default = Register;
@@ -3942,7 +3821,7 @@
   function add_css14(target) {
     append_styles(target, "svelte-f1u2iy", "article.container.svelte-f1u2iy.svelte-f1u2iy{text-align:center}div.box.svelte-f1u2iy.svelte-f1u2iy{display:inline-flex;flex-direction:column;gap:0.5rem}div.box.svelte-f1u2iy div.svelte-f1u2iy{text-align:left}button.svelte-f1u2iy.svelte-f1u2iy{width:100%}");
   }
-  function create_fragment17(ctx) {
+  function create_fragment18(ctx) {
     let article;
     let div7;
     let h2;
@@ -4146,7 +4025,7 @@
       }
     };
   }
-  function instance13($$self, $$props, $$invalidate) {
+  function instance12($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(7, $route = $$value));
     let username = "dosen";
@@ -4191,7 +4070,7 @@
   var Verify = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance13, create_fragment17, safe_not_equal, {}, add_css14);
+      init(this, options, instance12, create_fragment18, safe_not_equal, {}, add_css14);
     }
   };
   var Verify_default = Verify;
@@ -4211,7 +4090,7 @@
   function add_css15(target) {
     append_styles(target, "svelte-18wwe8f", "#orang{color:#b8b8b8}");
   }
-  function create_default_slot2(ctx) {
+  function create_default_slot(ctx) {
     let h1;
     let t1;
     let hr;
@@ -4246,7 +4125,83 @@
       }
     };
   }
-  function create_fragment18(ctx) {
+  function create_fragment19(ctx) {
+    let article;
+    let current;
+    article = new Article_default({
+      props: {
+        $$slots: { default: [create_default_slot] },
+        $$scope: { ctx }
+      }
+    });
+    return {
+      c() {
+        create_component(article.$$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(article, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const article_changes = {};
+        if (dirty & /*$$scope*/
+        1) {
+          article_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        article.$set(article_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(article.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(article.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(article, detaching);
+      }
+    };
+  }
+  var Home = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment19, safe_not_equal, {}, add_css15);
+    }
+  };
+  var home_default = Home;
+
+  // src/pages/admin/+pengumuman.svelte
+  function create_default_slot2(ctx) {
+    let h1;
+    let t1;
+    let p;
+    return {
+      c() {
+        h1 = element("h1");
+        h1.textContent = "Pengumuman";
+        t1 = space();
+        p = element("p");
+        p.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum\r\n      dicta voluptatibus sequi! Saepe eos quo et incidunt mollitia assumenda,\r\n      quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.";
+      },
+      m(target, anchor) {
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, p, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(h1);
+          detach(t1);
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_fragment20(ctx) {
     let article;
     let current;
     article = new Article_default({
@@ -4286,89 +4241,13 @@
       }
     };
   }
-  var Home = class extends SvelteComponent {
+  var Pengumuman2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment18, safe_not_equal, {}, add_css15);
+      init(this, options, null, create_fragment20, safe_not_equal, {});
     }
   };
-  var home_default = Home;
-
-  // src/pages/admin/+pengumuman.svelte
-  function create_default_slot3(ctx) {
-    let h1;
-    let t1;
-    let p;
-    return {
-      c() {
-        h1 = element("h1");
-        h1.textContent = "Pengumuman";
-        t1 = space();
-        p = element("p");
-        p.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum\r\n      dicta voluptatibus sequi! Saepe eos quo et incidunt mollitia assumenda,\r\n      quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.";
-      },
-      m(target, anchor) {
-        insert(target, h1, anchor);
-        insert(target, t1, anchor);
-        insert(target, p, anchor);
-      },
-      p: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(h1);
-          detach(t1);
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_fragment19(ctx) {
-    let article;
-    let current;
-    article = new Article_default({
-      props: {
-        $$slots: { default: [create_default_slot3] },
-        $$scope: { ctx }
-      }
-    });
-    return {
-      c() {
-        create_component(article.$$.fragment);
-      },
-      m(target, anchor) {
-        mount_component(article, target, anchor);
-        current = true;
-      },
-      p(ctx2, [dirty]) {
-        const article_changes = {};
-        if (dirty & /*$$scope*/
-        1) {
-          article_changes.$$scope = { dirty, ctx: ctx2 };
-        }
-        article.$set(article_changes);
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(article.$$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(article.$$.fragment, local);
-        current = false;
-      },
-      d(detaching) {
-        destroy_component(article, detaching);
-      }
-    };
-  }
-  var Pengumuman = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, null, create_fragment19, safe_not_equal, {});
-    }
-  };
-  var pengumuman_default = Pengumuman;
+  var pengumuman_default = Pengumuman2;
 
   // src/pages/admin/+profile.svelte
   function get_each_context4(ctx, list, i) {
@@ -4383,7 +4262,7 @@
     let current;
     article = new Article_default({
       props: {
-        $$slots: { default: [create_default_slot4] },
+        $$slots: { default: [create_default_slot3] },
         $$scope: { ctx }
       }
     });
@@ -4546,7 +4425,7 @@
       }
     };
   }
-  function create_default_slot4(ctx) {
+  function create_default_slot3(ctx) {
     let h1;
     let t1;
     let br;
@@ -4690,7 +4569,7 @@
       }
     };
   }
-  function create_fragment20(ctx) {
+  function create_fragment21(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -4753,7 +4632,7 @@
       }
     };
   }
-  function instance14($$self, $$props, $$invalidate) {
+  function instance13($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
     let { params } = $$props;
@@ -4908,7 +4787,7 @@
   var Profile = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance14, create_fragment20, safe_not_equal, { params: 3 });
+      init(this, options, instance13, create_fragment21, safe_not_equal, { params: 3 });
     }
   };
   var profile_default = Profile;
@@ -5761,7 +5640,7 @@
       }
     };
   }
-  function create_default_slot5(ctx) {
+  function create_default_slot4(ctx) {
     let p;
     return {
       c() {
@@ -5798,7 +5677,7 @@
       }
     };
   }
-  function create_fragment21(ctx) {
+  function create_fragment22(ctx) {
     let t;
     let modal;
     let updating_show;
@@ -5813,7 +5692,7 @@
     let modal_props = {
       $$slots: {
         header: [create_header_slot],
-        default: [create_default_slot5]
+        default: [create_default_slot4]
       },
       $$scope: { ctx }
     };
@@ -5900,7 +5779,7 @@
       }
     };
   }
-  function instance15($$self, $$props, $$invalidate) {
+  function instance14($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(29, $route = $$value));
     let { params } = $$props;
@@ -6092,7 +5971,7 @@
   var Proposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance15, create_fragment21, safe_not_equal, { params: 13 }, null, [-1, -1]);
+      init(this, options, instance14, create_fragment22, safe_not_equal, { params: 13 }, null, [-1, -1]);
     }
   };
   var proposal_default = Proposal;
@@ -6111,7 +5990,7 @@
     let current;
     article = new Article_default({
       props: {
-        $$slots: { default: [create_default_slot6] },
+        $$slots: { default: [create_default_slot5] },
         $$scope: { ctx }
       }
     });
@@ -6262,7 +6141,7 @@
       }
     };
   }
-  function create_default_slot6(ctx) {
+  function create_default_slot5(ctx) {
     let h1;
     let t1;
     let table;
@@ -6358,7 +6237,7 @@
       }
     };
   }
-  function create_fragment22(ctx) {
+  function create_fragment23(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -6421,7 +6300,7 @@
       }
     };
   }
-  function instance16($$self, $$props, $$invalidate) {
+  function instance15($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     let items;
@@ -6446,7 +6325,7 @@
   var Proposals = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance16, create_fragment22, safe_not_equal, {}, add_css16);
+      init(this, options, instance15, create_fragment23, safe_not_equal, {}, add_css16);
     }
   };
   var proposals_default = Proposals;
@@ -6800,7 +6679,7 @@
       }
     };
   }
-  function create_default_slot7(ctx) {
+  function create_default_slot6(ctx) {
     let if_block_anchor;
     let if_block = (
       /*items*/
@@ -6843,12 +6722,12 @@
       }
     };
   }
-  function create_fragment23(ctx) {
+  function create_fragment24(ctx) {
     let article;
     let current;
     article = new Article_default({
       props: {
-        $$slots: { default: [create_default_slot7] },
+        $$slots: { default: [create_default_slot6] },
         $$scope: { ctx }
       }
     });
@@ -6883,7 +6762,7 @@
       }
     };
   }
-  function instance17($$self, $$props, $$invalidate) {
+  function instance16($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(6, $route = $$value));
     let { params } = $$props;
@@ -6983,7 +6862,7 @@
   var Users = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance17, create_fragment23, safe_not_equal, { params: 4 }, add_css17);
+      init(this, options, instance16, create_fragment24, safe_not_equal, { params: 4 }, add_css17);
     }
   };
   var users_default = Users;
@@ -7096,7 +6975,7 @@
       }
     };
   }
-  function create_fragment24(ctx) {
+  function create_fragment25(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -7163,7 +7042,7 @@
       }
     };
   }
-  function instance18($$self, $$props, $$invalidate) {
+  function instance17($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -7182,7 +7061,7 @@
   var Index2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance18, create_fragment24, safe_not_equal, { params: 0 });
+      init(this, options, instance17, create_fragment25, safe_not_equal, { params: 0 });
     }
   };
   var Index_default2 = Index2;
@@ -7194,7 +7073,7 @@
   });
 
   // src/pages/auth/+home.svelte
-  function create_fragment25(ctx) {
+  function create_fragment26(ctx) {
     let article;
     return {
       c() {
@@ -7214,7 +7093,7 @@
       }
     };
   }
-  function instance19($$self, $$props, $$invalidate) {
+  function instance18($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(1, $route = $$value));
     let { params } = $$props;
@@ -7241,7 +7120,7 @@
   var Home2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance19, create_fragment25, safe_not_equal, { params: 0 });
+      init(this, options, instance18, create_fragment26, safe_not_equal, { params: 0 });
     }
   };
   var home_default2 = Home2;
@@ -7354,7 +7233,7 @@
       }
     };
   }
-  function create_fragment26(ctx) {
+  function create_fragment27(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -7421,7 +7300,7 @@
       }
     };
   }
-  function instance20($$self, $$props, $$invalidate) {
+  function instance19($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -7440,7 +7319,7 @@
   var Index3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance20, create_fragment26, safe_not_equal, { params: 0 });
+      init(this, options, instance19, create_fragment27, safe_not_equal, { params: 0 });
     }
   };
   var Index_default3 = Index3;
@@ -7686,7 +7565,7 @@
       }
     };
   }
-  function create_fragment27(ctx) {
+  function create_fragment28(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -7749,7 +7628,7 @@
       }
     };
   }
-  function instance21($$self, $$props, $$invalidate) {
+  function instance20($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     const id = localStorage.id;
@@ -7772,7 +7651,7 @@
   var Approval = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance21, create_fragment27, safe_not_equal, {}, add_css18);
+      init(this, options, instance20, create_fragment28, safe_not_equal, {}, add_css18);
     }
   };
   var approval_default = Approval;
@@ -8936,7 +8815,7 @@
       }
     };
   }
-  function create_default_slot8(ctx) {
+  function create_default_slot7(ctx) {
     let p;
     return {
       c() {
@@ -8973,7 +8852,7 @@
       }
     };
   }
-  function create_fragment28(ctx) {
+  function create_fragment29(ctx) {
     let t;
     let modal;
     let updating_show;
@@ -8988,7 +8867,7 @@
     let modal_props = {
       $$slots: {
         header: [create_header_slot2],
-        default: [create_default_slot8]
+        default: [create_default_slot7]
       },
       $$scope: { ctx }
     };
@@ -9075,7 +8954,7 @@
       }
     };
   }
-  function instance22($$self, $$props, $$invalidate) {
+  function instance21($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(22, $route = $$value));
     let { params } = $$props;
@@ -9223,7 +9102,7 @@
   var Detailproposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance22, create_fragment28, safe_not_equal, { params: 7 });
+      init(this, options, instance21, create_fragment29, safe_not_equal, { params: 7 });
     }
   };
   var detailproposal_default = Detailproposal;
@@ -9475,7 +9354,7 @@
       }
     };
   }
-  function create_fragment29(ctx) {
+  function create_fragment30(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -9541,7 +9420,7 @@
   function addProposal() {
     location.href = "/dosen/proposal";
   }
-  function instance23($$self, $$props, $$invalidate) {
+  function instance22($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     const id = localStorage.id;
@@ -9570,7 +9449,7 @@
   var Home3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance23, create_fragment29, safe_not_equal, {}, add_css19);
+      init(this, options, instance22, create_fragment30, safe_not_equal, {}, add_css19);
     }
   };
   var home_default3 = Home3;
@@ -9602,7 +9481,7 @@
     });
     field = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot9] },
+        $$slots: { default: [create_default_slot8] },
         $$scope: { ctx }
       }
     });
@@ -9752,7 +9631,7 @@
       }
     };
   }
-  function create_default_slot9(ctx) {
+  function create_default_slot8(ctx) {
     let button;
     let mounted;
     let dispose;
@@ -9783,7 +9662,7 @@
       }
     };
   }
-  function create_fragment30(ctx) {
+  function create_fragment31(ctx) {
     let article;
     let h1;
     let t1;
@@ -9853,7 +9732,7 @@
       }
     };
   }
-  function instance24($$self, $$props, $$invalidate) {
+  function instance23($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
     let items;
@@ -9996,7 +9875,7 @@
   var Profile2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance24, create_fragment30, safe_not_equal, {});
+      init(this, options, instance23, create_fragment31, safe_not_equal, {});
     }
   };
   var profile_default2 = Profile2;
@@ -10042,7 +9921,7 @@
   var scriptLoader = createScriptLoader();
 
   // src/pages/dosen/+proposal.svelte
-  function create_default_slot10(ctx) {
+  function create_default_slot9(ctx) {
     let button0;
     let t1;
     let button1;
@@ -10090,7 +9969,7 @@
       }
     };
   }
-  function create_fragment31(ctx) {
+  function create_fragment32(ctx) {
     let article;
     let h1;
     let t1;
@@ -10286,7 +10165,7 @@
     binding_callbacks.push(() => bind(field11, "value", field11_value_binding));
     field12 = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot10] },
+        $$slots: { default: [create_default_slot9] },
         $$scope: { ctx }
       }
     });
@@ -10513,7 +10392,7 @@
       }
     };
   }
-  function instance25($$self, $$props, $$invalidate) {
+  function instance24($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(24, $route = $$value));
     let jenisKegiatan = "";
@@ -10688,7 +10567,7 @@
   var Proposal2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance25, create_fragment31, safe_not_equal, {});
+      init(this, options, instance24, create_fragment32, safe_not_equal, {});
     }
   };
   var proposal_default2 = Proposal2;
@@ -11267,7 +11146,7 @@
     let current;
     field = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot11] },
+        $$slots: { default: [create_default_slot10] },
         $$scope: { ctx }
       }
     });
@@ -11333,7 +11212,7 @@
       }
     };
   }
-  function create_default_slot11(ctx) {
+  function create_default_slot10(ctx) {
     let button0;
     let t1;
     let button1;
@@ -11381,7 +11260,7 @@
       }
     };
   }
-  function create_fragment32(ctx) {
+  function create_fragment33(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
@@ -11448,7 +11327,7 @@
     const edit = [0, 1, 3, 5, 9];
     return edit.some((x) => x === code);
   }
-  function instance26($$self, $$props, $$invalidate) {
+  function instance25($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(9, $route = $$value));
     let { params } = $$props;
@@ -11582,7 +11461,7 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance26, create_fragment32, safe_not_equal, { params: 6 });
+      init(this, options, instance25, create_fragment33, safe_not_equal, { params: 6 });
     }
   };
   var proposals_default2 = Proposals2;
@@ -11695,7 +11574,7 @@
       }
     };
   }
-  function create_fragment33(ctx) {
+  function create_fragment34(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
@@ -11762,7 +11641,7 @@
       }
     };
   }
-  function instance27($$self, $$props, $$invalidate) {
+  function instance26($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -11781,7 +11660,7 @@
   var Index4 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance27, create_fragment33, safe_not_equal, { params: 0 });
+      init(this, options, instance26, create_fragment34, safe_not_equal, { params: 0 });
     }
   };
   var Index_default4 = Index4;
@@ -11912,7 +11791,7 @@
       }
     };
   }
-  function create_fragment34(ctx) {
+  function create_fragment35(ctx) {
     let navbarmenu;
     let t0;
     let t1;
@@ -12024,7 +11903,7 @@
       }
     };
   }
-  function instance28($$self, $$props, $$invalidate) {
+  function instance27($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(4, $route = $$value));
     let cmp, params;
@@ -12059,7 +11938,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance28, create_fragment34, safe_not_equal, {}, add_css20);
+      init(this, options, instance27, create_fragment35, safe_not_equal, {}, add_css20);
     }
   };
   var App_default = App;

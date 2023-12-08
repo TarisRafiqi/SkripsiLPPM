@@ -225,8 +225,10 @@
    }
 
    article.container {
+      /* background: lightblue; */
+      /* z-index: 101; */
+      padding-top: 10rem;
       text-align: center;
-      z-index: 101;
    }
 
    div.box {
