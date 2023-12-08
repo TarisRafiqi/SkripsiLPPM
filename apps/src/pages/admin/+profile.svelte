@@ -181,8 +181,11 @@
          <p><small>{msgNip}</small></p>
       {/if}
 
+      <br />
+
       <Field>
-         <button on:click={simpan}>Simpan</button>
+         <button class="button is-info is-light">Kembali</button>
+         <button class="button is-info" on:click={simpan}>Simpan</button>
       </Field>
    </Article>
 {/if}

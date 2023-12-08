@@ -2851,7 +2851,7 @@
       href: "/admin/users"
     },
     {
-      title: "Proposal Management",
+      title: "PPM Management",
       href: "/admin/proposals"
     },
     {
@@ -2861,16 +2861,16 @@
   ];
   var dosen = [
     {
-      title: "Proposal",
+      title: "PPM Management",
       href: "/dosen"
+    },
+    {
+      title: "Approval Management",
+      href: "/dosen/approval"
     },
     {
       title: "Profile",
       href: "/dosen/profile"
-    },
-    {
-      title: "Approval",
-      href: "/dosen/approval"
     },
     {
       title: "Logout",
@@ -4258,7 +4258,7 @@
         br = element("br");
         t17 = space();
         div9 = element("div");
-        div9.innerHTML = `<div class="control"><button class="button is-link">Submit</button></div> <div class="control"><button class="button is-link is-light">Cancel</button></div>`;
+        div9.innerHTML = `<div class="control"><button class="button is-info is-light">Kembali</button></div> <div class="control"><button class="button is-info">Create</button></div>`;
         attr(h1, "class", "title is-1");
         attr(div1, "class", "field");
         attr(div3, "class", "field");
@@ -4689,19 +4689,28 @@
     };
   }
   function create_default_slot_1(ctx) {
-    let button;
+    let button0;
+    let t1;
+    let button1;
     let mounted;
     let dispose;
     return {
       c() {
-        button = element("button");
-        button.textContent = "Simpan";
+        button0 = element("button");
+        button0.textContent = "Kembali";
+        t1 = space();
+        button1 = element("button");
+        button1.textContent = "Simpan";
+        attr(button0, "class", "button is-info is-light");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
-        insert(target, button, anchor);
+        insert(target, button0, anchor);
+        insert(target, t1, anchor);
+        insert(target, button1, anchor);
         if (!mounted) {
           dispose = listen(
-            button,
+            button1,
             "click",
             /*simpan*/
             ctx[2]
@@ -4712,7 +4721,9 @@
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(button);
+          detach(button0);
+          detach(t1);
+          detach(button1);
         }
         mounted = false;
         dispose();
@@ -4724,10 +4735,12 @@
     let t1;
     let hr;
     let t2;
-    let br;
+    let br0;
     let t3;
     let t4;
     let t5;
+    let br1;
+    let t6;
     let field;
     let current;
     let each_value = ensure_array_like(
@@ -4758,7 +4771,7 @@
         t1 = space();
         hr = element("hr");
         t2 = space();
-        br = element("br");
+        br0 = element("br");
         t3 = space();
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -4767,6 +4780,8 @@
         if (if_block)
           if_block.c();
         t5 = space();
+        br1 = element("br");
+        t6 = space();
         create_component(field.$$.fragment);
         attr(h1, "class", "title is-1");
       },
@@ -4775,7 +4790,7 @@
         insert(target, t1, anchor);
         insert(target, hr, anchor);
         insert(target, t2, anchor);
-        insert(target, br, anchor);
+        insert(target, br0, anchor);
         insert(target, t3, anchor);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -4786,6 +4801,8 @@
         if (if_block)
           if_block.m(target, anchor);
         insert(target, t5, anchor);
+        insert(target, br1, anchor);
+        insert(target, t6, anchor);
         mount_component(field, target, anchor);
         current = true;
       },
@@ -4860,10 +4877,12 @@
           detach(t1);
           detach(hr);
           detach(t2);
-          detach(br);
+          detach(br0);
           detach(t3);
           detach(t4);
           detach(t5);
+          detach(br1);
+          detach(t6);
         }
         destroy_each(each_blocks, detaching);
         if (if_block)
@@ -5496,6 +5515,8 @@
         t1 = space();
         button1 = element("button");
         button1.textContent = "Proses";
+        attr(button0, "class", "button is-warning");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -6357,8 +6378,9 @@
     let status;
     let t4;
     let td3;
+    let button;
     let t5;
-    let td3_uid_value;
+    let button_uid_value;
     let t6;
     let current;
     let mounted;
@@ -6380,12 +6402,14 @@
         create_component(status.$$.fragment);
         t4 = space();
         td3 = element("td");
-        t5 = text("Review");
+        button = element("button");
+        t5 = text("Detail");
         t6 = space();
         attr(td2, "class", "status svelte-1eb6cem");
-        attr(td3, "class", "review svelte-1eb6cem");
-        attr(td3, "uid", td3_uid_value = /*item*/
+        attr(button, "class", "button is-info");
+        attr(button, "uid", button_uid_value = /*item*/
         ctx[3].id);
+        attr(td3, "class", "review svelte-1eb6cem");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -6399,12 +6423,13 @@
         mount_component(status, td2, null);
         append(tr, t4);
         append(tr, td3);
-        append(td3, t5);
+        append(td3, button);
+        append(button, t5);
         append(tr, t6);
         current = true;
         if (!mounted) {
           dispose = listen(
-            td3,
+            button,
             "click",
             /*handleReview*/
             ctx[1]
@@ -6428,9 +6453,9 @@
           ctx2[3].status;
         status.$set(status_changes);
         if (!current || dirty & /*items*/
-        1 && td3_uid_value !== (td3_uid_value = /*item*/
+        1 && button_uid_value !== (button_uid_value = /*item*/
         ctx2[3].id)) {
-          attr(td3, "uid", td3_uid_value);
+          attr(button, "uid", button_uid_value);
         }
       },
       i(local) {
@@ -6459,8 +6484,9 @@
     let hr;
     let t2;
     let table;
-    let tr;
+    let thead;
     let t10;
+    let tbody;
     let current;
     let each_value = ensure_array_like(
       /*items*/
@@ -6481,13 +6507,15 @@
         hr = element("hr");
         t2 = space();
         table = element("table");
-        tr = element("tr");
-        tr.innerHTML = `<th>Judul</th> <th>Abstract</th> <th>status</th> <th>Action</th>`;
+        thead = element("thead");
+        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>status</th> <th>Action</th></tr>`;
         t10 = space();
+        tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
         attr(h1, "class", "title is-1");
+        attr(table, "class", "table");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -6495,11 +6523,12 @@
         insert(target, hr, anchor);
         insert(target, t2, anchor);
         insert(target, table, anchor);
-        append(table, tr);
+        append(table, thead);
         append(table, t10);
+        append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
-            each_blocks[i].m(table, null);
+            each_blocks[i].m(tbody, null);
           }
         }
         current = true;
@@ -6521,7 +6550,7 @@
               each_blocks[i] = create_each_block6(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
-              each_blocks[i].m(table, null);
+              each_blocks[i].m(tbody, null);
             }
           }
           group_outros();
@@ -6673,8 +6702,9 @@
     let span1;
     let t5;
     let table;
-    let tr;
+    let thead;
     let t13;
+    let tbody;
     let current;
     let mounted;
     let dispose;
@@ -6702,15 +6732,17 @@
         span1.innerHTML = `<a>Create User</a>`;
         t5 = space();
         table = element("table");
-        tr = element("tr");
-        tr.innerHTML = `<th>Username</th> <th>Email</th> <th>Role</th> <th>Active</th>`;
+        thead = element("thead");
+        thead.innerHTML = `<tr><th>Username</th> <th>Email</th> <th>Role</th> <th>Active</th></tr>`;
         t13 = space();
+        tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
         attr(h1, "class", "title is-1");
         attr(span0, "class", "icon");
-        attr(button, "class", "button is-link");
+        attr(button, "class", "button is-info");
+        attr(table, "class", "table");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -6724,11 +6756,12 @@
         append(button, span1);
         insert(target, t5, anchor);
         insert(target, table, anchor);
-        append(table, tr);
+        append(table, thead);
         append(table, t13);
+        append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
-            each_blocks[i].m(table, null);
+            each_blocks[i].m(tbody, null);
           }
         }
         current = true;
@@ -6757,7 +6790,7 @@
             } else {
               each_blocks[i] = create_each_block7(child_ctx);
               each_blocks[i].c();
-              each_blocks[i].m(table, null);
+              each_blocks[i].m(tbody, null);
             }
           }
           for (; i < each_blocks.length; i += 1) {
@@ -7712,98 +7745,41 @@
   }
   function create_if_block10(ctx) {
     let article;
-    let h1;
-    let t1;
-    let table;
-    let tr;
-    let t9;
     let current;
-    let each_value = ensure_array_like(
-      /*items*/
-      ctx[0]
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block8(get_each_context8(ctx, each_value, i));
-    }
-    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
-      each_blocks[i] = null;
+    article = new Article_default({
+      props: {
+        $$slots: { default: [create_default_slot8] },
+        $$scope: { ctx }
+      }
     });
     return {
       c() {
-        article = element("article");
-        h1 = element("h1");
-        h1.textContent = "List Approval";
-        t1 = space();
-        table = element("table");
-        tr = element("tr");
-        tr.innerHTML = `<th>Judul</th> <th>Abstract</th> <th>Status</th> <th colspan="2">Action</th>`;
-        t9 = space();
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
+        create_component(article.$$.fragment);
       },
       m(target, anchor) {
-        insert(target, article, anchor);
-        append(article, h1);
-        append(article, t1);
-        append(article, table);
-        append(table, tr);
-        append(table, t9);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(table, null);
-          }
-        }
+        mount_component(article, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty & /*items, detail*/
-        3) {
-          each_value = ensure_array_like(
-            /*items*/
-            ctx2[0]
-          );
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context8(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-              transition_in(each_blocks[i], 1);
-            } else {
-              each_blocks[i] = create_each_block8(child_ctx);
-              each_blocks[i].c();
-              transition_in(each_blocks[i], 1);
-              each_blocks[i].m(table, null);
-            }
-          }
-          group_outros();
-          for (i = each_value.length; i < each_blocks.length; i += 1) {
-            out(i);
-          }
-          check_outros();
+        const article_changes = {};
+        if (dirty & /*$$scope, items*/
+        129) {
+          article_changes.$$scope = { dirty, ctx: ctx2 };
         }
+        article.$set(article_changes);
       },
       i(local) {
         if (current)
           return;
-        for (let i = 0; i < each_value.length; i += 1) {
-          transition_in(each_blocks[i]);
-        }
+        transition_in(article.$$.fragment, local);
         current = true;
       },
       o(local) {
-        each_blocks = each_blocks.filter(Boolean);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          transition_out(each_blocks[i]);
-        }
+        transition_out(article.$$.fragment, local);
         current = false;
       },
       d(detaching) {
-        if (detaching) {
-          detach(article);
-        }
-        destroy_each(each_blocks, detaching);
+        destroy_component(article, detaching);
       }
     };
   }
@@ -7828,8 +7804,9 @@
     let td2_pid_value;
     let t4;
     let td3;
+    let button;
     let t5;
-    let td3_pid_value;
+    let button_pid_value;
     let t6;
     let current;
     let mounted;
@@ -7851,14 +7828,16 @@
         create_component(status.$$.fragment);
         t4 = space();
         td3 = element("td");
+        button = element("button");
         t5 = text("Detail");
         t6 = space();
         attr(td2, "class", "status svelte-123mmn1");
         attr(td2, "pid", td2_pid_value = /*item*/
         ctx[4].id);
-        attr(td3, "class", "view svelte-123mmn1");
-        attr(td3, "pid", td3_pid_value = /*item*/
+        attr(button, "class", "button is-info");
+        attr(button, "pid", button_pid_value = /*item*/
         ctx[4].id);
+        attr(td3, "class", "view svelte-123mmn1");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -7872,12 +7851,13 @@
         mount_component(status, td2, null);
         append(tr, t4);
         append(tr, td3);
-        append(td3, t5);
+        append(td3, button);
+        append(button, t5);
         append(tr, t6);
         current = true;
         if (!mounted) {
           dispose = listen(
-            td3,
+            button,
             "click",
             /*detail*/
             ctx[1]
@@ -7906,9 +7886,9 @@
           attr(td2, "pid", td2_pid_value);
         }
         if (!current || dirty & /*items*/
-        1 && td3_pid_value !== (td3_pid_value = /*item*/
+        1 && button_pid_value !== (button_pid_value = /*item*/
         ctx2[4].id)) {
-          attr(td3, "pid", td3_pid_value);
+          attr(button, "pid", button_pid_value);
         }
       },
       i(local) {
@@ -7928,6 +7908,126 @@
         destroy_component(status);
         mounted = false;
         dispose();
+      }
+    };
+  }
+  function create_default_slot8(ctx) {
+    let h1;
+    let t1;
+    let hr;
+    let t2;
+    let div;
+    let t6;
+    let table;
+    let thead;
+    let t14;
+    let tbody;
+    let current;
+    let each_value = ensure_array_like(
+      /*items*/
+      ctx[0]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block8(get_each_context8(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    return {
+      c() {
+        h1 = element("h1");
+        h1.textContent = "Approval Management";
+        t1 = space();
+        hr = element("hr");
+        t2 = space();
+        div = element("div");
+        div.innerHTML = `<p>Berikut adalah list <strong>Penelitian / Pengabdian Masyarakat</strong> yang diberikan kepada anda untuk mendapatkan persetujuan. Cek PPM dengan
+            teliti sebelum memberikan persetujuan!</p>`;
+        t6 = space();
+        table = element("table");
+        thead = element("thead");
+        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Status</th> <th colspan="2">Action</th></tr>`;
+        t14 = space();
+        tbody = element("tbody");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(h1, "class", "title is-1");
+        attr(div, "class", "box");
+        attr(table, "class", "table");
+      },
+      m(target, anchor) {
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, hr, anchor);
+        insert(target, t2, anchor);
+        insert(target, div, anchor);
+        insert(target, t6, anchor);
+        insert(target, table, anchor);
+        append(table, thead);
+        append(table, t14);
+        append(table, tbody);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(tbody, null);
+          }
+        }
+        current = true;
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*items, detail*/
+        3) {
+          each_value = ensure_array_like(
+            /*items*/
+            ctx2[0]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context8(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block8(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(tbody, null);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(h1);
+          detach(t1);
+          detach(hr);
+          detach(t2);
+          detach(div);
+          detach(t6);
+          detach(table);
+        }
+        destroy_each(each_blocks, detaching);
       }
     };
   }
@@ -8462,6 +8562,8 @@
         t1 = space();
         button1 = element("button");
         button1.textContent = "Proses";
+        attr(button0, "class", "button is-warning");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -8613,6 +8715,8 @@
         t1 = space();
         button1 = element("button");
         button1.textContent = "Proses";
+        attr(button0, "class", "button is-warning");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -8764,6 +8868,8 @@
         t1 = space();
         button1 = element("button");
         button1.textContent = "Proses";
+        attr(button0, "class", "button is-warning");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -8920,6 +9026,9 @@
         t3 = space();
         button2 = element("button");
         button2.textContent = "Proses";
+        attr(button0, "class", "button is-warning");
+        attr(button1, "class", "button is-danger");
+        attr(button2, "class", "button is-info");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -8962,13 +9071,13 @@
   function create_default_slot_13(ctx) {
     let h1;
     let t1;
-    let br0;
+    let hr;
     let t2;
     let t3;
     let field;
     let updating_value;
     let t4;
-    let br1;
+    let br;
     let t5;
     let t6;
     let t7;
@@ -9020,7 +9129,7 @@
         h1 = element("h1");
         h1.textContent = "Detail Proposal";
         t1 = space();
-        br0 = element("br");
+        hr = element("hr");
         t2 = space();
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -9028,7 +9137,7 @@
         t3 = space();
         create_component(field.$$.fragment);
         t4 = space();
-        br1 = element("br");
+        br = element("br");
         t5 = space();
         if (if_block0)
           if_block0.c();
@@ -9042,11 +9151,12 @@
         if (if_block3)
           if_block3.c();
         if_block3_anchor = empty();
+        attr(h1, "class", "title is-1");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
         insert(target, t1, anchor);
-        insert(target, br0, anchor);
+        insert(target, hr, anchor);
         insert(target, t2, anchor);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -9056,7 +9166,7 @@
         insert(target, t3, anchor);
         mount_component(field, target, anchor);
         insert(target, t4, anchor);
-        insert(target, br1, anchor);
+        insert(target, br, anchor);
         insert(target, t5, anchor);
         if (if_block0)
           if_block0.m(target, anchor);
@@ -9157,11 +9267,11 @@
         if (detaching) {
           detach(h1);
           detach(t1);
-          detach(br0);
+          detach(hr);
           detach(t2);
           detach(t3);
           detach(t4);
-          detach(br1);
+          detach(br);
           detach(t5);
           detach(t6);
           detach(t7);
@@ -9181,7 +9291,7 @@
       }
     };
   }
-  function create_default_slot8(ctx) {
+  function create_default_slot9(ctx) {
     let p;
     return {
       c() {
@@ -9233,7 +9343,7 @@
     let modal_props = {
       $$slots: {
         header: [create_header_slot2],
-        default: [create_default_slot8]
+        default: [create_default_slot9]
       },
       $$scope: { ctx }
     };
@@ -9484,116 +9594,41 @@
   }
   function create_if_block12(ctx) {
     let article;
-    let h1;
-    let t1;
-    let p;
-    let button;
-    let t3;
-    let table;
-    let tr;
-    let t11;
     let current;
-    let mounted;
-    let dispose;
-    let each_value = ensure_array_like(
-      /*items*/
-      ctx[0]
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block10(get_each_context10(ctx, each_value, i));
-    }
-    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
-      each_blocks[i] = null;
+    article = new Article_default({
+      props: {
+        $$slots: { default: [create_default_slot10] },
+        $$scope: { ctx }
+      }
     });
     return {
       c() {
-        article = element("article");
-        h1 = element("h1");
-        h1.textContent = "List Proposal";
-        t1 = space();
-        p = element("p");
-        button = element("button");
-        button.textContent = "+ Proposal baru";
-        t3 = space();
-        table = element("table");
-        tr = element("tr");
-        tr.innerHTML = `<th>Judul</th> <th>Abstract</th> <th>Status</th> <th colspan="2">Action</th>`;
-        t11 = space();
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
+        create_component(article.$$.fragment);
       },
       m(target, anchor) {
-        insert(target, article, anchor);
-        append(article, h1);
-        append(article, t1);
-        append(article, p);
-        append(p, button);
-        append(article, t3);
-        append(article, table);
-        append(table, tr);
-        append(table, t11);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(table, null);
-          }
-        }
+        mount_component(article, target, anchor);
         current = true;
-        if (!mounted) {
-          dispose = listen(button, "click", addProposal);
-          mounted = true;
-        }
       },
       p(ctx2, dirty) {
-        if (dirty & /*items, detail*/
-        3) {
-          each_value = ensure_array_like(
-            /*items*/
-            ctx2[0]
-          );
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context10(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-              transition_in(each_blocks[i], 1);
-            } else {
-              each_blocks[i] = create_each_block10(child_ctx);
-              each_blocks[i].c();
-              transition_in(each_blocks[i], 1);
-              each_blocks[i].m(table, null);
-            }
-          }
-          group_outros();
-          for (i = each_value.length; i < each_blocks.length; i += 1) {
-            out(i);
-          }
-          check_outros();
+        const article_changes = {};
+        if (dirty & /*$$scope, items*/
+        129) {
+          article_changes.$$scope = { dirty, ctx: ctx2 };
         }
+        article.$set(article_changes);
       },
       i(local) {
         if (current)
           return;
-        for (let i = 0; i < each_value.length; i += 1) {
-          transition_in(each_blocks[i]);
-        }
+        transition_in(article.$$.fragment, local);
         current = true;
       },
       o(local) {
-        each_blocks = each_blocks.filter(Boolean);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          transition_out(each_blocks[i]);
-        }
+        transition_out(article.$$.fragment, local);
         current = false;
       },
       d(detaching) {
-        if (detaching) {
-          detach(article);
-        }
-        destroy_each(each_blocks, detaching);
-        mounted = false;
-        dispose();
+        destroy_component(article, detaching);
       }
     };
   }
@@ -9617,8 +9652,9 @@
     let td2_pid_value;
     let t3;
     let td3;
+    let button;
     let t4;
-    let td3_pid_value;
+    let button_pid_value;
     let t5;
     let current;
     let mounted;
@@ -9639,14 +9675,16 @@
         create_component(status.$$.fragment);
         t3 = space();
         td3 = element("td");
+        button = element("button");
         t4 = text("Detail");
         t5 = space();
         attr(td2, "class", "status svelte-123mmn1");
         attr(td2, "pid", td2_pid_value = /*item*/
         ctx[4].id);
-        attr(td3, "class", "view svelte-123mmn1");
-        attr(td3, "pid", td3_pid_value = /*item*/
+        attr(button, "class", "button is-info");
+        attr(button, "pid", button_pid_value = /*item*/
         ctx[4].id);
+        attr(td3, "class", "view svelte-123mmn1");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -9660,12 +9698,13 @@
         mount_component(status, td2, null);
         append(tr, t3);
         append(tr, td3);
-        append(td3, t4);
+        append(td3, button);
+        append(button, t4);
         append(tr, t5);
         current = true;
         if (!mounted) {
           dispose = listen(
-            td3,
+            button,
             "click",
             /*detail*/
             ctx[1]
@@ -9695,9 +9734,9 @@
           attr(td2, "pid", td2_pid_value);
         }
         if (!current || dirty & /*items*/
-        1 && td3_pid_value !== (td3_pid_value = /*item*/
+        1 && button_pid_value !== (button_pid_value = /*item*/
         ctx2[4].id)) {
-          attr(td3, "pid", td3_pid_value);
+          attr(button, "pid", button_pid_value);
         }
       },
       i(local) {
@@ -9715,6 +9754,150 @@
           detach(tr);
         }
         destroy_component(status);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot10(ctx) {
+    let h1;
+    let t1;
+    let hr;
+    let t2;
+    let button;
+    let span0;
+    let icon;
+    let t3;
+    let span1;
+    let t5;
+    let table;
+    let thead;
+    let t13;
+    let tbody;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({ props: { id: "orang", src: accountAdd } });
+    let each_value = ensure_array_like(
+      /*items*/
+      ctx[0]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block10(get_each_context10(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    return {
+      c() {
+        h1 = element("h1");
+        h1.textContent = "PPM Management";
+        t1 = space();
+        hr = element("hr");
+        t2 = space();
+        button = element("button");
+        span0 = element("span");
+        create_component(icon.$$.fragment);
+        t3 = space();
+        span1 = element("span");
+        span1.innerHTML = `<a>Buat Proposal</a>`;
+        t5 = space();
+        table = element("table");
+        thead = element("thead");
+        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Status</th> <th colspan="2">Action</th></tr>`;
+        t13 = space();
+        tbody = element("tbody");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(h1, "class", "title is-1");
+        attr(span0, "class", "icon");
+        attr(button, "class", "button is-info");
+        attr(table, "class", "table");
+      },
+      m(target, anchor) {
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, hr, anchor);
+        insert(target, t2, anchor);
+        insert(target, button, anchor);
+        append(button, span0);
+        mount_component(icon, span0, null);
+        append(button, t3);
+        append(button, span1);
+        insert(target, t5, anchor);
+        insert(target, table, anchor);
+        append(table, thead);
+        append(table, t13);
+        append(table, tbody);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(tbody, null);
+          }
+        }
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", addProposal);
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*items, detail*/
+        3) {
+          each_value = ensure_array_like(
+            /*items*/
+            ctx2[0]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context10(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block10(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(tbody, null);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$$.fragment, local);
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$$.fragment, local);
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(h1);
+          detach(t1);
+          detach(hr);
+          detach(t2);
+          detach(button);
+          detach(t5);
+          detach(table);
+        }
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
         mounted = false;
         dispose();
       }
@@ -9847,7 +10030,7 @@
     });
     field = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot9] },
+        $$slots: { default: [create_default_slot_14] },
         $$scope: { ctx }
       }
     });
@@ -9997,20 +10180,29 @@
       }
     };
   }
-  function create_default_slot9(ctx) {
-    let button;
+  function create_default_slot_14(ctx) {
+    let button0;
+    let t1;
+    let button1;
     let mounted;
     let dispose;
     return {
       c() {
-        button = element("button");
-        button.textContent = "Simpan";
+        button0 = element("button");
+        button0.textContent = "Kembali";
+        t1 = space();
+        button1 = element("button");
+        button1.textContent = "Simpan";
+        attr(button0, "class", "button is-info is-light");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
-        insert(target, button, anchor);
+        insert(target, button0, anchor);
+        insert(target, t1, anchor);
+        insert(target, button1, anchor);
         if (!mounted) {
           dispose = listen(
-            button,
+            button1,
             "click",
             /*simpan*/
             ctx[1]
@@ -10021,17 +10213,21 @@
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(button);
+          detach(button0);
+          detach(t1);
+          detach(button1);
         }
         mounted = false;
         dispose();
       }
     };
   }
-  function create_fragment34(ctx) {
-    let article;
+  function create_default_slot11(ctx) {
     let h1;
     let t1;
+    let div;
+    let t13;
+    let if_block_anchor;
     let current;
     let if_block = (
       /*items*/
@@ -10039,22 +10235,29 @@
     );
     return {
       c() {
-        article = element("article");
         h1 = element("h1");
         h1.textContent = "Profile";
         t1 = space();
+        div = element("div");
+        div.innerHTML = `<ul><li class="is-active"><a><span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span> <span>Identitas</span></a></li> <li><a><span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span> <span>Mata Kuliah</span></a></li> <li><a><span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span> <span>Riwayat Pendidikan</span></a></li> <li><a><span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span> <span>Pengalaman</span></a></li></ul>`;
+        t13 = space();
         if (if_block)
           if_block.c();
+        if_block_anchor = empty();
+        attr(h1, "class", "title is-1");
+        attr(div, "class", "tabs is-boxed");
       },
       m(target, anchor) {
-        insert(target, article, anchor);
-        append(article, h1);
-        append(article, t1);
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, div, anchor);
+        insert(target, t13, anchor);
         if (if_block)
-          if_block.m(article, null);
+          if_block.m(target, anchor);
+        insert(target, if_block_anchor, anchor);
         current = true;
       },
-      p(ctx2, [dirty]) {
+      p(ctx2, dirty) {
         if (
           /*items*/
           ctx2[0]
@@ -10069,7 +10272,7 @@
             if_block = create_if_block13(ctx2);
             if_block.c();
             transition_in(if_block, 1);
-            if_block.m(article, null);
+            if_block.m(if_block_anchor.parentNode, if_block_anchor);
           }
         } else if (if_block) {
           group_outros();
@@ -10091,10 +10294,54 @@
       },
       d(detaching) {
         if (detaching) {
-          detach(article);
+          detach(h1);
+          detach(t1);
+          detach(div);
+          detach(t13);
+          detach(if_block_anchor);
         }
         if (if_block)
-          if_block.d();
+          if_block.d(detaching);
+      }
+    };
+  }
+  function create_fragment34(ctx) {
+    let article;
+    let current;
+    article = new Article_default({
+      props: {
+        $$slots: { default: [create_default_slot11] },
+        $$scope: { ctx }
+      }
+    });
+    return {
+      c() {
+        create_component(article.$$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(article, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const article_changes = {};
+        if (dirty & /*$$scope, items*/
+        257) {
+          article_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        article.$set(article_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(article.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(article.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(article, detaching);
       }
     };
   }
@@ -10287,7 +10534,7 @@
   var scriptLoader = createScriptLoader();
 
   // src/pages/dosen/+proposal.svelte
-  function create_default_slot10(ctx) {
+  function create_default_slot_15(ctx) {
     let button0;
     let t1;
     let button1;
@@ -10300,6 +10547,8 @@
         t1 = space();
         button1 = element("button");
         button1.textContent = "Submit";
+        attr(button0, "class", "button is-info is-light");
+        attr(button1, "class", "button is-info");
       },
       m(target, anchor) {
         insert(target, button0, anchor);
@@ -10335,48 +10584,51 @@
       }
     };
   }
-  function create_fragment35(ctx) {
-    let article;
+  function create_default_slot12(ctx) {
     let h1;
     let t1;
-    let br0;
+    let hr;
     let t2;
+    let br0;
+    let t3;
+    let div1;
+    let t6;
     let field0;
     let updating_value;
-    let t3;
+    let t7;
     let field1;
-    let t4;
+    let t8;
     let field2;
-    let t5;
+    let t9;
     let field3;
     let updating_value_1;
-    let t6;
+    let t10;
     let field4;
     let updating_value_2;
-    let t7;
+    let t11;
     let field5;
     let updating_value_3;
-    let t8;
+    let t12;
     let field6;
     let updating_value_4;
-    let t9;
+    let t13;
     let field7;
     let updating_value_5;
-    let t10;
+    let t14;
     let field8;
     let updating_value_6;
-    let t11;
+    let t15;
     let field9;
     let updating_value_7;
-    let t12;
+    let t16;
     let field10;
     let updating_value_8;
-    let t13;
+    let t17;
     let field11;
     let updating_value_9;
-    let t14;
+    let t18;
     let br1;
-    let t15;
+    let t19;
     let field12;
     let current;
     function field0_value_binding(value) {
@@ -10531,82 +10783,91 @@
     binding_callbacks.push(() => bind(field11, "value", field11_value_binding));
     field12 = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot10] },
+        $$slots: { default: [create_default_slot_15] },
         $$scope: { ctx }
       }
     });
     return {
       c() {
-        article = element("article");
         h1 = element("h1");
-        h1.textContent = "Proposal";
+        h1.textContent = "Buat Proposal";
         t1 = space();
-        br0 = element("br");
+        hr = element("hr");
         t2 = space();
-        create_component(field0.$$.fragment);
+        br0 = element("br");
         t3 = space();
-        create_component(field1.$$.fragment);
-        t4 = space();
-        create_component(field2.$$.fragment);
-        t5 = space();
-        create_component(field3.$$.fragment);
+        div1 = element("div");
+        div1.innerHTML = `<label class="label">Name</label> <div class="control"><input class="input" type="text" placeholder="Text input"/></div>`;
         t6 = space();
-        create_component(field4.$$.fragment);
+        create_component(field0.$$.fragment);
         t7 = space();
-        create_component(field5.$$.fragment);
+        create_component(field1.$$.fragment);
         t8 = space();
-        create_component(field6.$$.fragment);
+        create_component(field2.$$.fragment);
         t9 = space();
-        create_component(field7.$$.fragment);
+        create_component(field3.$$.fragment);
         t10 = space();
-        create_component(field8.$$.fragment);
+        create_component(field4.$$.fragment);
         t11 = space();
-        create_component(field9.$$.fragment);
+        create_component(field5.$$.fragment);
         t12 = space();
-        create_component(field10.$$.fragment);
+        create_component(field6.$$.fragment);
         t13 = space();
-        create_component(field11.$$.fragment);
+        create_component(field7.$$.fragment);
         t14 = space();
-        br1 = element("br");
+        create_component(field8.$$.fragment);
         t15 = space();
+        create_component(field9.$$.fragment);
+        t16 = space();
+        create_component(field10.$$.fragment);
+        t17 = space();
+        create_component(field11.$$.fragment);
+        t18 = space();
+        br1 = element("br");
+        t19 = space();
         create_component(field12.$$.fragment);
+        attr(h1, "class", "title is-1");
+        attr(div1, "class", "field");
       },
       m(target, anchor) {
-        insert(target, article, anchor);
-        append(article, h1);
-        append(article, t1);
-        append(article, br0);
-        append(article, t2);
-        mount_component(field0, article, null);
-        append(article, t3);
-        mount_component(field1, article, null);
-        append(article, t4);
-        mount_component(field2, article, null);
-        append(article, t5);
-        mount_component(field3, article, null);
-        append(article, t6);
-        mount_component(field4, article, null);
-        append(article, t7);
-        mount_component(field5, article, null);
-        append(article, t8);
-        mount_component(field6, article, null);
-        append(article, t9);
-        mount_component(field7, article, null);
-        append(article, t10);
-        mount_component(field8, article, null);
-        append(article, t11);
-        mount_component(field9, article, null);
-        append(article, t12);
-        mount_component(field10, article, null);
-        append(article, t13);
-        mount_component(field11, article, null);
-        append(article, t14);
-        append(article, br1);
-        append(article, t15);
-        mount_component(field12, article, null);
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, hr, anchor);
+        insert(target, t2, anchor);
+        insert(target, br0, anchor);
+        insert(target, t3, anchor);
+        insert(target, div1, anchor);
+        insert(target, t6, anchor);
+        mount_component(field0, target, anchor);
+        insert(target, t7, anchor);
+        mount_component(field1, target, anchor);
+        insert(target, t8, anchor);
+        mount_component(field2, target, anchor);
+        insert(target, t9, anchor);
+        mount_component(field3, target, anchor);
+        insert(target, t10, anchor);
+        mount_component(field4, target, anchor);
+        insert(target, t11, anchor);
+        mount_component(field5, target, anchor);
+        insert(target, t12, anchor);
+        mount_component(field6, target, anchor);
+        insert(target, t13, anchor);
+        mount_component(field7, target, anchor);
+        insert(target, t14, anchor);
+        mount_component(field8, target, anchor);
+        insert(target, t15, anchor);
+        mount_component(field9, target, anchor);
+        insert(target, t16, anchor);
+        mount_component(field10, target, anchor);
+        insert(target, t17, anchor);
+        mount_component(field11, target, anchor);
+        insert(target, t18, anchor);
+        insert(target, br1, anchor);
+        insert(target, t19, anchor);
+        mount_component(field12, target, anchor);
         current = true;
       },
-      p(ctx2, [dirty]) {
+      p(ctx2, dirty) {
         const field0_changes = {};
         if (!updating_value && dirty & /*judul*/
         16) {
@@ -10740,21 +11001,82 @@
       },
       d(detaching) {
         if (detaching) {
-          detach(article);
+          detach(h1);
+          detach(t1);
+          detach(hr);
+          detach(t2);
+          detach(br0);
+          detach(t3);
+          detach(div1);
+          detach(t6);
+          detach(t7);
+          detach(t8);
+          detach(t9);
+          detach(t10);
+          detach(t11);
+          detach(t12);
+          detach(t13);
+          detach(t14);
+          detach(t15);
+          detach(t16);
+          detach(t17);
+          detach(t18);
+          detach(br1);
+          detach(t19);
         }
-        destroy_component(field0);
-        destroy_component(field1);
-        destroy_component(field2);
-        destroy_component(field3);
-        destroy_component(field4);
-        destroy_component(field5);
-        destroy_component(field6);
-        destroy_component(field7);
-        destroy_component(field8);
-        destroy_component(field9);
-        destroy_component(field10);
-        destroy_component(field11);
-        destroy_component(field12);
+        destroy_component(field0, detaching);
+        destroy_component(field1, detaching);
+        destroy_component(field2, detaching);
+        destroy_component(field3, detaching);
+        destroy_component(field4, detaching);
+        destroy_component(field5, detaching);
+        destroy_component(field6, detaching);
+        destroy_component(field7, detaching);
+        destroy_component(field8, detaching);
+        destroy_component(field9, detaching);
+        destroy_component(field10, detaching);
+        destroy_component(field11, detaching);
+        destroy_component(field12, detaching);
+      }
+    };
+  }
+  function create_fragment35(ctx) {
+    let article;
+    let current;
+    article = new Article_default({
+      props: {
+        $$slots: { default: [create_default_slot12] },
+        $$scope: { ctx }
+      }
+    });
+    return {
+      c() {
+        create_component(article.$$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(article, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const article_changes = {};
+        if (dirty & /*$$scope, rab, anggotaTim, biayaPenelitian, Topik, tahunPelaksanaan, kelompokKeahlian, jenisProposal, jenisSkema, jenisKegiatan, judul*/
+        134218751) {
+          article_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        article.$set(article_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(article.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(article.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(article, detaching);
       }
     };
   }
@@ -10948,122 +11270,41 @@
   }
   function create_if_block14(ctx) {
     let article;
-    let h1;
-    let t1;
-    let t2;
     let current;
-    let each_value = ensure_array_like(
-      /*items*/
-      ctx[0]
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block12(get_each_context12(ctx, each_value, i));
-    }
-    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
-      each_blocks[i] = null;
+    article = new Article_default({
+      props: {
+        $$slots: { default: [create_default_slot13] },
+        $$scope: { ctx }
+      }
     });
-    let if_block = !/*view*/
-    ctx[1] && create_if_block_18(ctx);
     return {
       c() {
-        article = element("article");
-        h1 = element("h1");
-        h1.textContent = "Detail Proposal";
-        t1 = space();
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
-        t2 = space();
-        if (if_block)
-          if_block.c();
+        create_component(article.$$.fragment);
       },
       m(target, anchor) {
-        insert(target, article, anchor);
-        append(article, h1);
-        append(article, t1);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(article, null);
-          }
-        }
-        append(article, t2);
-        if (if_block)
-          if_block.m(article, null);
+        mount_component(article, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty & /*items, view*/
-        3) {
-          each_value = ensure_array_like(
-            /*items*/
-            ctx2[0]
-          );
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context12(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-              transition_in(each_blocks[i], 1);
-            } else {
-              each_blocks[i] = create_each_block12(child_ctx);
-              each_blocks[i].c();
-              transition_in(each_blocks[i], 1);
-              each_blocks[i].m(article, t2);
-            }
-          }
-          group_outros();
-          for (i = each_value.length; i < each_blocks.length; i += 1) {
-            out(i);
-          }
-          check_outros();
+        const article_changes = {};
+        if (dirty & /*$$scope, statusProposal, view, items*/
+        16391) {
+          article_changes.$$scope = { dirty, ctx: ctx2 };
         }
-        if (!/*view*/
-        ctx2[1]) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-            if (dirty & /*view*/
-            2) {
-              transition_in(if_block, 1);
-            }
-          } else {
-            if_block = create_if_block_18(ctx2);
-            if_block.c();
-            transition_in(if_block, 1);
-            if_block.m(article, null);
-          }
-        } else if (if_block) {
-          group_outros();
-          transition_out(if_block, 1, 1, () => {
-            if_block = null;
-          });
-          check_outros();
-        }
+        article.$set(article_changes);
       },
       i(local) {
         if (current)
           return;
-        for (let i = 0; i < each_value.length; i += 1) {
-          transition_in(each_blocks[i]);
-        }
-        transition_in(if_block);
+        transition_in(article.$$.fragment, local);
         current = true;
       },
       o(local) {
-        each_blocks = each_blocks.filter(Boolean);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          transition_out(each_blocks[i]);
-        }
-        transition_out(if_block);
+        transition_out(article.$$.fragment, local);
         current = false;
       },
       d(detaching) {
-        if (detaching) {
-          detach(article);
-        }
-        destroy_each(each_blocks, detaching);
-        if (if_block)
-          if_block.d();
+        destroy_component(article, detaching);
       }
     };
   }
@@ -11226,7 +11467,7 @@
           /*item*/
           ctx[11].key
         ),
-        $$slots: { default: [create_default_slot_23] },
+        $$slots: { default: [create_default_slot_33] },
         $$scope: { ctx }
       }
     });
@@ -11265,7 +11506,7 @@
       }
     };
   }
-  function create_default_slot_23(ctx) {
+  function create_default_slot_33(ctx) {
     let status;
     let current;
     status = new Status_default({ props: { code: (
@@ -11472,7 +11713,7 @@
     let current;
     field = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot_14] },
+        $$slots: { default: [create_default_slot_23] },
         $$scope: { ctx }
       }
     });
@@ -11512,7 +11753,7 @@
     let current;
     field = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot11] },
+        $$slots: { default: [create_default_slot_16] },
         $$scope: { ctx }
       }
     });
@@ -11547,7 +11788,7 @@
       }
     };
   }
-  function create_default_slot_14(ctx) {
+  function create_default_slot_23(ctx) {
     let button;
     let mounted;
     let dispose;
@@ -11578,7 +11819,7 @@
       }
     };
   }
-  function create_default_slot11(ctx) {
+  function create_default_slot_16(ctx) {
     let button0;
     let t1;
     let button1;
@@ -11623,6 +11864,141 @@
         }
         mounted = false;
         run_all(dispose);
+      }
+    };
+  }
+  function create_default_slot13(ctx) {
+    let h1;
+    let t1;
+    let div;
+    let t13;
+    let t14;
+    let if_block_anchor;
+    let current;
+    let each_value = ensure_array_like(
+      /*items*/
+      ctx[0]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block12(get_each_context12(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    let if_block = !/*view*/
+    ctx[1] && create_if_block_18(ctx);
+    return {
+      c() {
+        h1 = element("h1");
+        h1.textContent = "Detail Proposal";
+        t1 = space();
+        div = element("div");
+        div.innerHTML = `<ul><li class="is-active"><a><span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span> <span>Identitas PPM</span></a></li> <li><a><span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span> <span>Status</span></a></li> <li><a><span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span> <span>Logbook / Monev</span></a></li> <li><a><span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span> <span>Laporan</span></a></li></ul>`;
+        t13 = space();
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        t14 = space();
+        if (if_block)
+          if_block.c();
+        if_block_anchor = empty();
+        attr(h1, "class", "title is-1");
+        attr(div, "class", "tabs is-boxed");
+      },
+      m(target, anchor) {
+        insert(target, h1, anchor);
+        insert(target, t1, anchor);
+        insert(target, div, anchor);
+        insert(target, t13, anchor);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(target, anchor);
+          }
+        }
+        insert(target, t14, anchor);
+        if (if_block)
+          if_block.m(target, anchor);
+        insert(target, if_block_anchor, anchor);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*items, view*/
+        3) {
+          each_value = ensure_array_like(
+            /*items*/
+            ctx2[0]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context12(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block12(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(t14.parentNode, t14);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+        if (!/*view*/
+        ctx2[1]) {
+          if (if_block) {
+            if_block.p(ctx2, dirty);
+            if (dirty & /*view*/
+            2) {
+              transition_in(if_block, 1);
+            }
+          } else {
+            if_block = create_if_block_18(ctx2);
+            if_block.c();
+            transition_in(if_block, 1);
+            if_block.m(if_block_anchor.parentNode, if_block_anchor);
+          }
+        } else if (if_block) {
+          group_outros();
+          transition_out(if_block, 1, 1, () => {
+            if_block = null;
+          });
+          check_outros();
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        transition_in(if_block);
+        current = true;
+      },
+      o(local) {
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        transition_out(if_block);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(h1);
+          detach(t1);
+          detach(div);
+          detach(t13);
+          detach(t14);
+          detach(if_block_anchor);
+        }
+        destroy_each(each_blocks, detaching);
+        if (if_block)
+          if_block.d(detaching);
       }
     };
   }

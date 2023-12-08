@@ -1,6 +1,6 @@
 <script>
    import { onMount } from "svelte";
-   import { Field, Status } from "@cmp";
+   import { Article, Field, Status } from "@cmp";
    import { route } from "../../store";
 
    export let params;
@@ -151,8 +151,49 @@
 </script>
 
 {#if items}
-   <article>
-      <h1>Detail Proposal</h1>
+   <Article>
+      <h1 class="title is-1">Detail Proposal</h1>
+
+      <div class="tabs is-boxed">
+         <ul>
+            <li class="is-active">
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span class="icon is-small"
+                     ><i class="fas fa-image" aria-hidden="true"></i></span
+                  >
+                  <span>Identitas PPM</span>
+               </a>
+            </li>
+            <li>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span class="icon is-small"
+                     ><i class="fas fa-music" aria-hidden="true"></i></span
+                  >
+                  <span>Status</span>
+               </a>
+            </li>
+            <li>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span class="icon is-small"
+                     ><i class="fas fa-film" aria-hidden="true"></i></span
+                  >
+                  <span>Logbook / Monev</span>
+               </a>
+            </li>
+            <li>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span class="icon is-small"
+                     ><i class="far fa-file-alt" aria-hidden="true"></i></span
+                  >
+                  <span>Laporan</span>
+               </a>
+            </li>
+         </ul>
+      </div>
 
       {#each items as item}
          {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "jenis_kegiatan" && item.key !== "kode_program" && item.key !== "tipe_proposal" && item.key !== "kelompok_keahlian" && item.key !== "tahun_pelaksanaan" && item.key !== "topik" && item.key !== "biaya_penelitian" && item.key !== "anggota_tim" && item.key !== "update"}
@@ -184,5 +225,5 @@
             </Field>
          {/if}
       {/if}
-   </article>
+   </Article>
 {/if}

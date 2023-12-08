@@ -1,7 +1,7 @@
 <script>
    import { onMount } from "svelte";
    import { route } from "src/store";
-   import { Status } from "@cmp";
+   import { Article, Status } from "@cmp";
 
    const id = localStorage.id;
    let items;
@@ -25,27 +25,51 @@
 </script>
 
 {#if items}
-   <article>
-      <h1>List Approval</h1>
-      <table>
-         <tr>
-            <th>Judul</th>
-            <th>Abstract</th>
-            <th>Status</th>
-            <th colspan="2">Action</th>
-         </tr>
-         {#each items as item}
+   <Article>
+      <h1 class="title is-1">Approval Management</h1>
+
+      <hr />
+
+      <div class="box">
+         <p>
+            Berikut adalah list <strong
+               >Penelitian / Pengabdian Masyarakat</strong
+            > yang diberikan kepada anda untuk mendapatkan persetujuan. Cek PPM dengan
+            teliti sebelum memberikan persetujuan!
+         </p>
+      </div>
+
+      <table class="table">
+         <thead>
             <tr>
-               <td>{item.judul}</td>
-               <td>{item.abstrak}</td>
-               <td class="status" pid={item.id}>
-                  <Status code={item.status} />
-               </td>
-               <td class="view" pid={item.id} on:click={detail}>Detail</td>
+               <th>Judul</th>
+               <th>Abstract</th>
+               <th>Status</th>
+               <th colspan="2">Action</th>
             </tr>
-         {/each}
+         </thead>
+
+         <tbody>
+            {#each items as item}
+               <tr>
+                  <td>{item.judul}</td>
+                  <td>{item.abstrak}</td>
+                  <td class="status" pid={item.id}>
+                     <Status code={item.status} />
+                  </td>
+                  <td class="view">
+                     <button
+                        class="button is-info"
+                        pid={item.id}
+                        on:click={detail}
+                        >Detail
+                     </button></td
+                  >
+               </tr>
+            {/each}
+         </tbody>
       </table>
-   </article>
+   </Article>
 {/if}
 
 <style>

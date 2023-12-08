@@ -1,7 +1,7 @@
 <script>
    import { onMount } from "svelte";
    import { route } from "../../store";
-   import { Field } from "@cmp";
+   import { Field, Article, Icon, Status } from "@cmp";
 
    let items;
 
@@ -166,8 +166,49 @@
    }
 </script>
 
-<article>
-   <h1>Profile</h1>
+<Article>
+   <h1 class="title is-1">Profile</h1>
+
+   <div class="tabs is-boxed">
+      <ul>
+         <li class="is-active">
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a>
+               <span class="icon is-small"
+                  ><i class="fas fa-image" aria-hidden="true"></i></span
+               >
+               <span>Identitas</span>
+            </a>
+         </li>
+         <li>
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a>
+               <span class="icon is-small"
+                  ><i class="fas fa-music" aria-hidden="true"></i></span
+               >
+               <span>Mata Kuliah</span>
+            </a>
+         </li>
+         <li>
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a>
+               <span class="icon is-small"
+                  ><i class="fas fa-film" aria-hidden="true"></i></span
+               >
+               <span>Riwayat Pendidikan</span>
+            </a>
+         </li>
+         <li>
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a>
+               <span class="icon is-small"
+                  ><i class="far fa-file-alt" aria-hidden="true"></i></span
+               >
+               <span>Pengalaman</span>
+            </a>
+         </li>
+      </ul>
+   </div>
 
    {#if items}
       {#each items as item}
@@ -175,7 +216,8 @@
       {/each}
       <br />
       <Field>
-         <button on:click={simpan}>Simpan</button>
+         <button class="button is-info is-light">Kembali</button>
+         <button class="button is-info" on:click={simpan}>Simpan</button>
       </Field>
    {/if}
-</article>
+</Article>

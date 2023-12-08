@@ -1,6 +1,6 @@
 <script>
    import { onMount } from "svelte";
-   import { Field } from "@cmp";
+   import { Field, Article, Icon, Status } from "@cmp";
    import { route } from "../../store";
    import Editor from "@tinymce/tinymce-svelte";
 
@@ -137,14 +137,24 @@
    }
 </script>
 
-<article>
-   <h1>Proposal</h1>
+<Article>
+   <h1 class="title is-1">Buat Proposal</h1>
+   <hr />
 
    <br />
+
+   <div class="field">
+      <!-- svelte-ignore a11y-label-has-associated-control -->
+      <label class="label">Name</label>
+      <div class="control">
+         <input class="input" type="text" placeholder="Text input" />
+      </div>
+   </div>
 
    <Field name="Judul" bind:value={judul} />
    <Field id="abstract" textarea name="Abstrak" />
    <Field id="isi" textarea name="Isi Proposal" />
+
    <Field select name="Jenis Kegiatan" bind:value={jenisKegiatan} />
    <Field select name="Jenis Skema" bind:value={jenisSkema} />
    <Field select name="Jenis Proposal" bind:value={jenisProposal} />
@@ -157,12 +167,14 @@
 
    <br />
    <Field>
-      <button on:click={simpanProposal}>Simpan</button>
-      <button on:click={submitProposal}>Submit</button>
+      <button class="button is-info is-light" on:click={simpanProposal}
+         >Simpan</button
+      >
+      <button class="button is-info" on:click={submitProposal}>Submit</button>
    </Field>
 
    <!-- <textarea> Welcome to TinyMCE! </textarea> -->
-</article>
+</Article>
 
 <style>
 </style>

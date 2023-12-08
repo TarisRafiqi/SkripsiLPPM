@@ -161,9 +161,9 @@
 
 {#if items}
    <Article>
-      <h1>Detail Proposal</h1>
+      <h1 class="title is-1">Detail Proposal</h1>
 
-      <br />
+      <hr />
 
       {#each items as item}
          {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update"}
@@ -191,8 +191,12 @@
       {#if role === "Ka.Departemen"}
          {#if status === 4}
             <Field>
-               <button on:click={handleRevisi}>Revisi</button>
-               <button on:click={handlePass}>Proses</button>
+               <button class="button is-warning" on:click={handleRevisi}
+                  >Revisi</button
+               >
+               <button class="button is-info" on:click={handlePass}
+                  >Proses</button
+               >
             </Field>
          {/if}
       {/if}
@@ -200,8 +204,12 @@
       {#if role === "Ka.LPPM"}
          {#if status === 6}
             <Field>
-               <button on:click={handleRevisi}>Revisi</button>
-               <button on:click={handlePass}>Proses</button>
+               <button class="button is-warning" on:click={handleRevisi}
+                  >Revisi</button
+               >
+               <button class="button is-info" on:click={handlePass}
+                  >Proses</button
+               >
             </Field>
          {/if}
       {/if}
@@ -209,8 +217,12 @@
       {#if role === "reviewer"}
          {#if status === 8}
             <Field>
-               <button on:click={handleRevisi}>Revisi</button>
-               <button on:click={handlePass}>Proses</button>
+               <button class="button is-warning" on:click={handleRevisi}
+                  >Revisi</button
+               >
+               <button class="button is-info" on:click={handlePass}
+                  >Proses</button
+               >
             </Field>
          {/if}
       {/if}
@@ -218,9 +230,13 @@
       {#if role === "Ka.PusatKajian"}
          {#if status === 10}
             <Field>
-               <button on:click={handleRevisi}>Revisi</button>
-               <button>Ditolak</button>
-               <button on:click={handlePass}>Proses</button>
+               <button class="button is-warning" on:click={handleRevisi}
+                  >Revisi</button
+               >
+               <button class="button is-danger">Ditolak</button>
+               <button class="button is-info" on:click={handlePass}
+                  >Proses</button
+               >
             </Field>
          {/if}
       {/if}

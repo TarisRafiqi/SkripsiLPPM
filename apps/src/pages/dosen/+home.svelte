@@ -1,7 +1,8 @@
 <script>
    import { onMount } from "svelte";
    import { route } from "src/store";
-   import { Status } from "@cmp";
+   import { Article, Icon, Status } from "@cmp";
+   import { accountAdd } from "../../store/icons";
 
    const id = localStorage.id;
    let items;
@@ -45,32 +46,48 @@
 </script>
 
 {#if items}
-   <article>
-      <h1>List Proposal</h1>
+   <Article>
+      <h1 class="title is-1">PPM Management</h1>
+      <hr />
 
-      <p>
-         <button on:click={addProposal}>+ Proposal baru</button>
-      </p>
+      <button class="button is-info" on:click={addProposal}>
+         <span class="icon">
+            <Icon id="orang" src={accountAdd} />
+         </span>
+         <!-- svelte-ignore a11y-missing-attribute -->
+         <span><a>Buat Proposal</a></span>
+      </button>
 
-      <table>
-         <tr>
-            <th>Judul</th>
-            <th>Abstract</th>
-            <th>Status</th>
-            <th colspan="2">Action</th>
-         </tr>
-         {#each items as item}
+      <table class="table">
+         <thead>
             <tr>
-               <td>{item.judul}</td>
-               <td>{@html item.abstrak}</td>
-               <td class="status" pid={item.id}>
-                  <Status code={item.status} />
-               </td>
-               <td class="view" pid={item.id} on:click={detail}>Detail</td>
+               <th>Judul</th>
+               <th>Abstract</th>
+               <th>Status</th>
+               <th colspan="2">Action</th>
             </tr>
-         {/each}
+         </thead>
+
+         <tbody>
+            {#each items as item}
+               <tr>
+                  <td>{item.judul}</td>
+                  <td>{@html item.abstrak}</td>
+                  <td class="status" pid={item.id}>
+                     <Status code={item.status} />
+                  </td>
+                  <td class="view"
+                     ><button
+                        class="button is-info"
+                        pid={item.id}
+                        on:click={detail}>Detail</button
+                     ></td
+                  >
+               </tr>
+            {/each}
+         </tbody>
       </table>
-   </article>
+   </Article>
 {/if}
 
 <style>

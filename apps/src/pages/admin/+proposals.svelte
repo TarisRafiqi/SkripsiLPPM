@@ -41,23 +41,32 @@
       <h1 class="title is-1">PPM Management</h1>
       <hr />
 
-      <table>
-         <tr>
-            <th>Judul</th>
-            <th>Abstract</th>
-            <th>status</th>
-            <th>Action</th>
-         </tr>
-         {#each items as item}
+      <table class="table">
+         <thead>
             <tr>
-               <td>{item.judul}</td>
-               <td>{item.abstrak}</td>
-               <td class="status"><Status code={item.status} /></td>
-               <td class="review" uid={item.id} on:click={handleReview}
-                  >Review</td
-               >
+               <th>Judul</th>
+               <th>Abstract</th>
+               <th>status</th>
+               <th>Action</th>
             </tr>
-         {/each}
+         </thead>
+
+         <tbody>
+            {#each items as item}
+               <tr>
+                  <td>{item.judul}</td>
+                  <td>{item.abstrak}</td>
+                  <td class="status"><Status code={item.status} /></td>
+                  <td class="review"
+                     ><button
+                        class="button is-info"
+                        uid={item.id}
+                        on:click={handleReview}>Detail</button
+                     ></td
+                  >
+               </tr>
+            {/each}
+         </tbody>
       </table>
    </Article>
 {/if}

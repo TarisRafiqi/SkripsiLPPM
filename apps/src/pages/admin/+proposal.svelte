@@ -219,8 +219,10 @@
       <br />
 
       <Field>
-         <button on:click={handleRevisi}>Revisi</button>
-         <button on:click={handlePass}>Proses</button>
+         <button class="button is-warning" on:click={handleRevisi}
+            >Revisi</button
+         >
+         <button class="button is-info" on:click={handlePass}>Proses</button>
       </Field>
    </Article>
 {/if}
