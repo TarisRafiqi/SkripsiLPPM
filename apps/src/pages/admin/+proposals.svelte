@@ -38,7 +38,8 @@
 
 {#if items}
    <Article>
-      <h1>Proposals</h1>
+      <h1 class="title is-1">PPM Management</h1>
+      <hr />
 
       <table>
          <tr>

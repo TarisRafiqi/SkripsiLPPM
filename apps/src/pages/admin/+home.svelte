@@ -4,7 +4,7 @@
 </script>
 
 <Article>
-   <h1>Dashboard</h1>
+   <h1 class="title is-1">Dashboard</h1>
    <hr />
    <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga dolorum

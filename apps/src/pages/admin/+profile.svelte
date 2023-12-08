@@ -170,7 +170,8 @@
 
 {#if items}
    <Article>
-      <h1>Profile</h1>
+      <h1 class="title is-1">Profile</h1>
+      <hr />
       <br />
       {#each items as item}
          <Field name={item.field} bind:value={item.value} />

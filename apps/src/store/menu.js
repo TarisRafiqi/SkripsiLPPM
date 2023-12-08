@@ -12,10 +12,6 @@ const admin = [
       href: "/admin/proposals",
    },
    {
-      title: "Pengumuman",
-      href: "/admin/pengumuman",
-   },
-   {
       title: "Logout",
       href: "/logout",
    },

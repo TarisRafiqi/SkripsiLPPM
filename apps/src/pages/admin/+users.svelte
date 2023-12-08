@@ -1,6 +1,7 @@
 <script>
    import { route } from "../../store";
-   import { Article } from "@cmp";
+   import { Article, Icon } from "@cmp";
+   import { accountAdd } from "../../store/icons";
 
    export let params;
 
@@ -104,7 +105,7 @@
    }
 
    function addUser() {
-      $route("/register");
+      $route("/admin/createuser");
    }
 
    $: params, getPage();
@@ -113,17 +114,17 @@
 
 <Article>
    {#if items}
-      <h1>User Management</h1>
-      <p>
-         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quae
-         dolores veniam doloremque, est excepturi. Esse, amet est, tempore
-         molestias, aut iusto voluptate soluta distinctio voluptatem unde ad.
-         Accusantium, sint.
-      </p>
+      <h1 class="title is-1">User Management</h1>
+      <hr />
 
-      <p>
-         <button on:click={addUser}>+ Add User</button>
-      </p>
+      <button class="button is-link" on:click={addUser}>
+         <span class="icon">
+            <Icon id="orang" src={accountAdd} />
+         </span>
+         <!-- svelte-ignore a11y-missing-attribute -->
+         <span><a>Create User</a></span>
+      </button>
+
       <table>
          <tr>
             <th>Username</th>

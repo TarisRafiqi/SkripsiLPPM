@@ -39,7 +39,7 @@
       <li><a>About UISI</a></li>
       <!-- svelte-ignore a11y-missing-attribute -->
 
-      <button class="button is-normal is-fullwidth">Logout</button>
+      <!-- <button class="button is-normal is-fullwidth">Logout</button> -->
    </ul>
 </aside>
 
