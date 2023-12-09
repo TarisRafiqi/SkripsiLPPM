@@ -161,7 +161,7 @@
 
 {#if items}
    <Article>
-      <h1 class="title is-1">Detail Proposal</h1>
+      <h1 class="title is-1">Detail PPM</h1>
 
       <hr />
 

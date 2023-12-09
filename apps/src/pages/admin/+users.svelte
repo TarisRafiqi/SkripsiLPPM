@@ -117,13 +117,24 @@
       <h1 class="title is-1">User Management</h1>
       <hr />
 
-      <button class="button is-info" on:click={addUser}>
-         <span class="icon">
-            <Icon id="orang" src={accountAdd} />
-         </span>
-         <!-- svelte-ignore a11y-missing-attribute -->
-         <span><a>Create User</a></span>
-      </button>
+      <div class="columns notification is-info is-light">
+         <div class="column is-4">
+            <p>
+               Untuk <strong>Dosen / Reviewer</strong> dari luar UISI, buat akun
+               disini.
+            </p>
+         </div>
+
+         <div class="column">
+            <button class="button is-info" on:click={addUser}>
+               <span class="icon">
+                  <Icon id="orang" src={accountAdd} />
+               </span>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <span><a>Create User</a></span>
+            </button>
+         </div>
+      </div>
 
       <table class="table is-fullwidth is-striped is-hoverable">
          <thead>

@@ -5,43 +5,46 @@
 </script>
 
 {#if code === 0}
-   <span class="tag is-light is-rounded">Draft Proposal</span>
+   <span class="tag is-warning is-light is-rounded">Draft Proposal</span>
    <!-- Draft Proposal -->
 {:else if code === 1}
    <span class="tag is-danger is-light is-rounded">Revisi Proposal</span>
    <!-- Revisi Proposal -->
 {:else if code === 2}
-   <span class="tag is-info is-light is-rounded">Review Administrasi</span>
+   <span class="tag is-warning is-rounded">Review Administrasi</span>
    <!-- Review Administrasi -->
 {:else if code === 3}
    <span class="tag is-danger is-light is-rounded">Revisi Ka.Departemen</span>
    <!-- Revisi Ka.Departemen -->
 {:else if code === 4}
-   <span class="tag is-info is-light is-rounded">Review Ka. Departemen</span>
+   <span class="tag is-warning is-rounded">Review Ka. Departemen</span>
    <!-- Review Ka. Departemen -->
 {:else if code === 5}
    <span class="tag is-danger is-light is-rounded"> Revisi Ka. LPPM</span>
    <!-- Revisi Ka. LPPM -->
 {:else if code === 6}
-   <span class="tag is-info is-light is-rounded"> Review Ka. LPPM</span>
+   <span class="tag is-warning is-rounded"> Review Ka. LPPM</span>
    <!-- Review Ka. LPPM -->
 {:else if code === 7}
    <span class="tag is-danger is-light is-rounded">Revisi Reviewer</span>
    <!-- Revisi Reviewer -->
 {:else if code === 8}
-   <span class="tag is-info is-light is-rounded">Review Reviewer</span>
+   <span class="tag is-warning is-rounded">Review Reviewer</span>
    <!-- Review Reviewer -->
 {:else if code === 9}
    <span class="tag is-danger is-light is-rounded">Revisi Ka. Pusat Kajian</span
    >
    <!-- Revisi Ka. Pusat Kajian -->
 {:else if code === 10}
-   <span class="tag is-info is-light is-rounded">Review Ka. Pusat Kajian</span>
+   <span class="tag is-warning is-rounded">Review Ka. Pusat Kajian</span>
    <!-- Review Ka. Pusat Kajian -->
 {:else if code === 11}
-   Ditolak Ka. Pusat Kajian
+   <span class="tag is-danger is-rounded">Proposal Ditolak</span>
+   <!-- Ditolak Ka. Pusat Kajian -->
 {:else if code === 12}
-   Penelitian Dimulai
+   <span class="tag is-link is-rounded">Penelitian Berjalan</span>
+   <!-- Penelitian Dimulai -->
 {:else if code === 13}
-   Penelitian Selesai
+   <span class="tag is-success is-rounded">Penelitian Selesai</span>
+   <!-- Penelitian Selesai -->
 {/if}

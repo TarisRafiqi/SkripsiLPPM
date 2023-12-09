@@ -5,6 +5,8 @@
    import Editor from "@tinymce/tinymce-svelte";
 
    // let abstrak = "";
+   let test = "";
+
    let jenisKegiatan = "";
    let jenisProposal = "";
    let jenisSkema = "";
@@ -150,6 +152,8 @@
          <input class="input" type="text" placeholder="Text input" />
       </div>
    </div>
+
+   <Field select name="Judul" bind:value={test} />
 
    <Field name="Judul" bind:value={judul} />
    <Field id="abstract" textarea name="Abstrak" />

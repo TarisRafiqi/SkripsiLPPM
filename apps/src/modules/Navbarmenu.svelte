@@ -4,8 +4,9 @@
    import { menu } from "../store/icons";
    import { onMount } from "svelte";
 
-   // let token = localStorage.getItem("token");
+   let token = localStorage.getItem("token");
    let navbarMenu;
+   // console.log($isLogin, token);
 
    // onMount(() => {
    // const burgerIcon = document.querySelector("#burger");
@@ -83,7 +84,7 @@
 
             <div class="navbar-item">
                <div class="buttons">
-                  {#if $isLogin}
+                  {#if $isLogin || token}
                      <a
                         class="button is-white is-outlined is-rounded"
                         href="/logout"

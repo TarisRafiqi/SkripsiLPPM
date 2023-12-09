@@ -1,7 +1,8 @@
 <script>
    import { onMount } from "svelte";
    import { route } from "../../store";
-   import { Article, Status } from "@cmp";
+   import { Article, Status, Icon } from "@cmp";
+   import { infoOutline } from "../../store/icons";
 
    let items;
 
@@ -61,7 +62,11 @@
                      ><button
                         class="button is-info is-rounded is-small"
                         uid={item.id}
-                        on:click={handleReview}>Detail</button
+                        on:click={handleReview}
+                     >
+                        <span class="icon">
+                           <Icon id="orang" src={infoOutline} />
+                        </span></button
                      ></td
                   >
                </tr>

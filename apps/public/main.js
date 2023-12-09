@@ -2014,20 +2014,20 @@
 
   // src/libs/Hero.svelte
   function add_css5(target) {
-    append_styles(target, "svelte-1ryyw8d", '.title.svelte-1ryyw8d{color:black}.subtitle.svelte-1ryyw8d{color:black;text-align:justify}@media(min-width: 768px){}.hero-body.svelte-1ryyw8d{margin-left:1.5rem;margin-right:1.5rem;border-radius:20px;background-image:url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-12-2048x1152.jpg");background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%}');
+    append_styles(target, "svelte-nyqy4h", '.title.svelte-nyqy4h{color:black}.subtitle.svelte-nyqy4h{color:black;text-align:justify}@media(min-width: 768px){}.hero-body.svelte-nyqy4h{margin-top:5rem;margin-left:1.5rem;margin-right:1.5rem;border-radius:20px;background-image:url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-12-2048x1152.jpg");background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%}');
   }
   function create_fragment6(ctx) {
     let section;
     return {
       c() {
         section = element("section");
-        section.innerHTML = `<div class="hero-body svelte-1ryyw8d"><p class="title svelte-1ryyw8d">LPPM Universitas Internasional Semen Indonesia</p> <p class="subtitle svelte-1ryyw8d">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        section.innerHTML = `<div class="hero-body svelte-nyqy4h"><p class="title svelte-nyqy4h">LPPM Universitas Internasional Semen Indonesia</p> <p class="subtitle svelte-nyqy4h">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
          occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-         mollit anim id est laborum.</p> <div class="buttons"><a class="button is-white is-focused is-rounded" href="/login">Login</a></div></div>`;
+         mollit anim id est laborum.</p></div>`;
         attr(section, "class", "hero is-medium");
       },
       m(target, anchor) {
@@ -2446,6 +2446,7 @@
 
   // src/store/icons.js
   var accountAdd = "M15 4a4 4 0 0 0-4 4a4 4 0 0 0 4 4a4 4 0 0 0 4-4a4 4 0 0 0-4-4m0 1.9a2.1 2.1 0 1 1 0 4.2A2.1 2.1 0 0 1 12.9 8A2.1 2.1 0 0 1 15 5.9M4 7v3H1v2h3v3h2v-3h3v-2H6V7H4m11 6c-2.67 0-8 1.33-8 4v3h16v-3c0-2.67-5.33-4-8-4m0 1.9c2.97 0 6.1 1.46 6.1 2.1v1.1H8.9V17c0-.64 3.1-2.1 6.1-2.1Z";
+  var infoOutline = "M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z";
 
   // src/modules/Navbarmenu.svelte
   function add_css9(target) {
@@ -2514,7 +2515,8 @@
     function select_block_type(ctx2, dirty) {
       if (
         /*$isLogin*/
-        ctx2[1]
+        ctx2[1] || /*token*/
+        ctx2[2]
       )
         return create_if_block2;
       return create_else_block2;
@@ -2589,13 +2591,13 @@
         append(div7, div6);
         append(div6, div5);
         if_block.m(div5, null);
-        ctx[3](div8);
+        ctx[4](div8);
         if (!mounted) {
           dispose = listen(
             a1,
             "click",
             /*test*/
-            ctx[2]
+            ctx[3]
           );
           mounted = true;
         }
@@ -2617,7 +2619,7 @@
           detach(header);
         }
         if_block.d();
-        ctx[3](null);
+        ctx[4](null);
         mounted = false;
         dispose();
       }
@@ -2626,6 +2628,7 @@
   function instance6($$self, $$props, $$invalidate) {
     let $isLogin;
     component_subscribe($$self, isLogin, ($$value) => $$invalidate(1, $isLogin = $$value));
+    let token = localStorage.getItem("token");
     let navbarMenu;
     function test() {
       navbarMenu.classList.toggle("is-active");
@@ -2636,7 +2639,7 @@
         $$invalidate(0, navbarMenu);
       });
     }
-    return [navbarMenu, $isLogin, test, div8_binding];
+    return [navbarMenu, $isLogin, token, test, div8_binding];
   }
   var Navbarmenu = class extends SvelteComponent {
     constructor(options) {
@@ -3039,49 +3042,55 @@
 
   // src/modules/Status.svelte
   function create_if_block_13(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Penelitian Selesai");
+        span = element("span");
+        span.textContent = "Penelitian Selesai";
+        attr(span, "class", "tag is-success is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_12(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Penelitian Dimulai");
+        span = element("span");
+        span.textContent = "Penelitian Berjalan";
+        attr(span, "class", "tag is-link is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_11(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Ditolak Ka. Pusat Kajian");
+        span = element("span");
+        span.textContent = "Proposal Ditolak";
+        attr(span, "class", "tag is-danger is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
@@ -3092,7 +3101,7 @@
       c() {
         span = element("span");
         span.textContent = "Review Ka. Pusat Kajian";
-        attr(span, "class", "tag is-info is-light is-rounded");
+        attr(span, "class", "tag is-warning is-rounded");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -3128,7 +3137,7 @@
       c() {
         span = element("span");
         span.textContent = "Review Reviewer";
-        attr(span, "class", "tag is-info is-light is-rounded");
+        attr(span, "class", "tag is-warning is-rounded");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -3164,7 +3173,7 @@
       c() {
         span = element("span");
         span.textContent = "Review Ka. LPPM";
-        attr(span, "class", "tag is-info is-light is-rounded");
+        attr(span, "class", "tag is-warning is-rounded");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -3200,7 +3209,7 @@
       c() {
         span = element("span");
         span.textContent = "Review Ka. Departemen";
-        attr(span, "class", "tag is-info is-light is-rounded");
+        attr(span, "class", "tag is-warning is-rounded");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -3236,7 +3245,7 @@
       c() {
         span = element("span");
         span.textContent = "Review Administrasi";
-        attr(span, "class", "tag is-info is-light is-rounded");
+        attr(span, "class", "tag is-warning is-rounded");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -3272,7 +3281,7 @@
       c() {
         span = element("span");
         span.textContent = "Draft Proposal";
-        attr(span, "class", "tag is-light is-rounded");
+        attr(span, "class", "tag is-warning is-light is-rounded");
       },
       m(target, anchor) {
         insert(target, span, anchor);
@@ -6434,9 +6443,10 @@
     let t4;
     let td3;
     let button;
-    let t5;
+    let span;
+    let icon;
     let button_uid_value;
-    let t6;
+    let t5;
     let current;
     let mounted;
     let dispose;
@@ -6444,6 +6454,7 @@
       /*item*/
       ctx[3].status
     ) } });
+    icon = new Icon_default({ props: { id: "orang", src: infoOutline } });
     return {
       c() {
         tr = element("tr");
@@ -6458,9 +6469,11 @@
         t4 = space();
         td3 = element("td");
         button = element("button");
-        t5 = text("Detail");
-        t6 = space();
+        span = element("span");
+        create_component(icon.$$.fragment);
+        t5 = space();
         attr(td2, "class", "status svelte-1eb6cem");
+        attr(span, "class", "icon");
         attr(button, "class", "button is-info is-rounded is-small");
         attr(button, "uid", button_uid_value = /*item*/
         ctx[3].id);
@@ -6479,8 +6492,9 @@
         append(tr, t4);
         append(tr, td3);
         append(td3, button);
-        append(button, t5);
-        append(tr, t6);
+        append(button, span);
+        mount_component(icon, span, null);
+        append(tr, t5);
         current = true;
         if (!mounted) {
           dispose = listen(
@@ -6517,10 +6531,12 @@
         if (current)
           return;
         transition_in(status.$$.fragment, local);
+        transition_in(icon.$$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(status.$$.fragment, local);
+        transition_out(icon.$$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -6528,6 +6544,7 @@
           detach(tr);
         }
         destroy_component(status);
+        destroy_component(icon);
         mounted = false;
         dispose();
       }
@@ -6750,15 +6767,19 @@
     let t1;
     let hr;
     let t2;
+    let div2;
+    let div0;
+    let t6;
+    let div1;
     let button;
     let span0;
     let icon;
-    let t3;
+    let t7;
     let span1;
-    let t5;
+    let t9;
     let table;
     let thead;
-    let t13;
+    let t17;
     let tbody;
     let current;
     let mounted;
@@ -6779,24 +6800,33 @@
         t1 = space();
         hr = element("hr");
         t2 = space();
+        div2 = element("div");
+        div0 = element("div");
+        div0.innerHTML = `<p>Untuk <strong>Dosen / Reviewer</strong> dari luar UISI, buat akun
+               disini.</p>`;
+        t6 = space();
+        div1 = element("div");
         button = element("button");
         span0 = element("span");
         create_component(icon.$$.fragment);
-        t3 = space();
+        t7 = space();
         span1 = element("span");
         span1.innerHTML = `<a>Create User</a>`;
-        t5 = space();
+        t9 = space();
         table = element("table");
         thead = element("thead");
         thead.innerHTML = `<tr><th>Username</th> <th>Email</th> <th>Role</th> <th>Active</th></tr>`;
-        t13 = space();
+        t17 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
         attr(h1, "class", "title is-1");
+        attr(div0, "class", "column is-4");
         attr(span0, "class", "icon");
         attr(button, "class", "button is-info");
+        attr(div1, "class", "column");
+        attr(div2, "class", "columns notification is-info is-light");
         attr(table, "class", "table is-fullwidth is-striped is-hoverable");
       },
       m(target, anchor) {
@@ -6804,15 +6834,19 @@
         insert(target, t1, anchor);
         insert(target, hr, anchor);
         insert(target, t2, anchor);
-        insert(target, button, anchor);
+        insert(target, div2, anchor);
+        append(div2, div0);
+        append(div2, t6);
+        append(div2, div1);
+        append(div1, button);
         append(button, span0);
         mount_component(icon, span0, null);
-        append(button, t3);
+        append(button, t7);
         append(button, span1);
-        insert(target, t5, anchor);
+        insert(target, t9, anchor);
         insert(target, table, anchor);
         append(table, thead);
-        append(table, t13);
+        append(table, t17);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -6870,8 +6904,8 @@
           detach(t1);
           detach(hr);
           detach(t2);
-          detach(button);
-          detach(t5);
+          detach(div2);
+          detach(t9);
           detach(table);
         }
         destroy_component(icon);
@@ -9183,7 +9217,7 @@
     return {
       c() {
         h1 = element("h1");
-        h1.textContent = "Detail Proposal";
+        h1.textContent = "Detail PPM";
         t1 = space();
         hr = element("hr");
         t2 = space();
@@ -10623,13 +10657,13 @@
               button0,
               "click",
               /*simpanProposal*/
-              ctx[10]
+              ctx[11]
             ),
             listen(
               button1,
               "click",
               /*submitProposal*/
-              ctx[11]
+              ctx[12]
             )
           ];
           mounted = true;
@@ -10660,11 +10694,11 @@
     let updating_value;
     let t7;
     let field1;
+    let updating_value_1;
     let t8;
     let field2;
     let t9;
     let field3;
-    let updating_value_1;
     let t10;
     let field4;
     let updating_value_2;
@@ -10690,161 +10724,177 @@
     let field11;
     let updating_value_9;
     let t18;
-    let br1;
-    let t19;
     let field12;
+    let updating_value_10;
+    let t19;
+    let br1;
+    let t20;
+    let field13;
     let current;
     function field0_value_binding(value) {
-      ctx[12](value);
+      ctx[13](value);
     }
-    let field0_props = { name: "Judul" };
+    let field0_props = { select: true, name: "Judul" };
     if (
-      /*judul*/
-      ctx[4] !== void 0
+      /*test*/
+      ctx[0] !== void 0
     ) {
-      field0_props.value = /*judul*/
-      ctx[4];
+      field0_props.value = /*test*/
+      ctx[0];
     }
     field0 = new Field_default({ props: field0_props });
     binding_callbacks.push(() => bind(field0, "value", field0_value_binding));
-    field1 = new Field_default({
+    function field1_value_binding(value) {
+      ctx[14](value);
+    }
+    let field1_props = { name: "Judul" };
+    if (
+      /*judul*/
+      ctx[5] !== void 0
+    ) {
+      field1_props.value = /*judul*/
+      ctx[5];
+    }
+    field1 = new Field_default({ props: field1_props });
+    binding_callbacks.push(() => bind(field1, "value", field1_value_binding));
+    field2 = new Field_default({
       props: {
         id: "abstract",
         textarea: true,
         name: "Abstrak"
       }
     });
-    field2 = new Field_default({
+    field3 = new Field_default({
       props: {
         id: "isi",
         textarea: true,
         name: "Isi Proposal"
       }
     });
-    function field3_value_binding(value) {
-      ctx[13](value);
+    function field4_value_binding(value) {
+      ctx[15](value);
     }
-    let field3_props = { select: true, name: "Jenis Kegiatan" };
+    let field4_props = { select: true, name: "Jenis Kegiatan" };
     if (
       /*jenisKegiatan*/
-      ctx[0] !== void 0
+      ctx[1] !== void 0
     ) {
-      field3_props.value = /*jenisKegiatan*/
-      ctx[0];
-    }
-    field3 = new Field_default({ props: field3_props });
-    binding_callbacks.push(() => bind(field3, "value", field3_value_binding));
-    function field4_value_binding(value) {
-      ctx[14](value);
-    }
-    let field4_props = { select: true, name: "Jenis Skema" };
-    if (
-      /*jenisSkema*/
-      ctx[2] !== void 0
-    ) {
-      field4_props.value = /*jenisSkema*/
-      ctx[2];
+      field4_props.value = /*jenisKegiatan*/
+      ctx[1];
     }
     field4 = new Field_default({ props: field4_props });
     binding_callbacks.push(() => bind(field4, "value", field4_value_binding));
     function field5_value_binding(value) {
-      ctx[15](value);
+      ctx[16](value);
     }
-    let field5_props = { select: true, name: "Jenis Proposal" };
+    let field5_props = { select: true, name: "Jenis Skema" };
     if (
-      /*jenisProposal*/
-      ctx[1] !== void 0
+      /*jenisSkema*/
+      ctx[3] !== void 0
     ) {
-      field5_props.value = /*jenisProposal*/
-      ctx[1];
+      field5_props.value = /*jenisSkema*/
+      ctx[3];
     }
     field5 = new Field_default({ props: field5_props });
     binding_callbacks.push(() => bind(field5, "value", field5_value_binding));
     function field6_value_binding(value) {
-      ctx[16](value);
+      ctx[17](value);
     }
-    let field6_props = { select: true, name: "Kelompok Keahlian" };
+    let field6_props = { select: true, name: "Jenis Proposal" };
     if (
-      /*kelompokKeahlian*/
-      ctx[3] !== void 0
+      /*jenisProposal*/
+      ctx[2] !== void 0
     ) {
-      field6_props.value = /*kelompokKeahlian*/
-      ctx[3];
+      field6_props.value = /*jenisProposal*/
+      ctx[2];
     }
     field6 = new Field_default({ props: field6_props });
     binding_callbacks.push(() => bind(field6, "value", field6_value_binding));
     function field7_value_binding(value) {
-      ctx[17](value);
+      ctx[18](value);
     }
-    let field7_props = {
+    let field7_props = { select: true, name: "Kelompok Keahlian" };
+    if (
+      /*kelompokKeahlian*/
+      ctx[4] !== void 0
+    ) {
+      field7_props.value = /*kelompokKeahlian*/
+      ctx[4];
+    }
+    field7 = new Field_default({ props: field7_props });
+    binding_callbacks.push(() => bind(field7, "value", field7_value_binding));
+    function field8_value_binding(value) {
+      ctx[19](value);
+    }
+    let field8_props = {
       datepicker: true,
       name: "Tahun Pelaksanaan"
     };
     if (
       /*tahunPelaksanaan*/
-      ctx[5] !== void 0
-    ) {
-      field7_props.value = /*tahunPelaksanaan*/
-      ctx[5];
-    }
-    field7 = new Field_default({ props: field7_props });
-    binding_callbacks.push(() => bind(field7, "value", field7_value_binding));
-    function field8_value_binding(value) {
-      ctx[18](value);
-    }
-    let field8_props = { select: true, name: "Topik" };
-    if (
-      /*Topik*/
       ctx[6] !== void 0
     ) {
-      field8_props.value = /*Topik*/
+      field8_props.value = /*tahunPelaksanaan*/
       ctx[6];
     }
     field8 = new Field_default({ props: field8_props });
     binding_callbacks.push(() => bind(field8, "value", field8_value_binding));
     function field9_value_binding(value) {
-      ctx[19](value);
+      ctx[20](value);
     }
-    let field9_props = { select: true, name: "Biaya Penelitian" };
+    let field9_props = { select: true, name: "Topik" };
     if (
-      /*biayaPenelitian*/
+      /*Topik*/
       ctx[7] !== void 0
     ) {
-      field9_props.value = /*biayaPenelitian*/
+      field9_props.value = /*Topik*/
       ctx[7];
     }
     field9 = new Field_default({ props: field9_props });
     binding_callbacks.push(() => bind(field9, "value", field9_value_binding));
     function field10_value_binding(value) {
-      ctx[20](value);
+      ctx[21](value);
     }
-    let field10_props = { select: true, name: "Anggota Tim" };
+    let field10_props = { select: true, name: "Biaya Penelitian" };
     if (
-      /*anggotaTim*/
+      /*biayaPenelitian*/
       ctx[8] !== void 0
     ) {
-      field10_props.value = /*anggotaTim*/
+      field10_props.value = /*biayaPenelitian*/
       ctx[8];
     }
     field10 = new Field_default({ props: field10_props });
     binding_callbacks.push(() => bind(field10, "value", field10_value_binding));
     function field11_value_binding(value) {
-      ctx[21](value);
+      ctx[22](value);
     }
-    let field11_props = {
+    let field11_props = { select: true, name: "Anggota Tim" };
+    if (
+      /*anggotaTim*/
+      ctx[9] !== void 0
+    ) {
+      field11_props.value = /*anggotaTim*/
+      ctx[9];
+    }
+    field11 = new Field_default({ props: field11_props });
+    binding_callbacks.push(() => bind(field11, "value", field11_value_binding));
+    function field12_value_binding(value) {
+      ctx[23](value);
+    }
+    let field12_props = {
       select: true,
       name: "Rincian Anggaran Biaya (RAB)"
     };
     if (
       /*rab*/
-      ctx[9] !== void 0
+      ctx[10] !== void 0
     ) {
-      field11_props.value = /*rab*/
-      ctx[9];
+      field12_props.value = /*rab*/
+      ctx[10];
     }
-    field11 = new Field_default({ props: field11_props });
-    binding_callbacks.push(() => bind(field11, "value", field11_value_binding));
-    field12 = new Field_default({
+    field12 = new Field_default({ props: field12_props });
+    binding_callbacks.push(() => bind(field12, "value", field12_value_binding));
+    field13 = new Field_default({
       props: {
         $$slots: { default: [create_default_slot_15] },
         $$scope: { ctx }
@@ -10886,9 +10936,11 @@
         t17 = space();
         create_component(field11.$$.fragment);
         t18 = space();
-        br1 = element("br");
-        t19 = space();
         create_component(field12.$$.fragment);
+        t19 = space();
+        br1 = element("br");
+        t20 = space();
+        create_component(field13.$$.fragment);
         attr(h1, "class", "title is-1");
         attr(div1, "class", "field");
       },
@@ -10925,108 +10977,119 @@
         insert(target, t17, anchor);
         mount_component(field11, target, anchor);
         insert(target, t18, anchor);
-        insert(target, br1, anchor);
-        insert(target, t19, anchor);
         mount_component(field12, target, anchor);
+        insert(target, t19, anchor);
+        insert(target, br1, anchor);
+        insert(target, t20, anchor);
+        mount_component(field13, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
         const field0_changes = {};
-        if (!updating_value && dirty & /*judul*/
-        16) {
+        if (!updating_value && dirty & /*test*/
+        1) {
           updating_value = true;
-          field0_changes.value = /*judul*/
-          ctx2[4];
+          field0_changes.value = /*test*/
+          ctx2[0];
           add_flush_callback(() => updating_value = false);
         }
         field0.$set(field0_changes);
-        const field3_changes = {};
-        if (!updating_value_1 && dirty & /*jenisKegiatan*/
-        1) {
+        const field1_changes = {};
+        if (!updating_value_1 && dirty & /*judul*/
+        32) {
           updating_value_1 = true;
-          field3_changes.value = /*jenisKegiatan*/
-          ctx2[0];
+          field1_changes.value = /*judul*/
+          ctx2[5];
           add_flush_callback(() => updating_value_1 = false);
         }
-        field3.$set(field3_changes);
+        field1.$set(field1_changes);
         const field4_changes = {};
-        if (!updating_value_2 && dirty & /*jenisSkema*/
-        4) {
+        if (!updating_value_2 && dirty & /*jenisKegiatan*/
+        2) {
           updating_value_2 = true;
-          field4_changes.value = /*jenisSkema*/
-          ctx2[2];
+          field4_changes.value = /*jenisKegiatan*/
+          ctx2[1];
           add_flush_callback(() => updating_value_2 = false);
         }
         field4.$set(field4_changes);
         const field5_changes = {};
-        if (!updating_value_3 && dirty & /*jenisProposal*/
-        2) {
+        if (!updating_value_3 && dirty & /*jenisSkema*/
+        8) {
           updating_value_3 = true;
-          field5_changes.value = /*jenisProposal*/
-          ctx2[1];
+          field5_changes.value = /*jenisSkema*/
+          ctx2[3];
           add_flush_callback(() => updating_value_3 = false);
         }
         field5.$set(field5_changes);
         const field6_changes = {};
-        if (!updating_value_4 && dirty & /*kelompokKeahlian*/
-        8) {
+        if (!updating_value_4 && dirty & /*jenisProposal*/
+        4) {
           updating_value_4 = true;
-          field6_changes.value = /*kelompokKeahlian*/
-          ctx2[3];
+          field6_changes.value = /*jenisProposal*/
+          ctx2[2];
           add_flush_callback(() => updating_value_4 = false);
         }
         field6.$set(field6_changes);
         const field7_changes = {};
-        if (!updating_value_5 && dirty & /*tahunPelaksanaan*/
-        32) {
+        if (!updating_value_5 && dirty & /*kelompokKeahlian*/
+        16) {
           updating_value_5 = true;
-          field7_changes.value = /*tahunPelaksanaan*/
-          ctx2[5];
+          field7_changes.value = /*kelompokKeahlian*/
+          ctx2[4];
           add_flush_callback(() => updating_value_5 = false);
         }
         field7.$set(field7_changes);
         const field8_changes = {};
-        if (!updating_value_6 && dirty & /*Topik*/
+        if (!updating_value_6 && dirty & /*tahunPelaksanaan*/
         64) {
           updating_value_6 = true;
-          field8_changes.value = /*Topik*/
+          field8_changes.value = /*tahunPelaksanaan*/
           ctx2[6];
           add_flush_callback(() => updating_value_6 = false);
         }
         field8.$set(field8_changes);
         const field9_changes = {};
-        if (!updating_value_7 && dirty & /*biayaPenelitian*/
+        if (!updating_value_7 && dirty & /*Topik*/
         128) {
           updating_value_7 = true;
-          field9_changes.value = /*biayaPenelitian*/
+          field9_changes.value = /*Topik*/
           ctx2[7];
           add_flush_callback(() => updating_value_7 = false);
         }
         field9.$set(field9_changes);
         const field10_changes = {};
-        if (!updating_value_8 && dirty & /*anggotaTim*/
+        if (!updating_value_8 && dirty & /*biayaPenelitian*/
         256) {
           updating_value_8 = true;
-          field10_changes.value = /*anggotaTim*/
+          field10_changes.value = /*biayaPenelitian*/
           ctx2[8];
           add_flush_callback(() => updating_value_8 = false);
         }
         field10.$set(field10_changes);
         const field11_changes = {};
-        if (!updating_value_9 && dirty & /*rab*/
+        if (!updating_value_9 && dirty & /*anggotaTim*/
         512) {
           updating_value_9 = true;
-          field11_changes.value = /*rab*/
+          field11_changes.value = /*anggotaTim*/
           ctx2[9];
           add_flush_callback(() => updating_value_9 = false);
         }
         field11.$set(field11_changes);
         const field12_changes = {};
-        if (dirty & /*$$scope*/
-        134217728) {
-          field12_changes.$$scope = { dirty, ctx: ctx2 };
+        if (!updating_value_10 && dirty & /*rab*/
+        1024) {
+          updating_value_10 = true;
+          field12_changes.value = /*rab*/
+          ctx2[10];
+          add_flush_callback(() => updating_value_10 = false);
         }
         field12.$set(field12_changes);
+        const field13_changes = {};
+        if (dirty & /*$$scope*/
+        536870912) {
+          field13_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        field13.$set(field13_changes);
       },
       i(local) {
         if (current)
@@ -11044,6 +11107,7 @@
         transition_in(field10.$$.fragment, local);
         transition_in(field11.$$.fragment, local);
         transition_in(field12.$$.fragment, local);
+        transition_in(field13.$$.fragment, local);
         current = true;
       },
       o(local) {
@@ -11060,6 +11124,7 @@
         transition_out(field10.$$.fragment, local);
         transition_out(field11.$$.fragment, local);
         transition_out(field12.$$.fragment, local);
+        transition_out(field13.$$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -11084,8 +11149,9 @@
           detach(t16);
           detach(t17);
           detach(t18);
-          detach(br1);
           detach(t19);
+          detach(br1);
+          detach(t20);
         }
         destroy_component(field0, detaching);
         destroy_component(field1, detaching);
@@ -11100,6 +11166,7 @@
         destroy_component(field10, detaching);
         destroy_component(field11, detaching);
         destroy_component(field12, detaching);
+        destroy_component(field13, detaching);
       }
     };
   }
@@ -11122,8 +11189,8 @@
       },
       p(ctx2, [dirty]) {
         const article_changes = {};
-        if (dirty & /*$$scope, rab, anggotaTim, biayaPenelitian, Topik, tahunPelaksanaan, kelompokKeahlian, jenisProposal, jenisSkema, jenisKegiatan, judul*/
-        134218751) {
+        if (dirty & /*$$scope, rab, anggotaTim, biayaPenelitian, Topik, tahunPelaksanaan, kelompokKeahlian, jenisProposal, jenisSkema, jenisKegiatan, judul, test*/
+        536872959) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -11145,7 +11212,8 @@
   }
   function instance26($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(24, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(26, $route = $$value));
+    let test = "";
     let jenisKegiatan = "";
     let jenisProposal = "";
     let jenisSkema = "";
@@ -11251,46 +11319,51 @@
       }
     ];
     function field0_value_binding(value) {
-      judul2 = value;
-      $$invalidate(4, judul2);
+      test = value;
+      $$invalidate(0, test);
     }
-    function field3_value_binding(value) {
-      jenisKegiatan = value;
-      $$invalidate(0, jenisKegiatan);
+    function field1_value_binding(value) {
+      judul2 = value;
+      $$invalidate(5, judul2);
     }
     function field4_value_binding(value) {
-      jenisSkema = value;
-      $$invalidate(2, jenisSkema);
+      jenisKegiatan = value;
+      $$invalidate(1, jenisKegiatan);
     }
     function field5_value_binding(value) {
-      jenisProposal = value;
-      $$invalidate(1, jenisProposal);
+      jenisSkema = value;
+      $$invalidate(3, jenisSkema);
     }
     function field6_value_binding(value) {
-      kelompokKeahlian = value;
-      $$invalidate(3, kelompokKeahlian);
+      jenisProposal = value;
+      $$invalidate(2, jenisProposal);
     }
     function field7_value_binding(value) {
-      tahunPelaksanaan = value;
-      $$invalidate(5, tahunPelaksanaan);
+      kelompokKeahlian = value;
+      $$invalidate(4, kelompokKeahlian);
     }
     function field8_value_binding(value) {
-      Topik = value;
-      $$invalidate(6, Topik);
+      tahunPelaksanaan = value;
+      $$invalidate(6, tahunPelaksanaan);
     }
     function field9_value_binding(value) {
-      biayaPenelitian = value;
-      $$invalidate(7, biayaPenelitian);
+      Topik = value;
+      $$invalidate(7, Topik);
     }
     function field10_value_binding(value) {
-      anggotaTim = value;
-      $$invalidate(8, anggotaTim);
+      biayaPenelitian = value;
+      $$invalidate(8, biayaPenelitian);
     }
     function field11_value_binding(value) {
+      anggotaTim = value;
+      $$invalidate(9, anggotaTim);
+    }
+    function field12_value_binding(value) {
       rab = value;
-      $$invalidate(9, rab);
+      $$invalidate(10, rab);
     }
     return [
+      test,
       jenisKegiatan,
       jenisProposal,
       jenisSkema,
@@ -11304,7 +11377,7 @@
       simpanProposal,
       submitProposal,
       field0_value_binding,
-      field3_value_binding,
+      field1_value_binding,
       field4_value_binding,
       field5_value_binding,
       field6_value_binding,
@@ -11312,7 +11385,8 @@
       field8_value_binding,
       field9_value_binding,
       field10_value_binding,
-      field11_value_binding
+      field11_value_binding,
+      field12_value_binding
     ];
   }
   var Proposal2 = class extends SvelteComponent {

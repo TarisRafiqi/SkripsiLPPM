@@ -16,11 +16,6 @@
          occaecat cupidatat non proident, sunt in culpa qui officia deserunt
          mollit anim id est laborum.
       </p>
-      <div class="buttons">
-         <a class="button is-white is-focused is-rounded" href="/login">
-            Login
-         </a>
-      </div>
    </div>
 </section>
 
@@ -57,7 +52,7 @@
    }
 
    .hero-body {
-      /* margin-top: 5rem; */
+      margin-top: 5rem;
       margin-left: 1.5rem;
       margin-right: 1.5rem;
       border-radius: 20px;
