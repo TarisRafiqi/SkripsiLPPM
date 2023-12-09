@@ -41,12 +41,12 @@
       <h1 class="title is-1">PPM Management</h1>
       <hr />
 
-      <table class="table">
+      <table class="table is-fullwidth is-striped is-hoverable">
          <thead>
             <tr>
                <th>Judul</th>
                <th>Abstract</th>
-               <th>status</th>
+               <th>Status</th>
                <th>Action</th>
             </tr>
          </thead>
@@ -59,7 +59,7 @@
                   <td class="status"><Status code={item.status} /></td>
                   <td class="review"
                      ><button
-                        class="button is-info"
+                        class="button is-info is-rounded is-small"
                         uid={item.id}
                         on:click={handleReview}>Detail</button
                      ></td

@@ -84,11 +84,17 @@
             <div class="navbar-item">
                <div class="buttons">
                   {#if $isLogin}
-                     <a class="button is-white is-focused" href="/logout">
+                     <a
+                        class="button is-white is-outlined is-rounded"
+                        href="/logout"
+                     >
                         Logout
                      </a>
                   {:else}
-                     <a class="button is-white is-focused" href="/login">
+                     <a
+                        class="button is-white is-outlined is-rounded"
+                        href="/login"
+                     >
                         Login
                      </a>
                   {/if}

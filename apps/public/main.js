@@ -2014,14 +2014,14 @@
 
   // src/libs/Hero.svelte
   function add_css5(target) {
-    append_styles(target, "svelte-nyqy4h", '.title.svelte-nyqy4h{color:black}.subtitle.svelte-nyqy4h{color:black;text-align:justify}@media(min-width: 768px){}.hero-body.svelte-nyqy4h{margin-top:5rem;margin-left:1.5rem;margin-right:1.5rem;border-radius:20px;background-image:url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-12-2048x1152.jpg");background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%}');
+    append_styles(target, "svelte-1ryyw8d", '.title.svelte-1ryyw8d{color:black}.subtitle.svelte-1ryyw8d{color:black;text-align:justify}@media(min-width: 768px){}.hero-body.svelte-1ryyw8d{margin-left:1.5rem;margin-right:1.5rem;border-radius:20px;background-image:url("https://digitalsynopsis.com/wp-content/uploads/2020/07/free-vector-gradients-12-2048x1152.jpg");background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%}');
   }
   function create_fragment6(ctx) {
     let section;
     return {
       c() {
         section = element("section");
-        section.innerHTML = `<div class="hero-body svelte-nyqy4h"><p class="title svelte-nyqy4h">LPPM Universitas Internasional Semen Indonesia</p> <p class="subtitle svelte-nyqy4h">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        section.innerHTML = `<div class="hero-body svelte-1ryyw8d"><p class="title svelte-1ryyw8d">LPPM Universitas Internasional Semen Indonesia</p> <p class="subtitle svelte-1ryyw8d">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
@@ -2457,7 +2457,7 @@
       c() {
         a = element("a");
         a.textContent = "Login";
-        attr(a, "class", "button is-white is-focused");
+        attr(a, "class", "button is-white is-outlined is-rounded");
         attr(a, "href", "/login");
       },
       m(target, anchor) {
@@ -2476,7 +2476,7 @@
       c() {
         a = element("a");
         a.textContent = "Logout";
-        attr(a, "class", "button is-white is-focused");
+        attr(a, "class", "button is-white is-outlined is-rounded");
         attr(a, "href", "/logout");
       },
       m(target, anchor) {
@@ -3087,177 +3087,199 @@
     };
   }
   function create_if_block_10(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Review Ka. Pusat Kajian");
+        span = element("span");
+        span.textContent = "Review Ka. Pusat Kajian";
+        attr(span, "class", "tag is-info is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_9(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Revisi Ka. Pusat Kajian");
+        span = element("span");
+        span.textContent = "Revisi Ka. Pusat Kajian";
+        attr(span, "class", "tag is-danger is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_8(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Review Reviewer");
+        span = element("span");
+        span.textContent = "Review Reviewer";
+        attr(span, "class", "tag is-info is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_7(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Revisi Reviewer");
+        span = element("span");
+        span.textContent = "Revisi Reviewer";
+        attr(span, "class", "tag is-danger is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_6(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Review Ka. LPPM");
+        span = element("span");
+        span.textContent = "Review Ka. LPPM";
+        attr(span, "class", "tag is-info is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_5(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Revisi Ka. LPPM");
+        span = element("span");
+        span.textContent = "Revisi Ka. LPPM";
+        attr(span, "class", "tag is-danger is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_42(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Review Ka. Departemen");
+        span = element("span");
+        span.textContent = "Review Ka. Departemen";
+        attr(span, "class", "tag is-info is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_32(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Revisi Ka. Departemen");
+        span = element("span");
+        span.textContent = "Revisi Ka.Departemen";
+        attr(span, "class", "tag is-danger is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_22(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Review Administrasi");
+        span = element("span");
+        span.textContent = "Review Administrasi";
+        attr(span, "class", "tag is-info is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block_14(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Revisi Proposal");
+        span = element("span");
+        span.textContent = "Revisi Proposal";
+        attr(span, "class", "tag is-danger is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
   }
   function create_if_block3(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text("Draft Proposal");
+        span = element("span");
+        span.textContent = "Draft Proposal";
+        attr(span, "class", "tag is-light is-rounded");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(span);
         }
       }
     };
@@ -3394,6 +3416,12 @@
     let t0;
     let pengumuman;
     let t1;
+    let div0;
+    let t5;
+    let div1;
+    let t9;
+    let div2;
+    let t13;
     let footer;
     let current;
     hero = new Hero_default({});
@@ -3405,13 +3433,34 @@
         t0 = space();
         create_component(pengumuman.$$.fragment);
         t1 = space();
+        div0 = element("div");
+        div0.innerHTML = `This text is within a <strong>block</strong>.`;
+        t5 = space();
+        div1 = element("div");
+        div1.innerHTML = `This text is within a <strong>second block</strong>. Lorem ipsum dolor sit
+   amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla
+   egestas. Nullam condimentum luctus turpis.`;
+        t9 = space();
+        div2 = element("div");
+        div2.innerHTML = `This text is within a <strong>third block</strong>. This block has no margin
+   at the bottom.`;
+        t13 = space();
         create_component(footer.$$.fragment);
+        attr(div0, "class", "block");
+        attr(div1, "class", "block");
+        attr(div2, "class", "block");
       },
       m(target, anchor) {
         mount_component(hero, target, anchor);
         insert(target, t0, anchor);
         mount_component(pengumuman, target, anchor);
         insert(target, t1, anchor);
+        insert(target, div0, anchor);
+        insert(target, t5, anchor);
+        insert(target, div1, anchor);
+        insert(target, t9, anchor);
+        insert(target, div2, anchor);
+        insert(target, t13, anchor);
         mount_component(footer, target, anchor);
         current = true;
       },
@@ -3434,6 +3483,12 @@
         if (detaching) {
           detach(t0);
           detach(t1);
+          detach(div0);
+          detach(t5);
+          detach(div1);
+          detach(t9);
+          detach(div2);
+          detach(t13);
         }
         destroy_component(hero, detaching);
         destroy_component(pengumuman, detaching);
@@ -6406,7 +6461,7 @@
         t5 = text("Detail");
         t6 = space();
         attr(td2, "class", "status svelte-1eb6cem");
-        attr(button, "class", "button is-info");
+        attr(button, "class", "button is-info is-rounded is-small");
         attr(button, "uid", button_uid_value = /*item*/
         ctx[3].id);
         attr(td3, "class", "review svelte-1eb6cem");
@@ -6508,14 +6563,14 @@
         t2 = space();
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>status</th> <th>Action</th></tr>`;
+        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Status</th> <th>Action</th></tr>`;
         t10 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
         attr(h1, "class", "title is-1");
-        attr(table, "class", "table");
+        attr(table, "class", "table is-fullwidth is-striped is-hoverable");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -6742,7 +6797,7 @@
         attr(h1, "class", "title is-1");
         attr(span0, "class", "icon");
         attr(button, "class", "button is-info");
-        attr(table, "class", "table");
+        attr(table, "class", "table is-fullwidth is-striped is-hoverable");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -7942,7 +7997,8 @@
         hr = element("hr");
         t2 = space();
         div = element("div");
-        div.innerHTML = `<p>Berikut adalah list <strong>Penelitian / Pengabdian Masyarakat</strong> yang diberikan kepada anda untuk mendapatkan persetujuan. Cek PPM dengan
+        div.innerHTML = `<p>Berikut adalah list <strong>Penelitian / Pengabdian Masyarakat</strong>
+            yang diberikan kepada anda untuk mendapatkan persetujuan. Cek PPM dengan
             teliti sebelum memberikan persetujuan!</p>`;
         t6 = space();
         table = element("table");
@@ -7954,8 +8010,8 @@
           each_blocks[i].c();
         }
         attr(h1, "class", "title is-1");
-        attr(div, "class", "box");
-        attr(table, "class", "table");
+        attr(div, "class", "notification is-info is-light");
+        attr(table, "class", "table is-fullwidth is-striped is-hoverable");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -9648,14 +9704,16 @@
     );
     let t2;
     let td2;
-    let status;
-    let td2_pid_value;
-    let t3;
-    let td3;
-    let button;
     let t4;
-    let button_pid_value;
+    let td3;
+    let status;
+    let td3_pid_value;
     let t5;
+    let td4;
+    let button;
+    let t6;
+    let button_pid_value;
+    let t7;
     let current;
     let mounted;
     let dispose;
@@ -9672,19 +9730,22 @@
         td1 = element("td");
         t2 = space();
         td2 = element("td");
-        create_component(status.$$.fragment);
-        t3 = space();
+        td2.innerHTML = `<progress class="progress is-success" value="60" max="100">60%</progress>`;
+        t4 = space();
         td3 = element("td");
-        button = element("button");
-        t4 = text("Detail");
+        create_component(status.$$.fragment);
         t5 = space();
-        attr(td2, "class", "status svelte-123mmn1");
-        attr(td2, "pid", td2_pid_value = /*item*/
+        td4 = element("td");
+        button = element("button");
+        t6 = text("Detail");
+        t7 = space();
+        attr(td3, "class", "status svelte-123mmn1");
+        attr(td3, "pid", td3_pid_value = /*item*/
         ctx[4].id);
         attr(button, "class", "button is-info");
         attr(button, "pid", button_pid_value = /*item*/
         ctx[4].id);
-        attr(td3, "class", "view svelte-123mmn1");
+        attr(td4, "class", "view svelte-123mmn1");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -9695,12 +9756,14 @@
         td1.innerHTML = raw_value;
         append(tr, t2);
         append(tr, td2);
-        mount_component(status, td2, null);
-        append(tr, t3);
+        append(tr, t4);
         append(tr, td3);
-        append(td3, button);
-        append(button, t4);
+        mount_component(status, td3, null);
         append(tr, t5);
+        append(tr, td4);
+        append(td4, button);
+        append(button, t6);
+        append(tr, t7);
         current = true;
         if (!mounted) {
           dispose = listen(
@@ -9729,9 +9792,9 @@
           ctx2[4].status;
         status.$set(status_changes);
         if (!current || dirty & /*items*/
-        1 && td2_pid_value !== (td2_pid_value = /*item*/
+        1 && td3_pid_value !== (td3_pid_value = /*item*/
         ctx2[4].id)) {
-          attr(td2, "pid", td2_pid_value);
+          attr(td3, "pid", td3_pid_value);
         }
         if (!current || dirty & /*items*/
         1 && button_pid_value !== (button_pid_value = /*item*/
@@ -9772,7 +9835,7 @@
     let t5;
     let table;
     let thead;
-    let t13;
+    let t15;
     let tbody;
     let current;
     let mounted;
@@ -9805,8 +9868,8 @@
         t5 = space();
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Status</th> <th colspan="2">Action</th></tr>`;
-        t13 = space();
+        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Progress</th> <th>Status</th> <th colspan="2">Action</th></tr>`;
+        t15 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -9814,7 +9877,7 @@
         attr(h1, "class", "title is-1");
         attr(span0, "class", "icon");
         attr(button, "class", "button is-info");
-        attr(table, "class", "table");
+        attr(table, "class", "table is-fullwidth is-striped is-hoverable");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
@@ -9829,7 +9892,7 @@
         insert(target, t5, anchor);
         insert(target, table, anchor);
         append(table, thead);
-        append(table, t13);
+        append(table, t15);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {

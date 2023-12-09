@@ -216,41 +216,6 @@ textarea {
   border-radius: 0.5rem;
   min-height: 7rem !important;
 }
-table {
-  font-family: var(--fonts);
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1rem 0;
-}
-td,
-th {
-  padding: 0.5rem 0.75rem;
-}
-th {
-  background: #434a54;
-  color: #ffffff;
-  font-weight: bold;
-  border: 1px solid #54585d;
-}
-td {
-  color: #636363;
-  border: 1px solid #dddfe1;
-}
-tr td {
-  background-color: #f9fafb;
-}
-tr:nth-child(odd) td {
-  background-color: #ffffff;
-}
-:is(th, td)[center] {
-  text-align: center;
-}
-:is(th, td)[right] {
-  text-align: center;
-}
-:is(th, td)[fixed] {
-  width: 1rem;
-}
 [slot][middle] {
   justify-content: center;
 }

@@ -58,11 +58,12 @@
          <span><a>Buat Proposal</a></span>
       </button>
 
-      <table class="table">
+      <table class="table is-fullwidth is-striped is-hoverable">
          <thead>
             <tr>
                <th>Judul</th>
                <th>Abstract</th>
+               <th>Progress</th>
                <th>Status</th>
                <th colspan="2">Action</th>
             </tr>
@@ -73,6 +74,11 @@
                <tr>
                   <td>{item.judul}</td>
                   <td>{@html item.abstrak}</td>
+                  <td
+                     ><progress class="progress is-success" value="60" max="100"
+                        >60%</progress
+                     ></td
+                  >
                   <td class="status" pid={item.id}>
                      <Status code={item.status} />
                   </td>

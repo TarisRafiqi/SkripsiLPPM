@@ -22,6 +22,20 @@
 </aside> -->
 
 <aside class="menu">
+   <!-- Container Photo Profile -->
+   <!-- <div class="box">
+      <figure class="image is-128x128">
+         <img
+            class="is-rounded"
+            src="https://bulma.io/images/placeholders/128x128.png"
+            alt="Profile Photo"
+         />
+      </figure>
+      <br />
+      <p class="title is-6">Yourname</p>
+      <p class="subtitle is-6">yourname@gmail.com</p>
+   </div> -->
+
    <p class="menu-label">General</p>
    {#each items as item}
       <ul class="menu-list">

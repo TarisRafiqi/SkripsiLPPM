@@ -125,7 +125,7 @@
          <span><a>Create User</a></span>
       </button>
 
-      <table class="table">
+      <table class="table is-fullwidth is-striped is-hoverable">
          <thead>
             <tr>
                <th>Username</th>

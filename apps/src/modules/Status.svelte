@@ -5,27 +5,39 @@
 </script>
 
 {#if code === 0}
-   Draft Proposal
+   <span class="tag is-light is-rounded">Draft Proposal</span>
+   <!-- Draft Proposal -->
 {:else if code === 1}
-   Revisi Proposal
+   <span class="tag is-danger is-light is-rounded">Revisi Proposal</span>
+   <!-- Revisi Proposal -->
 {:else if code === 2}
-   Review Administrasi
+   <span class="tag is-info is-light is-rounded">Review Administrasi</span>
+   <!-- Review Administrasi -->
 {:else if code === 3}
-   Revisi Ka. Departemen
+   <span class="tag is-danger is-light is-rounded">Revisi Ka.Departemen</span>
+   <!-- Revisi Ka.Departemen -->
 {:else if code === 4}
-   Review Ka. Departemen
+   <span class="tag is-info is-light is-rounded">Review Ka. Departemen</span>
+   <!-- Review Ka. Departemen -->
 {:else if code === 5}
-   Revisi Ka. LPPM
+   <span class="tag is-danger is-light is-rounded"> Revisi Ka. LPPM</span>
+   <!-- Revisi Ka. LPPM -->
 {:else if code === 6}
-   Review Ka. LPPM
+   <span class="tag is-info is-light is-rounded"> Review Ka. LPPM</span>
+   <!-- Review Ka. LPPM -->
 {:else if code === 7}
-   Revisi Reviewer
+   <span class="tag is-danger is-light is-rounded">Revisi Reviewer</span>
+   <!-- Revisi Reviewer -->
 {:else if code === 8}
-   Review Reviewer
+   <span class="tag is-info is-light is-rounded">Review Reviewer</span>
+   <!-- Review Reviewer -->
 {:else if code === 9}
-   Revisi Ka. Pusat Kajian
+   <span class="tag is-danger is-light is-rounded">Revisi Ka. Pusat Kajian</span
+   >
+   <!-- Revisi Ka. Pusat Kajian -->
 {:else if code === 10}
-   Review Ka. Pusat Kajian
+   <span class="tag is-info is-light is-rounded">Review Ka. Pusat Kajian</span>
+   <!-- Review Ka. Pusat Kajian -->
 {:else if code === 11}
    Ditolak Ka. Pusat Kajian
 {:else if code === 12}

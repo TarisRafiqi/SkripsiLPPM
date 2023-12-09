@@ -30,16 +30,17 @@
 
       <hr />
 
-      <div class="box">
+      <div class="notification is-info is-light">
          <p>
             Berikut adalah list <strong
                >Penelitian / Pengabdian Masyarakat</strong
-            > yang diberikan kepada anda untuk mendapatkan persetujuan. Cek PPM dengan
+            >
+            yang diberikan kepada anda untuk mendapatkan persetujuan. Cek PPM dengan
             teliti sebelum memberikan persetujuan!
          </p>
       </div>
 
-      <table class="table">
+      <table class="table is-fullwidth is-striped is-hoverable">
          <thead>
             <tr>
                <th>Judul</th>
