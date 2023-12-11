@@ -44,17 +44,15 @@
       </ul>
    {/each}
 
-   <p class="menu-label">Website Settings</p>
-   <ul class="menu-list">
-      <!-- svelte-ignore a11y-missing-attribute -->
-      <li><a>Pengumuman</a></li>
-      <!-- svelte-ignore a11y-missing-attribute -->
-
-      <li><a>About UISI</a></li>
-      <!-- svelte-ignore a11y-missing-attribute -->
-
-      <!-- <button class="button is-normal is-fullwidth">Logout</button> -->
-   </ul>
+   {#if role === "admin"}
+      <p class="menu-label">Website Settings</p>
+      <ul class="menu-list">
+         <!-- svelte-ignore a11y-missing-attribute -->
+         <li><a href="/admin/pengumuman">Pengumuman</a></li>
+         <!-- svelte-ignore a11y-missing-attribute -->
+         <li><a href="/admin/aboutuisi">About UISI</a></li>
+      </ul>
+   {/if}
 </aside>
 
 <style>

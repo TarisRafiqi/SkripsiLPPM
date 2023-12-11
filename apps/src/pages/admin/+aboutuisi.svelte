@@ -26,7 +26,7 @@
 </script>
 
 <Article>
-   <h1 class="title is-1">Pengumuman</h1>
+   <h1 class="title is-1">About UISI</h1>
    <hr />
 
    <p>
