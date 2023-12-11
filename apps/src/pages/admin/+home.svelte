@@ -5,12 +5,17 @@
 
 <Article>
    <h1 class="title is-1">Dashboard</h1>
+
    <hr />
-   <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga dolorum
-      inventore eius ratione. Animi, aperiam dolore. Aut iure earum reiciendis
-      iste rerum eveniet tempora nisi porro, animi molestiae obcaecati unde?
-   </p>
+
+   <div class="columns notification is-info is-light">
+      <p>
+         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos
+         veniam hic ad ratione, modi voluptatum perferendis praesentium facere,
+         recusandae illo. Officiis, ab omnis. Animi earum exercitationem qui
+         atque vero.
+      </p>
+   </div>
 
    <!-- <a href="/">
       <Icon id="orang" src={menu} />

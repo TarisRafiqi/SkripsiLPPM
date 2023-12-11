@@ -1,7 +1,8 @@
 <script>
    import { onMount } from "svelte";
-   import { Article, Field, Status } from "@cmp";
+   import { Article, Field, Status, Icon } from "@cmp";
    import { route } from "../../store";
+   import { addProposal } from "../../store/icons";
 
    export let params;
 
@@ -148,82 +149,218 @@
          console.log(response);
       }
    }
+
+   let tab1 = true;
+   let tab2;
+   let tab3;
+   let tab4;
+
+   function clicktab1() {
+      tab1 = true;
+      tab2 = false;
+      tab3 = false;
+      tab4 = false;
+   }
+
+   function clicktab2() {
+      tab1 = false;
+      tab2 = true;
+      tab3 = false;
+      tab4 = false;
+   }
+
+   function clicktab3() {
+      tab1 = false;
+      tab2 = false;
+      tab3 = true;
+      tab4 = false;
+   }
+
+   function clicktab4() {
+      tab1 = false;
+      tab2 = false;
+      tab3 = false;
+      tab4 = true;
+   }
+
+   function addLogbook() {
+      // $route("/dosen/addlogbook");
+      // location.href = "/dosen/addlogbook";
+   }
 </script>
 
 {#if items}
    <Article>
-      <h1 class="title is-1">Detail Proposal</h1>
+      <h1 class="title is-1">Detail PPM</h1>
 
       <div class="tabs is-boxed">
          <ul>
-            <li class="is-active">
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab1} class:is-active={tab1}>
                <!-- svelte-ignore a11y-missing-attribute -->
                <a>
-                  <span class="icon is-small"
-                     ><i class="fas fa-image" aria-hidden="true"></i></span
-                  >
                   <span>Identitas PPM</span>
                </a>
             </li>
-            <li>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab2} class:is-active={tab2}>
                <!-- svelte-ignore a11y-missing-attribute -->
                <a>
-                  <span class="icon is-small"
-                     ><i class="fas fa-music" aria-hidden="true"></i></span
-                  >
                   <span>Status</span>
                </a>
             </li>
-            <li>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab3} class:is-active={tab3}>
                <!-- svelte-ignore a11y-missing-attribute -->
                <a>
-                  <span class="icon is-small"
-                     ><i class="fas fa-film" aria-hidden="true"></i></span
-                  >
                   <span>Logbook / Monev</span>
                </a>
             </li>
-            <li>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab4} class:is-active={tab4}>
                <!-- svelte-ignore a11y-missing-attribute -->
                <a>
-                  <span class="icon is-small"
-                     ><i class="far fa-file-alt" aria-hidden="true"></i></span
-                  >
                   <span>Laporan</span>
                </a>
             </li>
          </ul>
       </div>
 
-      {#each items as item}
-         {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "jenis_kegiatan" && item.key !== "kode_program" && item.key !== "tipe_proposal" && item.key !== "kelompok_keahlian" && item.key !== "tahun_pelaksanaan" && item.key !== "topik" && item.key !== "biaya_penelitian" && item.key !== "anggota_tim" && item.key !== "update"}
-            {#if item.key === "status"}
-               <Field name={item.key}>
-                  <Status code={item.value} />
-               </Field>
-            {:else}
-               <Field
-                  view={view || item.key === "comment"}
-                  name={item.key}
-                  bind:value={item.value}
-                  textarea={item.key === "abstract" ? true : null}
-               />
-            {/if}
-         {/if}
-      {/each}
+      <!-- Tab Identitas PPM -->
+      {#if tab1 === true}
+         <div id="tab1">
+            {#each items as item}
+               {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "tipe_proposal" && item.key !== "update" && item.key !== "status"}
+                  {#if item.key === "status"}
+                     <Field name={item.key}>
+                        <Status code={item.value} />
+                     </Field>
+                  {:else}
+                     <Field
+                        view={view || item.key === "comment"}
+                        name={item.key}
+                        bind:value={item.value}
+                        textarea={item.key === "abstract" ? true : null}
+                     />
+                  {/if}
+               {/if}
+            {/each}
 
-      {#if !view}
-         <br />
-         {#if !statusProposal}
-            <Field>
-               <button on:click={simpanProposal}>Simpan</button>
-               <button on:click={submitProposal}>Submit</button>
-            </Field>
-         {:else}
-            <Field>
-               <button on:click={remediasi}>Remediasi</button>
-            </Field>
-         {/if}
+            {#if !view}
+               <br />
+               {#if !statusProposal}
+                  <Field>
+                     <button on:click={simpanProposal}>Simpan</button>
+                     <button on:click={submitProposal}>Submit</button>
+                  </Field>
+               {:else}
+                  <Field>
+                     <button on:click={remediasi}>Remediasi</button>
+                  </Field>
+               {/if}
+            {/if}
+         </div>
+      {/if}
+
+      <!-- Tab Status -->
+      {#if tab2 === true}
+         <div id="tab2">
+            <table
+               class="table is-fullwidth is-striped is-hoverable is-bordered"
+            >
+               <thead>
+                  <tr>
+                     <th>Status PPM</th>
+                     <th>Status Pendanaan</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td
+                        >{#each items as item}
+                           {#if item.key === "status"}
+                              <Status code={item.value} />
+                           {/if}
+                        {/each}</td
+                     >
+                     <td>Coming Soon</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      {/if}
+
+      <!-- Tab Logbook / Monev -->
+      {#if tab3 === true}
+         <div id="tab3">
+            <div class="columns notification is-info is-light">
+               <div class="column is-4">
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Totam suscipit placeat amet.
+                  </p>
+               </div>
+
+               <div class="column">
+                  <button class="button is-info" on:click={addLogbook}>
+                     <span class="icon">
+                        <Icon id="logbook" src={addProposal} />
+                     </span>
+                     <!-- svelte-ignore a11y-missing-attribute -->
+                     <span><a>Create Logbook</a></span>
+                  </button>
+               </div>
+            </div>
+
+            <hr />
+
+            <div class="columns notification is-success is-light">
+               <div class="column is-4">
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Totam suscipit placeat amet.
+                  </p>
+               </div>
+
+               <div class="column">
+                  <button class="button is-success" on:click={addLogbook}>
+                     <span class="icon">
+                        <Icon id="monev" src={addProposal} />
+                     </span>
+                     <!-- svelte-ignore a11y-missing-attribute -->
+                     <span><a>Create Monev</a></span>
+                  </button>
+               </div>
+            </div>
+         </div>
+      {/if}
+
+      <!-- Tab Laporan -->
+      {#if tab4 === true}
+         <div id="tab4">
+            <div class="columns notification is-info is-light">
+               <div class="column is-4">
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                     Totam suscipit placeat amet.
+                  </p>
+               </div>
+
+               <div class="column">
+                  <button class="button is-info" on:click={addLogbook}>
+                     <span class="icon">
+                        <Icon id="laporan" src={addProposal} />
+                     </span>
+                     <!-- svelte-ignore a11y-missing-attribute -->
+                     <span><a>Create Laporan</a></span>
+                  </button>
+               </div>
+            </div>
+         </div>
       {/if}
    </Article>
 {/if}

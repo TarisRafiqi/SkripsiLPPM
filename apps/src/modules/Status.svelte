@@ -42,9 +42,9 @@
    <span class="tag is-danger is-rounded">Proposal Ditolak</span>
    <!-- Ditolak Ka. Pusat Kajian -->
 {:else if code === 12}
-   <span class="tag is-link is-rounded">Penelitian Berjalan</span>
+   <span class="tag is-link is-rounded">PPM Berjalan</span>
    <!-- Penelitian Dimulai -->
 {:else if code === 13}
-   <span class="tag is-success is-rounded">Penelitian Selesai</span>
+   <span class="tag is-success is-rounded">PPM Selesai</span>
    <!-- Penelitian Selesai -->
 {/if}

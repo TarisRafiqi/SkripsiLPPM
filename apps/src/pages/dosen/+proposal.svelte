@@ -5,7 +5,8 @@
    import Editor from "@tinymce/tinymce-svelte";
 
    // let abstrak = "";
-   let test = "";
+   let value;
+   let label;
 
    let jenisKegiatan = "";
    let jenisProposal = "";
@@ -143,8 +144,6 @@
    <h1 class="title is-1">Buat Proposal</h1>
    <hr />
 
-   <br />
-
    <div class="field">
       <!-- svelte-ignore a11y-label-has-associated-control -->
       <label class="label">Name</label>
@@ -153,7 +152,18 @@
       </div>
    </div>
 
-   <Field select name="Judul" bind:value={test} />
+   <div class="field">
+      <!-- svelte-ignore a11y-label-has-associated-control -->
+      <label class="label">Jenis Kegiatan</label>
+      <div class="control">
+         <div class="select">
+            <select>
+               <option>Penelitian</option>
+               <option>Pengabdian Masyarkat</option>
+            </select>
+         </div>
+      </div>
+   </div>
 
    <Field name="Judul" bind:value={judul} />
    <Field id="abstract" textarea name="Abstrak" />

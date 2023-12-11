@@ -1,7 +1,8 @@
 <script>
    import { onMount } from "svelte";
    import { route } from "src/store";
-   import { Article, Status } from "@cmp";
+   import { Article, Status, Icon } from "@cmp";
+   import { infoOutline } from "../../store/icons";
 
    const id = localStorage.id;
    let items;
@@ -58,13 +59,15 @@
                   <td class="status" pid={item.id}>
                      <Status code={item.status} />
                   </td>
-                  <td class="view">
-                     <button
-                        class="button is-info"
+                  <td class="review"
+                     ><button
+                        class="button is-info is-rounded is-small"
                         pid={item.id}
                         on:click={detail}
-                        >Detail
-                     </button></td
+                        ><span class="icon">
+                           <Icon id="orang" src={infoOutline} />
+                        </span></button
+                     ></td
                   >
                </tr>
             {/each}
@@ -74,7 +77,7 @@
 {/if}
 
 <style>
-   .view {
+   .review {
       cursor: pointer;
    }
 

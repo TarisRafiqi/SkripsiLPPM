@@ -156,6 +156,39 @@
       }
    }
 
+   let tab1 = true;
+   let tab2;
+   let tab3;
+   let tab4;
+
+   function clicktab1() {
+      tab1 = true;
+      tab2 = false;
+      tab3 = false;
+      tab4 = false;
+   }
+
+   function clicktab2() {
+      tab1 = false;
+      tab2 = true;
+      tab3 = false;
+      tab4 = false;
+   }
+
+   function clicktab3() {
+      tab1 = false;
+      tab2 = false;
+      tab3 = true;
+      tab4 = false;
+   }
+
+   function clicktab4() {
+      tab1 = false;
+      tab2 = false;
+      tab3 = false;
+      tab4 = true;
+   }
+
    // $: console.log(status);
 </script>
 
@@ -163,87 +196,155 @@
    <Article>
       <h1 class="title is-1">Detail PPM</h1>
 
-      <hr />
+      <div class="tabs is-boxed">
+         <ul>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab1} class:is-active={tab1}>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span>Identitas PPM</span>
+               </a>
+            </li>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab2} class:is-active={tab2}>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span>Status</span>
+               </a>
+            </li>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab3} class:is-active={tab3}>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span>Logbook / Monev</span>
+               </a>
+            </li>
+            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li on:click={clicktab4} class:is-active={tab4}>
+               <!-- svelte-ignore a11y-missing-attribute -->
+               <a>
+                  <span>Laporan</span>
+               </a>
+            </li>
+         </ul>
+      </div>
 
-      {#each items as item}
-         {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update"}
-            <!-- {#if item.field === "uid"}
+      {#if tab1 === true}
+         {#each items as item}
+            {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update" && item.field !== "status"}
+               <!-- {#if item.field === "uid"}
          <Field
          view
          name={item.field}
                   value={item.value}
                   href={"/admin/profile/" + item.value}
                /> -->
-            {#if item.field === "status"}
-               <Field view name={item.field}>
+               {#if item.field === "status"}
+                  <!-- <Field view name={item.field}>
                   <Status code={item.value} />
+               </Field> -->
+               {:else}
+                  <Field view name={item.field} value={item.value} />
+               {/if}
+            {/if}
+         {/each}
+
+         <Field name="Comment" bind:value={comment} textarea />
+
+         <br />
+
+         {#if role === "Ka.Departemen"}
+            {#if status === 4}
+               <Field>
+                  <button class="button is-warning" on:click={handleRevisi}
+                     >Revisi</button
+                  >
+                  <button class="button is-info" on:click={handlePass}
+                     >Proses</button
+                  >
                </Field>
-            {:else}
-               <Field view name={item.field} value={item.value} />
             {/if}
          {/if}
-      {/each}
 
-      <Field name="Comment" bind:value={comment} textarea />
+         {#if role === "Ka.LPPM"}
+            {#if status === 6}
+               <Field>
+                  <button class="button is-warning" on:click={handleRevisi}
+                     >Revisi</button
+                  >
+                  <button class="button is-info" on:click={handlePass}
+                     >Proses</button
+                  >
+               </Field>
+            {/if}
+         {/if}
 
-      <br />
+         {#if role === "reviewer"}
+            {#if status === 8}
+               <Field>
+                  <button class="button is-warning" on:click={handleRevisi}
+                     >Revisi</button
+                  >
+                  <button class="button is-info" on:click={handlePass}
+                     >Proses</button
+                  >
+               </Field>
+            {/if}
+         {/if}
 
-      {#if role === "Ka.Departemen"}
-         {#if status === 4}
-            <Field>
-               <button class="button is-warning" on:click={handleRevisi}
-                  >Revisi</button
-               >
-               <button class="button is-info" on:click={handlePass}
-                  >Proses</button
-               >
-            </Field>
+         {#if role === "Ka.PusatKajian"}
+            {#if status === 10}
+               <Field>
+                  <button class="button is-warning" on:click={handleRevisi}
+                     >Revisi</button
+                  >
+                  <button class="button is-danger">Ditolak</button>
+                  <button class="button is-info" on:click={handlePass}
+                     >Proses</button
+                  >
+               </Field>
+            {/if}
          {/if}
       {/if}
 
-      {#if role === "Ka.LPPM"}
-         {#if status === 6}
-            <Field>
-               <button class="button is-warning" on:click={handleRevisi}
-                  >Revisi</button
-               >
-               <button class="button is-info" on:click={handlePass}
-                  >Proses</button
-               >
-            </Field>
-         {/if}
+      {#if tab2 === true}
+         <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+            <thead>
+               <tr>
+                  <th>Status PPM</th>
+                  <th>Status Pendanaan</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td
+                     >{#each items as item}
+                        {#if item.field === "status"}
+                           <Status code={item.value} />
+                        {/if}
+                     {/each}</td
+                  >
+                  <td>Coming Soon</td>
+               </tr>
+            </tbody>
+         </table>
       {/if}
 
-      {#if role === "reviewer"}
-         {#if status === 8}
-            <Field>
-               <button class="button is-warning" on:click={handleRevisi}
-                  >Revisi</button
-               >
-               <button class="button is-info" on:click={handlePass}
-                  >Proses</button
-               >
-            </Field>
-         {/if}
+      {#if tab3 === true}
+         <h3 class="title is-3">Coming Soon</h3>
       {/if}
 
-      {#if role === "Ka.PusatKajian"}
-         {#if status === 10}
-            <Field>
-               <button class="button is-warning" on:click={handleRevisi}
-                  >Revisi</button
-               >
-               <button class="button is-danger">Ditolak</button>
-               <button class="button is-info" on:click={handlePass}
-                  >Proses</button
-               >
-            </Field>
-         {/if}
+      {#if tab4 === true}
+         <h3 class="title is-3">Coming Soon</h3>
       {/if}
    </Article>
 {/if}
 
-<Modal bind:show={showModal}>
+<!-- <Modal bind:show={showModal}>
    <h2 slot="header">Find Approval</h2>
    <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores fuga
@@ -251,4 +352,4 @@
       delectus soluta iusto odio architecto impedit maxime non asperiores
       eligendi?
    </p>
-</Modal>
+</Modal> -->

@@ -164,6 +164,39 @@
          console.log(response);
       }
    }
+
+   let tab1 = true;
+   let tab2;
+   let tab3;
+   let tab4;
+
+   function clicktab1() {
+      tab1 = true;
+      tab2 = false;
+      tab3 = false;
+      tab4 = false;
+   }
+
+   function clicktab2() {
+      tab1 = false;
+      tab2 = true;
+      tab3 = false;
+      tab4 = false;
+   }
+
+   function clicktab3() {
+      tab1 = false;
+      tab2 = false;
+      tab3 = true;
+      tab4 = false;
+   }
+
+   function clicktab4() {
+      tab1 = false;
+      tab2 = false;
+      tab3 = false;
+      tab4 = true;
+   }
 </script>
 
 <Article>
@@ -171,53 +204,219 @@
 
    <div class="tabs is-boxed">
       <ul>
-         <li class="is-active">
+         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+         <!-- svelte-ignore a11y-click-events-have-key-events -->
+         <li on:click={clicktab1} class:is-active={tab1}>
             <!-- svelte-ignore a11y-missing-attribute -->
             <a>
-               <span class="icon is-small"
-                  ><i class="fas fa-image" aria-hidden="true"></i></span
-               >
                <span>Identitas</span>
             </a>
          </li>
-         <li>
+         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+         <!-- svelte-ignore a11y-click-events-have-key-events -->
+         <li on:click={clicktab2} class:is-active={tab2}>
             <!-- svelte-ignore a11y-missing-attribute -->
             <a>
-               <span class="icon is-small"
-                  ><i class="fas fa-music" aria-hidden="true"></i></span
-               >
                <span>Mata Kuliah</span>
             </a>
          </li>
-         <li>
+         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+         <!-- svelte-ignore a11y-click-events-have-key-events -->
+         <li on:click={clicktab3} class:is-active={tab3}>
             <!-- svelte-ignore a11y-missing-attribute -->
             <a>
-               <span class="icon is-small"
-                  ><i class="fas fa-film" aria-hidden="true"></i></span
-               >
                <span>Riwayat Pendidikan</span>
             </a>
          </li>
-         <li>
+         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+         <!-- svelte-ignore a11y-click-events-have-key-events -->
+         <li on:click={clicktab4} class:is-active={tab4}>
             <!-- svelte-ignore a11y-missing-attribute -->
             <a>
-               <span class="icon is-small"
-                  ><i class="far fa-file-alt" aria-hidden="true"></i></span
-               >
                <span>Pengalaman</span>
             </a>
          </li>
       </ul>
    </div>
 
-   {#if items}
-      {#each items as item}
-         <Field name={item.field} bind:value={item.value} />
-      {/each}
+   {#if tab1 === true}
+      {#if items}
+         {#each items as item}
+            <Field name={item.field} bind:value={item.value} />
+         {/each}
+         <br />
+         <Field>
+            <button class="button is-info is-light">Kembali</button>
+            <button class="button is-info" on:click={simpan}>Simpan</button>
+         </Field>
+      {/if}
+   {/if}
+
+   {#if tab2 === true}
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>Mata Kuliah</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>Informatika</td>
+               <td>icon delete</td>
+            </tr>
+         </tbody>
+      </table>
+   {/if}
+
+   {#if tab3 === true}
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>Program</th>
+               <th>S1</th>
+               <th>S2</th>
+               <th>S3</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <th>Nama Perguruan Tinggi</th>
+               <td>.......</td>
+               <td>.......</td>
+               <td>.......</td>
+            </tr>
+            <tr>
+               <th>Bidang Ilmu</th>
+               <td>.......</td>
+               <td>.......</td>
+               <td>.......</td>
+            </tr>
+            <tr>
+               <th>Tahun Masuk</th>
+               <td>.......</td>
+               <td>.......</td>
+               <td>.......</td>
+            </tr>
+            <tr>
+               <th>Tahun Lulus</th>
+               <td>.......</td>
+               <td>.......</td>
+               <td>.......</td>
+            </tr>
+            <tr>
+               <th>Judul Skripsi/Tesis/Disertasi</th>
+               <td>.......</td>
+               <td>.......</td>
+               <td>.......</td>
+            </tr>
+         </tbody>
+      </table>
+   {/if}
+
+   {#if tab4 === true}
+      <h6 class="title is-6">Pengalaman Penelitian</h6>
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>No</th>
+               <th>Tahun</th>
+               <th>Judul Penelitian</th>
+               <th>Ketua / Anggota</th>
+               <th>Sumber Dana</th>
+               <th>Jumlah Rp.</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody> </tbody>
+      </table>
       <br />
-      <Field>
-         <button class="button is-info is-light">Kembali</button>
-         <button class="button is-info" on:click={simpan}>Simpan</button>
-      </Field>
+
+      <h6 class="title is-6">Pengalaman Pengabdian Masyarakat</h6>
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>No</th>
+               <th>Tahun</th>
+               <th>Judul Pengmas</th>
+               <th>Ketua / Anggota</th>
+               <th>Sumber Dana</th>
+               <th>Jumlah Rp.</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody> </tbody>
+      </table>
+      <br />
+
+      <h6 class="title is-6">
+         Pengalaman Diseminasi Ilmiah dalam Pertemuan / Pameran
+      </h6>
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>No</th>
+               <th>Tahun</th>
+               <th>Judul Artikel</th>
+               <th>Nama Pemakalah</th>
+               <th>Nama Pertemuan Ilmiah / Pameran</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody> </tbody>
+      </table>
+      <br />
+
+      <h6 class="title is-6">
+         Pengalaman Publikasi Ilmiah dalam Jurnal "Bukan Proceeding"
+      </h6>
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>No</th>
+               <th>Tahun</th>
+               <th>Judul Artikel</th>
+               <th>Nama Jurnal, Vol., No Issue/No Artikel, Halaman</th>
+               <th>Impact Factor/Scopus Quarter/Akreditasi</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody> </tbody>
+      </table>
+      <br />
+
+      <h6 class="title is-6">Pengalaman Penulisan Buku</h6>
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>No</th>
+               <th>Tahun</th>
+               <th>Judul Buku</th>
+               <th>Nama Penulis</th>
+               <th>Penerbit</th>
+               <th>ISBN</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody> </tbody>
+      </table>
+      <br />
+
+      <h6 class="title is-6">Pengalaman Hak Kekayaan Intelektual</h6>
+      <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+         <thead>
+            <tr>
+               <th>No</th>
+               <th>Tahun</th>
+               <th>Judul HKI</th>
+               <th>Nama Penulis</th>
+               <th>Jenis HKI</th>
+               <th>No HKI</th>
+               <th>Hapus</th>
+            </tr>
+         </thead>
+         <tbody> </tbody>
+      </table>
+      <br />
    {/if}
 </Article>
