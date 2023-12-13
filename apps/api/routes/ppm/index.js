@@ -144,10 +144,10 @@ module.exports = async function (fastify, opts) {
       const roleFromToken = decodedToken.role;
 
       let data = request.body;
-      // reply.send({
-      //    data,
-      // });
-      // return;
+      reply.send({
+         data,
+      });
+      return;
       const sql =
          "INSERT INTO ppm (uid, judul, abstrak, isi, status, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?)";
       let connection;

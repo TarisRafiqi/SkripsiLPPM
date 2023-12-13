@@ -2,6 +2,7 @@
    import { onMount } from "svelte";
    import { Field, Article, Icon, Status } from "@cmp";
    import { route } from "../../store";
+   import { uploadIcon } from "../../store/icons";
    import Editor from "@tinymce/tinymce-svelte";
 
    // let abstrak = "";
@@ -68,6 +69,7 @@
       });
 
       const result = await response.json();
+      return;
 
       if (response.ok) {
          console.log(result);
@@ -86,6 +88,9 @@
       let payload = {
          id,
          judul,
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
          myAbstract,
          myIsi,
          status: 2,
@@ -102,6 +107,9 @@
       });
 
       const result = await response.json();
+
+      console.log(result);
+      return;
 
       if (response.ok) {
          $route("/dosen");
@@ -144,40 +152,126 @@
    <h1 class="title is-1">Buat Proposal</h1>
    <hr />
 
-   <div class="field">
-      <!-- svelte-ignore a11y-label-has-associated-control -->
-      <label class="label">Name</label>
-      <div class="control">
-         <input class="input" type="text" placeholder="Text input" />
+   <Field name="Jenis Proposal">
+      <div class="select">
+         <select bind:value={jenisProposal}>
+            <option value="" selected disabled hidden
+               >Pilih Jenis Proposal</option
+            >
+            <option selected value="Proposal Awal">Proposal Awal</option>
+            <option value="Proposal Lanjutan">Proposal Lanjutan</option>
+         </select>
       </div>
-   </div>
+   </Field>
 
-   <div class="field">
-      <!-- svelte-ignore a11y-label-has-associated-control -->
-      <label class="label">Jenis Kegiatan</label>
-      <div class="control">
-         <div class="select">
-            <select>
-               <option>Penelitian</option>
-               <option>Pengabdian Masyarkat</option>
-            </select>
-         </div>
+   <Field name="Jenis Kegiatan">
+      <div class="select">
+         <select bind:value={jenisKegiatan}>
+            <option value="" selected disabled hidden
+               >Pilih Jenis Kegiatan</option
+            >
+            <option value="Penelitian">Penelitian</option>
+            <option value="Pengabdian Masyarakat">Pengabdian Masyarakat</option>
+         </select>
       </div>
-   </div>
+   </Field>
 
-   <Field name="Judul" bind:value={judul} />
+   <Field name="Jenis Skema">
+      <div class="select">
+         <select bind:value={jenisSkema}>
+            <optgroup label="Skema Penelitian">
+               <option value="" selected disabled hidden
+                  >Pilih Skema Penelitian
+               </option>
+               <option value="HRRK">Riset Kelompok Keahlian</option>
+               <option value="HRT">Riset Terapan</option>
+               <option value="HRK">Riset Kerjasama</option>
+               <option value="RM">Riset Mandiri</option>
+               <option value="RE">Riset Eksternal</option>
+            </optgroup>
+            <optgroup label="Skema Pengabdian Masyarkat">
+               <option value="HPMDB">Pengabdian Masyarakat Desa Binaan</option>
+               <option value="HPMUB">Pengabdian Masyarakat UMKM Binaan</option>
+               <option value="PMM">Pengabdian Masyarakat Mandiri</option>
+               <option value="PMHE"
+                  >Pengabdian Masyarakat Hibah Eksternal</option
+               >
+            </optgroup>
+         </select>
+      </div>
+   </Field>
+
+   <Field name="Kelompok Keahlian">
+      <input
+         class="input"
+         type="text"
+         placeholder="Masukkan Kelompok Keahlian"
+         bind:value={kelompokKeahlian}
+      />
+   </Field>
+
+   <Field name="Topik">
+      <input
+         class="input"
+         type="text"
+         placeholder="Masukkan Topik"
+         bind:value={Topik}
+      />
+   </Field>
+
+   <Field datepicker name="Tahun Pelaksanaan" bind:value={tahunPelaksanaan} />
+
+   <Field name="Biaya Penelitian">
+      <input
+         class="input"
+         type="text"
+         placeholder="Masukkan Biaya Penelitian"
+         bind:value={biayaPenelitian}
+      />
+   </Field>
+
+   <Field name="Anggota Tim">
+      <input
+         class="input"
+         type="text"
+         placeholder="Tambahkan Anggota Tim"
+         bind:value={anggotaTim}
+      />
+   </Field>
+   <!-- <Field select name="Anggota Tim" bind:value={anggotaTim} /> -->
+
+   <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab}>
+      <div class="file">
+         <label class="file-label">
+            <input class="file-input" type="file" name="resume" />
+            <span class="file-cta">
+               <span class="file-icon">
+                  <Icon id="orang" src={uploadIcon} />
+               </span>
+               <span class="file-label"> Upload File </span>
+            </span>
+         </label>
+      </div>
+   </Field>
+
+   <!-- <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab} /> -->
+   <!-- <Field select name="Jenis Skema" bind:value={jenisSkema} /> -->
+   <!-- <Field select name="Jenis Proposal" bind:value={jenisProposal} /> -->
+   <!-- <Field select name="Kelompok Keahlian" bind:value={kelompokKeahlian} /> -->
+   <!-- <Field select name="Topik" bind:value={Topik} />
+   <Field select name="Biaya Penelitian" bind:value={biayaPenelitian} /> -->
+   <hr />
+   <Field name="Judul">
+      <input
+         class="input"
+         type="text"
+         placeholder="Masukkan Judul"
+         bind:value={judul}
+      />
+   </Field>
+
    <Field id="abstract" textarea name="Abstrak" />
    <Field id="isi" textarea name="Isi Proposal" />
-
-   <Field select name="Jenis Kegiatan" bind:value={jenisKegiatan} />
-   <Field select name="Jenis Skema" bind:value={jenisSkema} />
-   <Field select name="Jenis Proposal" bind:value={jenisProposal} />
-   <Field select name="Kelompok Keahlian" bind:value={kelompokKeahlian} />
-   <Field datepicker name="Tahun Pelaksanaan" bind:value={tahunPelaksanaan} />
-   <Field select name="Topik" bind:value={Topik} />
-   <Field select name="Biaya Penelitian" bind:value={biayaPenelitian} />
-   <Field select name="Anggota Tim" bind:value={anggotaTim} />
-   <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab} />
 
    <br />
    <Field>
@@ -191,4 +285,13 @@
 </Article>
 
 <style>
+   select:required:invalid {
+      color: rgb(201, 201, 201);
+   }
+   option[value=""][disabled] {
+      display: none;
+   }
+   option {
+      color: black;
+   }
 </style>

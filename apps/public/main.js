@@ -396,6 +396,22 @@
   function set_input_value(input, value) {
     input.value = value == null ? "" : value;
   }
+  function select_option(select, value, mounting) {
+    for (let i = 0; i < select.options.length; i += 1) {
+      const option = select.options[i];
+      if (option.__value === value) {
+        option.selected = true;
+        return;
+      }
+    }
+    if (!mounting || value !== void 0) {
+      select.selectedIndex = -1;
+    }
+  }
+  function select_value(select) {
+    const selected_option = select.querySelector(":checked");
+    return selected_option && selected_option.__value;
+  }
   function toggle_class(element2, name, toggle) {
     element2.classList.toggle(name, !!toggle);
   }
@@ -2448,6 +2464,7 @@
   var accountAdd = "M15 4a4 4 0 0 0-4 4a4 4 0 0 0 4 4a4 4 0 0 0 4-4a4 4 0 0 0-4-4m0 1.9a2.1 2.1 0 1 1 0 4.2A2.1 2.1 0 0 1 12.9 8A2.1 2.1 0 0 1 15 5.9M4 7v3H1v2h3v3h2v-3h3v-2H6V7H4m11 6c-2.67 0-8 1.33-8 4v3h16v-3c0-2.67-5.33-4-8-4m0 1.9c2.97 0 6.1 1.46 6.1 2.1v1.1H8.9V17c0-.64 3.1-2.1 6.1-2.1Z";
   var infoOutline = "M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z";
   var addProposal = "M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v6.7q-.475-.225-.975-.387T19 11.075V5H5v14h6.05q.075.55.238 1.05t.387.95H5Zm0-3v1V5v6.075V11v7Zm2-1h4.075q.075-.525.238-1.025t.362-.975H7v2Zm0-4h6.1q.8-.75 1.788-1.25T17 11.075V11H7v2Zm0-4h10V7H7v2Zm11 14q-2.075 0-3.537-1.463T13 18q0-2.075 1.463-3.537T18 13q2.075 0 3.538 1.463T23 18q0 2.075-1.463 3.538T18 23Zm-.5-2h1v-2.5H21v-1h-2.5V15h-1v2.5H15v1h2.5V21Z";
+  var uploadIcon = "M11 20H6.5q-2.275 0-3.887-1.575T1 14.575q0-1.95 1.175-3.475T5.25 9.15q.625-2.3 2.5-3.725T12 4q2.925 0 4.963 2.038T19 11q1.725.2 2.863 1.488T23 15.5q0 1.875-1.312 3.188T18.5 20H13v-7.15l1.6 1.55L16 13l-4-4l-4 4l1.4 1.4l1.6-1.55z";
 
   // src/modules/Navbarmenu.svelte
   function add_css9(target) {
@@ -12389,6 +12406,617 @@
   var scriptLoader = createScriptLoader();
 
   // src/pages/dosen/+proposal.svelte
+  function add_css22(target) {
+    append_styles(target, "svelte-1va68vy", 'select.svelte-1va68vy:required:invalid{color:rgb(201, 201, 201)}option[value=""][disabled].svelte-1va68vy{display:none}option.svelte-1va68vy{color:black}');
+  }
+  function create_default_slot_10(ctx) {
+    let div;
+    let select;
+    let option0;
+    let option1;
+    let option2;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        select = element("select");
+        option0 = element("option");
+        option0.textContent = "Pilih Jenis Proposal";
+        option1 = element("option");
+        option1.textContent = "Proposal Awal";
+        option2 = element("option");
+        option2.textContent = "Proposal Lanjutan";
+        option0.__value = "";
+        set_input_value(option0, option0.__value);
+        option0.selected = true;
+        option0.disabled = true;
+        option0.hidden = true;
+        attr(option0, "class", "svelte-1va68vy");
+        option1.selected = true;
+        option1.__value = "Proposal Awal";
+        set_input_value(option1, option1.__value);
+        attr(option1, "class", "svelte-1va68vy");
+        option2.__value = "Proposal Lanjutan";
+        set_input_value(option2, option2.__value);
+        attr(option2, "class", "svelte-1va68vy");
+        attr(select, "class", "svelte-1va68vy");
+        if (
+          /*jenisProposal*/
+          ctx[1] === void 0
+        )
+          add_render_callback(() => (
+            /*select_change_handler*/
+            ctx[12].call(select)
+          ));
+        attr(div, "class", "select");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, select);
+        append(select, option0);
+        append(select, option1);
+        append(select, option2);
+        select_option(
+          select,
+          /*jenisProposal*/
+          ctx[1],
+          true
+        );
+        if (!mounted) {
+          dispose = listen(
+            select,
+            "change",
+            /*select_change_handler*/
+            ctx[12]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*jenisProposal*/
+        2) {
+          select_option(
+            select,
+            /*jenisProposal*/
+            ctx2[1]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_9(ctx) {
+    let div;
+    let select;
+    let option0;
+    let option1;
+    let option2;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        select = element("select");
+        option0 = element("option");
+        option0.textContent = "Pilih Jenis Kegiatan";
+        option1 = element("option");
+        option1.textContent = "Penelitian";
+        option2 = element("option");
+        option2.textContent = "Pengabdian Masyarakat";
+        option0.__value = "";
+        set_input_value(option0, option0.__value);
+        option0.selected = true;
+        option0.disabled = true;
+        option0.hidden = true;
+        attr(option0, "class", "svelte-1va68vy");
+        option1.__value = "Penelitian";
+        set_input_value(option1, option1.__value);
+        attr(option1, "class", "svelte-1va68vy");
+        option2.__value = "Pengabdian Masyarakat";
+        set_input_value(option2, option2.__value);
+        attr(option2, "class", "svelte-1va68vy");
+        attr(select, "class", "svelte-1va68vy");
+        if (
+          /*jenisKegiatan*/
+          ctx[0] === void 0
+        )
+          add_render_callback(() => (
+            /*select_change_handler_1*/
+            ctx[13].call(select)
+          ));
+        attr(div, "class", "select");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, select);
+        append(select, option0);
+        append(select, option1);
+        append(select, option2);
+        select_option(
+          select,
+          /*jenisKegiatan*/
+          ctx[0],
+          true
+        );
+        if (!mounted) {
+          dispose = listen(
+            select,
+            "change",
+            /*select_change_handler_1*/
+            ctx[13]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*jenisKegiatan*/
+        1) {
+          select_option(
+            select,
+            /*jenisKegiatan*/
+            ctx2[0]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_8(ctx) {
+    let div;
+    let select;
+    let optgroup0;
+    let option0;
+    let option1;
+    let option2;
+    let option3;
+    let option4;
+    let option5;
+    let optgroup1;
+    let option6;
+    let option7;
+    let option8;
+    let option9;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        select = element("select");
+        optgroup0 = element("optgroup");
+        option0 = element("option");
+        option0.textContent = "Pilih Skema Penelitian\r\n               ";
+        option1 = element("option");
+        option1.textContent = "Riset Kelompok Keahlian";
+        option2 = element("option");
+        option2.textContent = "Riset Terapan";
+        option3 = element("option");
+        option3.textContent = "Riset Kerjasama";
+        option4 = element("option");
+        option4.textContent = "Riset Mandiri";
+        option5 = element("option");
+        option5.textContent = "Riset Eksternal";
+        optgroup1 = element("optgroup");
+        option6 = element("option");
+        option6.textContent = "Pengabdian Masyarakat Desa Binaan";
+        option7 = element("option");
+        option7.textContent = "Pengabdian Masyarakat UMKM Binaan";
+        option8 = element("option");
+        option8.textContent = "Pengabdian Masyarakat Mandiri";
+        option9 = element("option");
+        option9.textContent = "Pengabdian Masyarakat Hibah Eksternal";
+        option0.__value = "";
+        set_input_value(option0, option0.__value);
+        option0.selected = true;
+        option0.disabled = true;
+        option0.hidden = true;
+        attr(option0, "class", "svelte-1va68vy");
+        option1.__value = "HRRK";
+        set_input_value(option1, option1.__value);
+        attr(option1, "class", "svelte-1va68vy");
+        option2.__value = "HRT";
+        set_input_value(option2, option2.__value);
+        attr(option2, "class", "svelte-1va68vy");
+        option3.__value = "HRK";
+        set_input_value(option3, option3.__value);
+        attr(option3, "class", "svelte-1va68vy");
+        option4.__value = "RM";
+        set_input_value(option4, option4.__value);
+        attr(option4, "class", "svelte-1va68vy");
+        option5.__value = "RE";
+        set_input_value(option5, option5.__value);
+        attr(option5, "class", "svelte-1va68vy");
+        attr(optgroup0, "label", "Skema Penelitian");
+        option6.__value = "HPMDB";
+        set_input_value(option6, option6.__value);
+        attr(option6, "class", "svelte-1va68vy");
+        option7.__value = "HPMUB";
+        set_input_value(option7, option7.__value);
+        attr(option7, "class", "svelte-1va68vy");
+        option8.__value = "PMM";
+        set_input_value(option8, option8.__value);
+        attr(option8, "class", "svelte-1va68vy");
+        option9.__value = "PMHE";
+        set_input_value(option9, option9.__value);
+        attr(option9, "class", "svelte-1va68vy");
+        attr(optgroup1, "label", "Skema Pengabdian Masyarkat");
+        attr(select, "class", "svelte-1va68vy");
+        if (
+          /*jenisSkema*/
+          ctx[2] === void 0
+        )
+          add_render_callback(() => (
+            /*select_change_handler_2*/
+            ctx[14].call(select)
+          ));
+        attr(div, "class", "select");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, select);
+        append(select, optgroup0);
+        append(optgroup0, option0);
+        append(optgroup0, option1);
+        append(optgroup0, option2);
+        append(optgroup0, option3);
+        append(optgroup0, option4);
+        append(optgroup0, option5);
+        append(select, optgroup1);
+        append(optgroup1, option6);
+        append(optgroup1, option7);
+        append(optgroup1, option8);
+        append(optgroup1, option9);
+        select_option(
+          select,
+          /*jenisSkema*/
+          ctx[2],
+          true
+        );
+        if (!mounted) {
+          dispose = listen(
+            select,
+            "change",
+            /*select_change_handler_2*/
+            ctx[14]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*jenisSkema*/
+        4) {
+          select_option(
+            select,
+            /*jenisSkema*/
+            ctx2[2]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_7(ctx) {
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        input = element("input");
+        attr(input, "class", "input");
+        attr(input, "type", "text");
+        attr(input, "placeholder", "Masukkan Kelompok Keahlian");
+      },
+      m(target, anchor) {
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*kelompokKeahlian*/
+          ctx[3]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler*/
+            ctx[15]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*kelompokKeahlian*/
+        8 && input.value !== /*kelompokKeahlian*/
+        ctx2[3]) {
+          set_input_value(
+            input,
+            /*kelompokKeahlian*/
+            ctx2[3]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_6(ctx) {
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        input = element("input");
+        attr(input, "class", "input");
+        attr(input, "type", "text");
+        attr(input, "placeholder", "Masukkan Topik");
+      },
+      m(target, anchor) {
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*Topik*/
+          ctx[6]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_1*/
+            ctx[16]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*Topik*/
+        64 && input.value !== /*Topik*/
+        ctx2[6]) {
+          set_input_value(
+            input,
+            /*Topik*/
+            ctx2[6]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_5(ctx) {
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        input = element("input");
+        attr(input, "class", "input");
+        attr(input, "type", "text");
+        attr(input, "placeholder", "Masukkan Biaya Penelitian");
+      },
+      m(target, anchor) {
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*biayaPenelitian*/
+          ctx[7]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_2*/
+            ctx[18]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*biayaPenelitian*/
+        128 && input.value !== /*biayaPenelitian*/
+        ctx2[7]) {
+          set_input_value(
+            input,
+            /*biayaPenelitian*/
+            ctx2[7]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_42(ctx) {
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        input = element("input");
+        attr(input, "class", "input");
+        attr(input, "type", "text");
+        attr(input, "placeholder", "Tambahkan Anggota Tim");
+      },
+      m(target, anchor) {
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*anggotaTim*/
+          ctx[8]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_3*/
+            ctx[19]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*anggotaTim*/
+        256 && input.value !== /*anggotaTim*/
+        ctx2[8]) {
+          set_input_value(
+            input,
+            /*anggotaTim*/
+            ctx2[8]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_default_slot_33(ctx) {
+    let div;
+    let label_1;
+    let input;
+    let t0;
+    let span2;
+    let span0;
+    let icon;
+    let t1;
+    let span1;
+    let current;
+    icon = new Icon_default({ props: { id: "orang", src: uploadIcon } });
+    return {
+      c() {
+        div = element("div");
+        label_1 = element("label");
+        input = element("input");
+        t0 = space();
+        span2 = element("span");
+        span0 = element("span");
+        create_component(icon.$$.fragment);
+        t1 = space();
+        span1 = element("span");
+        span1.textContent = "Upload File";
+        attr(input, "class", "file-input");
+        attr(input, "type", "file");
+        attr(input, "name", "resume");
+        attr(span0, "class", "file-icon");
+        attr(span1, "class", "file-label");
+        attr(span2, "class", "file-cta");
+        attr(label_1, "class", "file-label");
+        attr(div, "class", "file");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, label_1);
+        append(label_1, input);
+        append(label_1, t0);
+        append(label_1, span2);
+        append(span2, span0);
+        mount_component(icon, span0, null);
+        append(span2, t1);
+        append(span2, span1);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_component(icon);
+      }
+    };
+  }
+  function create_default_slot_23(ctx) {
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        input = element("input");
+        attr(input, "class", "input");
+        attr(input, "type", "text");
+        attr(input, "placeholder", "Masukkan Judul");
+      },
+      m(target, anchor) {
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*judul*/
+          ctx[4]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_4*/
+            ctx[21]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*judul*/
+        16 && input.value !== /*judul*/
+        ctx2[4]) {
+          set_input_value(
+            input,
+            /*judul*/
+            ctx2[4]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
   function create_default_slot_15(ctx) {
     let button0;
     let t1;
@@ -12442,140 +13070,79 @@
   function create_default_slot13(ctx) {
     let h1;
     let t1;
-    let hr;
+    let hr0;
     let t2;
-    let div1;
-    let t5;
-    let div4;
-    let label1;
-    let t7;
-    let div3;
-    let div2;
-    let select;
-    let option0;
-    let option1;
-    let t10;
     let field0;
-    let updating_value;
-    let t11;
+    let t3;
     let field1;
-    let t12;
+    let t4;
     let field2;
-    let t13;
+    let t5;
     let field3;
-    let updating_value_1;
-    let t14;
+    let t6;
     let field4;
-    let updating_value_2;
-    let t15;
+    let t7;
     let field5;
-    let updating_value_3;
-    let t16;
+    let updating_value;
+    let t8;
     let field6;
-    let updating_value_4;
-    let t17;
+    let t9;
     let field7;
-    let updating_value_5;
-    let t18;
+    let t10;
     let field8;
-    let updating_value_6;
-    let t19;
+    let updating_value_1;
+    let t11;
+    let hr1;
+    let t12;
     let field9;
-    let updating_value_7;
-    let t20;
+    let t13;
     let field10;
-    let updating_value_8;
-    let t21;
+    let t14;
     let field11;
-    let updating_value_9;
-    let t22;
+    let t15;
     let br;
-    let t23;
+    let t16;
     let field12;
     let current;
-    function field0_value_binding(value) {
-      ctx[12](value);
-    }
-    let field0_props = { name: "Judul" };
-    if (
-      /*judul*/
-      ctx[4] !== void 0
-    ) {
-      field0_props.value = /*judul*/
-      ctx[4];
-    }
-    field0 = new Field_default({ props: field0_props });
-    binding_callbacks.push(() => bind(field0, "value", field0_value_binding));
+    field0 = new Field_default({
+      props: {
+        name: "Jenis Proposal",
+        $$slots: { default: [create_default_slot_10] },
+        $$scope: { ctx }
+      }
+    });
     field1 = new Field_default({
       props: {
-        id: "abstract",
-        textarea: true,
-        name: "Abstrak"
+        name: "Jenis Kegiatan",
+        $$slots: { default: [create_default_slot_9] },
+        $$scope: { ctx }
       }
     });
     field2 = new Field_default({
       props: {
-        id: "isi",
-        textarea: true,
-        name: "Isi Proposal"
+        name: "Jenis Skema",
+        $$slots: { default: [create_default_slot_8] },
+        $$scope: { ctx }
       }
     });
-    function field3_value_binding(value) {
-      ctx[13](value);
-    }
-    let field3_props = { select: true, name: "Jenis Kegiatan" };
-    if (
-      /*jenisKegiatan*/
-      ctx[0] !== void 0
-    ) {
-      field3_props.value = /*jenisKegiatan*/
-      ctx[0];
-    }
-    field3 = new Field_default({ props: field3_props });
-    binding_callbacks.push(() => bind(field3, "value", field3_value_binding));
-    function field4_value_binding(value) {
-      ctx[14](value);
-    }
-    let field4_props = { select: true, name: "Jenis Skema" };
-    if (
-      /*jenisSkema*/
-      ctx[2] !== void 0
-    ) {
-      field4_props.value = /*jenisSkema*/
-      ctx[2];
-    }
-    field4 = new Field_default({ props: field4_props });
-    binding_callbacks.push(() => bind(field4, "value", field4_value_binding));
+    field3 = new Field_default({
+      props: {
+        name: "Kelompok Keahlian",
+        $$slots: { default: [create_default_slot_7] },
+        $$scope: { ctx }
+      }
+    });
+    field4 = new Field_default({
+      props: {
+        name: "Topik",
+        $$slots: { default: [create_default_slot_6] },
+        $$scope: { ctx }
+      }
+    });
     function field5_value_binding(value) {
-      ctx[15](value);
-    }
-    let field5_props = { select: true, name: "Jenis Proposal" };
-    if (
-      /*jenisProposal*/
-      ctx[1] !== void 0
-    ) {
-      field5_props.value = /*jenisProposal*/
-      ctx[1];
-    }
-    field5 = new Field_default({ props: field5_props });
-    binding_callbacks.push(() => bind(field5, "value", field5_value_binding));
-    function field6_value_binding(value) {
-      ctx[16](value);
-    }
-    let field6_props = { select: true, name: "Kelompok Keahlian" };
-    if (
-      /*kelompokKeahlian*/
-      ctx[3] !== void 0
-    ) {
-      field6_props.value = /*kelompokKeahlian*/
-      ctx[3];
-    }
-    field6 = new Field_default({ props: field6_props });
-    binding_callbacks.push(() => bind(field6, "value", field6_value_binding));
-    function field7_value_binding(value) {
       ctx[17](value);
     }
-    let field7_props = {
+    let field5_props = {
       datepicker: true,
       name: "Tahun Pelaksanaan"
     };
@@ -12583,66 +13150,64 @@
       /*tahunPelaksanaan*/
       ctx[5] !== void 0
     ) {
-      field7_props.value = /*tahunPelaksanaan*/
+      field5_props.value = /*tahunPelaksanaan*/
       ctx[5];
     }
-    field7 = new Field_default({ props: field7_props });
-    binding_callbacks.push(() => bind(field7, "value", field7_value_binding));
+    field5 = new Field_default({ props: field5_props });
+    binding_callbacks.push(() => bind(field5, "value", field5_value_binding));
+    field6 = new Field_default({
+      props: {
+        name: "Biaya Penelitian",
+        $$slots: { default: [create_default_slot_5] },
+        $$scope: { ctx }
+      }
+    });
+    field7 = new Field_default({
+      props: {
+        name: "Anggota Tim",
+        $$slots: { default: [create_default_slot_42] },
+        $$scope: { ctx }
+      }
+    });
     function field8_value_binding(value) {
-      ctx[18](value);
-    }
-    let field8_props = { select: true, name: "Topik" };
-    if (
-      /*Topik*/
-      ctx[6] !== void 0
-    ) {
-      field8_props.value = /*Topik*/
-      ctx[6];
-    }
-    field8 = new Field_default({ props: field8_props });
-    binding_callbacks.push(() => bind(field8, "value", field8_value_binding));
-    function field9_value_binding(value) {
-      ctx[19](value);
-    }
-    let field9_props = { select: true, name: "Biaya Penelitian" };
-    if (
-      /*biayaPenelitian*/
-      ctx[7] !== void 0
-    ) {
-      field9_props.value = /*biayaPenelitian*/
-      ctx[7];
-    }
-    field9 = new Field_default({ props: field9_props });
-    binding_callbacks.push(() => bind(field9, "value", field9_value_binding));
-    function field10_value_binding(value) {
       ctx[20](value);
     }
-    let field10_props = { select: true, name: "Anggota Tim" };
-    if (
-      /*anggotaTim*/
-      ctx[8] !== void 0
-    ) {
-      field10_props.value = /*anggotaTim*/
-      ctx[8];
-    }
-    field10 = new Field_default({ props: field10_props });
-    binding_callbacks.push(() => bind(field10, "value", field10_value_binding));
-    function field11_value_binding(value) {
-      ctx[21](value);
-    }
-    let field11_props = {
+    let field8_props = {
       select: true,
-      name: "Rincian Anggaran Biaya (RAB)"
+      name: "Rincian Anggaran Biaya (RAB)",
+      $$slots: { default: [create_default_slot_33] },
+      $$scope: { ctx }
     };
     if (
       /*rab*/
       ctx[9] !== void 0
     ) {
-      field11_props.value = /*rab*/
+      field8_props.value = /*rab*/
       ctx[9];
     }
-    field11 = new Field_default({ props: field11_props });
-    binding_callbacks.push(() => bind(field11, "value", field11_value_binding));
+    field8 = new Field_default({ props: field8_props });
+    binding_callbacks.push(() => bind(field8, "value", field8_value_binding));
+    field9 = new Field_default({
+      props: {
+        name: "Judul",
+        $$slots: { default: [create_default_slot_23] },
+        $$scope: { ctx }
+      }
+    });
+    field10 = new Field_default({
+      props: {
+        id: "abstract",
+        textarea: true,
+        name: "Abstrak"
+      }
+    });
+    field11 = new Field_default({
+      props: {
+        id: "isi",
+        textarea: true,
+        name: "Isi Proposal"
+      }
+    });
     field12 = new Field_default({
       props: {
         $$slots: { default: [create_default_slot_15] },
@@ -12654,197 +13219,146 @@
         h1 = element("h1");
         h1.textContent = "Buat Proposal";
         t1 = space();
-        hr = element("hr");
+        hr0 = element("hr");
         t2 = space();
-        div1 = element("div");
-        div1.innerHTML = `<label class="label">Name</label> <div class="control"><input class="input" type="text" placeholder="Text input"/></div>`;
-        t5 = space();
-        div4 = element("div");
-        label1 = element("label");
-        label1.textContent = "Jenis Kegiatan";
-        t7 = space();
-        div3 = element("div");
-        div2 = element("div");
-        select = element("select");
-        option0 = element("option");
-        option0.textContent = "Penelitian";
-        option1 = element("option");
-        option1.textContent = "Pengabdian Masyarkat";
-        t10 = space();
         create_component(field0.$$.fragment);
-        t11 = space();
+        t3 = space();
         create_component(field1.$$.fragment);
-        t12 = space();
+        t4 = space();
         create_component(field2.$$.fragment);
-        t13 = space();
+        t5 = space();
         create_component(field3.$$.fragment);
-        t14 = space();
+        t6 = space();
         create_component(field4.$$.fragment);
-        t15 = space();
+        t7 = space();
         create_component(field5.$$.fragment);
-        t16 = space();
+        t8 = space();
         create_component(field6.$$.fragment);
-        t17 = space();
+        t9 = space();
         create_component(field7.$$.fragment);
-        t18 = space();
+        t10 = space();
         create_component(field8.$$.fragment);
-        t19 = space();
+        t11 = space();
+        hr1 = element("hr");
+        t12 = space();
         create_component(field9.$$.fragment);
-        t20 = space();
+        t13 = space();
         create_component(field10.$$.fragment);
-        t21 = space();
+        t14 = space();
         create_component(field11.$$.fragment);
-        t22 = space();
+        t15 = space();
         br = element("br");
-        t23 = space();
+        t16 = space();
         create_component(field12.$$.fragment);
         attr(h1, "class", "title is-1");
-        attr(div1, "class", "field");
-        attr(label1, "class", "label");
-        option0.__value = "Penelitian";
-        set_input_value(option0, option0.__value);
-        option1.__value = "Pengabdian Masyarkat";
-        set_input_value(option1, option1.__value);
-        attr(div2, "class", "select");
-        attr(div3, "class", "control");
-        attr(div4, "class", "field");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
         insert(target, t1, anchor);
-        insert(target, hr, anchor);
+        insert(target, hr0, anchor);
         insert(target, t2, anchor);
-        insert(target, div1, anchor);
-        insert(target, t5, anchor);
-        insert(target, div4, anchor);
-        append(div4, label1);
-        append(div4, t7);
-        append(div4, div3);
-        append(div3, div2);
-        append(div2, select);
-        append(select, option0);
-        append(select, option1);
-        insert(target, t10, anchor);
         mount_component(field0, target, anchor);
-        insert(target, t11, anchor);
+        insert(target, t3, anchor);
         mount_component(field1, target, anchor);
-        insert(target, t12, anchor);
+        insert(target, t4, anchor);
         mount_component(field2, target, anchor);
-        insert(target, t13, anchor);
+        insert(target, t5, anchor);
         mount_component(field3, target, anchor);
-        insert(target, t14, anchor);
+        insert(target, t6, anchor);
         mount_component(field4, target, anchor);
-        insert(target, t15, anchor);
+        insert(target, t7, anchor);
         mount_component(field5, target, anchor);
-        insert(target, t16, anchor);
+        insert(target, t8, anchor);
         mount_component(field6, target, anchor);
-        insert(target, t17, anchor);
+        insert(target, t9, anchor);
         mount_component(field7, target, anchor);
-        insert(target, t18, anchor);
+        insert(target, t10, anchor);
         mount_component(field8, target, anchor);
-        insert(target, t19, anchor);
+        insert(target, t11, anchor);
+        insert(target, hr1, anchor);
+        insert(target, t12, anchor);
         mount_component(field9, target, anchor);
-        insert(target, t20, anchor);
+        insert(target, t13, anchor);
         mount_component(field10, target, anchor);
-        insert(target, t21, anchor);
+        insert(target, t14, anchor);
         mount_component(field11, target, anchor);
-        insert(target, t22, anchor);
+        insert(target, t15, anchor);
         insert(target, br, anchor);
-        insert(target, t23, anchor);
+        insert(target, t16, anchor);
         mount_component(field12, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
         const field0_changes = {};
-        if (!updating_value && dirty & /*judul*/
-        16) {
-          updating_value = true;
-          field0_changes.value = /*judul*/
-          ctx2[4];
-          add_flush_callback(() => updating_value = false);
+        if (dirty & /*$$scope, jenisProposal*/
+        536870914) {
+          field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
+        const field1_changes = {};
+        if (dirty & /*$$scope, jenisKegiatan*/
+        536870913) {
+          field1_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        field1.$set(field1_changes);
+        const field2_changes = {};
+        if (dirty & /*$$scope, jenisSkema*/
+        536870916) {
+          field2_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        field2.$set(field2_changes);
         const field3_changes = {};
-        if (!updating_value_1 && dirty & /*jenisKegiatan*/
-        1) {
-          updating_value_1 = true;
-          field3_changes.value = /*jenisKegiatan*/
-          ctx2[0];
-          add_flush_callback(() => updating_value_1 = false);
+        if (dirty & /*$$scope, kelompokKeahlian*/
+        536870920) {
+          field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
-        if (!updating_value_2 && dirty & /*jenisSkema*/
-        4) {
-          updating_value_2 = true;
-          field4_changes.value = /*jenisSkema*/
-          ctx2[2];
-          add_flush_callback(() => updating_value_2 = false);
+        if (dirty & /*$$scope, Topik*/
+        536870976) {
+          field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
         const field5_changes = {};
-        if (!updating_value_3 && dirty & /*jenisProposal*/
-        2) {
-          updating_value_3 = true;
-          field5_changes.value = /*jenisProposal*/
-          ctx2[1];
-          add_flush_callback(() => updating_value_3 = false);
+        if (!updating_value && dirty & /*tahunPelaksanaan*/
+        32) {
+          updating_value = true;
+          field5_changes.value = /*tahunPelaksanaan*/
+          ctx2[5];
+          add_flush_callback(() => updating_value = false);
         }
         field5.$set(field5_changes);
         const field6_changes = {};
-        if (!updating_value_4 && dirty & /*kelompokKeahlian*/
-        8) {
-          updating_value_4 = true;
-          field6_changes.value = /*kelompokKeahlian*/
-          ctx2[3];
-          add_flush_callback(() => updating_value_4 = false);
+        if (dirty & /*$$scope, biayaPenelitian*/
+        536871040) {
+          field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
-        if (!updating_value_5 && dirty & /*tahunPelaksanaan*/
-        32) {
-          updating_value_5 = true;
-          field7_changes.value = /*tahunPelaksanaan*/
-          ctx2[5];
-          add_flush_callback(() => updating_value_5 = false);
+        if (dirty & /*$$scope, anggotaTim*/
+        536871168) {
+          field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
-        if (!updating_value_6 && dirty & /*Topik*/
-        64) {
-          updating_value_6 = true;
-          field8_changes.value = /*Topik*/
-          ctx2[6];
-          add_flush_callback(() => updating_value_6 = false);
+        if (dirty & /*$$scope*/
+        536870912) {
+          field8_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        if (!updating_value_1 && dirty & /*rab*/
+        512) {
+          updating_value_1 = true;
+          field8_changes.value = /*rab*/
+          ctx2[9];
+          add_flush_callback(() => updating_value_1 = false);
         }
         field8.$set(field8_changes);
         const field9_changes = {};
-        if (!updating_value_7 && dirty & /*biayaPenelitian*/
-        128) {
-          updating_value_7 = true;
-          field9_changes.value = /*biayaPenelitian*/
-          ctx2[7];
-          add_flush_callback(() => updating_value_7 = false);
+        if (dirty & /*$$scope, judul*/
+        536870928) {
+          field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
-        const field10_changes = {};
-        if (!updating_value_8 && dirty & /*anggotaTim*/
-        256) {
-          updating_value_8 = true;
-          field10_changes.value = /*anggotaTim*/
-          ctx2[8];
-          add_flush_callback(() => updating_value_8 = false);
-        }
-        field10.$set(field10_changes);
-        const field11_changes = {};
-        if (!updating_value_9 && dirty & /*rab*/
-        512) {
-          updating_value_9 = true;
-          field11_changes.value = /*rab*/
-          ctx2[9];
-          add_flush_callback(() => updating_value_9 = false);
-        }
-        field11.$set(field11_changes);
         const field12_changes = {};
         if (dirty & /*$$scope*/
         536870912) {
@@ -12890,26 +13404,24 @@
         if (detaching) {
           detach(h1);
           detach(t1);
-          detach(hr);
+          detach(hr0);
           detach(t2);
-          detach(div1);
+          detach(t3);
+          detach(t4);
           detach(t5);
-          detach(div4);
+          detach(t6);
+          detach(t7);
+          detach(t8);
+          detach(t9);
           detach(t10);
           detach(t11);
+          detach(hr1);
           detach(t12);
           detach(t13);
           detach(t14);
           detach(t15);
-          detach(t16);
-          detach(t17);
-          detach(t18);
-          detach(t19);
-          detach(t20);
-          detach(t21);
-          detach(t22);
           detach(br);
-          detach(t23);
+          detach(t16);
         }
         destroy_component(field0, detaching);
         destroy_component(field1, detaching);
@@ -12946,7 +13458,7 @@
       },
       p(ctx2, [dirty]) {
         const article_changes = {};
-        if (dirty & /*$$scope, rab, anggotaTim, biayaPenelitian, Topik, tahunPelaksanaan, kelompokKeahlian, jenisProposal, jenisSkema, jenisKegiatan, judul*/
+        if (dirty & /*$$scope, judul, rab, anggotaTim, biayaPenelitian, tahunPelaksanaan, Topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal*/
         536871935) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
@@ -13020,6 +13532,7 @@
         body: JSON.stringify(payload)
       });
       const result = await response.json();
+      return;
       if (response.ok) {
         console.log(result);
         $route("/dosen");
@@ -13034,6 +13547,9 @@
       let payload = {
         id,
         judul: judul2,
+        jenisProposal,
+        jenisKegiatan,
+        jenisSkema,
         myAbstract,
         myIsi,
         status: 2,
@@ -13048,6 +13564,8 @@
         body: JSON.stringify(payload)
       });
       const result = await response.json();
+      console.log(result);
+      return;
       if (response.ok) {
         $route("/dosen");
       } else {
@@ -13076,45 +13594,45 @@
         namaProgram: "Skema Riset Hibah Eksternal"
       }
     ];
-    function field0_value_binding(value2) {
-      judul2 = value2;
-      $$invalidate(4, judul2);
-    }
-    function field3_value_binding(value2) {
-      jenisKegiatan = value2;
-      $$invalidate(0, jenisKegiatan);
-    }
-    function field4_value_binding(value2) {
-      jenisSkema = value2;
-      $$invalidate(2, jenisSkema);
-    }
-    function field5_value_binding(value2) {
-      jenisProposal = value2;
+    function select_change_handler() {
+      jenisProposal = select_value(this);
       $$invalidate(1, jenisProposal);
     }
-    function field6_value_binding(value2) {
-      kelompokKeahlian = value2;
+    function select_change_handler_1() {
+      jenisKegiatan = select_value(this);
+      $$invalidate(0, jenisKegiatan);
+    }
+    function select_change_handler_2() {
+      jenisSkema = select_value(this);
+      $$invalidate(2, jenisSkema);
+    }
+    function input_input_handler() {
+      kelompokKeahlian = this.value;
       $$invalidate(3, kelompokKeahlian);
     }
-    function field7_value_binding(value2) {
+    function input_input_handler_1() {
+      Topik = this.value;
+      $$invalidate(6, Topik);
+    }
+    function field5_value_binding(value2) {
       tahunPelaksanaan = value2;
       $$invalidate(5, tahunPelaksanaan);
     }
-    function field8_value_binding(value2) {
-      Topik = value2;
-      $$invalidate(6, Topik);
-    }
-    function field9_value_binding(value2) {
-      biayaPenelitian = value2;
+    function input_input_handler_2() {
+      biayaPenelitian = this.value;
       $$invalidate(7, biayaPenelitian);
     }
-    function field10_value_binding(value2) {
-      anggotaTim = value2;
+    function input_input_handler_3() {
+      anggotaTim = this.value;
       $$invalidate(8, anggotaTim);
     }
-    function field11_value_binding(value2) {
+    function field8_value_binding(value2) {
       rab = value2;
       $$invalidate(9, rab);
+    }
+    function input_input_handler_4() {
+      judul2 = this.value;
+      $$invalidate(4, judul2);
     }
     return [
       jenisKegiatan,
@@ -13129,22 +13647,22 @@
       rab,
       simpanProposal,
       submitProposal,
-      field0_value_binding,
-      field3_value_binding,
-      field4_value_binding,
+      select_change_handler,
+      select_change_handler_1,
+      select_change_handler_2,
+      input_input_handler,
+      input_input_handler_1,
       field5_value_binding,
-      field6_value_binding,
-      field7_value_binding,
+      input_input_handler_2,
+      input_input_handler_3,
       field8_value_binding,
-      field9_value_binding,
-      field10_value_binding,
-      field11_value_binding
+      input_input_handler_4
     ];
   }
   var Proposal2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance26, create_fragment36, safe_not_equal, {});
+      init(this, options, instance26, create_fragment36, safe_not_equal, {}, add_css22);
     }
   };
   var proposal_default2 = Proposal2;
@@ -13476,7 +13994,7 @@
           /*item*/
           ctx[19].key
         ),
-        $$slots: { default: [create_default_slot_33] },
+        $$slots: { default: [create_default_slot_34] },
         $$scope: { ctx }
       }
     });
@@ -13515,7 +14033,7 @@
       }
     };
   }
-  function create_default_slot_33(ctx) {
+  function create_default_slot_34(ctx) {
     let status;
     let current;
     status = new Status_default({ props: { code: (
@@ -13710,7 +14228,7 @@
     let current;
     field = new Field_default({
       props: {
-        $$slots: { default: [create_default_slot_23] },
+        $$slots: { default: [create_default_slot_24] },
         $$scope: { ctx }
       }
     });
@@ -13785,7 +14303,7 @@
       }
     };
   }
-  function create_default_slot_23(ctx) {
+  function create_default_slot_24(ctx) {
     let button;
     let mounted;
     let dispose;
@@ -15058,7 +15576,7 @@
   ];
 
   // src/App.svelte
-  function add_css22(target) {
+  function add_css23(target) {
     append_styles(target, "svelte-16l003y", "aside ~ main{margin-left:var(--wide)}");
   }
   function create_if_block_110(ctx) {
@@ -15314,7 +15832,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance29, create_fragment39, safe_not_equal, {}, add_css22);
+      init(this, options, instance29, create_fragment39, safe_not_equal, {}, add_css23);
     }
   };
   var App_default = App;
