@@ -3,9 +3,8 @@
    import { Field, Article, Icon, Status } from "@cmp";
    import { route } from "../../store";
    import { uploadIcon } from "../../store/icons";
-   import Editor from "@tinymce/tinymce-svelte";
+   // import Editor from "@tinymce/tinymce-svelte";
 
-   // let abstrak = "";
    let value;
    let label;
 
@@ -15,7 +14,7 @@
    let kelompokKeahlian = "";
    let judul = "";
    let tahunPelaksanaan = "";
-   let Topik = "";
+   let topik = "";
    let biayaPenelitian = "";
    let anggotaTim = "";
    let rab = "";
@@ -52,11 +51,19 @@
 
       let payload = {
          id,
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         // biayaPenelitian,
+         // anggotaTim,
+         // rab,
          judul,
          myAbstract,
          myIsi,
          status: 0,
-         tahunPelaksanaan,
       };
 
       const response = await fetch("/api/ppm", {
@@ -69,7 +76,7 @@
       });
 
       const result = await response.json();
-      return;
+      // return;
 
       if (response.ok) {
          console.log(result);
@@ -87,14 +94,19 @@
 
       let payload = {
          id,
-         judul,
          jenisProposal,
          jenisKegiatan,
          jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         // biayaPenelitian,
+         // anggotaTim,
+         // rab,
+         judul,
          myAbstract,
          myIsi,
          status: 2,
-         tahunPelaksanaan,
       };
 
       const response = await fetch("/api/ppm", {
@@ -108,8 +120,8 @@
 
       const result = await response.json();
 
-      console.log(result);
-      return;
+      // console.log(result);
+      // return;
 
       if (response.ok) {
          $route("/dosen");
@@ -117,29 +129,6 @@
          console.log(result.msg);
       }
    }
-
-   let listKodeProgram = [
-      {
-         idKodeProgram: "1",
-         namaProgram: "Skema Riset Kelompok Keahlian",
-      },
-      {
-         idKodeProgram: "2",
-         namaProgram: "Skema Riset Terapan",
-      },
-      {
-         idKodeProgram: "3",
-         namaProgram: "Skema Riset Kerjasama",
-      },
-      {
-         idKodeProgram: "4",
-         namaProgram: "Skema Riset Mandiri",
-      },
-      {
-         idKodeProgram: "5",
-         namaProgram: "Skema Riset Hibah Eksternal",
-      },
-   ];
 
    function goSelect(el) {
       // console.log(el);
@@ -179,24 +168,27 @@
    <Field name="Jenis Skema">
       <div class="select">
          <select bind:value={jenisSkema}>
-            <optgroup label="Skema Penelitian">
-               <option value="" selected disabled hidden
-                  >Pilih Skema Penelitian
-               </option>
-               <option value="HRRK">Riset Kelompok Keahlian</option>
+            <option value="" selected disabled hidden
+               >Pilih Jenis Skema
+            </option>
+            {#if jenisKegiatan === "Penelitian"}
+               <!-- <optgroup label="Skema Penelitian"> -->
+               <option value="HRKK">Riset Kelompok Keahlian</option>
                <option value="HRT">Riset Terapan</option>
                <option value="HRK">Riset Kerjasama</option>
                <option value="RM">Riset Mandiri</option>
                <option value="RE">Riset Eksternal</option>
-            </optgroup>
-            <optgroup label="Skema Pengabdian Masyarkat">
+               <!-- </optgroup> -->
+            {:else}
+               <!-- <optgroup label="Skema Pengabdian Masyarakat"> -->
                <option value="HPMDB">Pengabdian Masyarakat Desa Binaan</option>
                <option value="HPMUB">Pengabdian Masyarakat UMKM Binaan</option>
                <option value="PMM">Pengabdian Masyarakat Mandiri</option>
                <option value="PMHE"
                   >Pengabdian Masyarakat Hibah Eksternal</option
                >
-            </optgroup>
+               <!-- </optgroup> -->
+            {/if}
          </select>
       </div>
    </Field>
@@ -215,7 +207,7 @@
          class="input"
          type="text"
          placeholder="Masukkan Topik"
-         bind:value={Topik}
+         bind:value={topik}
       />
    </Field>
 

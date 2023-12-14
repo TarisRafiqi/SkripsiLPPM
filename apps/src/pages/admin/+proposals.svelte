@@ -55,8 +55,8 @@
          <tbody>
             {#each items as item}
                <tr>
-                  <td>{item.judul}</td>
-                  <td>{item.abstrak}</td>
+                  <td><p>{item.judul}</p> </td>
+                  <td><p>{item.abstrak}</p></td>
                   <td class="status"><Status code={item.status} /></td>
                   <td class="review"
                      ><button
@@ -77,6 +77,12 @@
 {/if}
 
 <style>
+   th {
+      text-align: center;
+   }
+   p {
+      text-align: justify;
+   }
    .review {
       cursor: pointer;
    }

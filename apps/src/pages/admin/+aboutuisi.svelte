@@ -1,5 +1,27 @@
 <script>
-   import { Article, Status } from "@cmp";
+   import { Article, Field } from "@cmp";
+   import { onMount } from "svelte";
+
+   onMount(() => {
+      tinymce.init({
+         selector: "textarea",
+         plugins:
+            "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
+         toolbar:
+            "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+         tinycomments_mode: "embedded",
+         tinycomments_author: "Author name",
+         mergetags_list: [
+            { value: "First.Name", title: "First Name" },
+            { value: "Email", title: "Email" },
+         ],
+         ai_request: (request, respondWith) =>
+            respondWith.string(() =>
+               Promise.reject("See docs to implement AI Assistant")
+            ),
+      });
+   });
+
    // import { onMount } from "svelte";
    // import { route } from "../../store";
 
@@ -29,9 +51,7 @@
    <h1 class="title is-1">About UISI</h1>
    <hr />
 
-   <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum
-      dicta voluptatibus sequi! Saepe eos quo et incidunt mollitia assumenda,
-      quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.
-   </p>
+   <Field id="lppmUISI" textarea name="LPPM UISI" />
+   <Field id="fungsiTujuan" textarea name="Fungsi dan Tujuan" />
+   <Field id="visiMisi" textarea name="Visi dan Misi" />
 </Article>

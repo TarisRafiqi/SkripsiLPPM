@@ -797,7 +797,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance30, create_fragment40, not_equal, props, append_styles2, dirty = [-1]) {
+  function init(component, options, instance31, create_fragment40, not_equal, props, append_styles2, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -823,7 +823,7 @@
     };
     append_styles2 && append_styles2($$.root);
     let ready = false;
-    $$.ctx = instance30 ? instance30(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance31 ? instance31(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -2464,6 +2464,7 @@
   var accountAdd = "M15 4a4 4 0 0 0-4 4a4 4 0 0 0 4 4a4 4 0 0 0 4-4a4 4 0 0 0-4-4m0 1.9a2.1 2.1 0 1 1 0 4.2A2.1 2.1 0 0 1 12.9 8A2.1 2.1 0 0 1 15 5.9M4 7v3H1v2h3v3h2v-3h3v-2H6V7H4m11 6c-2.67 0-8 1.33-8 4v3h16v-3c0-2.67-5.33-4-8-4m0 1.9c2.97 0 6.1 1.46 6.1 2.1v1.1H8.9V17c0-.64 3.1-2.1 6.1-2.1Z";
   var infoOutline = "M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z";
   var addProposal = "M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v6.7q-.475-.225-.975-.387T19 11.075V5H5v14h6.05q.075.55.238 1.05t.387.95H5Zm0-3v1V5v6.075V11v7Zm2-1h4.075q.075-.525.238-1.025t.362-.975H7v2Zm0-4h6.1q.8-.75 1.788-1.25T17 11.075V11H7v2Zm0-4h10V7H7v2Zm11 14q-2.075 0-3.537-1.463T13 18q0-2.075 1.463-3.537T18 13q2.075 0 3.538 1.463T23 18q0 2.075-1.463 3.538T18 23Zm-.5-2h1v-2.5H21v-1h-2.5V15h-1v2.5H15v1h2.5V21Z";
+  var add = "M11 13v3q0 .425.288.713T12 17q.425 0 .713-.288T13 16v-3h3q.425 0 .713-.288T17 12q0-.425-.288-.712T16 11h-3V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v3H8q-.425 0-.712.288T7 12q0 .425.288.713T8 13h3Zm1 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z";
   var uploadIcon = "M11 20H6.5q-2.275 0-3.887-1.575T1 14.575q0-1.95 1.175-3.475T5.25 9.15q.625-2.3 2.5-3.725T12 4q2.925 0 4.963 2.038T19 11q1.725.2 2.863 1.488T23 15.5q0 1.875-1.312 3.188T18.5 20H13v-7.15l1.6 1.55L16 13l-4-4l-4 4l1.4 1.4l1.6-1.55z";
 
   // src/modules/Navbarmenu.svelte
@@ -4280,7 +4281,33 @@
     let t1;
     let hr;
     let t2;
-    let p;
+    let field0;
+    let t3;
+    let field1;
+    let t4;
+    let field2;
+    let current;
+    field0 = new Field_default({
+      props: {
+        id: "lppmUISI",
+        textarea: true,
+        name: "LPPM UISI"
+      }
+    });
+    field1 = new Field_default({
+      props: {
+        id: "fungsiTujuan",
+        textarea: true,
+        name: "Fungsi dan Tujuan"
+      }
+    });
+    field2 = new Field_default({
+      props: {
+        id: "visiMisi",
+        textarea: true,
+        name: "Visi dan Misi"
+      }
+    });
     return {
       c() {
         h1 = element("h1");
@@ -4288,8 +4315,11 @@
         t1 = space();
         hr = element("hr");
         t2 = space();
-        p = element("p");
-        p.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum\r\n      dicta voluptatibus sequi! Saepe eos quo et incidunt mollitia assumenda,\r\n      quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.";
+        create_component(field0.$$.fragment);
+        t3 = space();
+        create_component(field1.$$.fragment);
+        t4 = space();
+        create_component(field2.$$.fragment);
         attr(h1, "class", "title is-1");
       },
       m(target, anchor) {
@@ -4297,17 +4327,40 @@
         insert(target, t1, anchor);
         insert(target, hr, anchor);
         insert(target, t2, anchor);
-        insert(target, p, anchor);
+        mount_component(field0, target, anchor);
+        insert(target, t3, anchor);
+        mount_component(field1, target, anchor);
+        insert(target, t4, anchor);
+        mount_component(field2, target, anchor);
+        current = true;
       },
       p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(field0.$$.fragment, local);
+        transition_in(field1.$$.fragment, local);
+        transition_in(field2.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(field0.$$.fragment, local);
+        transition_out(field1.$$.fragment, local);
+        transition_out(field2.$$.fragment, local);
+        current = false;
+      },
       d(detaching) {
         if (detaching) {
           detach(h1);
           detach(t1);
           detach(hr);
           detach(t2);
-          detach(p);
+          detach(t3);
+          detach(t4);
         }
+        destroy_component(field0, detaching);
+        destroy_component(field1, detaching);
+        destroy_component(field2, detaching);
       }
     };
   }
@@ -4351,10 +4404,27 @@
       }
     };
   }
+  function instance14($$self) {
+    onMount(() => {
+      tinymce.init({
+        selector: "textarea",
+        plugins: "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
+        toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        tinycomments_mode: "embedded",
+        tinycomments_author: "Author name",
+        mergetags_list: [
+          { value: "First.Name", title: "First Name" },
+          { value: "Email", title: "Email" }
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+      });
+    });
+    return [];
+  }
   var Aboutuisi = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment21, safe_not_equal, {});
+      init(this, options, instance14, create_fragment21, safe_not_equal, {});
     }
   };
   var aboutuisi_default = Aboutuisi;
@@ -4523,7 +4593,7 @@
       }
     };
   }
-  function instance14($$self, $$props, $$invalidate) {
+  function instance15($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(0, $route = $$value));
     function addUser() {
@@ -4534,7 +4604,7 @@
   var Createuser = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance14, create_fragment22, safe_not_equal, {});
+      init(this, options, instance15, create_fragment22, safe_not_equal, {});
     }
   };
   var createuser_default = Createuser;
@@ -4637,7 +4707,21 @@
     let t1;
     let hr;
     let t2;
-    let p;
+    let div2;
+    let div0;
+    let t5;
+    let div1;
+    let button;
+    let span0;
+    let icon;
+    let t6;
+    let span1;
+    let t8;
+    let table;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({ props: { id: "add", src: add } });
     return {
       c() {
         h1 = element("h1");
@@ -4645,26 +4729,74 @@
         t1 = space();
         hr = element("hr");
         t2 = space();
-        p = element("p");
-        p.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum\r\n      dicta voluptatibus sequi! Saepe eos quo et incidunt mollitia assumenda,\r\n      quis, dolore voluptates aut, consectetur ad eaque soluta explicabo sit.";
+        div2 = element("div");
+        div0 = element("div");
+        div0.innerHTML = `<p>Lorem ipsum dolor sit <strong>Pengumuman</strong></p>`;
+        t5 = space();
+        div1 = element("div");
+        button = element("button");
+        span0 = element("span");
+        create_component(icon.$$.fragment);
+        t6 = space();
+        span1 = element("span");
+        span1.innerHTML = `<a>Buat Pengumuman</a>`;
+        t8 = space();
+        table = element("table");
+        table.innerHTML = `<thead><tr><th>Judul</th> <th>Isi</th> <th>Action</th></tr></thead> <tbody><tr><td>.......</td> <td>.......</td> <td>.......</td></tr></tbody>`;
         attr(h1, "class", "title is-1");
+        attr(div0, "class", "column is-4");
+        attr(span0, "class", "icon");
+        attr(button, "class", "button is-info");
+        attr(div1, "class", "column");
+        attr(div2, "class", "columns notification is-info is-light");
+        attr(table, "class", "table is-fullwidth is-striped is-hoverable");
       },
       m(target, anchor) {
         insert(target, h1, anchor);
         insert(target, t1, anchor);
         insert(target, hr, anchor);
         insert(target, t2, anchor);
-        insert(target, p, anchor);
+        insert(target, div2, anchor);
+        append(div2, div0);
+        append(div2, t5);
+        append(div2, div1);
+        append(div1, button);
+        append(button, span0);
+        mount_component(icon, span0, null);
+        append(button, t6);
+        append(button, span1);
+        insert(target, t8, anchor);
+        insert(target, table, anchor);
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", addPengumuman);
+          mounted = true;
+        }
       },
       p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$$.fragment, local);
+        current = false;
+      },
       d(detaching) {
         if (detaching) {
           detach(h1);
           detach(t1);
           detach(hr);
           detach(t2);
-          detach(p);
+          detach(div2);
+          detach(t8);
+          detach(table);
         }
+        destroy_component(icon);
+        mounted = false;
+        dispose();
       }
     };
   }
@@ -4707,6 +4839,8 @@
         destroy_component(article, detaching);
       }
     };
+  }
+  function addPengumuman() {
   }
   var Pengumuman2 = class extends SvelteComponent {
     constructor(options) {
@@ -5127,7 +5261,7 @@
       }
     };
   }
-  function instance15($$self, $$props, $$invalidate) {
+  function instance16($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(5, $route = $$value));
     let { params } = $$props;
@@ -5282,7 +5416,7 @@
   var Profile = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance15, create_fragment25, safe_not_equal, { params: 3 });
+      init(this, options, instance16, create_fragment25, safe_not_equal, { params: 3 });
     }
   };
   var profile_default = Profile;
@@ -6960,7 +7094,7 @@
   }
   async function handleSubmit() {
   }
-  function instance16($$self, $$props, $$invalidate) {
+  function instance17($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(39, $route = $$value));
     let { params } = $$props;
@@ -7202,14 +7336,14 @@
   var Proposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance16, create_fragment26, safe_not_equal, { params: 23 }, null, [-1, -1]);
+      init(this, options, instance17, create_fragment26, safe_not_equal, { params: 23 }, null, [-1, -1]);
     }
   };
   var proposal_default = Proposal;
 
   // src/pages/admin/+proposals.svelte
   function add_css18(target) {
-    append_styles(target, "svelte-1eb6cem", ".review.svelte-1eb6cem{cursor:pointer}.status.svelte-1eb6cem{text-align:center}");
+    append_styles(target, "svelte-1fo15t", "th.svelte-1fo15t{text-align:center}p.svelte-1fo15t{text-align:justify}.review.svelte-1fo15t{cursor:pointer}.status.svelte-1fo15t{text-align:center}");
   }
   function get_each_context6(ctx, list, i) {
     const child_ctx = ctx.slice();
@@ -7259,6 +7393,7 @@
   function create_each_block6(ctx) {
     let tr;
     let td0;
+    let p0;
     let t0_value = (
       /*item*/
       ctx[3].judul + ""
@@ -7266,6 +7401,7 @@
     let t0;
     let t1;
     let td1;
+    let p1;
     let t2_value = (
       /*item*/
       ctx[3].abstrak + ""
@@ -7293,9 +7429,11 @@
       c() {
         tr = element("tr");
         td0 = element("td");
+        p0 = element("p");
         t0 = text(t0_value);
         t1 = space();
         td1 = element("td");
+        p1 = element("p");
         t2 = text(t2_value);
         t3 = space();
         td2 = element("td");
@@ -7306,20 +7444,24 @@
         span = element("span");
         create_component(icon.$$.fragment);
         t5 = space();
-        attr(td2, "class", "status svelte-1eb6cem");
+        attr(p0, "class", "svelte-1fo15t");
+        attr(p1, "class", "svelte-1fo15t");
+        attr(td2, "class", "status svelte-1fo15t");
         attr(span, "class", "icon");
         attr(button, "class", "button is-info is-rounded is-small");
         attr(button, "uid", button_uid_value = /*item*/
         ctx[3].id);
-        attr(td3, "class", "review svelte-1eb6cem");
+        attr(td3, "class", "review svelte-1fo15t");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
         append(tr, td0);
-        append(td0, t0);
+        append(td0, p0);
+        append(p0, t0);
         append(tr, t1);
         append(tr, td1);
-        append(td1, t2);
+        append(td1, p1);
+        append(p1, t2);
         append(tr, t3);
         append(tr, td2);
         mount_component(status, td2, null);
@@ -7414,7 +7556,7 @@
         t2 = space();
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Status</th> <th>Action</th></tr>`;
+        thead.innerHTML = `<tr><th class="svelte-1fo15t">Judul</th> <th class="svelte-1fo15t">Abstract</th> <th class="svelte-1fo15t">Status</th> <th class="svelte-1fo15t">Action</th></tr>`;
         t10 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -7556,7 +7698,7 @@
       }
     };
   }
-  function instance17($$self, $$props, $$invalidate) {
+  function instance18($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     let items;
@@ -7581,7 +7723,7 @@
   var Proposals = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance17, create_fragment27, safe_not_equal, {}, add_css18);
+      init(this, options, instance18, create_fragment27, safe_not_equal, {}, add_css18);
     }
   };
   var proposals_default = Proposals;
@@ -8084,7 +8226,7 @@
       }
     };
   }
-  function instance18($$self, $$props, $$invalidate) {
+  function instance19($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(6, $route = $$value));
     let { params } = $$props;
@@ -8184,7 +8326,7 @@
   var Users = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance18, create_fragment28, safe_not_equal, { params: 4 }, add_css19);
+      init(this, options, instance19, create_fragment28, safe_not_equal, { params: 4 }, add_css19);
     }
   };
   var users_default = Users;
@@ -8364,7 +8506,7 @@
       }
     };
   }
-  function instance19($$self, $$props, $$invalidate) {
+  function instance20($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -8383,7 +8525,7 @@
   var Index2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance19, create_fragment29, safe_not_equal, { params: 0 });
+      init(this, options, instance20, create_fragment29, safe_not_equal, { params: 0 });
     }
   };
   var Index_default2 = Index2;
@@ -8415,7 +8557,7 @@
       }
     };
   }
-  function instance20($$self, $$props, $$invalidate) {
+  function instance21($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(1, $route = $$value));
     let { params } = $$props;
@@ -8442,7 +8584,7 @@
   var Home2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance20, create_fragment30, safe_not_equal, { params: 0 });
+      init(this, options, instance21, create_fragment30, safe_not_equal, { params: 0 });
     }
   };
   var home_default2 = Home2;
@@ -8622,7 +8764,7 @@
       }
     };
   }
-  function instance21($$self, $$props, $$invalidate) {
+  function instance22($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -8641,7 +8783,7 @@
   var Index3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance21, create_fragment31, safe_not_equal, { params: 0 });
+      init(this, options, instance22, create_fragment31, safe_not_equal, { params: 0 });
     }
   };
   var Index_default3 = Index3;
@@ -9026,7 +9168,7 @@
       }
     };
   }
-  function instance22($$self, $$props, $$invalidate) {
+  function instance23($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     const id = localStorage.id;
@@ -9049,7 +9191,7 @@
   var Approval = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance22, create_fragment32, safe_not_equal, {}, add_css20);
+      init(this, options, instance23, create_fragment32, safe_not_equal, {}, add_css20);
     }
   };
   var approval_default = Approval;
@@ -10738,7 +10880,7 @@
       }
     };
   }
-  function instance23($$self, $$props, $$invalidate) {
+  function instance24($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(29, $route = $$value));
     let { params } = $$props;
@@ -10916,14 +11058,14 @@
   var Detailproposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance23, create_fragment33, safe_not_equal, { params: 14 }, null, [-1, -1]);
+      init(this, options, instance24, create_fragment33, safe_not_equal, { params: 14 }, null, [-1, -1]);
     }
   };
   var detailproposal_default = Detailproposal;
 
   // src/pages/dosen/+home.svelte
   function add_css21(target) {
-    append_styles(target, "svelte-1eb6cem", ".review.svelte-1eb6cem{cursor:pointer}.status.svelte-1eb6cem{text-align:center}");
+    append_styles(target, "svelte-4z2166", "p.svelte-4z2166{text-align:justify}.review.svelte-4z2166{cursor:pointer}.status.svelte-4z2166{text-align:center}");
   }
   function get_each_context10(ctx, list, i) {
     const child_ctx = ctx.slice();
@@ -10973,6 +11115,7 @@
   function create_each_block10(ctx) {
     let tr;
     let td0;
+    let p0;
     let t0_value = (
       /*item*/
       ctx[4].judul + ""
@@ -10980,23 +11123,22 @@
     let t0;
     let t1;
     let td1;
+    let p1;
     let raw_value = (
       /*item*/
       ctx[4].abstrak + ""
     );
     let t2;
     let td2;
-    let t4;
-    let td3;
     let status;
-    let td3_pid_value;
-    let t5;
-    let td4;
+    let td2_pid_value;
+    let t3;
+    let td3;
     let button;
     let span;
     let icon;
     let button_pid_value;
-    let t6;
+    let t4;
     let current;
     let mounted;
     let dispose;
@@ -11009,48 +11151,49 @@
       c() {
         tr = element("tr");
         td0 = element("td");
+        p0 = element("p");
         t0 = text(t0_value);
         t1 = space();
         td1 = element("td");
+        p1 = element("p");
         t2 = space();
         td2 = element("td");
-        td2.innerHTML = `<progress class="progress is-success" value="60" max="100">60%</progress>`;
-        t4 = space();
-        td3 = element("td");
         create_component(status.$$.fragment);
-        t5 = space();
-        td4 = element("td");
+        t3 = space();
+        td3 = element("td");
         button = element("button");
         span = element("span");
         create_component(icon.$$.fragment);
-        t6 = space();
-        attr(td3, "class", "status svelte-1eb6cem");
-        attr(td3, "pid", td3_pid_value = /*item*/
+        t4 = space();
+        attr(p0, "class", "svelte-4z2166");
+        attr(p1, "class", "svelte-4z2166");
+        attr(td2, "class", "status svelte-4z2166");
+        attr(td2, "pid", td2_pid_value = /*item*/
         ctx[4].id);
         attr(span, "class", "icon");
         attr(button, "class", "button is-info is-rounded is-small");
         attr(button, "pid", button_pid_value = /*item*/
         ctx[4].id);
-        attr(td4, "class", "review svelte-1eb6cem");
+        attr(td3, "class", "review svelte-4z2166");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
         append(tr, td0);
-        append(td0, t0);
+        append(td0, p0);
+        append(p0, t0);
         append(tr, t1);
         append(tr, td1);
-        td1.innerHTML = raw_value;
+        append(td1, p1);
+        p1.innerHTML = raw_value;
         append(tr, t2);
         append(tr, td2);
-        append(tr, t4);
+        mount_component(status, td2, null);
+        append(tr, t3);
         append(tr, td3);
-        mount_component(status, td3, null);
-        append(tr, t5);
-        append(tr, td4);
-        append(td4, button);
+        append(td3, button);
         append(button, span);
         mount_component(icon, span, null);
-        append(tr, t6);
+        append(tr, t4);
         current = true;
         if (!mounted) {
           dispose = listen(
@@ -11070,7 +11213,7 @@
         if ((!current || dirty & /*items*/
         1) && raw_value !== (raw_value = /*item*/
         ctx2[4].abstrak + ""))
-          td1.innerHTML = raw_value;
+          p1.innerHTML = raw_value;
         ;
         const status_changes = {};
         if (dirty & /*items*/
@@ -11079,9 +11222,9 @@
           ctx2[4].status;
         status.$set(status_changes);
         if (!current || dirty & /*items*/
-        1 && td3_pid_value !== (td3_pid_value = /*item*/
+        1 && td2_pid_value !== (td2_pid_value = /*item*/
         ctx2[4].id)) {
-          attr(td3, "pid", td3_pid_value);
+          attr(td2, "pid", td2_pid_value);
         }
         if (!current || dirty & /*items*/
         1 && button_pid_value !== (button_pid_value = /*item*/
@@ -11125,7 +11268,7 @@
     let t5;
     let table;
     let thead;
-    let t15;
+    let t13;
     let tbody;
     let current;
     let mounted;
@@ -11158,8 +11301,8 @@
         t5 = space();
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Progress</th> <th>Status</th> <th colspan="2">Action</th></tr>`;
-        t15 = space();
+        thead.innerHTML = `<tr><th>Judul</th> <th>Abstract</th> <th>Status</th> <th colspan="2">Action</th></tr>`;
+        t13 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -11182,7 +11325,7 @@
         insert(target, t5, anchor);
         insert(target, table, anchor);
         append(table, thead);
-        append(table, t15);
+        append(table, t13);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -11322,7 +11465,7 @@
   function addProposal2() {
     location.href = "/dosen/proposal";
   }
-  function instance24($$self, $$props, $$invalidate) {
+  function instance25($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(2, $route = $$value));
     const id = localStorage.id;
@@ -11351,7 +11494,7 @@
   var Home3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance24, create_fragment34, safe_not_equal, {}, add_css21);
+      init(this, options, instance25, create_fragment34, safe_not_equal, {}, add_css21);
     }
   };
   var home_default3 = Home3;
@@ -12177,7 +12320,7 @@
       }
     };
   }
-  function instance25($$self, $$props, $$invalidate) {
+  function instance26($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(11, $route = $$value));
     let items;
@@ -12360,50 +12503,10 @@
   var Profile2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance25, create_fragment35, safe_not_equal, {});
+      init(this, options, instance26, create_fragment35, safe_not_equal, {});
     }
   };
   var profile_default2 = Profile2;
-
-  // node_modules/@tinymce/tinymce-svelte/dist/index.mjs
-  var uuid = (prefix) => {
-    return prefix + "_" + Math.floor(Math.random() * 1e9) + String(Date.now());
-  };
-  var createScriptLoader = () => {
-    let state = {
-      listeners: [],
-      scriptId: uuid("tiny-script"),
-      scriptLoaded: false,
-      injected: false
-    };
-    const injectScript = (scriptId, doc, url, cb) => {
-      state.injected = true;
-      const script = doc.createElement("script");
-      script.referrerPolicy = "origin";
-      script.type = "application/javascript";
-      script.src = url;
-      script.onload = () => {
-        cb();
-      };
-      if (doc.head)
-        doc.head.appendChild(script);
-    };
-    const load = (doc, url, callback) => {
-      if (state.scriptLoaded) {
-        callback();
-      } else {
-        state.listeners.push(callback);
-        if (!state.injected) {
-          injectScript(state.scriptId, doc, url, () => {
-            state.listeners.forEach((fn) => fn());
-            state.scriptLoaded = true;
-          });
-        }
-      }
-    };
-    return { load };
-  };
-  var scriptLoader = createScriptLoader();
 
   // src/pages/dosen/+proposal.svelte
   function add_css22(target) {
@@ -12574,84 +12677,131 @@
       }
     };
   }
-  function create_default_slot_8(ctx) {
-    let div;
-    let select;
-    let optgroup0;
+  function create_else_block7(ctx) {
+    let option0;
+    let option1;
+    let option2;
+    let option3;
+    return {
+      c() {
+        option0 = element("option");
+        option0.textContent = "Pengabdian Masyarakat Desa Binaan";
+        option1 = element("option");
+        option1.textContent = "Pengabdian Masyarakat UMKM Binaan";
+        option2 = element("option");
+        option2.textContent = "Pengabdian Masyarakat Mandiri";
+        option3 = element("option");
+        option3.textContent = "Pengabdian Masyarakat Hibah Eksternal";
+        option0.__value = "HPMDB";
+        set_input_value(option0, option0.__value);
+        attr(option0, "class", "svelte-1va68vy");
+        option1.__value = "HPMUB";
+        set_input_value(option1, option1.__value);
+        attr(option1, "class", "svelte-1va68vy");
+        option2.__value = "PMM";
+        set_input_value(option2, option2.__value);
+        attr(option2, "class", "svelte-1va68vy");
+        option3.__value = "PMHE";
+        set_input_value(option3, option3.__value);
+        attr(option3, "class", "svelte-1va68vy");
+      },
+      m(target, anchor) {
+        insert(target, option0, anchor);
+        insert(target, option1, anchor);
+        insert(target, option2, anchor);
+        insert(target, option3, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(option0);
+          detach(option1);
+          detach(option2);
+          detach(option3);
+        }
+      }
+    };
+  }
+  function create_if_block15(ctx) {
     let option0;
     let option1;
     let option2;
     let option3;
     let option4;
-    let option5;
-    let optgroup1;
-    let option6;
-    let option7;
-    let option8;
-    let option9;
+    return {
+      c() {
+        option0 = element("option");
+        option0.textContent = "Riset Kelompok Keahlian";
+        option1 = element("option");
+        option1.textContent = "Riset Terapan";
+        option2 = element("option");
+        option2.textContent = "Riset Kerjasama";
+        option3 = element("option");
+        option3.textContent = "Riset Mandiri";
+        option4 = element("option");
+        option4.textContent = "Riset Eksternal";
+        option0.__value = "HRKK";
+        set_input_value(option0, option0.__value);
+        attr(option0, "class", "svelte-1va68vy");
+        option1.__value = "HRT";
+        set_input_value(option1, option1.__value);
+        attr(option1, "class", "svelte-1va68vy");
+        option2.__value = "HRK";
+        set_input_value(option2, option2.__value);
+        attr(option2, "class", "svelte-1va68vy");
+        option3.__value = "RM";
+        set_input_value(option3, option3.__value);
+        attr(option3, "class", "svelte-1va68vy");
+        option4.__value = "RE";
+        set_input_value(option4, option4.__value);
+        attr(option4, "class", "svelte-1va68vy");
+      },
+      m(target, anchor) {
+        insert(target, option0, anchor);
+        insert(target, option1, anchor);
+        insert(target, option2, anchor);
+        insert(target, option3, anchor);
+        insert(target, option4, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(option0);
+          detach(option1);
+          detach(option2);
+          detach(option3);
+          detach(option4);
+        }
+      }
+    };
+  }
+  function create_default_slot_8(ctx) {
+    let div;
+    let select;
+    let option;
     let mounted;
     let dispose;
+    function select_block_type(ctx2, dirty) {
+      if (
+        /*jenisKegiatan*/
+        ctx2[0] === "Penelitian"
+      )
+        return create_if_block15;
+      return create_else_block7;
+    }
+    let current_block_type = select_block_type(ctx, -1);
+    let if_block = current_block_type(ctx);
     return {
       c() {
         div = element("div");
         select = element("select");
-        optgroup0 = element("optgroup");
-        option0 = element("option");
-        option0.textContent = "Pilih Skema Penelitian\r\n               ";
-        option1 = element("option");
-        option1.textContent = "Riset Kelompok Keahlian";
-        option2 = element("option");
-        option2.textContent = "Riset Terapan";
-        option3 = element("option");
-        option3.textContent = "Riset Kerjasama";
-        option4 = element("option");
-        option4.textContent = "Riset Mandiri";
-        option5 = element("option");
-        option5.textContent = "Riset Eksternal";
-        optgroup1 = element("optgroup");
-        option6 = element("option");
-        option6.textContent = "Pengabdian Masyarakat Desa Binaan";
-        option7 = element("option");
-        option7.textContent = "Pengabdian Masyarakat UMKM Binaan";
-        option8 = element("option");
-        option8.textContent = "Pengabdian Masyarakat Mandiri";
-        option9 = element("option");
-        option9.textContent = "Pengabdian Masyarakat Hibah Eksternal";
-        option0.__value = "";
-        set_input_value(option0, option0.__value);
-        option0.selected = true;
-        option0.disabled = true;
-        option0.hidden = true;
-        attr(option0, "class", "svelte-1va68vy");
-        option1.__value = "HRRK";
-        set_input_value(option1, option1.__value);
-        attr(option1, "class", "svelte-1va68vy");
-        option2.__value = "HRT";
-        set_input_value(option2, option2.__value);
-        attr(option2, "class", "svelte-1va68vy");
-        option3.__value = "HRK";
-        set_input_value(option3, option3.__value);
-        attr(option3, "class", "svelte-1va68vy");
-        option4.__value = "RM";
-        set_input_value(option4, option4.__value);
-        attr(option4, "class", "svelte-1va68vy");
-        option5.__value = "RE";
-        set_input_value(option5, option5.__value);
-        attr(option5, "class", "svelte-1va68vy");
-        attr(optgroup0, "label", "Skema Penelitian");
-        option6.__value = "HPMDB";
-        set_input_value(option6, option6.__value);
-        attr(option6, "class", "svelte-1va68vy");
-        option7.__value = "HPMUB";
-        set_input_value(option7, option7.__value);
-        attr(option7, "class", "svelte-1va68vy");
-        option8.__value = "PMM";
-        set_input_value(option8, option8.__value);
-        attr(option8, "class", "svelte-1va68vy");
-        option9.__value = "PMHE";
-        set_input_value(option9, option9.__value);
-        attr(option9, "class", "svelte-1va68vy");
-        attr(optgroup1, "label", "Skema Pengabdian Masyarkat");
+        option = element("option");
+        option.textContent = "Pilih Jenis Skema\r\n            ";
+        if_block.c();
+        option.__value = "";
+        set_input_value(option, option.__value);
+        option.selected = true;
+        option.disabled = true;
+        option.hidden = true;
+        attr(option, "class", "svelte-1va68vy");
         attr(select, "class", "svelte-1va68vy");
         if (
           /*jenisSkema*/
@@ -12666,18 +12816,8 @@
       m(target, anchor) {
         insert(target, div, anchor);
         append(div, select);
-        append(select, optgroup0);
-        append(optgroup0, option0);
-        append(optgroup0, option1);
-        append(optgroup0, option2);
-        append(optgroup0, option3);
-        append(optgroup0, option4);
-        append(optgroup0, option5);
-        append(select, optgroup1);
-        append(optgroup1, option6);
-        append(optgroup1, option7);
-        append(optgroup1, option8);
-        append(optgroup1, option9);
+        append(select, option);
+        if_block.m(select, null);
         select_option(
           select,
           /*jenisSkema*/
@@ -12695,6 +12835,14 @@
         }
       },
       p(ctx2, dirty) {
+        if (current_block_type !== (current_block_type = select_block_type(ctx2, dirty))) {
+          if_block.d(1);
+          if_block = current_block_type(ctx2);
+          if (if_block) {
+            if_block.c();
+            if_block.m(select, null);
+          }
+        }
         if (dirty & /*jenisSkema*/
         4) {
           select_option(
@@ -12708,6 +12856,7 @@
         if (detaching) {
           detach(div);
         }
+        if_block.d();
         mounted = false;
         dispose();
       }
@@ -12776,7 +12925,7 @@
         insert(target, input, anchor);
         set_input_value(
           input,
-          /*Topik*/
+          /*topik*/
           ctx[6]
         );
         if (!mounted) {
@@ -12790,12 +12939,12 @@
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*Topik*/
-        64 && input.value !== /*Topik*/
+        if (dirty & /*topik*/
+        64 && input.value !== /*topik*/
         ctx2[6]) {
           set_input_value(
             input,
-            /*Topik*/
+            /*topik*/
             ctx2[6]
           );
         }
@@ -13291,31 +13440,31 @@
       p(ctx2, dirty) {
         const field0_changes = {};
         if (dirty & /*$$scope, jenisProposal*/
-        536870914) {
+        268435458) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty & /*$$scope, jenisKegiatan*/
-        536870913) {
+        268435457) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
-        if (dirty & /*$$scope, jenisSkema*/
-        536870916) {
+        if (dirty & /*$$scope, jenisSkema, jenisKegiatan*/
+        268435461) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty & /*$$scope, kelompokKeahlian*/
-        536870920) {
+        268435464) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
-        if (dirty & /*$$scope, Topik*/
-        536870976) {
+        if (dirty & /*$$scope, topik*/
+        268435520) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
@@ -13330,19 +13479,19 @@
         field5.$set(field5_changes);
         const field6_changes = {};
         if (dirty & /*$$scope, biayaPenelitian*/
-        536871040) {
+        268435584) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
         if (dirty & /*$$scope, anggotaTim*/
-        536871168) {
+        268435712) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
         if (dirty & /*$$scope*/
-        536870912) {
+        268435456) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         if (!updating_value_1 && dirty & /*rab*/
@@ -13355,13 +13504,13 @@
         field8.$set(field8_changes);
         const field9_changes = {};
         if (dirty & /*$$scope, judul*/
-        536870928) {
+        268435472) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field12_changes = {};
         if (dirty & /*$$scope*/
-        536870912) {
+        268435456) {
           field12_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field12.$set(field12_changes);
@@ -13458,8 +13607,8 @@
       },
       p(ctx2, [dirty]) {
         const article_changes = {};
-        if (dirty & /*$$scope, judul, rab, anggotaTim, biayaPenelitian, tahunPelaksanaan, Topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal*/
-        536871935) {
+        if (dirty & /*$$scope, judul, rab, anggotaTim, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal*/
+        268436479) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -13479,7 +13628,7 @@
       }
     };
   }
-  function instance26($$self, $$props, $$invalidate) {
+  function instance27($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(24, $route = $$value));
     let value;
@@ -13490,7 +13639,7 @@
     let kelompokKeahlian = "";
     let judul2 = "";
     let tahunPelaksanaan = "";
-    let Topik = "";
+    let topik = "";
     let biayaPenelitian = "";
     let anggotaTim = "";
     let rab = "";
@@ -13517,11 +13666,19 @@
       myIsi = tinymce.get("isi").getContent();
       let payload = {
         id,
+        jenisProposal,
+        jenisKegiatan,
+        jenisSkema,
+        kelompokKeahlian,
+        topik,
+        tahunPelaksanaan,
+        // biayaPenelitian,
+        // anggotaTim,
+        // rab,
         judul: judul2,
         myAbstract,
         myIsi,
-        status: 0,
-        tahunPelaksanaan
+        status: 0
       };
       const response = await fetch("/api/ppm", {
         method: "POST",
@@ -13532,7 +13689,6 @@
         body: JSON.stringify(payload)
       });
       const result = await response.json();
-      return;
       if (response.ok) {
         console.log(result);
         $route("/dosen");
@@ -13546,14 +13702,19 @@
       myIsi = tinymce.get("isi").getContent();
       let payload = {
         id,
-        judul: judul2,
         jenisProposal,
         jenisKegiatan,
         jenisSkema,
+        kelompokKeahlian,
+        topik,
+        tahunPelaksanaan,
+        // biayaPenelitian,
+        // anggotaTim,
+        // rab,
+        judul: judul2,
         myAbstract,
         myIsi,
-        status: 2,
-        tahunPelaksanaan
+        status: 2
       };
       const response = await fetch("/api/ppm", {
         method: "POST",
@@ -13564,36 +13725,12 @@
         body: JSON.stringify(payload)
       });
       const result = await response.json();
-      console.log(result);
-      return;
       if (response.ok) {
         $route("/dosen");
       } else {
         console.log(result.msg);
       }
     }
-    let listKodeProgram = [
-      {
-        idKodeProgram: "1",
-        namaProgram: "Skema Riset Kelompok Keahlian"
-      },
-      {
-        idKodeProgram: "2",
-        namaProgram: "Skema Riset Terapan"
-      },
-      {
-        idKodeProgram: "3",
-        namaProgram: "Skema Riset Kerjasama"
-      },
-      {
-        idKodeProgram: "4",
-        namaProgram: "Skema Riset Mandiri"
-      },
-      {
-        idKodeProgram: "5",
-        namaProgram: "Skema Riset Hibah Eksternal"
-      }
-    ];
     function select_change_handler() {
       jenisProposal = select_value(this);
       $$invalidate(1, jenisProposal);
@@ -13611,8 +13748,8 @@
       $$invalidate(3, kelompokKeahlian);
     }
     function input_input_handler_1() {
-      Topik = this.value;
-      $$invalidate(6, Topik);
+      topik = this.value;
+      $$invalidate(6, topik);
     }
     function field5_value_binding(value2) {
       tahunPelaksanaan = value2;
@@ -13641,7 +13778,7 @@
       kelompokKeahlian,
       judul2,
       tahunPelaksanaan,
-      Topik,
+      topik,
       biayaPenelitian,
       anggotaTim,
       rab,
@@ -13662,7 +13799,7 @@
   var Proposal2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance26, create_fragment36, safe_not_equal, {}, add_css22);
+      init(this, options, instance27, create_fragment36, safe_not_equal, {}, add_css22);
     }
   };
   var proposal_default2 = Proposal2;
@@ -13680,7 +13817,7 @@
     child_ctx[23] = i;
     return child_ctx;
   }
-  function create_if_block15(ctx) {
+  function create_if_block16(ctx) {
     let article;
     let current;
     article = new Article_default({
@@ -14157,7 +14294,7 @@
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block_74, create_else_block7];
+    const if_block_creators = [create_if_block_74, create_else_block8];
     const if_blocks = [];
     function select_block_type_1(ctx2, dirty) {
       if (!/*statusProposal*/
@@ -14223,7 +14360,7 @@
       }
     };
   }
-  function create_else_block7(ctx) {
+  function create_else_block8(ctx) {
     let field;
     let current;
     field = new Field_default({
@@ -15121,7 +15258,7 @@
     let current;
     let if_block = (
       /*items*/
-      ctx[0] && create_if_block15(ctx)
+      ctx[0] && create_if_block16(ctx)
     );
     return {
       c() {
@@ -15147,7 +15284,7 @@
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block15(ctx2);
+            if_block = create_if_block16(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -15185,7 +15322,7 @@
   }
   function addLogbook() {
   }
-  function instance27($$self, $$props, $$invalidate) {
+  function instance28($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(17, $route = $$value));
     let { params } = $$props;
@@ -15355,13 +15492,13 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance27, create_fragment37, safe_not_equal, { params: 14 });
+      init(this, options, instance28, create_fragment37, safe_not_equal, { params: 14 });
     }
   };
   var proposals_default2 = Proposals2;
 
   // src/pages/dosen/Index.svelte
-  function create_else_block8(ctx) {
+  function create_else_block9(ctx) {
     let e404;
     let current;
     e404 = new E404_default({});
@@ -15389,7 +15526,7 @@
       }
     };
   }
-  function create_if_block16(ctx) {
+  function create_if_block17(ctx) {
     let switch_instance;
     let switch_instance_anchor;
     let current;
@@ -15473,7 +15610,7 @@
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block16, create_else_block8];
+    const if_block_creators = [create_if_block17, create_else_block9];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
@@ -15535,7 +15672,7 @@
       }
     };
   }
-  function instance28($$self, $$props, $$invalidate) {
+  function instance29($$self, $$props, $$invalidate) {
     let { params = {} } = $$props;
     let page;
     $$self.$$set = ($$props2) => {
@@ -15554,7 +15691,7 @@
   var Index4 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance28, create_fragment38, safe_not_equal, { params: 0 });
+      init(this, options, instance29, create_fragment38, safe_not_equal, { params: 0 });
     }
   };
   var Index_default4 = Index4;
@@ -15606,7 +15743,7 @@
       }
     };
   }
-  function create_if_block17(ctx) {
+  function create_if_block18(ctx) {
     let main;
     let switch_instance;
     let current;
@@ -15698,7 +15835,7 @@
     );
     let if_block1 = (
       /*cmp*/
-      ctx[0] && create_if_block17(ctx)
+      ctx[0] && create_if_block18(ctx)
     );
     return {
       c() {
@@ -15756,7 +15893,7 @@
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block17(ctx2);
+            if_block1 = create_if_block18(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
             if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
@@ -15797,7 +15934,7 @@
       }
     };
   }
-  function instance29($$self, $$props, $$invalidate) {
+  function instance30($$self, $$props, $$invalidate) {
     let $route;
     component_subscribe($$self, route, ($$value) => $$invalidate(4, $route = $$value));
     let cmp, params;
@@ -15832,7 +15969,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance29, create_fragment39, safe_not_equal, {}, add_css23);
+      init(this, options, instance30, create_fragment39, safe_not_equal, {}, add_css23);
     }
   };
   var App_default = App;

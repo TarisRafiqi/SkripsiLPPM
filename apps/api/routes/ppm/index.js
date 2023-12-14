@@ -144,12 +144,14 @@ module.exports = async function (fastify, opts) {
       const roleFromToken = decodedToken.role;
 
       let data = request.body;
-      reply.send({
-         data,
-      });
-      return;
+
+      // reply.send({
+      //    data,
+      // });
+      // return;
+
       const sql =
-         "INSERT INTO ppm (uid, judul, abstrak, isi, status, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?)";
+         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik,  tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       let connection;
 
       if (
@@ -168,6 +170,13 @@ module.exports = async function (fastify, opts) {
                data.myAbstract,
                data.myIsi,
                data.status,
+               data.jenisProposal,
+               data.jenisKegiatan,
+               data.jenisSkema,
+               data.kelompokKeahlian,
+               data.topik,
+               // data.anggotaTim,
+               // data.rab,
                data.tahunPelaksanaan,
             ]);
             connection.release();

@@ -63,7 +63,7 @@
             <tr>
                <th>Judul</th>
                <th>Abstract</th>
-               <th>Progress</th>
+               <!-- <th>Progress</th> -->
                <th>Status</th>
                <th colspan="2">Action</th>
             </tr>
@@ -72,13 +72,13 @@
          <tbody>
             {#each items as item}
                <tr>
-                  <td>{item.judul}</td>
-                  <td>{@html item.abstrak}</td>
-                  <td
+                  <td><p>{item.judul}</p> </td>
+                  <td><p>{@html item.abstrak}</p> </td>
+                  <!-- <td
                      ><progress class="progress is-success" value="60" max="100"
                         >60%</progress
                      ></td
-                  >
+                  > -->
                   <td class="status" pid={item.id}>
                      <Status code={item.status} />
                   </td>
@@ -100,6 +100,9 @@
 {/if}
 
 <style>
+   p {
+      text-align: justify;
+   }
    .review {
       cursor: pointer;
    }
