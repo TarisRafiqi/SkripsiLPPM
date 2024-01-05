@@ -8,18 +8,30 @@
    const role = localStorage.getItem("role");
 
    let items;
-   let comment;
-   let status;
    let ka_departemen;
    let ka_lppm;
    let reviewer;
    let ka_pusat_kajian;
    let showModal = false;
-   let kdeptSelected;
-   let klppmSelected;
-   let kpkSelected;
-   let reviewerSelected;
-   let judul, abstrak, isi;
+
+   let jenisProposal,
+      jenisKegiatan,
+      jenisSkema,
+      kelompokKeahlian,
+      topik,
+      tahunPelaksanaan,
+      biayaPenelitian,
+      anggotaTim,
+      rab,
+      judul,
+      abstrak,
+      isi,
+      comment,
+      status,
+      kdeptSelected,
+      klppmSelected,
+      kpkSelected,
+      reviewerSelected;
 
    // pakai akses token, hanya uid yang bersangkutan, dan role admin yang boleh mengakses halaman ini
    onMount(async () => {
@@ -40,39 +52,71 @@
          headers: headers,
       });
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
 
       if (response.ok) {
-         items = [];
-
-         for (const [field, value] of Object.entries(result)) {
-            let obj = {
-               field: field,
-               value: value,
-            };
-            items.push(obj);
-         }
+         items = result;
          console.log(items);
-         judul = items[2].value;
-         abstrak = items[3].value;
-         isi = items[4].value;
-         status = items[5].value;
-         kdeptSelected = items[7].value;
-         klppmSelected = items[8].value;
-         kpkSelected = items[9].value;
-         reviewerSelected = items[10].value;
+
+         // items = [];
+         // for (const [field, value] of Object.entries(result)) {
+         //    let obj = {
+         //       field: field,
+         //       value: value,
+         //    };
+         //    items.push(obj);
+         // }
+         // console.log(items);
+         // judul = items[2].value;
+         // abstrak = items[3].value;
+         // isi = items[4].value;
+         // status = items[5].value;
+         // kdeptSelected = items[7].value;
+         // klppmSelected = items[8].value;
+         // kpkSelected = items[9].value;
+         // reviewerSelected = items[10].value;
+
+         jenisProposal = items.jenis_proposal;
+         jenisKegiatan = items.jenis_kegiatan;
+         jenisSkema = items.jenis_skema;
+         kelompokKeahlian = items.kelompok_keahlian;
+         topik = items.topik;
+         tahunPelaksanaan = items.tahun_pelaksanaan;
+         biayaPenelitian = items.biaya_penelitian;
+         anggotaTim = items.anggota_tim;
+         rab = items.rab;
+         judul = items.judul;
+         abstrak = items.abstrak;
+         isi = items.isi;
+         comment = items.comment;
+         status = items.status;
+
+         kdeptSelected = items.uid_kdept;
+         klppmSelected = items.uid_klppm;
+         kpkSelected = items.uid_kpk;
+         reviewerSelected = items.uid_reviewer;
       }
    });
 
    async function handleRevisi() {
-      status = items[5].value - 1;
+      // status = items[5].value - 1;
+      status = Number(items.status) - 1;
       const payload = {
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         biayaPenelitian,
+         // anggotaTim,
+         // rab,
          id: id,
          judul,
          abstrak,
          isi,
-         status,
          comment,
+         status: Number(items.status) - 1,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
@@ -97,14 +141,24 @@
    }
 
    async function handlePass() {
-      status = items[5].value + 2;
+      // status = items[5].value + 2;
+      status = Number(items.status) + 2;
       const payload = {
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         biayaPenelitian,
+         // anggotaTim,
+         // rab,
          id: id,
          judul,
          abstrak,
          isi,
-         status,
          comment: "",
+         status,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
@@ -234,24 +288,74 @@
       </div>
 
       {#if tab1 === true}
-         {#each items as item}
-            {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update" && item.field !== "status"}
-               <!-- {#if item.field === "uid"}
-         <Field
-         view
-         name={item.field}
+         <!-- {#each items as item} -->
+         <!-- {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update" && item.field !== "status"} 
+               {#if item.field === "uid"}
+                  <Field
+                  view
+                  name={item.field}
                   value={item.value}
                   href={"/admin/profile/" + item.value}
                /> -->
-               {#if item.field === "status"}
-                  <!-- <Field view name={item.field}>
+         <!-- {#if item.field === "status"} -->
+         <!-- <Field view name={item.field}>
                   <Status code={item.value} />
                </Field> -->
-               {:else}
-                  <Field view name={item.field} value={item.value} />
-               {/if}
-            {/if}
-         {/each}
+         <!-- {:else} -->
+         <!-- {/if} -->
+         <!-- {/if} -->
+         <!-- <Field view name={item.field} value={item.value} /> -->
+         <!-- {/each} -->
+
+         <Field name="Jenis Proposal">
+            {jenisProposal}
+         </Field>
+
+         <Field name="Jenis Kegiatan">
+            {jenisKegiatan}
+         </Field>
+
+         <Field name="Jenis Skema">
+            {jenisSkema}
+         </Field>
+
+         <Field name="Kelompok Keahlian">
+            {kelompokKeahlian}
+         </Field>
+
+         <Field name="Topik">
+            {topik}
+         </Field>
+
+         <Field name="Tahun Pelaksanaan">
+            {tahunPelaksanaan}
+         </Field>
+
+         <Field name="Biaya Penelitian">
+            {biayaPenelitian}
+         </Field>
+
+         <Field name="Anggota Tim">
+            {anggotaTim}
+         </Field>
+
+         <Field name="Rincian Anggaran Biaya">
+            {rab}
+         </Field>
+
+         <hr />
+
+         <Field name="Judul">
+            {items.judul}
+         </Field>
+
+         <Field name="abstrak">
+            {@html items.abstrak}
+         </Field>
+
+         <Field name="isi">
+            {@html items.isi}
+         </Field>
 
          <Field name="Comment" bind:value={comment} textarea />
 
@@ -321,13 +425,9 @@
             </thead>
             <tbody>
                <tr>
-                  <td
-                     >{#each items as item}
-                        {#if item.field === "status"}
-                           <Status code={item.value} />
-                        {/if}
-                     {/each}</td
-                  >
+                  <td>
+                     <Status code={items.status} />
+                  </td>
                   <td>Coming Soon</td>
                </tr>
             </tbody>

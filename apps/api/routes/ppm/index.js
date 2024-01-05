@@ -151,7 +151,7 @@ module.exports = async function (fastify, opts) {
       // return;
 
       const sql =
-         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik,  tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, rab, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       let connection;
 
       if (
@@ -174,9 +174,9 @@ module.exports = async function (fastify, opts) {
                data.jenisKegiatan,
                data.jenisSkema,
                data.kelompokKeahlian,
-               data.topik,
+               data.Topik,
                // data.anggotaTim,
-               // data.rab,
+               data.rab,
                data.tahunPelaksanaan,
             ]);
             connection.release();
@@ -202,17 +202,30 @@ module.exports = async function (fastify, opts) {
       let dbData;
       let connection;
       let data = request.body;
-      reply.send({
-         data,
-         msg: ">>>>>",
-      });
+
+      // reply.send({
+      //    data,
+      //    msg: ">>>>>",
+      // });
       // return;
+
       const sql =
-         "UPDATE ppm SET judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
+         // "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, anggota_tim = ?, rab = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
+
+         "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
 
       try {
          connection = await fastify.mysql.getConnection();
          const [rows] = await connection.query(sql, [
+            data.jenisProposal,
+            data.jenisKegiatan,
+            data.jenisSkema,
+            data.kelompokKeahlian,
+            data.topik,
+            data.tahunPelaksanaan,
+            data.biayaPenelitian,
+            // data.anggotaTim,
+            // data.rab,
             data.judul,
             data.abstrak,
             data.isi,

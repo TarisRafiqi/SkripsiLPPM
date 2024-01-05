@@ -1,8 +1,9 @@
 <script>
-   import { onMount } from "svelte";
+   import { onMount, afterUpdate } from "svelte";
    import { Article, Field, Status, Icon } from "@cmp";
    import { route } from "../../store";
-   import { addProposal } from "../../store/icons";
+   import { addProposal, uploadIcon, deleteIcon } from "../../store/icons";
+   import Wysiwyg from "src/libs/Wysiwyg.svelte";
 
    export let params;
 
@@ -10,6 +11,21 @@
    let view;
    let data;
    let statusProposal;
+
+   let jenisProposal;
+   let jenisKegiatan;
+   let jenisSkema;
+   let kelompokKeahlian;
+   let topik;
+   let tahunPelaksanaan;
+   let biayaPenelitian;
+   let anggotaTim;
+   let rab;
+   let judul;
+   let abstrak;
+   let isi;
+   let comment;
+   let status;
 
    const id = params["1"];
 
@@ -27,31 +43,34 @@
          headers: headers,
       });
       const result = await response.json();
-      console.log(result);
+      view = !isEdit(result.status);
+      // console.log(view);
 
       if (response.ok) {
-         items = [];
-         data = result;
-         for (const [key, value] of Object.entries(result)) {
-            if (key === "status") {
-               view = !isEdit(value);
-            }
-            items.push({
-               key,
-               value,
-            });
-         }
-         console.log(items);
-         judul = items[2].value;
-         abstrak = items[3].value;
-         isi = items[4].value;
-         statusProposal = items[5].value;
-         kdeptSelected = items[7].value;
-         klppmSelected = items[8].value;
-         kpkSelected = items[9].value;
-         reviewerSelected = items[10].value;
+         items = result;
+         // console.log(items);
+
+         jenisProposal = items.jenis_proposal;
+         jenisKegiatan = items.jenis_kegiatan;
+         jenisSkema = items.jenis_skema;
+         kelompokKeahlian = items.kelompok_keahlian;
+         topik = items.topik;
+         tahunPelaksanaan = items.tahun_pelaksanaan;
+         biayaPenelitian = items.biaya_penelitian;
+         anggotaTim = items.anggota_tim;
+         rab = items.rab;
+         judul = items.judul;
+         abstrak = items.abstrak;
+         isi = items.isi;
+         comment = items.comment;
+         status = items.status;
+         kdeptSelected = items.uid_kdept;
+         klppmSelected = items.uid_klppm;
+         kpkSelected = items.uid_kpk;
+         reviewerSelected = items.uid_reviewer;
       } else {
          console.log(response);
+         // console.log("gagal");
       }
    });
 
@@ -61,22 +80,31 @@
    }
 
    async function remediasi() {
-      const data = {};
-      // convert array to object;
-      items.map((x) => (data[x.key] = x.value));
+      abstrak = tinymce.get("abstract").getContent();
+      isi = tinymce.get("isi").getContent();
 
       const payload = {
-         id: data.id,
-         judul: data.judul,
-         abstrak: data.abstrak,
-         isi: data.isi,
-         status: Number(data.status) + 1,
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         biayaPenelitian,
+         // anggotaTim,
+         // rab,
+         id,
+         judul,
+         abstrak,
+         isi,
          comment: "",
+         status: Number(items.status) + 1,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
          reviewerSelected,
       };
+
       const response = await fetch("/api/ppm", {
          method: "PATCH",
          headers: {
@@ -97,16 +125,31 @@
    }
 
    async function submitProposal() {
-      const data = {};
+      abstrak = tinymce.get("abstract").getContent();
+      isi = tinymce.get("isi").getContent();
 
-      items.map((x) => (data[x.key] = x.value));
       const payload = {
-         id: data.id,
-         judul: data.judul,
-         abstrak: data.abstrak,
-         isi: data.isi,
-         status: Number(data.status) + 2,
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         biayaPenelitian,
+         // anggotaTim,
+         // rab,
+         id,
+         judul,
+         abstrak,
+         isi,
+         comment,
+         status: Number(items.status) + 2,
+         kdeptSelected,
+         klppmSelected,
+         kpkSelected,
+         reviewerSelected,
       };
+
       const response = await fetch("/api/ppm", {
          method: "PATCH",
          headers: {
@@ -116,6 +159,8 @@
       });
 
       const result = await response.json();
+      // console.log(result);
+      // return;
 
       if (response.ok) {
          $route("/dosen");
@@ -125,14 +170,31 @@
    }
 
    async function simpanProposal() {
-      const data = {};
-      items.map((x) => (data[x.key] = x.value));
+      abstrak = tinymce.get("abstract").getContent();
+      isi = tinymce.get("isi").getContent();
+
       const payload = {
-         id: data.id,
-         judul: data.judul,
-         abstrak: data.abstrak,
-         status: Number(data.status),
+         jenisProposal,
+         jenisKegiatan,
+         jenisSkema,
+         kelompokKeahlian,
+         topik,
+         tahunPelaksanaan,
+         biayaPenelitian,
+         // anggotaTim,
+         // rab,
+         id,
+         judul,
+         abstrak,
+         isi,
+         comment,
+         status: Number(items.status),
+         kdeptSelected,
+         klppmSelected,
+         kpkSelected,
+         reviewerSelected,
       };
+
       const response = await fetch("/api/ppm", {
          method: "PATCH",
          headers: {
@@ -142,6 +204,8 @@
       });
 
       const result = await response.json();
+      // console.log(result);
+      // return;
 
       if (response.ok) {
          $route("/dosen");
@@ -160,6 +224,7 @@
       tab2 = false;
       tab3 = false;
       tab4 = false;
+      // location.reload();
    }
 
    function clicktab2() {
@@ -233,7 +298,271 @@
       <!-- Tab Identitas PPM -->
       {#if tab1 === true}
          <div id="tab1">
-            {#each items as item}
+            {#if !view}
+               <Field name="Jenis Proposal">
+                  <div class="select is-fullwidth">
+                     <select bind:value={jenisProposal}>
+                        <option value="" selected disabled hidden
+                           >Pilih Jenis Proposal</option
+                        >
+                        <option selected value="Proposal Awal"
+                           >Proposal Awal</option
+                        >
+                        <option value="Proposal Lanjutan"
+                           >Proposal Lanjutan</option
+                        >
+                     </select>
+                  </div>
+               </Field>
+
+               <Field name="Jenis Kegiatan">
+                  <div class="select is-fullwidth">
+                     <select bind:value={jenisKegiatan}>
+                        <option value="" selected disabled hidden
+                           >Pilih Jenis Kegiatan</option
+                        >
+                        <option value="Penelitian">Penelitian</option>
+                        <option value="Pengabdian Masyarakat"
+                           >Pengabdian Masyarakat</option
+                        >
+                     </select>
+                  </div>
+               </Field>
+
+               <Field name="Jenis Skema">
+                  <div class="select is-fullwidth">
+                     <select bind:value={jenisSkema}>
+                        <option value="" selected disabled hidden
+                           >Pilih Jenis Skema
+                        </option>
+                        {#if jenisKegiatan === "Penelitian"}
+                           <!-- <optgroup label="Skema Penelitian"> -->
+                           <option value="Riset Kelompok Keahlian"
+                              >Riset Kelompok Keahlian</option
+                           >
+                           <option value="Riset Terapan">Riset Terapan</option>
+                           <option value="Riset Kerjasama"
+                              >Riset Kerjasama</option
+                           >
+                           <option value="Riset Mandiri">Riset Mandiri</option>
+                           <option value="Riset Eksternal"
+                              >Riset Eksternal</option
+                           >
+                           <!-- </optgroup> -->
+                        {:else}
+                           <!-- <optgroup label="Skema Pengabdian Masyarakat"> -->
+                           <option value="Pengabdian Masyarakat Desa Binaan"
+                              >Pengabdian Masyarakat Desa Binaan</option
+                           >
+                           <option value="Pengabdian Masyarakat UMKM Binaan"
+                              >Pengabdian Masyarakat UMKM Binaan</option
+                           >
+                           <option value="Pengabdian Masyarakat Mandiri"
+                              >Pengabdian Masyarakat Mandiri</option
+                           >
+                           <option value="Pengabdian Masyarakat Hibah Eksternal"
+                              >Pengabdian Masyarakat Hibah Eksternal</option
+                           >
+                           <!-- </optgroup> -->
+                        {/if}
+                     </select>
+                  </div>
+               </Field>
+
+               <Field name="Kelompok Keahlian">
+                  <input
+                     class="input"
+                     type="text"
+                     placeholder="Masukkan Kelompok Keahlian"
+                     bind:value={kelompokKeahlian}
+                  />
+               </Field>
+
+               <Field name="Topik">
+                  <input
+                     class="input"
+                     type="text"
+                     placeholder="Masukkan Topik"
+                     bind:value={topik}
+                  />
+               </Field>
+
+               <Field
+                  datepicker
+                  name="Tahun Pelaksanaan"
+                  bind:value={tahunPelaksanaan}
+               />
+
+               <Field name="Biaya Penelitian">
+                  <input
+                     class="input"
+                     type="text"
+                     placeholder="Masukkan Biaya Penelitian"
+                     bind:value={biayaPenelitian}
+                  />
+               </Field>
+
+               <!-- <Field select name="Anggota Tim" bind:value={anggotaTim} /> -->
+
+               <Field select name="Rincian Anggaran Biaya" bind:value={rab}>
+                  <div class="file">
+                     <label class="file-label">
+                        <input class="file-input" type="file" name="resume" />
+                        <span class="file-cta">
+                           <span class="file-icon">
+                              <Icon id="orang" src={uploadIcon} />
+                           </span>
+                           <span class="file-label"> Upload File </span>
+                        </span>
+                     </label>
+                  </div>
+               </Field>
+
+               <Field name="Anggota Tim">
+                  <input
+                     class="input"
+                     type="text"
+                     placeholder="Tambahkan Anggota Tim"
+                     bind:value={anggotaTim}
+                  />
+               </Field>
+
+               <br />
+
+               <table
+                  class="table is-fullwidth is-striped is-hoverable is-bordered"
+               >
+                  <thead>
+                     <tr>
+                        <th class="is-narrow">Action</th>
+                        <th>Status</th>
+                        <th>Nama</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td></td>
+                        <td>Ketua</td>
+                        <td>...</td>
+                     </tr>
+                     <tr>
+                        <td
+                           ><button class="button is-danger is-rounded is-small"
+                              ><span class="icon">
+                                 <Icon id="delete" src={deleteIcon} />
+                              </span></button
+                           ></td
+                        >
+                        <td>Anggota</td>
+                        <td>...</td>
+                     </tr>
+                  </tbody>
+               </table>
+
+               <hr />
+
+               <Field name="Judul">
+                  <input
+                     class="input"
+                     type="text"
+                     placeholder="Masukkan Judul"
+                     bind:value={judul}
+                  />
+               </Field>
+
+               <!-- <Field
+                  id="abstract"
+                  textarea
+                  name="Abstrak"
+                  bind:value={abstrak}
+               /> -->
+
+               <!-- <Field id="isi" textarea name="Isi Proposal" bind:value={isi} /> -->
+               <!-- <Field id="isi" textarea name="Isi Proposal" bind:value={isi} /> -->
+
+               <Field name="Abstrak">
+                  <Wysiwyg id="abstract" content={abstrak} />
+               </Field>
+
+               <Field name="Isi Proposal">
+                  <Wysiwyg id="isi" content={isi} />
+               </Field>
+
+               <Field name="Comment">
+                  {items.comment}
+               </Field>
+            {:else}
+               <Field name="Jenis Proposal">
+                  {jenisProposal}
+               </Field>
+
+               <Field name="Jenis Kegiatan">
+                  {jenisKegiatan}
+               </Field>
+
+               <Field name="Jenis Skema">
+                  {jenisSkema}
+               </Field>
+
+               <Field name="Kelompok Keahlian">
+                  {kelompokKeahlian}
+               </Field>
+
+               <Field name="Topik">
+                  {topik}
+               </Field>
+
+               <Field name="Tahun Pelaksanaan">
+                  {tahunPelaksanaan}
+               </Field>
+
+               <Field name="Biaya Penelitian">
+                  {biayaPenelitian}
+               </Field>
+
+               <Field name="Rincian Anggaran Biaya">
+                  {rab}
+               </Field>
+
+               <Field name="Anggota Tim">
+                  <table
+                     class="table is-fullwidth is-striped is-hoverable is-bordered"
+                  >
+                     <thead>
+                        <tr>
+                           <th>Status</th>
+                           <th>Nama</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>Ketua</td>
+                           <td>...</td>
+                        </tr>
+                        <tr>
+                           <td>Anggota</td>
+                           <td>...</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </Field>
+
+               <hr />
+
+               <Field name="Judul">
+                  {items.judul}
+               </Field>
+
+               <Field name="abstrak">
+                  {@html items.abstrak}
+               </Field>
+
+               <Field name="isi">
+                  {@html items.isi}
+               </Field>
+            {/if}
+
+            <!-- {#each items as item}
                {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "tipe_proposal" && item.key !== "update" && item.key !== "status"}
                   {#if item.key === "status"}
                      <Field name={item.key}>
@@ -248,11 +577,11 @@
                      />
                   {/if}
                {/if}
-            {/each}
+            {/each} -->
 
             {#if !view}
                <br />
-               {#if !statusProposal}
+               {#if status === 0}
                   <Field>
                      <button on:click={simpanProposal}>Simpan</button>
                      <button on:click={submitProposal}>Submit</button>
@@ -280,13 +609,9 @@
                </thead>
                <tbody>
                   <tr>
-                     <td
-                        >{#each items as item}
-                           {#if item.key === "status"}
-                              <Status code={item.value} />
-                           {/if}
-                        {/each}</td
-                     >
+                     <td>
+                        <Status code={items.status} />
+                     </td>
                      <td>Coming Soon</td>
                   </tr>
                </tbody>

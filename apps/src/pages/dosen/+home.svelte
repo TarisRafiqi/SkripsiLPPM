@@ -35,8 +35,8 @@
 
    function detail(ev) {
       let propId = ev.target.getAttribute("pid");
-      $route("/dosen/proposals/" + propId);
-      // location.href = "/dosen/proposals/" + propId;
+      // $route("/dosen/proposals/" + propId);
+      location.href = "/dosen/proposals/" + propId;
    }
 
    function addProposal() {

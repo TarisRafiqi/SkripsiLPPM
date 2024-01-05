@@ -53,11 +53,11 @@
       <h2>LOGIN</h2>
       <div>
          <div>Username</div>
-         <input type="text" bind:value={username} />
+         <input class="input" type="text" bind:value={username} />
       </div>
       <div>
          <div>Password</div>
-         <input type="password" bind:value={password} />
+         <input class="input" type="password" bind:value={password} />
       </div>
       <div>
          <br />

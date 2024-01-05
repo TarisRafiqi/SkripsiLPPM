@@ -2,6 +2,7 @@
    import { onMount } from "svelte";
    import { route } from "../../store";
    import { Field, Article, Icon, Status } from "@cmp";
+   import Wysiwyg from "src/libs/Wysiwyg.svelte";
 
    let items;
 
@@ -242,7 +243,11 @@
    {#if tab1 === true}
       {#if items}
          {#each items as item}
-            <Field name={item.field} bind:value={item.value} />
+            <!-- <Field name={item.field} bind:value={item.value} /> -->
+
+            <Field name={item.field}>
+               <input class="input" type="text" bind:value={item.value} />
+            </Field>
          {/each}
          <br />
          <Field>

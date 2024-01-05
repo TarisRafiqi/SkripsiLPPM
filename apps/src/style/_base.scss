@@ -211,44 +211,48 @@ button {
 
 /* INPUT */
 
-textarea,
-select,
-input {
-   display: inline-block;
-   font-family: var(--fonts);
-   border: 1px solid #dadce0;
-   color: #434a54;
-   font-size: var(--size, 1em);
-   padding: 0 1em;
-   line-height: 2.25em;
-   outline: 0;
-   border-radius: 1.5em;
-   width: 100%;
+// textarea,
+// select,
+// input {
+//    display: inline-block;
+//    font-family: var(--fonts);
+//    border: 1px solid #dadce0;
+//    color: #434a54;
+//    font-size: var(--size, 1em);
+//    padding: 0 1em;
+//    line-height: 2.25em;
+//    outline: 0;
+//    border-radius: 0.3em;
+//    width: 100%;
 
-   &:hover {
-      z-index: 1;
-   }
+//    &:hover {
+//       z-index: 1;
+//    }
 
-   &:focus {
-      z-index: 1;
-      box-shadow: 0 0 0 0.2em var(--shadow, #dadce055);
-      border-color: var(--border, #dadce0);
-   }
-}
+//    &:focus {
+//       z-index: 1;
+//       box-shadow: 0 0 0 0.2em var(--shadow, #dadce055);
+//       border-color: var(--border, #dadce0);
+//    }
+// }
 
-@media screen and (min-width: 768px) {
-   textarea,
-   select,
-   input {
-      width: unset;
-   }
-}
+// @media screen and (min-width: 768px) {
+//    textarea,
+//    select,
+//    input {
+//       width: unset;
+//    }
+// }
 
-textarea {
-   padding: 0.5rem 0.75rem;
-   line-height: 1.5;
-   border-radius: 0.5rem;
-   min-height: 7rem !important;
+// textarea {
+//    padding: 0.5rem 0.75rem;
+//    line-height: 1.5;
+//    border-radius: 0.5rem;
+//    min-height: 7rem !important;
+// }
+
+.icon {
+   pointer-events: none;
 }
 
 // table {

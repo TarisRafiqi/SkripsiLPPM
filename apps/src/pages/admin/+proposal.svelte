@@ -264,10 +264,6 @@
                      value={item.value}
                      href={"/admin/profile/" + item.value}
                   />
-               {:else if item.field === "status"}
-                  <!-- <Field view name={item.field}>
-                  <Status code={item.value} />
-               </Field> -->
                {:else}
                   <Field view name={item.field} value={item.value} />
                {/if}

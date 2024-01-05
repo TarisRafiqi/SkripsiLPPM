@@ -111,6 +111,7 @@
       margin-top: 0.5rem;
    }
 
+   div a,
    :not(.view) b {
       display: block;
       line-height: 38px;

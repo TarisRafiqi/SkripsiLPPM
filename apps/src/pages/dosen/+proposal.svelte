@@ -2,7 +2,7 @@
    import { onMount } from "svelte";
    import { Field, Article, Icon, Status } from "@cmp";
    import { route } from "../../store";
-   import { uploadIcon } from "../../store/icons";
+   import { uploadIcon, deleteIcon } from "../../store/icons";
    // import Editor from "@tinymce/tinymce-svelte";
 
    let value;
@@ -28,19 +28,19 @@
       tinymce.init({
          selector: "textarea",
          plugins:
-            "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
+            "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ",
          toolbar:
-            "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+            "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
          tinycomments_mode: "embedded",
          tinycomments_author: "Author name",
          mergetags_list: [
             { value: "First.Name", title: "First Name" },
             { value: "Email", title: "Email" },
          ],
-         ai_request: (request, respondWith) =>
-            respondWith.string(() =>
-               Promise.reject("See docs to implement AI Assistant")
-            ),
+         // ai_request: (request, respondWith) =>
+         //    respondWith.string(() =>
+         //       Promise.reject("See docs to implement AI Assistant")
+         //    ),
       });
    });
 
@@ -142,7 +142,7 @@
    <hr />
 
    <Field name="Jenis Proposal">
-      <div class="select">
+      <div class="select is-fullwidth">
          <select bind:value={jenisProposal}>
             <option value="" selected disabled hidden
                >Pilih Jenis Proposal</option
@@ -154,7 +154,7 @@
    </Field>
 
    <Field name="Jenis Kegiatan">
-      <div class="select">
+      <div class="select is-fullwidth">
          <select bind:value={jenisKegiatan}>
             <option value="" selected disabled hidden
                >Pilih Jenis Kegiatan</option
@@ -166,7 +166,7 @@
    </Field>
 
    <Field name="Jenis Skema">
-      <div class="select">
+      <div class="select is-fullwidth">
          <select bind:value={jenisSkema}>
             <option value="" selected disabled hidden
                >Pilih Jenis Skema
@@ -222,16 +222,6 @@
       />
    </Field>
 
-   <Field name="Anggota Tim">
-      <input
-         class="input"
-         type="text"
-         placeholder="Tambahkan Anggota Tim"
-         bind:value={anggotaTim}
-      />
-   </Field>
-   <!-- <Field select name="Anggota Tim" bind:value={anggotaTim} /> -->
-
    <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab}>
       <div class="file">
          <label class="file-label">
@@ -246,13 +236,54 @@
       </div>
    </Field>
 
-   <!-- <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab} /> -->
-   <!-- <Field select name="Jenis Skema" bind:value={jenisSkema} /> -->
-   <!-- <Field select name="Jenis Proposal" bind:value={jenisProposal} /> -->
-   <!-- <Field select name="Kelompok Keahlian" bind:value={kelompokKeahlian} /> -->
-   <!-- <Field select name="Topik" bind:value={Topik} />
-   <Field select name="Biaya Penelitian" bind:value={biayaPenelitian} /> -->
+   <Field name="Anggota Tim">
+      <input
+         class="input"
+         type="text"
+         placeholder="Tambahkan Anggota Tim"
+         bind:value={anggotaTim}
+      />
+   </Field>
+
+   <!-- <Field name="Anggota Tim"> -->
+   <!-- <Select {items} {value} on:select={handleSelect}></Select> -->
+   <!-- <Select {items}></Select> -->
+   <!-- </Field> -->
+
+   <br />
+
+   <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+      <thead>
+         <tr>
+            <th class="is-narrow">Action</th>
+            <th>Status</th>
+            <th>Nama</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td></td>
+            <td>Ketua</td>
+            <td>...</td>
+         </tr>
+         <tr>
+            <td
+               ><button class="button is-danger is-rounded is-small"
+                  ><span class="icon">
+                     <Icon id="delete" src={deleteIcon} />
+                  </span></button
+               ></td
+            >
+            <td>Anggota</td>
+            <td>...</td>
+         </tr>
+      </tbody>
+   </table>
+
+   <!-- <Field select name="Anggota Tim" bind:value={anggotaTim} /> -->
+
    <hr />
+
    <Field name="Judul">
       <input
          class="input"
@@ -266,6 +297,7 @@
    <Field id="isi" textarea name="Isi Proposal" />
 
    <br />
+
    <Field>
       <button class="button is-info is-light" on:click={simpanProposal}
          >Simpan</button
@@ -276,7 +308,7 @@
    <!-- <textarea> Welcome to TinyMCE! </textarea> -->
 </Article>
 
-<style>
+<!-- <style>
    select:required:invalid {
       color: rgb(201, 201, 201);
    }
@@ -286,4 +318,4 @@
    option {
       color: black;
    }
-</style>
+</style> -->
