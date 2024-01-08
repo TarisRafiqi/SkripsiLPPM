@@ -43,7 +43,7 @@ function router() {
          });
       }
 
-      console.log("token:", query);
+      // console.log("token:", query);
 
       let match = routes.filter((route) => {
          let path = route.path;

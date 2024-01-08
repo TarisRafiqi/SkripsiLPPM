@@ -69,7 +69,7 @@
    {:else if textarea && !view}
       <textarea {id} bind:value on:click={onclick} />
    {:else if datepicker && !view}
-      <input type="month" bind:value on:click={onclick} />
+      <input class="input" type="month" bind:value on:click={onclick} />
    {:else if select && view}
       <!-- true && !false-->
       <!-- true && true -->

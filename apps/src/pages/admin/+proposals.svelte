@@ -20,7 +20,7 @@
          headers: headers,
       });
       const result = await response.json();
-      // console.log(result);
+      console.log(result);
 
       if (response.ok) {
          items = result.dbData;
@@ -46,7 +46,8 @@
          <thead>
             <tr>
                <th>Judul</th>
-               <th>Abstract</th>
+               <th class="is-narrow">Jenis Kegiatan</th>
+               <th class="is-narrow">Jenis Skema</th>
                <th>Status</th>
                <th>Action</th>
             </tr>
@@ -56,7 +57,8 @@
             {#each items as item}
                <tr>
                   <td><p>{item.judul}</p> </td>
-                  <td><p>{item.abstrak}</p></td>
+                  <td><p>{item.jenis_kegiatan}</p></td>
+                  <td><p>{item.jenis_skema}</p></td>
                   <td class="status"><Status code={item.status} /></td>
                   <td class="review"
                      ><button

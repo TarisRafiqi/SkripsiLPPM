@@ -339,7 +339,7 @@
             {anggotaTim}
          </Field>
 
-         <Field name="Rincian Anggaran Biaya">
+         <Field name="Rencana Anggaran Biaya">
             {rab}
          </Field>
 

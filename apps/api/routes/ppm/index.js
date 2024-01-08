@@ -16,6 +16,11 @@ module.exports = async function (fastify, opts) {
       let dbData;
       let connection;
 
+      // reply.send({
+      //    msg: ">>> test",
+      // });
+      // return;
+
       if (
          roleFromToken === "admin" ||
          roleFromToken === "dosen" ||
@@ -57,24 +62,6 @@ module.exports = async function (fastify, opts) {
       let dbData;
       let connection;
 
-      // reply.send({
-      //    token,
-      //    decodedToken,
-      //    uid,
-      //    idFromToken,
-      // });
-      // return;
-
-      // if (roleFromToken === "dosen") {
-      //    console.log("yes, this account role is dosen");
-      //    // fungsi selanjutnya atau beri data ke FE
-      // } else {
-      //    reply.send({
-      //       pesan: "Anda tidak memiliki hak akses halaman ini",
-      //    });
-      //    console.log("this role account is not dosen");
-      // }
-
       if (idFromToken === uid) {
          const sql = "SELECT * FROM ppm WHERE uid = ?";
          try {
@@ -105,7 +92,8 @@ module.exports = async function (fastify, opts) {
       // const idFromToken = decodedToken.id;
       const roleFromToken = decodedToken.role;
 
-      const sql = "SELECT id, uid, judul, abstrak, status FROM ppm";
+      const sql =
+         "SELECT id, uid, judul, jenis_kegiatan, jenis_skema, status FROM ppm";
       let dbData;
       let connection;
 
@@ -150,8 +138,11 @@ module.exports = async function (fastify, opts) {
       // });
       // return;
 
+      // const sql =
+      //    "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, biaya_penelitian, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
       const sql =
-         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, rab, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, biaya_penelitian, anggota_tim, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       let connection;
 
       if (
@@ -174,9 +165,11 @@ module.exports = async function (fastify, opts) {
                data.jenisKegiatan,
                data.jenisSkema,
                data.kelompokKeahlian,
-               data.Topik,
+               data.topik,
+               data.biayaPenelitian,
                // data.anggotaTim,
-               data.rab,
+               JSON.stringify(data.anggotaTim),
+               // data.rab,
                data.tahunPelaksanaan,
             ]);
             connection.release();
@@ -212,7 +205,7 @@ module.exports = async function (fastify, opts) {
       const sql =
          // "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, anggota_tim = ?, rab = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
 
-         "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
+         "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, anggota_tim = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
 
       try {
          connection = await fastify.mysql.getConnection();
@@ -224,7 +217,7 @@ module.exports = async function (fastify, opts) {
             data.topik,
             data.tahunPelaksanaan,
             data.biayaPenelitian,
-            // data.anggotaTim,
+            JSON.stringify(data.anggotaTim),
             // data.rab,
             data.judul,
             data.abstrak,

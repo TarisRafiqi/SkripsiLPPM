@@ -159,7 +159,8 @@
       const result = await response.json();
 
       if (response.ok) {
-         $route("/admin/proposals");
+         // $route("/admin/proposals");
+         $route("/admin/users");
       } else {
          console.log(response);
       }
@@ -174,7 +175,11 @@
       <hr />
       <br />
       {#each items as item}
-         <Field name={item.field} bind:value={item.value} />
+         <!-- <Field name={item.field} bind:value={item.value} /> -->
+
+         <Field name={item.field}>
+            <input class="input" type="text" bind:value={item.value} />
+         </Field>
       {/each}
 
       {#if msgNip}

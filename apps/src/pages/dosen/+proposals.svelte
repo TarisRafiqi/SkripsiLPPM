@@ -4,10 +4,11 @@
    import { route } from "../../store";
    import { addProposal, uploadIcon, deleteIcon } from "../../store/icons";
    import Wysiwyg from "src/libs/Wysiwyg.svelte";
+   import Select from "src/libs/Select.svelte";
 
    export let params;
 
-   let items;
+   // let items;
    let view;
    let data;
    let statusProposal;
@@ -28,6 +29,7 @@
    let status;
 
    const id = params["1"];
+   let items = [];
 
    // pakai akses token, hanya uid yang bersangkutan dan role Admin yang boleh mengakses halaman ini
    onMount(async () => {
@@ -47,29 +49,56 @@
       // console.log(view);
 
       if (response.ok) {
-         items = result;
-         // console.log(items);
+         data = result;
+         console.log(data);
+         console.log(data.anggota_tim);
+         // return;
 
-         jenisProposal = items.jenis_proposal;
-         jenisKegiatan = items.jenis_kegiatan;
-         jenisSkema = items.jenis_skema;
-         kelompokKeahlian = items.kelompok_keahlian;
-         topik = items.topik;
-         tahunPelaksanaan = items.tahun_pelaksanaan;
-         biayaPenelitian = items.biaya_penelitian;
-         anggotaTim = items.anggota_tim;
-         rab = items.rab;
-         judul = items.judul;
-         abstrak = items.abstrak;
-         isi = items.isi;
-         comment = items.comment;
-         status = items.status;
-         kdeptSelected = items.uid_kdept;
-         klppmSelected = items.uid_klppm;
-         kpkSelected = items.uid_kpk;
-         reviewerSelected = items.uid_reviewer;
+         jenisProposal = data.jenis_proposal;
+         jenisKegiatan = data.jenis_kegiatan;
+         jenisSkema = data.jenis_skema;
+         kelompokKeahlian = data.kelompok_keahlian;
+         topik = data.topik;
+         tahunPelaksanaan = data.tahun_pelaksanaan;
+         biayaPenelitian = data.biaya_penelitian;
+         anggotaTim = data.anggota_tim;
+         rab = data.rab;
+         judul = data.judul;
+         abstrak = data.abstrak;
+         isi = data.isi;
+         comment = data.comment;
+         status = data.status;
+         kdeptSelected = data.uid_kdept;
+         klppmSelected = data.uid_klppm;
+         kpkSelected = data.uid_kpk;
+         reviewerSelected = data.uid_reviewer;
       } else {
          console.log(response);
+         // console.log("gagal");
+      }
+
+      // -----------------------------------------------------------------------------
+      const responsee = await fetch("/api/pilihUser", {
+         method: "GET",
+         headers: headers,
+      });
+
+      const results = await responsee.json();
+      // return;
+
+      if (responsee.ok) {
+         listUser = results;
+         // console.log(listUser);
+         //console.log(listUser[0]);
+         items = [];
+         for (const [key, value] of Object.entries(listUser)) {
+            items.push({
+               value: value.uid,
+               label: value.nama_lengkap,
+            });
+         }
+      } else {
+         console.log(responsee);
          // console.log("gagal");
       }
    });
@@ -91,14 +120,14 @@
          topik,
          tahunPelaksanaan,
          biayaPenelitian,
-         // anggotaTim,
+         anggotaTim,
          // rab,
          id,
          judul,
          abstrak,
          isi,
          comment: "",
-         status: Number(items.status) + 1,
+         status: Number(data.status) + 1,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
@@ -136,14 +165,14 @@
          topik,
          tahunPelaksanaan,
          biayaPenelitian,
-         // anggotaTim,
+         anggotaTim,
          // rab,
          id,
          judul,
          abstrak,
          isi,
-         comment,
-         status: Number(items.status) + 2,
+         comment: "",
+         status: Number(data.status) + 2,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
@@ -181,14 +210,14 @@
          topik,
          tahunPelaksanaan,
          biayaPenelitian,
-         // anggotaTim,
+         anggotaTim,
          // rab,
          id,
          judul,
          abstrak,
          isi,
-         comment,
-         status: Number(items.status),
+         comment: "",
+         status: Number(data.status),
          kdeptSelected,
          klppmSelected,
          kpkSelected,
@@ -252,9 +281,20 @@
       // $route("/dosen/addlogbook");
       // location.href = "/dosen/addlogbook";
    }
+
+   function deleteMember(e) {
+      // console.log(e.target);
+      // console.log(e.target.getAttribute("data-value"));
+      let uid = e.target.getAttribute("data-value");
+      anggotaTim = anggotaTim.filter((member) => {
+         console.log(member.value, uid);
+         return member.value !== uid;
+      });
+      console.log(anggotaTim);
+   }
 </script>
 
-{#if items}
+{#if data}
    <Article>
       <h1 class="title is-1">Detail PPM</h1>
 
@@ -396,35 +436,25 @@
                <Field name="Biaya Penelitian">
                   <input
                      class="input"
-                     type="text"
+                     type="number"
                      placeholder="Masukkan Biaya Penelitian"
                      bind:value={biayaPenelitian}
                   />
                </Field>
 
-               <!-- <Field select name="Anggota Tim" bind:value={anggotaTim} /> -->
-
-               <Field select name="Rincian Anggaran Biaya" bind:value={rab}>
-                  <div class="file">
-                     <label class="file-label">
-                        <input class="file-input" type="file" name="resume" />
-                        <span class="file-cta">
-                           <span class="file-icon">
-                              <Icon id="orang" src={uploadIcon} />
-                           </span>
-                           <span class="file-label"> Upload File </span>
-                        </span>
-                     </label>
-                  </div>
+               <Field name="Rincian Anggaran Biaya" bind:value={rab}>
+                  <!-- <label for="avatar">Upload a file:</label> -->
+                  <input
+                     class="input"
+                     accept=".xlsx"
+                     id="avatar"
+                     name="avatar"
+                     type="file"
+                  />
                </Field>
 
                <Field name="Anggota Tim">
-                  <input
-                     class="input"
-                     type="text"
-                     placeholder="Tambahkan Anggota Tim"
-                     bind:value={anggotaTim}
-                  />
+                  <Select start="2" {items} bind:result={anggotaTim} />
                </Field>
 
                <br />
@@ -435,7 +465,7 @@
                   <thead>
                      <tr>
                         <th class="is-narrow">Action</th>
-                        <th>Status</th>
+                        <th class="is-narrow">Status</th>
                         <th>Nama</th>
                      </tr>
                   </thead>
@@ -445,17 +475,24 @@
                         <td>Ketua</td>
                         <td>...</td>
                      </tr>
-                     <tr>
-                        <td
-                           ><button class="button is-danger is-rounded is-small"
-                              ><span class="icon">
-                                 <Icon id="delete" src={deleteIcon} />
-                              </span></button
-                           ></td
-                        >
-                        <td>Anggota</td>
-                        <td>...</td>
-                     </tr>
+                     {#if anggotaTim.length > 0}
+                        {#each anggotaTim as member}
+                           <tr>
+                              <td
+                                 ><button
+                                    class="button is-danger is-rounded is-small"
+                                    data-value={member.value}
+                                    on:click={deleteMember}
+                                    ><span class="icon">
+                                       <Icon id="delete" src={deleteIcon} />
+                                    </span></button
+                                 ></td
+                              >
+                              <td>Anggota</td>
+                              <td>{member.label}</td>
+                           </tr>
+                        {/each}
+                     {/if}
                   </tbody>
                </table>
 
@@ -489,7 +526,7 @@
                </Field>
 
                <Field name="Comment">
-                  {items.comment}
+                  {comment}
                </Field>
             {:else}
                <Field name="Jenis Proposal">
@@ -520,49 +557,55 @@
                   {biayaPenelitian}
                </Field>
 
-               <Field name="Rincian Anggaran Biaya">
+               <Field name="Rencana Anggaran Biaya">
                   {rab}
                </Field>
 
                <Field name="Anggota Tim">
-                  <table
-                     class="table is-fullwidth is-striped is-hoverable is-bordered"
-                  >
-                     <thead>
-                        <tr>
-                           <th>Status</th>
-                           <th>Nama</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                           <td>Ketua</td>
-                           <td>...</td>
-                        </tr>
-                        <tr>
-                           <td>Anggota</td>
-                           <td>...</td>
-                        </tr>
-                     </tbody>
-                  </table>
+                  <span></span>
                </Field>
+               <br />
+               <table
+                  class="table is-fullwidth is-striped is-hoverable is-bordered"
+               >
+                  <thead>
+                     <tr>
+                        <th class="is-narrow">Status</th>
+                        <th>Nama</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>Ketua</td>
+                        <td>...</td>
+                     </tr>
+                     {#if anggotaTim.length > 0}
+                        {#each anggotaTim as member}
+                           <tr>
+                              <td>Anggota</td>
+                              <td>{member.label}</td>
+                           </tr>
+                        {/each}
+                     {/if}
+                  </tbody>
+               </table>
 
                <hr />
 
                <Field name="Judul">
-                  {items.judul}
+                  {data.judul}
                </Field>
 
                <Field name="abstrak">
-                  {@html items.abstrak}
+                  {@html data.abstrak}
                </Field>
 
                <Field name="isi">
-                  {@html items.isi}
+                  {@html data.isi}
                </Field>
             {/if}
 
-            <!-- {#each items as item}
+            <!-- {#each data as item}
                {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "tipe_proposal" && item.key !== "update" && item.key !== "status"}
                   {#if item.key === "status"}
                      <Field name={item.key}>
@@ -610,7 +653,7 @@
                <tbody>
                   <tr>
                      <td>
-                        <Status code={items.status} />
+                        <Status code={data.status} />
                      </td>
                      <td>Coming Soon</td>
                   </tr>

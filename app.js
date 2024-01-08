@@ -197,6 +197,8 @@ function createRoutes() {
          .join("/");
       if (cmp === "Index") path = "/";
       else path = path.replace("/index", "/:page");
+      cmp = cmp.replace("+", "");
+      path = path.replace("+", "");
       decl += `import ${cmp} from "${x.replace("src", ".")}";\n`;
       declRoutes += `\t{ path: "${path}", page: ${cmp} },\n`;
    });

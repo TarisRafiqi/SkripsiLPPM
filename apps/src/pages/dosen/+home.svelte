@@ -62,8 +62,8 @@
          <thead>
             <tr>
                <th>Judul</th>
-               <th>Abstract</th>
-               <!-- <th>Progress</th> -->
+               <th class="is-narrow">Jenis Kegiatan</th>
+               <th class="is-narrow">Jenis Skema</th>
                <th>Status</th>
                <th colspan="2">Action</th>
             </tr>
@@ -72,8 +72,9 @@
          <tbody>
             {#each items as item}
                <tr>
-                  <td><p>{item.judul}</p> </td>
-                  <td><p>{@html item.abstrak}</p> </td>
+                  <td><p>{item.judul}</p></td>
+                  <td><p>{item.jenis_kegiatan}</p></td>
+                  <td><p>{item.jenis_skema}</p></td>
                   <!-- <td
                      ><progress class="progress is-success" value="60" max="100"
                         >60%</progress

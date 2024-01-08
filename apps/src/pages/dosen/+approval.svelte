@@ -45,7 +45,8 @@
          <thead>
             <tr>
                <th>Judul</th>
-               <th>Abstract</th>
+               <th class="is-narrow">Jenis Kegiatan</th>
+               <th class="is-narrow">Jenis Skema</th>
                <th>Status</th>
                <th colspan="2">Action</th>
             </tr>
@@ -55,7 +56,8 @@
             {#each items as item}
                <tr>
                   <td>{item.judul}</td>
-                  <td>{item.abstrak}</td>
+                  <td><p>{item.jenis_kegiatan}</p></td>
+                  <td><p>{item.jenis_skema}</p></td>
                   <td class="status" pid={item.id}>
                      <Status code={item.status} />
                   </td>

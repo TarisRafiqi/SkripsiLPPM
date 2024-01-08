@@ -4,6 +4,7 @@
    import { route } from "../../store";
    import { uploadIcon, deleteIcon } from "../../store/icons";
    // import Editor from "@tinymce/tinymce-svelte";
+   import Select from "src/libs/Select.svelte";
 
    let value;
    let label;
@@ -16,13 +17,50 @@
    let tahunPelaksanaan = "";
    let topik = "";
    let biayaPenelitian = "";
-   let anggotaTim = "";
+   let anggotaTim = [];
    let rab = "";
 
    let myAbstract;
    let myIsi;
 
    const id = Number(localStorage.getItem("id"));
+   let items = [];
+
+   // let result = [];
+   // let listAnggota = [];
+   // let files;
+
+   onMount(async () => {
+      const accessToken = localStorage.getItem("token");
+
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+
+      const response = await fetch("/api/pilihUser", {
+         method: "GET",
+         headers: headers,
+      });
+
+      const result = await response.json();
+      // return;
+
+      if (response.ok) {
+         listUser = result;
+         //console.log(listUser[0]);
+         items = [];
+         for (const [key, value] of Object.entries(listUser)) {
+            items.push({
+               value: value.uid,
+               label: value.nama_lengkap,
+            });
+         }
+      } else {
+         console.log(response);
+         // console.log("gagal");
+      }
+   });
 
    onMount(() => {
       tinymce.init({
@@ -57,8 +95,8 @@
          kelompokKeahlian,
          topik,
          tahunPelaksanaan,
-         // biayaPenelitian,
-         // anggotaTim,
+         biayaPenelitian,
+         anggotaTim,
          // rab,
          judul,
          myAbstract,
@@ -76,10 +114,11 @@
       });
 
       const result = await response.json();
+      // console.log(result);
       // return;
 
       if (response.ok) {
-         console.log(result);
+         // console.log(result);
          // return;
          $route("/dosen");
       } else {
@@ -91,6 +130,8 @@
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
       myIsi = tinymce.get("isi").getContent();
+      // anggotaTim = JSON.stringify(anggotaTim)
+      // console.log(anggotaTim)
 
       let payload = {
          id,
@@ -100,8 +141,8 @@
          kelompokKeahlian,
          topik,
          tahunPelaksanaan,
-         // biayaPenelitian,
-         // anggotaTim,
+         biayaPenelitian,
+         anggotaTim,
          // rab,
          judul,
          myAbstract,
@@ -119,7 +160,6 @@
       });
 
       const result = await response.json();
-
       // console.log(result);
       // return;
 
@@ -134,6 +174,16 @@
       // console.log(el);
       let valueId = el.value;
       // console.log(valueId);
+   }
+
+   function deleteMember(e) {
+      // console.log(e.target);
+      // console.log(e.target.getAttribute("data-value"));
+      let uid = e.target.getAttribute("data-value");
+      anggotaTim = anggotaTim.filter((member) => {
+         console.log(member.value, uid);
+         return member.value !== uid;
+      });
    }
 </script>
 
@@ -173,18 +223,26 @@
             </option>
             {#if jenisKegiatan === "Penelitian"}
                <!-- <optgroup label="Skema Penelitian"> -->
-               <option value="HRKK">Riset Kelompok Keahlian</option>
-               <option value="HRT">Riset Terapan</option>
+               <option value="Riset Kelompok Keahlian"
+                  >Riset Kelompok Keahlian</option
+               >
+               <option value="Riset Terapan">Riset Terapan</option>
                <option value="HRK">Riset Kerjasama</option>
-               <option value="RM">Riset Mandiri</option>
-               <option value="RE">Riset Eksternal</option>
+               <option value="Riset Kerjasama">Riset Mandiri</option>
+               <option value="Riset Eksternal">Riset Eksternal</option>
                <!-- </optgroup> -->
             {:else}
                <!-- <optgroup label="Skema Pengabdian Masyarakat"> -->
-               <option value="HPMDB">Pengabdian Masyarakat Desa Binaan</option>
-               <option value="HPMUB">Pengabdian Masyarakat UMKM Binaan</option>
-               <option value="PMM">Pengabdian Masyarakat Mandiri</option>
-               <option value="PMHE"
+               <option value="Pengabdian Masyarakat Desa Binaan"
+                  >Pengabdian Masyarakat Desa Binaan</option
+               >
+               <option value="Pengabdian Masyarakat UMKM Binaan"
+                  >Pengabdian Masyarakat UMKM Binaan</option
+               >
+               <option value="Pengabdian Masyarakat Mandiri"
+                  >Pengabdian Masyarakat Mandiri</option
+               >
+               <option value="Pengabdian Masyarakat Hibah Eksternal"
                   >Pengabdian Masyarakat Hibah Eksternal</option
                >
                <!-- </optgroup> -->
@@ -216,13 +274,13 @@
    <Field name="Biaya Penelitian">
       <input
          class="input"
-         type="text"
+         type="number"
          placeholder="Masukkan Biaya Penelitian"
          bind:value={biayaPenelitian}
       />
    </Field>
 
-   <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab}>
+   <!-- <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab}>
       <div class="file">
          <label class="file-label">
             <input class="file-input" type="file" name="resume" />
@@ -234,21 +292,22 @@
             </span>
          </label>
       </div>
-   </Field>
+   </Field> -->
 
-   <Field name="Anggota Tim">
+   <Field name="Rencana Anggaran Biaya">
+      <!-- <label for="avatar">Upload a file:</label> -->
       <input
          class="input"
-         type="text"
-         placeholder="Tambahkan Anggota Tim"
-         bind:value={anggotaTim}
+         accept=".xlsx"
+         id="file-upload"
+         name="file-upload"
+         type="file"
       />
    </Field>
 
-   <!-- <Field name="Anggota Tim"> -->
-   <!-- <Select {items} {value} on:select={handleSelect}></Select> -->
-   <!-- <Select {items}></Select> -->
-   <!-- </Field> -->
+   <Field name="Anggota Tim">
+      <Select start="2" {items} bind:result={anggotaTim} />
+   </Field>
 
    <br />
 
@@ -256,7 +315,7 @@
       <thead>
          <tr>
             <th class="is-narrow">Action</th>
-            <th>Status</th>
+            <th class="is-narrow">Status</th>
             <th>Nama</th>
          </tr>
       </thead>
@@ -266,17 +325,24 @@
             <td>Ketua</td>
             <td>...</td>
          </tr>
-         <tr>
-            <td
-               ><button class="button is-danger is-rounded is-small"
-                  ><span class="icon">
-                     <Icon id="delete" src={deleteIcon} />
-                  </span></button
-               ></td
-            >
-            <td>Anggota</td>
-            <td>...</td>
-         </tr>
+         {#if anggotaTim.length > 0}
+            {#each anggotaTim as member}
+               <tr>
+                  <td
+                     ><button
+                        class="button is-danger is-rounded is-small"
+                        data-value={member.value}
+                        on:click={deleteMember}
+                        ><span class="icon">
+                           <Icon id="delete" src={deleteIcon} />
+                        </span></button
+                     ></td
+                  >
+                  <td>Anggota</td>
+                  <td>{member.label}</td>
+               </tr>
+            {/each}
+         {/if}
       </tbody>
    </table>
 

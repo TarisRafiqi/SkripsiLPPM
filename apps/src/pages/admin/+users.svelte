@@ -156,26 +156,28 @@
                   </td>
                   <td>{item.email}</td>
                   <td fixed class="group">
-                     <select uid={idx} on:change={handleGroup}>
-                        <option value="9" selected={item.role === 9}
-                           >Admin</option
-                        >
-                        <option value="0" selected={item.role === 0}
-                           >Dosen</option
-                        >
-                        <option value="10" selected={item.role === 10}
-                           >Reviewer</option
-                        >
-                        <option value="11" selected={item.role === 11}
-                           >Ka. Departemen</option
-                        >
-                        <option value="12" selected={item.role === 12}
-                           >Ka. LPPM</option
-                        >
-                        <option value="13" selected={item.role === 13}
-                           >Ka. Pusat Kajian</option
-                        >
-                     </select>
+                     <div class="select">
+                        <select uid={idx} on:change={handleGroup}>
+                           <option value="9" selected={item.role === 9}
+                              >Admin</option
+                           >
+                           <option value="0" selected={item.role === 0}
+                              >Dosen</option
+                           >
+                           <option value="10" selected={item.role === 10}
+                              >Reviewer</option
+                           >
+                           <option value="11" selected={item.role === 11}
+                              >Ka. Departemen</option
+                           >
+                           <option value="12" selected={item.role === 12}
+                              >Ka. LPPM</option
+                           >
+                           <option value="13" selected={item.role === 13}
+                              >Ka. Pusat Kajian</option
+                           >
+                        </select>
+                     </div>
                   </td>
                   <td
                      fixed
