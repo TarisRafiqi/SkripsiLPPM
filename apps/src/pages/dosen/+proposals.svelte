@@ -27,6 +27,7 @@
    let isi;
    let comment;
    let status;
+   let file;
 
    const id = params["1"];
    let items = [];
@@ -44,14 +45,14 @@
          method: "GET",
          headers: headers,
       });
+
       const result = await response.json();
       view = !isEdit(result.status);
-      // console.log(view);
 
       if (response.ok) {
          data = result;
-         console.log(data);
-         console.log(data.anggota_tim);
+         // console.log(data);
+         // console.log(data.anggota_tim);
          // return;
 
          jenisProposal = data.jenis_proposal;
@@ -74,10 +75,9 @@
          reviewerSelected = data.uid_reviewer;
       } else {
          console.log(response);
-         // console.log("gagal");
       }
 
-      // -----------------------------------------------------------------------------
+      // -----------------------------------------------------------------------------//
       const responsee = await fetch("/api/pilihUser", {
          method: "GET",
          headers: headers,
@@ -104,13 +104,68 @@
    });
 
    function isEdit(code) {
-      const edit = [0, 1, 3, 5, 9];
+      const edit = [0, 1, 3, 5, 7, 9];
       return edit.some((x) => x === code);
    }
 
+   async function handleDownload(e) {
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+      let filename = "rab.xlsx";
+      try {
+         const response = await fetch(`/api/upload/${judul}`, {
+            method: "GET",
+            headers: headers,
+         });
+         const blob = await response.blob();
+         const link = document.createElement("a");
+         link.href = window.URL.createObjectURL(blob);
+         link.download = filename;
+         link.click();
+      } catch (error) {
+         console.error("Error downloading file:", error);
+      }
+   }
+
    async function remediasi() {
+      const accessToken = localStorage.getItem("token");
       abstrak = tinymce.get("abstract").getContent();
       isi = tinymce.get("isi").getContent();
+
+      // -----------------------------------------------------------------------------//
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+         const base64Data = reader.result.split(",")[1];
+         const payloadfile = {
+            file: {
+               name: file.name,
+               type: file.type,
+               data: base64Data,
+            },
+            judul,
+         };
+
+         try {
+            const response = await fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                  Authorization: `${accessToken}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(payloadfile),
+            });
+            const result = await response.json();
+            console.log(result);
+         } catch (error) {
+            console.error("Error uploading file:", error);
+         }
+      };
+      //
+      if (file) reader.readAsDataURL(file);
+      // -----------------------------------------------------------------------------//
 
       const payload = {
          jenisProposal,
@@ -154,8 +209,41 @@
    }
 
    async function submitProposal() {
+      const accessToken = localStorage.getItem("token");
       abstrak = tinymce.get("abstract").getContent();
       isi = tinymce.get("isi").getContent();
+
+      // -----------------------------------------------------------------------------//
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+         const base64Data = reader.result.split(",")[1];
+         const payloadfile = {
+            file: {
+               name: file.name,
+               type: file.type,
+               data: base64Data,
+            },
+            judul,
+         };
+
+         try {
+            const response = await fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                  Authorization: `${accessToken}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(payloadfile),
+            });
+            const result = await response.json();
+            console.log(result);
+         } catch (error) {
+            console.error("Error uploading file:", error);
+         }
+      };
+      //
+      reader.readAsDataURL(file);
+      // -----------------------------------------------------------------------------//
 
       const payload = {
          jenisProposal,
@@ -199,8 +287,40 @@
    }
 
    async function simpanProposal() {
+      const accessToken = localStorage.getItem("token");
       abstrak = tinymce.get("abstract").getContent();
       isi = tinymce.get("isi").getContent();
+
+      // -----------------------------------------------------------------------------//
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+         const base64Data = reader.result.split(",")[1];
+         const payloadfile = {
+            file: {
+               name: file.name,
+               type: file.type,
+               data: base64Data,
+            },
+            judul,
+         };
+
+         try {
+            const response = await fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                  Authorization: `${accessToken}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(payloadfile),
+            });
+            const result = await response.json();
+            console.log(result);
+         } catch (error) {
+            console.error("Error uploading file:", error);
+         }
+      };
+      reader.readAsDataURL(file);
+      // -----------------------------------------------------------------------------//
 
       const payload = {
          jenisProposal,
@@ -442,14 +562,22 @@
                   />
                </Field>
 
-               <Field name="Rincian Anggaran Biaya" bind:value={rab}>
-                  <!-- <label for="avatar">Upload a file:</label> -->
+               <!-- <Field name="Rincian Anggaran Biaya" bind:value={rab}>
                   <input
                      class="input"
                      accept=".xlsx"
                      id="avatar"
                      name="avatar"
                      type="file"
+                  />
+               </Field> -->
+
+               <Field name="Rencana Anggaran Biaya">
+                  <input
+                     class="input"
+                     accept=".xlsx"
+                     type="file"
+                     on:change={(e) => (file = e.target.files[0])}
                   />
                </Field>
 
@@ -558,7 +686,10 @@
                </Field>
 
                <Field name="Rencana Anggaran Biaya">
-                  {rab}
+                  <button
+                     class="button is-link is-rounded button is-small"
+                     on:click={handleDownload}>Download RAB</button
+                  >
                </Field>
 
                <Field name="Anggota Tim">

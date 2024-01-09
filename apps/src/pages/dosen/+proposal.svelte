@@ -25,10 +25,10 @@
 
    const id = Number(localStorage.getItem("id"));
    let items = [];
+   let file;
 
    // let result = [];
    // let listAnggota = [];
-   // let files;
 
    onMount(async () => {
       const accessToken = localStorage.getItem("token");
@@ -87,6 +87,37 @@
       myAbstract = tinymce.get("abstract").getContent();
       myIsi = tinymce.get("isi").getContent();
 
+      // -----------------------------------------------------------------------------//
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+         const base64Data = reader.result.split(",")[1];
+         const payloadfile = {
+            file: {
+               name: file.name,
+               type: file.type,
+               data: base64Data,
+            },
+            judul,
+         };
+
+         try {
+            const response = await fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                  Authorization: `${accessToken}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(payloadfile),
+            });
+            const result = await response.json();
+            console.log(result);
+         } catch (error) {
+            console.error("Error uploading file:", error);
+         }
+      };
+      reader.readAsDataURL(file);
+      // -----------------------------------------------------------------------------//
+
       let payload = {
          id,
          jenisProposal,
@@ -130,8 +161,37 @@
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
       myIsi = tinymce.get("isi").getContent();
-      // anggotaTim = JSON.stringify(anggotaTim)
-      // console.log(anggotaTim)
+
+      // -----------------------------------------------------------------------------//
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+         const base64Data = reader.result.split(",")[1];
+         const payloadfile = {
+            file: {
+               name: file.name,
+               type: file.type,
+               data: base64Data,
+            },
+            judul,
+         };
+
+         try {
+            const response = await fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                  Authorization: `${accessToken}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(payloadfile),
+            });
+            const result = await response.json();
+            console.log(result);
+         } catch (error) {
+            console.error("Error uploading file:", error);
+         }
+      };
+      reader.readAsDataURL(file);
+      // -----------------------------------------------------------------------------//
 
       let payload = {
          id,
@@ -227,8 +287,8 @@
                   >Riset Kelompok Keahlian</option
                >
                <option value="Riset Terapan">Riset Terapan</option>
-               <option value="HRK">Riset Kerjasama</option>
-               <option value="Riset Kerjasama">Riset Mandiri</option>
+               <option value="Riset Kerjasama">Riset Kerjasama</option>
+               <option value="Riset Mandiri">Riset Mandiri</option>
                <option value="Riset Eksternal">Riset Eksternal</option>
                <!-- </optgroup> -->
             {:else}
@@ -280,28 +340,12 @@
       />
    </Field>
 
-   <!-- <Field select name="Rincian Anggaran Biaya (RAB)" bind:value={rab}>
-      <div class="file">
-         <label class="file-label">
-            <input class="file-input" type="file" name="resume" />
-            <span class="file-cta">
-               <span class="file-icon">
-                  <Icon id="orang" src={uploadIcon} />
-               </span>
-               <span class="file-label"> Upload File </span>
-            </span>
-         </label>
-      </div>
-   </Field> -->
-
    <Field name="Rencana Anggaran Biaya">
-      <!-- <label for="avatar">Upload a file:</label> -->
       <input
          class="input"
          accept=".xlsx"
-         id="file-upload"
-         name="file-upload"
          type="file"
+         on:change={(e) => (file = e.target.files[0])}
       />
    </Field>
 

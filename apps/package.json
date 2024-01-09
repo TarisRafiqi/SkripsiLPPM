@@ -10,12 +10,11 @@
    "author": "",
    "license": "ISC",
    "devDependencies": {
-      "@tinymce/tinymce-svelte": "^1.0.1",
+      "@tinymce/tinymce-svelte": "^2.0.1",
       "bulma": "^0.9.4",
       "flatpickr": "^4.6.13",
-      "googleapis": "^128.0.0",
+      "googleapis": "^130.0.0",
       "litepicker": "^2.0.12",
-      "svelte-select": "^4.2.6",
-      "tinymce": "^6.8.1"
+      "tinymce": "^6.8.2"
    }
 }

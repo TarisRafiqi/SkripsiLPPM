@@ -199,11 +199,11 @@
     return -1;
   }
   function exclude_internal_props(props) {
-    const result2 = {};
+    const result = {};
     for (const k in props)
       if (k[0] !== "$")
-        result2[k] = props[k];
-    return result2;
+        result[k] = props[k];
+    return result;
   }
   function set_store_value(store, ret, value) {
     store.set(value);
@@ -504,14 +504,14 @@
     }
   };
   function get_custom_elements_slots(element2) {
-    const result2 = {};
+    const result = {};
     element2.childNodes.forEach(
       /** @param {Element} node */
       (node) => {
-        result2[node.slot || "default"] = true;
+        result[node.slot || "default"] = true;
       }
     );
-    return result2;
+    return result;
   }
   function construct_svelte_component(component, props) {
     return new component(props);
@@ -882,7 +882,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance34, create_fragment43, not_equal, props, append_styles2, dirty = [-1]) {
+  function init(component, options, instance34, create_fragment43, not_equal, props, append_styles2 = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -1033,6 +1033,12 @@
               this.$$d[name] = get_custom_element_value(name, attribute.value, this.$$p_d, "toProp");
             }
           }
+          for (const key in this.$$p_d) {
+            if (!(key in this.$$d) && this[key] !== void 0) {
+              this.$$d[key] = this[key];
+              delete this[key];
+            }
+          }
           this.$$c = new this.$$ctor({
             target: this.shadowRoot || this,
             props: {
@@ -1055,7 +1061,7 @@
                   "toAttribute"
                 );
                 if (attribute_value == null) {
-                  this.removeAttribute(key);
+                  this.removeAttribute(this.$$p_d[key].attribute || key);
                 } else {
                   this.setAttribute(this.$$p_d[key].attribute || key, attribute_value);
                 }
@@ -2647,7 +2653,7 @@
   function instance6($$self, $$props, $$invalidate) {
     let { items } = $$props;
     let { start = 1 } = $$props;
-    let { result: result2 = [] } = $$props;
+    let { result = [] } = $$props;
     let focused = 0;
     let value = "";
     let filteredItems = items;
@@ -2659,13 +2665,13 @@
       let el = e.target;
       if (el.classList.contains("selected")) {
         el.classList.remove("selected");
-        $$invalidate(4, result2 = result2.filter((it) => {
+        $$invalidate(4, result = result.filter((it) => {
           return it.value !== el.getAttribute("data-value");
         }));
       } else {
         el.classList.add("selected");
-        $$invalidate(4, result2 = [
-          ...result2,
+        $$invalidate(4, result = [
+          ...result,
           {
             value: el.getAttribute("data-value"),
             label: el.innerText
@@ -2700,7 +2706,7 @@
       if ("start" in $$props2)
         $$invalidate(6, start = $$props2.start);
       if ("result" in $$props2)
-        $$invalidate(4, result2 = $$props2.result);
+        $$invalidate(4, result = $$props2.result);
     };
     $$self.$$.update = () => {
       if ($$self.$$.dirty & /*value, start*/
@@ -2714,7 +2720,7 @@
       focused,
       filteredItems,
       setSelected,
-      result2,
+      result,
       items,
       start,
       input_input_handler
@@ -4199,11 +4205,11 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       };
-      const response2 = await fetch("/api/auth", payload);
-      const result2 = await response2.json();
-      if (result2.sukses) {
+      const response = await fetch("/api/auth", payload);
+      const result = await response.json();
+      if (result.sukses) {
         set_store_value(isLogin, $isLogin = true, $isLogin);
-        const { id, username: username2, role, token } = result2;
+        const { id, username: username2, role, token } = result;
         localStorage.setItem("id", id);
         localStorage.setItem("username", username2);
         localStorage.setItem("role", role);
@@ -4469,14 +4475,14 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email })
       };
-      const response2 = await fetch("/api/user", payload);
-      const result2 = await response2.json();
-      if (response2.ok) {
-        console.log(result2);
-        localStorage.setItem("code", result2.code);
+      const response = await fetch("/api/user", payload);
+      const result = await response.json();
+      if (response.ok) {
+        console.log(result);
+        localStorage.setItem("code", result.code);
         $route("/verify");
       } else {
-        console.log(result2);
+        console.log(result);
       }
     }
     function input0_input_handler() {
@@ -4724,10 +4730,10 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, code, password })
       };
-      const response2 = await fetch("/api/verify", payload);
-      if (response2.status === 204) {
+      const response = await fetch("/api/verify", payload);
+      if (response.status === 204) {
         console.log("Gagal");
-      } else if (response2.status === 200) {
+      } else if (response.status === 200) {
         console.log("sukses");
         $route("/login");
       }
@@ -5811,11 +5817,11 @@
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/user/" + id, { method: "GET", headers });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user/" + id, { method: "GET", headers });
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = []);
-        for (const [field, value] of Object.entries(result2[0])) {
+        for (const [field, value] of Object.entries(result[0])) {
           items.push({ field, value });
         }
       }
@@ -5919,16 +5925,16 @@
           }
         }
       });
-      const response2 = await fetch("/api/userprofile", {
+      const response = await fetch("/api/userprofile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/admin/users");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     function input_input_handler(each_value, item_index) {
@@ -7642,12 +7648,12 @@
       $$invalidate(3, ka_lppm = await findRole(12));
       $$invalidate(5, ka_pusat_kajian = await findRole(13));
       $$invalidate(4, reviewer = await findRole(10));
-      const response2 = await fetch("/api/ppm/" + id, { method: "GET", headers });
-      const result2 = await response2.json();
-      console.log(result2);
-      if (response2.ok) {
+      const response = await fetch("/api/ppm/" + id, { method: "GET", headers });
+      const result = await response.json();
+      console.log(result);
+      if (response.ok) {
         $$invalidate(0, items = []);
-        for (const [field, value] of Object.entries(result2)) {
+        for (const [field, value] of Object.entries(result)) {
           let obj = { field, value };
           items.push(obj);
         }
@@ -7675,16 +7681,16 @@
         kpkSelected: kpkSelected2,
         reviewerSelected: reviewerSelected2
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function handlePass() {
@@ -7702,34 +7708,34 @@
         reviewerSelected: reviewerSelected2
       };
       console.log("reviewerSelected", reviewerSelected2);
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/admin/proposals");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function searchUser(ev) {
-      const response2 = await fetch("/api/user");
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user");
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(6, showModal = true);
       }
     }
     let options;
     async function findRole(role) {
-      const response2 = await fetch("/api/role/" + role);
-      const result2 = await response2.json();
-      if (response2.ok) {
-        options = result2;
+      const response = await fetch("/api/role/" + role);
+      const result = await response.json();
+      if (response.ok) {
+        options = result;
         return options;
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     let tab1 = true;
@@ -8249,11 +8255,11 @@
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/ppm", { method: "GET", headers });
-      const result2 = await response2.json();
-      console.log(result2);
-      if (response2.ok) {
-        $$invalidate(0, items = result2.dbData);
+      const response = await fetch("/api/ppm", { method: "GET", headers });
+      const result = await response.json();
+      console.log(result);
+      if (response.ok) {
+        $$invalidate(0, items = result.dbData);
       }
     });
     async function handleReview(ev) {
@@ -8784,11 +8790,11 @@
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/user", { method: "GET", headers });
-      const result2 = await response2.json();
-      console.log(result2);
-      if (response2.status === 200) {
-        $$invalidate(0, items = result2.dbData);
+      const response = await fetch("/api/user", { method: "GET", headers });
+      const result = await response.json();
+      console.log(result);
+      if (response.status === 200) {
+        $$invalidate(0, items = result.dbData);
       }
     }
     async function handleActive(ev) {
@@ -8799,16 +8805,16 @@
         active: !items[id].active,
         role: Number(value)
       };
-      const response2 = await fetch("/api/user", {
+      const response = await fetch("/api/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         populateTable();
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function handleGroup(ev) {
@@ -8819,28 +8825,28 @@
         role: Number(value),
         active: items[id].active
       };
-      const response2 = await fetch("/api/user", {
+      const response = await fetch("/api/user", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         populateTable();
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function getPage() {
       if (params["1"] === "profile") {
         let id = params["2"];
-        const response2 = await fetch("/api/user/" + id);
-        const result2 = await response2.json();
-        if (response2.ok) {
-          if (!result2.length)
+        const response = await fetch("/api/user/" + id);
+        const result = await response.json();
+        if (response.ok) {
+          if (!result.length)
             return;
           $$invalidate(5, profile = []);
-          for (const [field, value] of Object.entries(result2[0])) {
+          for (const [field, value] of Object.entries(result[0])) {
             profile.push({ field, value });
           }
         } else {
@@ -9744,12 +9750,12 @@
     const id = localStorage.id;
     let items;
     onMount(async () => {
-      const response2 = await fetch("/api/approval/" + id);
-      const result2 = await response2.json();
-      if (response2.ok) {
-        $$invalidate(0, items = result2.dbData);
+      const response = await fetch("/api/approval/" + id);
+      const result = await response.json();
+      if (response.ok) {
+        $$invalidate(0, items = result.dbData);
       } else {
-        console.log(response2);
+        console.log(response);
       }
     });
     function detail2(ev) {
@@ -11703,10 +11709,10 @@
       ka_lppm = await findRole(12);
       ka_pusat_kajian = await findRole(13);
       reviewer = await findRole(10);
-      const response2 = await fetch("/api/ppm/" + id, { method: "GET", headers });
-      const result2 = await response2.json();
-      if (response2.ok) {
-        $$invalidate(0, items = result2);
+      const response = await fetch("/api/ppm/" + id, { method: "GET", headers });
+      const result = await response.json();
+      if (response.ok) {
+        $$invalidate(0, items = result);
         console.log(items);
         $$invalidate(1, jenisProposal = items.jenis_proposal);
         $$invalidate(2, jenisKegiatan = items.jenis_kegiatan);
@@ -11751,16 +11757,16 @@
         kpkSelected: kpkSelected2,
         reviewerSelected: reviewerSelected2
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen/approval");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function handlePass() {
@@ -11787,34 +11793,34 @@
         reviewerSelected: reviewerSelected2
       };
       console.log("reviewerSelected", reviewerSelected2);
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen/approval");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function searchUser(ev) {
-      const response2 = await fetch("/api/user");
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user");
+      const result = await response.json();
+      if (response.ok) {
         showModal = true;
       }
     }
     let options;
     async function findRole(role2) {
-      const response2 = await fetch("/api/role/" + role2);
-      const result2 = await response2.json();
-      if (response2.ok) {
-        options = result2;
+      const response = await fetch("/api/role/" + role2);
+      const result = await response.json();
+      if (response.ok) {
+        options = result;
         return options;
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     let tab1 = true;
@@ -12321,13 +12327,13 @@
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/ppm/all/" + id, { method: "GET", headers });
-      const result2 = await response2.json();
-      if (response2.ok) {
-        $$invalidate(0, items = result2.dbData);
-        console.log(result2);
+      const response = await fetch("/api/ppm/all/" + id, { method: "GET", headers });
+      const result = await response.json();
+      if (response.ok) {
+        $$invalidate(0, items = result.dbData);
+        console.log(result);
       } else {
-        console.log(response2);
+        console.log(response);
       }
     });
     return [items];
@@ -13209,11 +13215,11 @@
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/user/" + id, { method: "GET", headers });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const response = await fetch("/api/user/" + id, { method: "GET", headers });
+      const result = await response.json();
+      if (response.ok) {
         $$invalidate(0, items = []);
-        for (const [field, value] of Object.entries(result2[0])) {
+        for (const [field, value] of Object.entries(result[0])) {
           items.push({ field, value });
         }
       }
@@ -13317,17 +13323,17 @@
           }
         }
       });
-      const response2 = await fetch("/api/userprofile", {
+      const response = await fetch("/api/userprofile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      console.log(result2);
-      if (response2.ok) {
+      const result = await response.json();
+      console.log(result);
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     let tab1 = true;
@@ -13387,7 +13393,7 @@
   // src/pages/dosen/+proposal.svelte
   function get_each_context12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[28] = list[i];
+    child_ctx[30] = list[i];
     return child_ctx;
   }
   function create_default_slot_102(ctx) {
@@ -13424,7 +13430,7 @@
         )
           add_render_callback(() => (
             /*select_change_handler*/
-            ctx[13].call(select)
+            ctx[14].call(select)
           ));
         attr(div, "class", "select is-fullwidth");
       },
@@ -13445,7 +13451,7 @@
             select,
             "change",
             /*select_change_handler*/
-            ctx[13]
+            ctx[14]
           );
           mounted = true;
         }
@@ -13502,7 +13508,7 @@
         )
           add_render_callback(() => (
             /*select_change_handler_1*/
-            ctx[14].call(select)
+            ctx[15].call(select)
           ));
         attr(div, "class", "select is-fullwidth");
       },
@@ -13523,7 +13529,7 @@
             select,
             "change",
             /*select_change_handler_1*/
-            ctx[14]
+            ctx[15]
           );
           mounted = true;
         }
@@ -13609,9 +13615,9 @@
         set_input_value(option0, option0.__value);
         option1.__value = "Riset Terapan";
         set_input_value(option1, option1.__value);
-        option2.__value = "HRK";
+        option2.__value = "Riset Kerjasama";
         set_input_value(option2, option2.__value);
-        option3.__value = "Riset Kerjasama";
+        option3.__value = "Riset Mandiri";
         set_input_value(option3, option3.__value);
         option4.__value = "Riset Eksternal";
         set_input_value(option4, option4.__value);
@@ -13668,7 +13674,7 @@
         )
           add_render_callback(() => (
             /*select_change_handler_2*/
-            ctx[15].call(select)
+            ctx[16].call(select)
           ));
         attr(div, "class", "select is-fullwidth");
       },
@@ -13688,7 +13694,7 @@
             select,
             "change",
             /*select_change_handler_2*/
-            ctx[15]
+            ctx[16]
           );
           mounted = true;
         }
@@ -13744,7 +13750,7 @@
             input,
             "input",
             /*input_input_handler*/
-            ctx[16]
+            ctx[17]
           );
           mounted = true;
         }
@@ -13792,7 +13798,7 @@
             input,
             "input",
             /*input_input_handler_1*/
-            ctx[17]
+            ctx[18]
           );
           mounted = true;
         }
@@ -13840,7 +13846,7 @@
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[19]
+            ctx[20]
           );
           mounted = true;
         }
@@ -13867,23 +13873,34 @@
   }
   function create_default_slot_42(ctx) {
     let input;
+    let mounted;
+    let dispose;
     return {
       c() {
         input = element("input");
         attr(input, "class", "input");
         attr(input, "accept", ".xlsx");
-        attr(input, "id", "file-upload");
-        attr(input, "name", "file-upload");
         attr(input, "type", "file");
       },
       m(target, anchor) {
         insert(target, input, anchor);
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "change",
+            /*change_handler*/
+            ctx[21]
+          );
+          mounted = true;
+        }
       },
       p: noop,
       d(detaching) {
         if (detaching) {
           detach(input);
         }
+        mounted = false;
+        dispose();
       }
     };
   }
@@ -13892,7 +13909,7 @@
     let updating_result;
     let current;
     function select_result_binding(value) {
-      ctx[20](value);
+      ctx[22](value);
     }
     let select_props = { start: "2", items: (
       /*items*/
@@ -13977,7 +13994,7 @@
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*anggotaTim, deleteMember*/
-        4352) {
+        8448) {
           each_value = ensure_array_like(
             /*anggotaTim*/
             ctx2[8]
@@ -14038,7 +14055,7 @@
     let td2;
     let t3_value = (
       /*member*/
-      ctx[28].label + ""
+      ctx[30].label + ""
     );
     let t3;
     let t4;
@@ -14063,7 +14080,7 @@
         attr(span, "class", "icon");
         attr(button, "class", "button is-danger is-rounded is-small");
         attr(button, "data-value", button_data_value_value = /*member*/
-        ctx[28].value);
+        ctx[30].value);
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -14083,7 +14100,7 @@
             button,
             "click",
             /*deleteMember*/
-            ctx[12]
+            ctx[13]
           );
           mounted = true;
         }
@@ -14091,12 +14108,12 @@
       p(ctx2, dirty) {
         if (!current || dirty[0] & /*anggotaTim*/
         256 && button_data_value_value !== (button_data_value_value = /*member*/
-        ctx2[28].value)) {
+        ctx2[30].value)) {
           attr(button, "data-value", button_data_value_value);
         }
         if ((!current || dirty[0] & /*anggotaTim*/
         256) && t3_value !== (t3_value = /*member*/
-        ctx2[28].label + ""))
+        ctx2[30].label + ""))
           set_data(t3, t3_value);
       },
       i(local) {
@@ -14142,7 +14159,7 @@
             input,
             "input",
             /*input_input_handler_3*/
-            ctx[21]
+            ctx[23]
           );
           mounted = true;
         }
@@ -14193,13 +14210,13 @@
               button0,
               "click",
               /*simpanProposal*/
-              ctx[10]
+              ctx[11]
             ),
             listen(
               button1,
               "click",
               /*submitProposal*/
-              ctx[11]
+              ctx[12]
             )
           ];
           mounted = true;
@@ -14298,7 +14315,7 @@
       }
     });
     function field5_value_binding(value) {
-      ctx[18](value);
+      ctx[19](value);
     }
     let field5_props = {
       datepicker: true,
@@ -14468,35 +14485,35 @@
         const field0_changes = {};
         if (dirty[0] & /*jenisProposal*/
         2 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty[0] & /*jenisKegiatan*/
         1 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
         if (dirty[0] & /*jenisSkema, jenisKegiatan*/
         5 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty[0] & /*kelompokKeahlian*/
         8 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
         if (dirty[0] & /*topik*/
         64 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
@@ -14512,20 +14529,21 @@
         const field6_changes = {};
         if (dirty[0] & /*biayaPenelitian*/
         128 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
-        if (dirty[1] & /*$$scope*/
-        1) {
+        if (dirty[0] & /*file*/
+        1024 | dirty[1] & /*$$scope*/
+        4) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
         if (dirty[0] & /*items, anggotaTim*/
         768 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field8.$set(field8_changes);
@@ -14555,13 +14573,13 @@
         const field9_changes = {};
         if (dirty[0] & /*judul*/
         16 | dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field12_changes = {};
         if (dirty[1] & /*$$scope*/
-        1) {
+        4) {
           field12_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field12.$set(field12_changes);
@@ -14666,9 +14684,9 @@
       },
       p(ctx2, dirty) {
         const article_changes = {};
-        if (dirty[0] & /*judul, anggotaTim, items, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal*/
-        1023 | dirty[1] & /*$$scope*/
-        1) {
+        if (dirty[0] & /*judul, anggotaTim, items, file, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal*/
+        2047 | dirty[1] & /*$$scope*/
+        4) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -14690,7 +14708,7 @@
   }
   function instance29($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(24, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(26, $route = $$value));
     let value;
     let label;
     let jenisKegiatan = "";
@@ -14706,16 +14724,17 @@
     let myIsi;
     const id = Number(localStorage.getItem("id"));
     let items = [];
+    let file;
     onMount(async () => {
       const accessToken = localStorage.getItem("token");
       const headers = {
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/pilihUser", { method: "GET", headers });
-      const result2 = await response2.json();
-      if (response2.ok) {
-        listUser = result2;
+      const response = await fetch("/api/pilihUser", { method: "GET", headers });
+      const result = await response.json();
+      if (response.ok) {
+        listUser = result;
         $$invalidate(9, items = []);
         for (const [key, value2] of Object.entries(listUser)) {
           items.push({
@@ -14724,7 +14743,7 @@
           });
         }
       } else {
-        console.log(response2);
+        console.log(response);
       }
     });
     onMount(() => {
@@ -14744,6 +14763,33 @@
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
       myIsi = tinymce.get("isi").getContent();
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Data = reader.result.split(",")[1];
+        const payloadfile = {
+          file: {
+            name: file.name,
+            type: file.type,
+            data: base64Data
+          },
+          judul
+        };
+        try {
+          const response2 = await fetch("/api/upload", {
+            method: "POST",
+            headers: {
+              Authorization: `${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadfile)
+          });
+          const result2 = await response2.json();
+          console.log(result2);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      };
+      reader.readAsDataURL(file);
       let payload = {
         id,
         jenisProposal,
@@ -14760,7 +14806,7 @@
         myIsi,
         status: 0
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "POST",
         headers: {
           Authorization: `${accessToken}`,
@@ -14768,17 +14814,44 @@
         },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(result2.msg);
+        console.log(result.msg);
       }
     }
     async function submitProposal() {
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
       myIsi = tinymce.get("isi").getContent();
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Data = reader.result.split(",")[1];
+        const payloadfile = {
+          file: {
+            name: file.name,
+            type: file.type,
+            data: base64Data
+          },
+          judul
+        };
+        try {
+          const response2 = await fetch("/api/upload", {
+            method: "POST",
+            headers: {
+              Authorization: `${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadfile)
+          });
+          const result2 = await response2.json();
+          console.log(result2);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      };
+      reader.readAsDataURL(file);
       let payload = {
         id,
         jenisProposal,
@@ -14795,7 +14868,7 @@
         myIsi,
         status: 2
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "POST",
         headers: {
           Authorization: `${accessToken}`,
@@ -14803,11 +14876,11 @@
         },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(result2.msg);
+        console.log(result.msg);
       }
     }
     function deleteMember(e) {
@@ -14845,6 +14918,7 @@
       biayaPenelitian = to_number(this.value);
       $$invalidate(7, biayaPenelitian);
     }
+    const change_handler = (e) => $$invalidate(10, file = e.target.files[0]);
     function select_result_binding(value2) {
       anggotaTim = value2;
       $$invalidate(8, anggotaTim);
@@ -14864,6 +14938,7 @@
       biayaPenelitian,
       anggotaTim,
       items,
+      file,
       simpanProposal,
       submitProposal,
       deleteMember,
@@ -14874,6 +14949,7 @@
       input_input_handler_1,
       field5_value_binding,
       input_input_handler_2,
+      change_handler,
       select_result_binding,
       input_input_handler_3
     ];
@@ -14889,12 +14965,12 @@
   // src/pages/dosen/+proposals.svelte
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[43] = list[i];
+    child_ctx[45] = list[i];
     return child_ctx;
   }
   function get_each_context13(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[43] = list[i];
+    child_ctx[45] = list[i];
     return child_ctx;
   }
   function create_if_block17(ctx) {
@@ -14916,9 +14992,9 @@
       },
       p(ctx2, dirty) {
         const article_changes = {};
-        if (dirty[0] & /*tab4, tab3, data, tab2, status, view, comment, isi, abstrak, judul, anggotaTim, items, rab, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal, tab1*/
+        if (dirty[0] & /*tab4, tab3, data, tab2, status, view, comment, isi, abstrak, judul, anggotaTim, items, file, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal, tab1*/
         2097151 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -15247,62 +15323,61 @@
         const field0_changes = {};
         if (dirty[0] & /*jenisProposal*/
         4 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty[0] & /*jenisKegiatan*/
         8 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
         if (dirty[0] & /*jenisSkema*/
         16 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty[0] & /*kelompokKeahlian*/
         32 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
         if (dirty[0] & /*topik*/
         64 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
         const field5_changes = {};
         if (dirty[0] & /*tahunPelaksanaan*/
         128 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field5_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field5.$set(field5_changes);
         const field6_changes = {};
         if (dirty[0] & /*biayaPenelitian*/
         256 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
-        if (dirty[0] & /*rab*/
-        1024 | dirty[1] & /*$$scope*/
-        131072) {
+        if (dirty[1] & /*$$scope*/
+        524288) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
         if (dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field8.$set(field8_changes);
@@ -15324,21 +15399,21 @@
         const field9_changes = {};
         if (dirty[0] & /*data*/
         2 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field10_changes = {};
         if (dirty[0] & /*data*/
         2 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field10_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field10.$set(field10_changes);
         const field11_changes = {};
         if (dirty[0] & /*data*/
         2 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field11_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field11.$set(field11_changes);
@@ -15429,7 +15504,6 @@
     let field6;
     let t6;
     let field7;
-    let updating_value_1;
     let t7;
     let field8;
     let t8;
@@ -15488,7 +15562,7 @@
       }
     });
     function field5_value_binding(value) {
-      ctx[35](value);
+      ctx[36](value);
     }
     let field5_props = {
       datepicker: true,
@@ -15510,23 +15584,13 @@
         $$scope: { ctx }
       }
     });
-    function field7_value_binding(value) {
-      ctx[37](value);
-    }
-    let field7_props = {
-      name: "Rincian Anggaran Biaya",
-      $$slots: { default: [create_default_slot_83] },
-      $$scope: { ctx }
-    };
-    if (
-      /*rab*/
-      ctx[10] !== void 0
-    ) {
-      field7_props.value = /*rab*/
-      ctx[10];
-    }
-    field7 = new Field_default({ props: field7_props });
-    binding_callbacks.push(() => bind(field7, "value", field7_value_binding));
+    field7 = new Field_default({
+      props: {
+        name: "Rencana Anggaran Biaya",
+        $$slots: { default: [create_default_slot_83] },
+        $$scope: { ctx }
+      }
+    });
     field8 = new Field_default({
       props: {
         name: "Anggota Tim",
@@ -15655,35 +15719,35 @@
         const field0_changes = {};
         if (dirty[0] & /*jenisProposal*/
         4 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty[0] & /*jenisKegiatan*/
         8 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
         if (dirty[0] & /*jenisSkema, jenisKegiatan*/
         24 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty[0] & /*kelompokKeahlian*/
         32 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
         if (dirty[0] & /*topik*/
         64 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
@@ -15699,27 +15763,21 @@
         const field6_changes = {};
         if (dirty[0] & /*biayaPenelitian*/
         256 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
-        if (dirty[1] & /*$$scope*/
-        131072) {
+        if (dirty[0] & /*file*/
+        32768 | dirty[1] & /*$$scope*/
+        524288) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
-        }
-        if (!updating_value_1 && dirty[0] & /*rab*/
-        1024) {
-          updating_value_1 = true;
-          field7_changes.value = /*rab*/
-          ctx2[10];
-          add_flush_callback(() => updating_value_1 = false);
         }
         field7.$set(field7_changes);
         const field8_changes = {};
         if (dirty[0] & /*items, anggotaTim*/
         66048 | dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field8.$set(field8_changes);
@@ -15748,29 +15806,29 @@
         }
         const field9_changes = {};
         if (dirty[0] & /*judul*/
-        2048 | dirty[1] & /*$$scope*/
-        131072) {
+        1024 | dirty[1] & /*$$scope*/
+        524288) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field10_changes = {};
         if (dirty[0] & /*abstrak*/
-        4096 | dirty[1] & /*$$scope*/
-        131072) {
+        2048 | dirty[1] & /*$$scope*/
+        524288) {
           field10_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field10.$set(field10_changes);
         const field11_changes = {};
         if (dirty[0] & /*isi*/
-        8192 | dirty[1] & /*$$scope*/
-        131072) {
+        4096 | dirty[1] & /*$$scope*/
+        524288) {
           field11_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field11.$set(field11_changes);
         const field12_changes = {};
         if (dirty[0] & /*comment*/
-        16384 | dirty[1] & /*$$scope*/
-        131072) {
+        8192 | dirty[1] & /*$$scope*/
+        524288) {
           field12_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field12.$set(field12_changes);
@@ -16047,30 +16105,34 @@
     };
   }
   function create_default_slot_192(ctx) {
-    let t;
+    let button;
+    let mounted;
+    let dispose;
     return {
       c() {
-        t = text(
-          /*rab*/
-          ctx[10]
-        );
+        button = element("button");
+        button.textContent = "Download RAB";
+        attr(button, "class", "button is-link is-rounded button is-small");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
-      },
-      p(ctx2, dirty) {
-        if (dirty[0] & /*rab*/
-        1024)
-          set_data(
-            t,
-            /*rab*/
-            ctx2[10]
+        insert(target, button, anchor);
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*handleDownload*/
+            ctx[21]
           );
+          mounted = true;
+        }
       },
+      p: noop,
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(button);
         }
+        mounted = false;
+        dispose();
       }
     };
   }
@@ -16155,7 +16217,7 @@
     let td1;
     let t2_value = (
       /*member*/
-      ctx[43].label + ""
+      ctx[45].label + ""
     );
     let t2;
     let t3;
@@ -16180,7 +16242,7 @@
       p(ctx2, dirty) {
         if (dirty[0] & /*anggotaTim*/
         512 && t2_value !== (t2_value = /*member*/
-        ctx2[43].label + ""))
+        ctx2[45].label + ""))
           set_data(t2, t2_value);
       },
       d(detaching) {
@@ -16312,7 +16374,7 @@
         )
           add_render_callback(() => (
             /*select_change_handler*/
-            ctx[30].call(select)
+            ctx[31].call(select)
           ));
         attr(div, "class", "select is-fullwidth");
       },
@@ -16333,7 +16395,7 @@
             select,
             "change",
             /*select_change_handler*/
-            ctx[30]
+            ctx[31]
           );
           mounted = true;
         }
@@ -16390,7 +16452,7 @@
         )
           add_render_callback(() => (
             /*select_change_handler_1*/
-            ctx[31].call(select)
+            ctx[32].call(select)
           ));
         attr(div, "class", "select is-fullwidth");
       },
@@ -16411,7 +16473,7 @@
             select,
             "change",
             /*select_change_handler_1*/
-            ctx[31]
+            ctx[32]
           );
           mounted = true;
         }
@@ -16556,7 +16618,7 @@
         )
           add_render_callback(() => (
             /*select_change_handler_2*/
-            ctx[32].call(select)
+            ctx[33].call(select)
           ));
         attr(div, "class", "select is-fullwidth");
       },
@@ -16576,7 +16638,7 @@
             select,
             "change",
             /*select_change_handler_2*/
-            ctx[32]
+            ctx[33]
           );
           mounted = true;
         }
@@ -16632,7 +16694,7 @@
             input,
             "input",
             /*input_input_handler*/
-            ctx[33]
+            ctx[34]
           );
           mounted = true;
         }
@@ -16680,7 +16742,7 @@
             input,
             "input",
             /*input_input_handler_1*/
-            ctx[34]
+            ctx[35]
           );
           mounted = true;
         }
@@ -16728,7 +16790,7 @@
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[36]
+            ctx[37]
           );
           mounted = true;
         }
@@ -16755,23 +16817,34 @@
   }
   function create_default_slot_83(ctx) {
     let input;
+    let mounted;
+    let dispose;
     return {
       c() {
         input = element("input");
         attr(input, "class", "input");
         attr(input, "accept", ".xlsx");
-        attr(input, "id", "avatar");
-        attr(input, "name", "avatar");
         attr(input, "type", "file");
       },
       m(target, anchor) {
         insert(target, input, anchor);
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "change",
+            /*change_handler*/
+            ctx[38]
+          );
+          mounted = true;
+        }
       },
       p: noop,
       d(detaching) {
         if (detaching) {
           detach(input);
         }
+        mounted = false;
+        dispose();
       }
     };
   }
@@ -16780,7 +16853,7 @@
     let updating_result;
     let current;
     function select_result_binding(value) {
-      ctx[38](value);
+      ctx[39](value);
     }
     let select_props = { start: "2", items: (
       /*items*/
@@ -16865,7 +16938,7 @@
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*anggotaTim, deleteMember*/
-        268435968) {
+        536871424) {
           each_value = ensure_array_like(
             /*anggotaTim*/
             ctx2[9]
@@ -16926,7 +16999,7 @@
     let td2;
     let t3_value = (
       /*member*/
-      ctx[43].label + ""
+      ctx[45].label + ""
     );
     let t3;
     let t4;
@@ -16951,7 +17024,7 @@
         attr(span, "class", "icon");
         attr(button, "class", "button is-danger is-rounded is-small");
         attr(button, "data-value", button_data_value_value = /*member*/
-        ctx[43].value);
+        ctx[45].value);
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -16971,7 +17044,7 @@
             button,
             "click",
             /*deleteMember*/
-            ctx[28]
+            ctx[29]
           );
           mounted = true;
         }
@@ -16979,12 +17052,12 @@
       p(ctx2, dirty) {
         if (!current || dirty[0] & /*anggotaTim*/
         512 && button_data_value_value !== (button_data_value_value = /*member*/
-        ctx2[43].value)) {
+        ctx2[45].value)) {
           attr(button, "data-value", button_data_value_value);
         }
         if ((!current || dirty[0] & /*anggotaTim*/
         512) && t3_value !== (t3_value = /*member*/
-        ctx2[43].label + ""))
+        ctx2[45].label + ""))
           set_data(t3, t3_value);
       },
       i(local) {
@@ -17023,26 +17096,26 @@
         set_input_value(
           input,
           /*judul*/
-          ctx[11]
+          ctx[10]
         );
         if (!mounted) {
           dispose = listen(
             input,
             "input",
             /*input_input_handler_3*/
-            ctx[39]
+            ctx[40]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*judul*/
-        2048 && input.value !== /*judul*/
-        ctx2[11]) {
+        1024 && input.value !== /*judul*/
+        ctx2[10]) {
           set_input_value(
             input,
             /*judul*/
-            ctx2[11]
+            ctx2[10]
           );
         }
       },
@@ -17063,7 +17136,7 @@
         id: "abstract",
         content: (
           /*abstrak*/
-          ctx[12]
+          ctx[11]
         )
       }
     });
@@ -17078,9 +17151,9 @@
       p(ctx2, dirty) {
         const wysiwyg_changes = {};
         if (dirty[0] & /*abstrak*/
-        4096)
+        2048)
           wysiwyg_changes.content = /*abstrak*/
-          ctx2[12];
+          ctx2[11];
         wysiwyg.$set(wysiwyg_changes);
       },
       i(local) {
@@ -17104,7 +17177,7 @@
     wysiwyg = new Wysiwyg_default({
       props: { id: "isi", content: (
         /*isi*/
-        ctx[13]
+        ctx[12]
       ) }
     });
     return {
@@ -17118,9 +17191,9 @@
       p(ctx2, dirty) {
         const wysiwyg_changes = {};
         if (dirty[0] & /*isi*/
-        8192)
+        4096)
           wysiwyg_changes.content = /*isi*/
-          ctx2[13];
+          ctx2[12];
         wysiwyg.$set(wysiwyg_changes);
       },
       i(local) {
@@ -17144,7 +17217,7 @@
       c() {
         t = text(
           /*comment*/
-          ctx[14]
+          ctx[13]
         );
       },
       m(target, anchor) {
@@ -17152,11 +17225,11 @@
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*comment*/
-        16384)
+        8192)
           set_data(
             t,
             /*comment*/
-            ctx2[14]
+            ctx2[13]
           );
       },
       d(detaching) {
@@ -17178,7 +17251,7 @@
     function select_block_type_2(ctx2, dirty) {
       if (
         /*status*/
-        ctx2[15] === 0
+        ctx2[14] === 0
       )
         return 0;
       return 1;
@@ -17261,7 +17334,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -17301,7 +17374,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        131072) {
+        524288) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -17337,7 +17410,7 @@
             button,
             "click",
             /*remediasi*/
-            ctx[21]
+            ctx[22]
           );
           mounted = true;
         }
@@ -17376,13 +17449,13 @@
               button0,
               "click",
               /*simpanProposal*/
-              ctx[23]
+              ctx[24]
             ),
             listen(
               button1,
               "click",
               /*submitProposal*/
-              ctx[22]
+              ctx[23]
             )
           ];
           mounted = true;
@@ -17803,25 +17876,25 @@
               li0,
               "click",
               /*clicktab1*/
-              ctx[24]
+              ctx[25]
             ),
             listen(
               li1,
               "click",
               /*clicktab2*/
-              ctx[25]
+              ctx[26]
             ),
             listen(
               li2,
               "click",
               /*clicktab3*/
-              ctx[26]
+              ctx[27]
             ),
             listen(
               li3,
               "click",
               /*clicktab4*/
-              ctx[27]
+              ctx[28]
             )
           ];
           mounted = true;
@@ -18061,14 +18134,14 @@
     };
   }
   function isEdit(code) {
-    const edit = [0, 1, 3, 5, 9];
+    const edit = [0, 1, 3, 5, 7, 9];
     return edit.some((x) => x === code);
   }
   function addLogbook() {
   }
   function instance30($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(40, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(42, $route = $$value));
     let { params } = $$props;
     let view;
     let data2;
@@ -18087,6 +18160,7 @@
     let isi;
     let comment;
     let status;
+    let file;
     const id = params["1"];
     let items = [];
     onMount(async () => {
@@ -18095,13 +18169,11 @@
         Authorization: `${accessToken}`,
         "Content-Type": "application/json"
       };
-      const response2 = await fetch("/api/ppm/" + id, { method: "GET", headers });
-      const result2 = await response2.json();
-      $$invalidate(0, view = !isEdit(result2.status));
-      if (response2.ok) {
-        $$invalidate(1, data2 = result2);
-        console.log(data2);
-        console.log(data2.anggota_tim);
+      const response = await fetch("/api/ppm/" + id, { method: "GET", headers });
+      const result = await response.json();
+      $$invalidate(0, view = !isEdit(result.status));
+      if (response.ok) {
+        $$invalidate(1, data2 = result);
         $$invalidate(2, jenisProposal = data2.jenis_proposal);
         $$invalidate(3, jenisKegiatan = data2.jenis_kegiatan);
         $$invalidate(4, jenisSkema = data2.jenis_skema);
@@ -18110,18 +18182,18 @@
         $$invalidate(7, tahunPelaksanaan = data2.tahun_pelaksanaan);
         $$invalidate(8, biayaPenelitian = data2.biaya_penelitian);
         $$invalidate(9, anggotaTim = data2.anggota_tim);
-        $$invalidate(10, rab = data2.rab);
-        $$invalidate(11, judul = data2.judul);
-        $$invalidate(12, abstrak = data2.abstrak);
-        $$invalidate(13, isi = data2.isi);
-        $$invalidate(14, comment = data2.comment);
-        $$invalidate(15, status = data2.status);
+        rab = data2.rab;
+        $$invalidate(10, judul = data2.judul);
+        $$invalidate(11, abstrak = data2.abstrak);
+        $$invalidate(12, isi = data2.isi);
+        $$invalidate(13, comment = data2.comment);
+        $$invalidate(14, status = data2.status);
         kdeptSelected = data2.uid_kdept;
         klppmSelected = data2.uid_klppm;
         kpkSelected = data2.uid_kpk;
         reviewerSelected = data2.uid_reviewer;
       } else {
-        console.log(response2);
+        console.log(response);
       }
       const responsee = await fetch("/api/pilihUser", { method: "GET", headers });
       const results = await responsee.json();
@@ -18138,9 +18210,56 @@
         console.log(responsee);
       }
     });
+    async function handleDownload2(e) {
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+        Authorization: `${accessToken}`,
+        "Content-Type": "application/json"
+      };
+      let filename = "rab.xlsx";
+      try {
+        const response = await fetch(`/api/upload/${judul}`, { method: "GET", headers });
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+      } catch (error) {
+        console.error("Error downloading file:", error);
+      }
+    }
     async function remediasi() {
-      $$invalidate(12, abstrak = tinymce.get("abstract").getContent());
-      $$invalidate(13, isi = tinymce.get("isi").getContent());
+      const accessToken = localStorage.getItem("token");
+      $$invalidate(11, abstrak = tinymce.get("abstract").getContent());
+      $$invalidate(12, isi = tinymce.get("isi").getContent());
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Data = reader.result.split(",")[1];
+        const payloadfile = {
+          file: {
+            name: file.name,
+            type: file.type,
+            data: base64Data
+          },
+          judul
+        };
+        try {
+          const response2 = await fetch("/api/upload", {
+            method: "POST",
+            headers: {
+              Authorization: `${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadfile)
+          });
+          const result2 = await response2.json();
+          console.log(result2);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      };
+      if (file)
+        reader.readAsDataURL(file);
       const payload = {
         jenisProposal,
         jenisKegiatan,
@@ -18162,21 +18281,49 @@
         kpkSelected,
         reviewerSelected
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function submitProposal() {
-      $$invalidate(12, abstrak = tinymce.get("abstract").getContent());
-      $$invalidate(13, isi = tinymce.get("isi").getContent());
+      const accessToken = localStorage.getItem("token");
+      $$invalidate(11, abstrak = tinymce.get("abstract").getContent());
+      $$invalidate(12, isi = tinymce.get("isi").getContent());
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Data = reader.result.split(",")[1];
+        const payloadfile = {
+          file: {
+            name: file.name,
+            type: file.type,
+            data: base64Data
+          },
+          judul
+        };
+        try {
+          const response2 = await fetch("/api/upload", {
+            method: "POST",
+            headers: {
+              Authorization: `${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadfile)
+          });
+          const result2 = await response2.json();
+          console.log(result2);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      };
+      reader.readAsDataURL(file);
       const payload = {
         jenisProposal,
         jenisKegiatan,
@@ -18198,21 +18345,49 @@
         kpkSelected,
         reviewerSelected
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     async function simpanProposal() {
-      $$invalidate(12, abstrak = tinymce.get("abstract").getContent());
-      $$invalidate(13, isi = tinymce.get("isi").getContent());
+      const accessToken = localStorage.getItem("token");
+      $$invalidate(11, abstrak = tinymce.get("abstract").getContent());
+      $$invalidate(12, isi = tinymce.get("isi").getContent());
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Data = reader.result.split(",")[1];
+        const payloadfile = {
+          file: {
+            name: file.name,
+            type: file.type,
+            data: base64Data
+          },
+          judul
+        };
+        try {
+          const response2 = await fetch("/api/upload", {
+            method: "POST",
+            headers: {
+              Authorization: `${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadfile)
+          });
+          const result2 = await response2.json();
+          console.log(result2);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      };
+      reader.readAsDataURL(file);
       const payload = {
         jenisProposal,
         jenisKegiatan,
@@ -18234,16 +18409,16 @@
         kpkSelected,
         reviewerSelected
       };
-      const response2 = await fetch("/api/ppm", {
+      const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result2 = await response2.json();
-      if (response2.ok) {
+      const result = await response.json();
+      if (response.ok) {
         $route("/dosen");
       } else {
-        console.log(response2);
+        console.log(response);
       }
     }
     let tab1 = true;
@@ -18310,21 +18485,18 @@
       biayaPenelitian = to_number(this.value);
       $$invalidate(8, biayaPenelitian);
     }
-    function field7_value_binding(value) {
-      rab = value;
-      $$invalidate(10, rab);
-    }
+    const change_handler = (e) => $$invalidate(15, file = e.target.files[0]);
     function select_result_binding(value) {
       anggotaTim = value;
       $$invalidate(9, anggotaTim);
     }
     function input_input_handler_3() {
       judul = this.value;
-      $$invalidate(11, judul);
+      $$invalidate(10, judul);
     }
     $$self.$$set = ($$props2) => {
       if ("params" in $$props2)
-        $$invalidate(29, params = $$props2.params);
+        $$invalidate(30, params = $$props2.params);
     };
     return [
       view,
@@ -18337,17 +18509,18 @@
       tahunPelaksanaan,
       biayaPenelitian,
       anggotaTim,
-      rab,
       judul,
       abstrak,
       isi,
       comment,
       status,
+      file,
       items,
       tab1,
       tab2,
       tab3,
       tab4,
+      handleDownload2,
       remediasi,
       submitProposal,
       simpanProposal,
@@ -18364,7 +18537,7 @@
       input_input_handler_1,
       field5_value_binding,
       input_input_handler_2,
-      field7_value_binding,
+      change_handler,
       select_result_binding,
       input_input_handler_3
     ];
@@ -18372,7 +18545,7 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance30, create_fragment39, safe_not_equal, { params: 29 }, null, [-1, -1]);
+      init(this, options, instance30, create_fragment39, safe_not_equal, { params: 30 }, null, [-1, -1]);
     }
   };
   var proposals_default2 = Proposals2;
@@ -18415,6 +18588,8 @@
         t7 = space();
         button1 = element("button");
         button1.textContent = "Download";
+        attr(input, "class", "input");
+        attr(input, "accept", ".xlsx");
         attr(input, "type", "file");
       },
       m(target, anchor) {
@@ -18496,7 +18671,7 @@
       p(ctx2, [dirty]) {
         const article_changes = {};
         if (dirty & /*$$scope, file*/
-        17) {
+        9) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -18517,46 +18692,54 @@
     };
   }
   async function handleDownload(e) {
-    e.preventDefault();
     const accessToken = localStorage.getItem("token");
     const headers = {
       Authorization: `${accessToken}`,
       "Content-Type": "application/json"
     };
-    const response2 = await fetch("/api/upload", { method: "GET", headers });
-    const result2 = await response2.json();
-    if (response2.ok) {
-      console.log(result2);
-      let blob = new Blob([result2.data]);
-      let objectURL = URL.createObjectURL(blob);
-      console.log(objectURL);
-      const a = document.createElement("a");
-      a.href = objectURL;
-      a.download = "sample.xlsx";
-      document.body.appendChild(a);
+    let filename = "rab.xlsx";
+    try {
+      const response = await fetch(`/api/upload`, { method: "GET", headers });
+      const blob = await response.blob();
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    } catch (error) {
+      console.error("Error downloading file:", error);
     }
   }
   function instance31($$self, $$props, $$invalidate) {
-    let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(3, $route = $$value));
     let file;
     async function handleFileUpload() {
       const accessToken = localStorage.getItem("token");
-      const formData = new FormData();
-      formData.append("file", file);
-      try {
-        const response2 = await fetch("/api/upload", { method: "POST", body: formData });
-        const result2 = await response2.json();
-        console.log(result2);
-      } catch (error) {
-        console.error("Error uploading file:", error);
-      }
-      return;
-      if (response.ok) {
-        $route("/dosen");
-      } else {
-        console.log(result.msg);
-      }
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Data = reader.result.split(",")[1];
+        const payloadfile = {
+          file: {
+            name: file.name,
+            type: file.type,
+            data: base64Data
+          },
+          judul: "Judul Baru Test Subject"
+        };
+        try {
+          const response = await fetch("/api/upload", {
+            method: "POST",
+            headers: {
+              Authorization: `${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadfile)
+          });
+          const result = await response.json();
+          console.log(result);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      };
+      reader.readAsDataURL(file);
     }
     const change_handler = (e) => $$invalidate(0, file = e.target.files[0]);
     return [file, handleFileUpload, change_handler];

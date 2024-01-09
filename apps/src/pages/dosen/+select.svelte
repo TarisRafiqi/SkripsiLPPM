@@ -2,84 +2,76 @@
    import { onMount } from "svelte";
    import { Field, Article, Icon, Status } from "@cmp";
    import { route } from "../../store";
-   import { uploadIcon, deleteIcon } from "../../store/icons";
    // import Editor from "@tinymce/tinymce-svelte";
    import Select from "src/libs/Select.svelte";
 
    let file;
 
    async function handleDownload(e) {
-      e.preventDefault();
       const accessToken = localStorage.getItem("token");
-
       const headers = {
          Authorization: `${accessToken}`,
          "Content-Type": "application/json",
       };
-
-      const response = await fetch("/api/upload", {
-         method: "GET",
-         headers: headers,
-      });
-      const result = await response.json();
-
-      if (response.ok) {
-         console.log(result);
-         // let bufferData = new Uint8Array(result.data);
-         // Create a Blob from the buffer
-         let blob = new Blob([result.data]);
-         // Create an object URL for the Blob
-         let objectURL = URL.createObjectURL(blob);
-         console.log(objectURL);
-         const a = document.createElement("a");
-         a.href = objectURL;
-         a.download = "sample.xlsx";
-         document.body.appendChild(a);
-         // a.click();
-         // location.pathname = objectURL;
-         // history.replaceState(null, null, objectURL);
-         // history.replaceState(
-         //    null,
-         //    null,
-         //    window.location.pathname + "your thing here"
-         // );
-         // document.body.removeChild(a);
-         // window.URL.revokeObjectURL(objectURL);
+      let filename = "rab.xlsx";
+      try {
+         const response = await fetch(`/api/upload`, {
+            method: "GET",
+            headers: headers,
+         });
+         const blob = await response.blob();
+         const link = document.createElement("a");
+         link.href = window.URL.createObjectURL(blob);
+         link.download = filename;
+         link.click();
+      } catch (error) {
+         console.error("Error downloading file:", error);
       }
    }
 
    async function handleFileUpload() {
       const accessToken = localStorage.getItem("token");
 
-      const formData = new FormData();
-      formData.append("file", file);
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+         const base64Data = reader.result.split(",")[1];
+         const payloadfile = {
+            file: {
+               name: file.name,
+               type: file.type,
+               data: base64Data,
+            },
+            judul: "Judul Baru Test Subject",
+         };
 
-      try {
-         const response = await fetch("/api/upload", {
-            method: "POST",
-            body: formData,
-         });
-         const result = await response.json();
-         console.log(result);
-      } catch (error) {
-         console.error("Error uploading file:", error);
-      }
-      return;
-
-      if (response.ok) {
-         // console.log(result);
-         // return;
-         $route("/dosen");
-      } else {
-         console.log(result.msg);
-      }
+         try {
+            const response = await fetch("/api/upload", {
+               method: "POST",
+               headers: {
+                  Authorization: `${accessToken}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(payloadfile),
+            });
+            const result = await response.json();
+            console.log(result);
+         } catch (error) {
+            console.error("Error uploading file:", error);
+         }
+      };
+      reader.readAsDataURL(file);
    }
 </script>
 
 <Article>
    <br />
 
-   <input type="file" on:change={(e) => (file = e.target.files[0])} />
+   <input
+      class="input"
+      accept=".xlsx"
+      type="file"
+      on:change={(e) => (file = e.target.files[0])}
+   />
 
    <br />
    <br />

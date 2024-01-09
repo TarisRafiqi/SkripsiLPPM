@@ -89,8 +89,8 @@ module.exports = async function (fastify, opts) {
    fastify.get("/", async function (request, reply) {
       const token = request.headers.authorization;
       const decodedToken = fastify.jwt.decode(token);
-      // const idFromToken = decodedToken.id;
       const roleFromToken = decodedToken.role;
+      // const idFromToken = decodedToken.id;
 
       const sql =
          "SELECT id, uid, judul, jenis_kegiatan, jenis_skema, status FROM ppm";
@@ -128,8 +128,8 @@ module.exports = async function (fastify, opts) {
    fastify.post("/", async function (request, reply) {
       const token = request.headers.authorization;
       const decodedToken = fastify.jwt.decode(token);
-      // const idFromToken = decodedToken.id;
       const roleFromToken = decodedToken.role;
+      // const idFromToken = decodedToken.id;
 
       let data = request.body;
 
@@ -137,9 +137,6 @@ module.exports = async function (fastify, opts) {
       //    data,
       // });
       // return;
-
-      // const sql =
-      //    "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, biaya_penelitian, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       const sql =
          "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, biaya_penelitian, anggota_tim, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -167,7 +164,6 @@ module.exports = async function (fastify, opts) {
                data.kelompokKeahlian,
                data.topik,
                data.biayaPenelitian,
-               // data.anggotaTim,
                JSON.stringify(data.anggotaTim),
                // data.rab,
                data.tahunPelaksanaan,
