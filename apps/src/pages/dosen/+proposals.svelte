@@ -27,10 +27,12 @@
    let isi;
    let comment;
    let status;
-   let file;
+
+   let userId;
 
    const id = params["1"];
    let items = [];
+   let file;
 
    // pakai akses token, hanya uid yang bersangkutan dan role Admin yang boleh mengakses halaman ini
    onMount(async () => {
@@ -73,6 +75,9 @@
          klppmSelected = data.uid_klppm;
          kpkSelected = data.uid_kpk;
          reviewerSelected = data.uid_reviewer;
+         randomFileName = data.random_file_name;
+
+         userId = data.uid;
       } else {
          console.log(response);
       }
@@ -108,6 +113,22 @@
       return edit.some((x) => x === code);
    }
 
+   function formatRupiah(angka, prefix) {
+      var number_string = angka.replace(/[^,\d]/g, "").toString(),
+         split = number_string.split(","),
+         sisa = split[0].length % 3,
+         rupiah = split[0].substr(0, sisa),
+         ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+      if (ribuan) {
+         separator = sisa ? "." : "";
+         rupiah += separator + ribuan.join(".");
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+      return prefix === undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+   }
+
    async function handleDownload(e) {
       const accessToken = localStorage.getItem("token");
       const headers = {
@@ -116,7 +137,7 @@
       };
       let filename = "rab.xlsx";
       try {
-         const response = await fetch(`/api/upload/${judul}`, {
+         const response = await fetch(`/api/upload/${randomFileName}`, {
             method: "GET",
             headers: headers,
          });
@@ -135,7 +156,6 @@
       abstrak = tinymce.get("abstract").getContent();
       isi = tinymce.get("isi").getContent();
 
-      // -----------------------------------------------------------------------------//
       const reader = new FileReader();
       reader.onloadend = async () => {
          const base64Data = reader.result.split(",")[1];
@@ -145,7 +165,7 @@
                type: file.type,
                data: base64Data,
             },
-            judul,
+            randomFileName,
          };
 
          try {
@@ -187,6 +207,7 @@
          klppmSelected,
          kpkSelected,
          reviewerSelected,
+         randomFileName,
       };
 
       const response = await fetch("/api/ppm", {
@@ -213,7 +234,6 @@
       abstrak = tinymce.get("abstract").getContent();
       isi = tinymce.get("isi").getContent();
 
-      // -----------------------------------------------------------------------------//
       const reader = new FileReader();
       reader.onloadend = async () => {
          const base64Data = reader.result.split(",")[1];
@@ -223,7 +243,7 @@
                type: file.type,
                data: base64Data,
             },
-            judul,
+            randomFileName,
          };
 
          try {
@@ -265,6 +285,7 @@
          klppmSelected,
          kpkSelected,
          reviewerSelected,
+         randomFileName,
       };
 
       const response = await fetch("/api/ppm", {
@@ -291,7 +312,6 @@
       abstrak = tinymce.get("abstract").getContent();
       isi = tinymce.get("isi").getContent();
 
-      // -----------------------------------------------------------------------------//
       const reader = new FileReader();
       reader.onloadend = async () => {
          const base64Data = reader.result.split(",")[1];
@@ -301,6 +321,8 @@
                type: file.type,
                data: base64Data,
             },
+            id,
+            userId,
             judul,
          };
 
@@ -342,6 +364,7 @@
          klppmSelected,
          kpkSelected,
          reviewerSelected,
+         randomFileName,
       };
 
       const response = await fetch("/api/ppm", {
@@ -556,21 +579,16 @@
                <Field name="Biaya Penelitian">
                   <input
                      class="input"
-                     type="number"
+                     type="text"
                      placeholder="Masukkan Biaya Penelitian"
                      bind:value={biayaPenelitian}
+                     on:keyup={() =>
+                        (biayaPenelitian = formatRupiah(
+                           biayaPenelitian,
+                           "Rp. "
+                        ))}
                   />
                </Field>
-
-               <!-- <Field name="Rincian Anggaran Biaya" bind:value={rab}>
-                  <input
-                     class="input"
-                     accept=".xlsx"
-                     id="avatar"
-                     name="avatar"
-                     type="file"
-                  />
-               </Field> -->
 
                <Field name="Rencana Anggaran Biaya">
                   <input
@@ -634,16 +652,6 @@
                      bind:value={judul}
                   />
                </Field>
-
-               <!-- <Field
-                  id="abstract"
-                  textarea
-                  name="Abstrak"
-                  bind:value={abstrak}
-               /> -->
-
-               <!-- <Field id="isi" textarea name="Isi Proposal" bind:value={isi} /> -->
-               <!-- <Field id="isi" textarea name="Isi Proposal" bind:value={isi} /> -->
 
                <Field name="Abstrak">
                   <Wysiwyg id="abstract" content={abstrak} />
@@ -735,23 +743,6 @@
                   {@html data.isi}
                </Field>
             {/if}
-
-            <!-- {#each data as item}
-               {#if item.key !== "uid" && item.key !== "id" && item.key !== "uid_kdept" && item.key !== "uid_klppm" && item.key !== "uid_kpk" && item.key !== "uid_reviewer" && item.key !== "tipe_proposal" && item.key !== "update" && item.key !== "status"}
-                  {#if item.key === "status"}
-                     <Field name={item.key}>
-                        <Status code={item.value} />
-                     </Field>
-                  {:else}
-                     <Field
-                        view={view || item.key === "comment"}
-                        name={item.key}
-                        bind:value={item.value}
-                        textarea={item.key === "abstract" ? true : null}
-                     />
-                  {/if}
-               {/if}
-            {/each} -->
 
             {#if !view}
                <br />

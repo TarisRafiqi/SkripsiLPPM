@@ -113,7 +113,6 @@
 
    div a,
    :not(.view) b {
-      display: block;
       line-height: 38px;
    }
 

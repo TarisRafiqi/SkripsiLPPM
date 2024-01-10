@@ -19,6 +19,7 @@
    let biayaPenelitian = "";
    let anggotaTim = [];
    let rab = "";
+   let randomFileName = "";
 
    let myAbstract;
    let myIsi;
@@ -60,6 +61,19 @@
          console.log(response);
          // console.log("gagal");
       }
+
+      //_______________________________________________________________________
+      // Generate Random Character
+      const characters =
+         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let resultxx = "";
+
+      for (let i = 0; i < 30; i++) {
+         const randomIndex = Math.floor(Math.random() * characters.length);
+         resultxx += characters.charAt(randomIndex);
+      }
+
+      randomFileName = resultxx;
    });
 
    onMount(() => {
@@ -82,6 +96,22 @@
       });
    });
 
+   function formatRupiah(angka, prefix) {
+      var number_string = angka.replace(/[^,\d]/g, "").toString(),
+         split = number_string.split(","),
+         sisa = split[0].length % 3,
+         rupiah = split[0].substr(0, sisa),
+         ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+      if (ribuan) {
+         separator = sisa ? "." : "";
+         rupiah += separator + ribuan.join(".");
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+      return prefix === undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+   }
+
    async function simpanProposal() {
       const accessToken = localStorage.getItem("token");
       myAbstract = tinymce.get("abstract").getContent();
@@ -97,7 +127,7 @@
                type: file.type,
                data: base64Data,
             },
-            judul,
+            randomFileName,
          };
 
          try {
@@ -133,6 +163,7 @@
          myAbstract,
          myIsi,
          status: 0,
+         randomFileName,
       };
 
       const response = await fetch("/api/ppm", {
@@ -172,7 +203,7 @@
                type: file.type,
                data: base64Data,
             },
-            judul,
+            randomFileName,
          };
 
          try {
@@ -208,6 +239,7 @@
          myAbstract,
          myIsi,
          status: 2,
+         randomFileName,
       };
 
       const response = await fetch("/api/ppm", {
@@ -334,9 +366,11 @@
    <Field name="Biaya Penelitian">
       <input
          class="input"
-         type="number"
+         type="text"
          placeholder="Masukkan Biaya Penelitian"
          bind:value={biayaPenelitian}
+         on:keyup={() =>
+            (biayaPenelitian = formatRupiah(biayaPenelitian, "Rp. "))}
       />
    </Field>
 

@@ -139,7 +139,7 @@ module.exports = async function (fastify, opts) {
       // return;
 
       const sql =
-         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, biaya_penelitian, anggota_tim, tahun_pelaksanaan) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+         "INSERT INTO ppm (uid, judul, abstrak, isi, status, jenis_proposal, jenis_kegiatan, jenis_skema, kelompok_keahlian, topik, biaya_penelitian, anggota_tim, tahun_pelaksanaan, random_file_name) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       let connection;
 
       if (
@@ -167,6 +167,7 @@ module.exports = async function (fastify, opts) {
                JSON.stringify(data.anggotaTim),
                // data.rab,
                data.tahunPelaksanaan,
+               data.randomFileName,
             ]);
             connection.release();
             reply.send({
@@ -194,14 +195,11 @@ module.exports = async function (fastify, opts) {
 
       // reply.send({
       //    data,
-      //    msg: ">>>>>",
       // });
       // return;
 
       const sql =
-         // "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, anggota_tim = ?, rab = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
-
-         "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, anggota_tim = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ? WHERE id = ?";
+         "UPDATE ppm SET jenis_proposal = ?, jenis_kegiatan = ?, jenis_skema = ?, kelompok_keahlian = ?, topik = ?, tahun_pelaksanaan = ?, biaya_penelitian = ?, anggota_tim = ?, judul = ?, abstrak = ?, isi = ?,  comment = ?, status = ?, uid_kdept = ?, uid_klppm = ?, uid_kpk = ?, uid_reviewer = ?, random_file_name = ? WHERE id = ?";
 
       try {
          connection = await fastify.mysql.getConnection();
@@ -224,6 +222,7 @@ module.exports = async function (fastify, opts) {
             data.klppmSelected,
             data.kpkSelected,
             data.reviewerSelected,
+            data.randomFileName,
             data.id,
          ]);
          dbData = rows;
@@ -234,6 +233,7 @@ module.exports = async function (fastify, opts) {
       } catch (error) {
          reply.send({
             msg: "gagal terkoneksi ke db",
+            error,
          });
       }
    });

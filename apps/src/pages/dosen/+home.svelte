@@ -26,7 +26,7 @@
 
       if (response.ok) {
          items = result.dbData;
-         console.log(result);
+         // console.log(result);
       } else {
          console.log(response);
          // console.log("gagal");

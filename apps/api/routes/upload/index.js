@@ -5,23 +5,29 @@ const path = require("path");
 
 module.exports = async function (fastify, opts) {
    // Download File
-   fastify.get("/:judul", async function (request, reply) {
-      const judul = request.params.judul;
-      let arr = judul.split(" ");
-
+   fastify.get("/:randomFileName", async function (request, reply) {
       const token = request.headers.authorization;
       const decodedToken = fastify.jwt.decode(token);
-      const username = decodedToken.username;
-      const filename =
-         "rab-" +
-         username +
-         "_" +
-         arr
-            .map((str) => str.charAt(0))
-            .join("")
-            .toLowerCase() +
-         ".xlsx";
-      const filepath = path.join(__dirname, "../../../upload", filename);
+
+      const randomFileName = request.params.randomFileName;
+      console.log(randomFileName);
+      // let arr = judul.split(" ");
+      // const username = decodedToken.username;
+      // const filename =
+      //    "rab-" +
+      //    username +
+      //    "_" +
+      //    arr
+      //       .map((str) => str.charAt(0))
+      //       .join("")
+      //       .toLowerCase() +
+      //    ".xlsx";
+
+      const filepath = path.join(
+         __dirname,
+         "../../../upload",
+         randomFileName + ".xlsx"
+      );
 
       try {
          const buffer = fs.readFileSync(filepath);
@@ -36,22 +42,24 @@ module.exports = async function (fastify, opts) {
    fastify.post("/", async function (request, reply) {
       const token = request.headers.authorization;
       const decodedToken = fastify.jwt.decode(token);
-      const username = decodedToken.username;
+
       const fileData = request.body.file;
-      const judul = request.body.judul;
+      const randomFileName = request.body.randomFileName;
+      // console.log(randomFileName);
 
-      let arr = judul.split(" ");
-      let filename =
-         "rab-" +
-         username +
-         "_" +
-         arr
-            .map((str) => str.charAt(0))
-            .join("")
-            .toLowerCase() +
-         ".xlsx";
+      // const username = decodedToken.username;
+      // let arr = judul.split(" ");
+      // let filename =
+      //    "rab-" +
+      //    username +
+      //    "_" +
+      //    arr
+      //       .map((str) => str.charAt(0))
+      //       .join("")
+      //       .toLowerCase() +
+      //    ".xlsx";
 
-      const filepath = "./upload/" + filename;
+      const filepath = "./upload/" + randomFileName + ".xlsx";
 
       try {
          const buffer = Buffer.from(fileData.data, "base64");

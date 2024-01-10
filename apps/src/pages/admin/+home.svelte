@@ -9,12 +9,7 @@
    <hr />
 
    <div class="columns notification is-info is-light">
-      <p>
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos
-         veniam hic ad ratione, modi voluptatum perferendis praesentium facere,
-         recusandae illo. Officiis, ab omnis. Animi earum exercitationem qui
-         atque vero.
-      </p>
+      <p>Coming Soon</p>
    </div>
 
    <!-- <a href="/">

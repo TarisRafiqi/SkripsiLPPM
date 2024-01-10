@@ -6,6 +6,19 @@
    import Select from "src/libs/Select.svelte";
 
    let file;
+   let denganRupiahValue = "";
+   let randomFileName = "";
+
+   const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+   let result = "";
+
+   for (let i = 0; i < 30; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+   }
+
+   randomFileName = result;
 
    async function handleDownload(e) {
       const accessToken = localStorage.getItem("token");
@@ -15,7 +28,7 @@
       };
       let filename = "rab.xlsx";
       try {
-         const response = await fetch(`/api/upload`, {
+         const response = await fetch(`/api/upload/${randomFileName}`, {
             method: "GET",
             headers: headers,
          });
@@ -41,7 +54,7 @@
                type: file.type,
                data: base64Data,
             },
-            judul: "Judul Baru Test Subject",
+            randomFileName,
          };
 
          try {
@@ -61,9 +74,47 @@
       };
       reader.readAsDataURL(file);
    }
+
+   function formatRupiah(angka, prefix) {
+      var number_string = angka.replace(/[^,\d]/g, "").toString(),
+         split = number_string.split(","),
+         sisa = split[0].length % 3,
+         rupiah = split[0].substr(0, sisa),
+         ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+      if (ribuan) {
+         separator = sisa ? "." : "";
+         rupiah += separator + ribuan.join(".");
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+      return prefix === undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+   }
 </script>
 
 <Article>
+   <Field name="Biaya Penelitian">
+      <input
+         class="input"
+         type="text"
+         bind:value={denganRupiahValue}
+         on:keyup={() =>
+            (denganRupiahValue = formatRupiah(denganRupiahValue, "Rp. "))}
+      />
+   </Field>
+
+   <br />
+   <br />
+
+   <h1>Random Character Generator</h1>
+   <br />
+   <button>Generate Random Character</button>
+   {#if randomFileName}
+      <p>Random Character: {randomFileName}</p>
+   {/if}
+
+   <br />
+   <br />
    <br />
 
    <input
@@ -82,6 +133,9 @@
    <br />
 
    <button on:click={handleDownload}>Download</button>
+
+   <br />
+   <br />
 </Article>
 
 <style>
