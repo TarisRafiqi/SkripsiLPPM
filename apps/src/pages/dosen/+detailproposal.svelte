@@ -7,7 +7,7 @@
    const id = params["1"];
    const role = localStorage.getItem("role");
 
-   let items;
+   let data;
    let ka_departemen;
    let ka_lppm;
    let reviewer;
@@ -55,52 +55,55 @@
       // console.log(result);
 
       if (response.ok) {
-         items = result;
-         console.log(items);
+         data = result;
+         // console.log(data);
 
-         // items = [];
-         // for (const [field, value] of Object.entries(result)) {
-         //    let obj = {
-         //       field: field,
-         //       value: value,
-         //    };
-         //    items.push(obj);
-         // }
-         // console.log(items);
-         // judul = items[2].value;
-         // abstrak = items[3].value;
-         // isi = items[4].value;
-         // status = items[5].value;
-         // kdeptSelected = items[7].value;
-         // klppmSelected = items[8].value;
-         // kpkSelected = items[9].value;
-         // reviewerSelected = items[10].value;
-
-         jenisProposal = items.jenis_proposal;
-         jenisKegiatan = items.jenis_kegiatan;
-         jenisSkema = items.jenis_skema;
-         kelompokKeahlian = items.kelompok_keahlian;
-         topik = items.topik;
-         tahunPelaksanaan = items.tahun_pelaksanaan;
-         biayaPenelitian = items.biaya_penelitian;
-         anggotaTim = items.anggota_tim;
-         rab = items.rab;
-         judul = items.judul;
-         abstrak = items.abstrak;
-         isi = items.isi;
-         comment = items.comment;
-         status = items.status;
-
-         kdeptSelected = items.uid_kdept;
-         klppmSelected = items.uid_klppm;
-         kpkSelected = items.uid_kpk;
-         reviewerSelected = items.uid_reviewer;
+         jenisProposal = data.jenis_proposal;
+         jenisKegiatan = data.jenis_kegiatan;
+         jenisSkema = data.jenis_skema;
+         kelompokKeahlian = data.kelompok_keahlian;
+         topik = data.topik;
+         tahunPelaksanaan = data.tahun_pelaksanaan;
+         biayaPenelitian = data.biaya_penelitian;
+         anggotaTim = data.anggota_tim;
+         rab = data.rab;
+         judul = data.judul;
+         abstrak = data.abstrak;
+         isi = data.isi;
+         comment = data.comment;
+         status = data.status;
+         kdeptSelected = data.uid_kdept;
+         klppmSelected = data.uid_klppm;
+         kpkSelected = data.uid_kpk;
+         reviewerSelected = data.uid_reviewer;
+         randomFileName = data.random_file_name;
       }
    });
 
    async function handleRevisi() {
-      // status = items[5].value - 1;
-      status = Number(items.status) - 1;
+      // status = Number(items.status) - 1;
+      // const payload = {
+      //    jenisProposal,
+      //    jenisKegiatan,
+      //    jenisSkema,
+      //    kelompokKeahlian,
+      //    topik,
+      //    tahunPelaksanaan,
+      //    biayaPenelitian,
+      //    // anggotaTim,
+      //    // rab,
+      //    id: id,
+      //    judul,
+      //    abstrak,
+      //    isi,
+      //    comment,
+      //    status: Number(items.status) - 1,
+      //    kdeptSelected,
+      //    klppmSelected,
+      //    kpkSelected,
+      //    reviewerSelected,
+      // };
+
       const payload = {
          jenisProposal,
          jenisKegiatan,
@@ -109,18 +112,18 @@
          topik,
          tahunPelaksanaan,
          biayaPenelitian,
-         // anggotaTim,
-         // rab,
-         id: id,
+         anggotaTim,
+         id,
          judul,
          abstrak,
          isi,
-         comment,
-         status: Number(items.status) - 1,
+         comment: "",
+         status: Number(data.status) - 1,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
          reviewerSelected,
+         randomFileName,
       };
 
       const response = await fetch("/api/ppm", {
@@ -141,8 +144,29 @@
    }
 
    async function handlePass() {
-      // status = items[5].value + 2;
-      status = Number(items.status) + 2;
+      // status = Number(items.status) + 2;
+      // const payload = {
+      //    jenisProposal,
+      //    jenisKegiatan,
+      //    jenisSkema,
+      //    kelompokKeahlian,
+      //    topik,
+      //    tahunPelaksanaan,
+      //    biayaPenelitian,
+      //    // anggotaTim,
+      //    // rab,
+      //    id: id,
+      //    judul,
+      //    abstrak,
+      //    isi,
+      //    comment: "",
+      //    status,
+      //    kdeptSelected,
+      //    klppmSelected,
+      //    kpkSelected,
+      //    reviewerSelected,
+      // };
+
       const payload = {
          jenisProposal,
          jenisKegiatan,
@@ -151,21 +175,19 @@
          topik,
          tahunPelaksanaan,
          biayaPenelitian,
-         // anggotaTim,
-         // rab,
-         id: id,
+         anggotaTim,
+         id,
          judul,
          abstrak,
          isi,
          comment: "",
-         status,
+         status: Number(data.status) + 2,
          kdeptSelected,
          klppmSelected,
          kpkSelected,
          reviewerSelected,
+         randomFileName,
       };
-
-      console.log("reviewerSelected", reviewerSelected);
 
       const response = await fetch("/api/ppm", {
          method: "PATCH",
@@ -210,6 +232,28 @@
       }
    }
 
+   async function handleDownload(e) {
+      const accessToken = localStorage.getItem("token");
+      const headers = {
+         Authorization: `${accessToken}`,
+         "Content-Type": "application/json",
+      };
+      let filename = "rab.xlsx";
+      try {
+         const response = await fetch(`/api/upload/${randomFileName}`, {
+            method: "GET",
+            headers: headers,
+         });
+         const blob = await response.blob();
+         const link = document.createElement("a");
+         link.href = window.URL.createObjectURL(blob);
+         link.download = filename;
+         link.click();
+      } catch (error) {
+         console.error("Error downloading file:", error);
+      }
+   }
+
    let tab1 = true;
    let tab2;
    let tab3;
@@ -246,7 +290,7 @@
    // $: console.log(status);
 </script>
 
-{#if items}
+{#if data}
    <Article>
       <h1 class="title is-1">Detail PPM</h1>
 
@@ -288,25 +332,6 @@
       </div>
 
       {#if tab1 === true}
-         <!-- {#each items as item} -->
-         <!-- {#if item.field !== "comment" && item.field !== "uid_kdept" && item.field !== "uid_klppm" && item.field !== "uid_kpk" && item.field !== "uid_reviewer" && item.field !== "update" && item.field !== "status"} 
-               {#if item.field === "uid"}
-                  <Field
-                  view
-                  name={item.field}
-                  value={item.value}
-                  href={"/admin/profile/" + item.value}
-               /> -->
-         <!-- {#if item.field === "status"} -->
-         <!-- <Field view name={item.field}>
-                  <Status code={item.value} />
-               </Field> -->
-         <!-- {:else} -->
-         <!-- {/if} -->
-         <!-- {/if} -->
-         <!-- <Field view name={item.field} value={item.value} /> -->
-         <!-- {/each} -->
-
          <Field name="Jenis Proposal">
             {jenisProposal}
          </Field>
@@ -335,30 +360,55 @@
             {biayaPenelitian}
          </Field>
 
-         <Field name="Anggota Tim">
-            {anggotaTim}
+         <Field name="Rencana Anggaran Biaya">
+            <button
+               class="button is-link is-rounded button is-small"
+               on:click={handleDownload}>Download RAB</button
+            >
          </Field>
 
-         <Field name="Rencana Anggaran Biaya">
-            {rab}
+         <Field name="Anggota Tim">
+            <span></span>
          </Field>
+         <br />
+         <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+            <thead>
+               <tr>
+                  <th class="is-narrow">Status</th>
+                  <th>Nama</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>Ketua</td>
+                  <td>...</td>
+               </tr>
+               {#if anggotaTim.length > 0}
+                  {#each anggotaTim as member}
+                     <tr>
+                        <td>Anggota</td>
+                        <td>{member.label}</td>
+                     </tr>
+                  {/each}
+               {/if}
+            </tbody>
+         </table>
 
          <hr />
 
          <Field name="Judul">
-            {items.judul}
+            {data.judul}
          </Field>
 
          <Field name="abstrak">
-            {@html items.abstrak}
+            {@html data.abstrak}
          </Field>
 
          <Field name="isi">
-            {@html items.isi}
+            <div class="box box-padding">
+               {@html data.isi}
+            </div>
          </Field>
-
-         <Field name="Comment" bind:value={comment} textarea />
-
          <br />
 
          {#if role === "Ka.Departemen"}
@@ -426,7 +476,7 @@
             <tbody>
                <tr>
                   <td>
-                     <Status code={items.status} />
+                     <Status code={data.status} />
                   </td>
                   <td>Coming Soon</td>
                </tr>
@@ -453,3 +503,9 @@
       eligendi?
    </p>
 </Modal> -->
+
+<style>
+   .box-padding {
+      padding: 4.724rem;
+   }
+</style>

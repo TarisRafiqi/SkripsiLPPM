@@ -707,7 +707,9 @@
             </Field>
 
             <Field name="isi">
-               {@html data.isi}
+               <div class="box box-padding">
+                  {@html data.isi}
+               </div>
             </Field>
          {/if}
 
@@ -852,3 +854,9 @@
       eligendi?
    </p>
 </Modal>
+
+<style>
+   .box-padding {
+      padding: 4.724rem;
+   }
+</style>

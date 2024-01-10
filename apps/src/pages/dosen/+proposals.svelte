@@ -28,8 +28,6 @@
    let comment;
    let status;
 
-   let userId;
-
    const id = params["1"];
    let items = [];
    let file;
@@ -54,7 +52,6 @@
       if (response.ok) {
          data = result;
          // console.log(data);
-         // console.log(data.anggota_tim);
          // return;
 
          jenisProposal = data.jenis_proposal;
@@ -76,8 +73,6 @@
          kpkSelected = data.uid_kpk;
          reviewerSelected = data.uid_reviewer;
          randomFileName = data.random_file_name;
-
-         userId = data.uid;
       } else {
          console.log(response);
       }
@@ -321,9 +316,7 @@
                type: file.type,
                data: base64Data,
             },
-            id,
-            userId,
-            judul,
+            randomFileName,
          };
 
          try {
@@ -740,7 +733,9 @@
                </Field>
 
                <Field name="isi">
-                  {@html data.isi}
+                  <div class="box box-padding">
+                     {@html data.isi}
+                  </div>
                </Field>
             {/if}
 
@@ -854,3 +849,9 @@
       {/if}
    </Article>
 {/if}
+
+<style>
+   .box-padding {
+      padding: 4.724rem;
+   }
+</style>

@@ -3394,10 +3394,6 @@
     {
       title: "Logout",
       href: "/logout"
-    },
-    {
-      title: "Test",
-      href: "/dosen/select"
     }
   ];
   var menu_default = {
@@ -4911,8 +4907,8 @@
     onMount(() => {
       tinymce.init({
         selector: "textarea",
-        plugins: "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
-        toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ",
+        toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
         tinycomments_mode: "embedded",
         tinycomments_author: "Author name",
         mergetags_list: [
@@ -5957,6 +5953,9 @@
   var profile_default = Profile;
 
   // src/pages/admin/+proposal.svelte
+  function add_css19(target) {
+    append_styles(target, "svelte-16qu3hd", ".box-padding.svelte-16qu3hd{padding:4.724rem}");
+  }
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[67] = list[i];
@@ -7307,32 +7306,30 @@
     };
   }
   function create_default_slot_17(ctx) {
-    let html_tag;
+    let div;
     let raw_value = (
       /*data*/
       ctx[0].isi + ""
     );
-    let html_anchor;
     return {
       c() {
-        html_tag = new HtmlTag(false);
-        html_anchor = empty();
-        html_tag.a = html_anchor;
+        div = element("div");
+        attr(div, "class", "box box-padding svelte-16qu3hd");
       },
       m(target, anchor) {
-        html_tag.m(raw_value, target, anchor);
-        insert(target, html_anchor, anchor);
+        insert(target, div, anchor);
+        div.innerHTML = raw_value;
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*data*/
         1 && raw_value !== (raw_value = /*data*/
         ctx2[0].isi + ""))
-          html_tag.p(raw_value);
+          div.innerHTML = raw_value;
+        ;
       },
       d(detaching) {
         if (detaching) {
-          detach(html_anchor);
-          html_tag.d();
+          detach(div);
         }
       }
     };
@@ -9901,13 +9898,13 @@
   var Proposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance19, create_fragment28, safe_not_equal, { params: 40 }, null, [-1, -1, -1]);
+      init(this, options, instance19, create_fragment28, safe_not_equal, { params: 40 }, add_css19, [-1, -1, -1]);
     }
   };
   var proposal_default = Proposal;
 
   // src/pages/admin/+proposals.svelte
-  function add_css19(target) {
+  function add_css20(target) {
     append_styles(target, "svelte-1fo15t", "th.svelte-1fo15t{text-align:center}p.svelte-1fo15t{text-align:justify}.review.svelte-1fo15t{cursor:pointer}.status.svelte-1fo15t{text-align:center}");
   }
   function get_each_context7(ctx, list, i) {
@@ -10309,13 +10306,13 @@
   var Proposals = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance20, create_fragment29, safe_not_equal, {}, add_css19);
+      init(this, options, instance20, create_fragment29, safe_not_equal, {}, add_css20);
     }
   };
   var proposals_default = Proposals;
 
   // src/pages/admin/+users.svelte
-  function add_css20(target) {
+  function add_css21(target) {
     append_styles(target, "svelte-1t9fqxv", "[fixed].svelte-1t9fqxv{text-align:center}.group.svelte-1t9fqxv{padding:0 0.5rem}.active.svelte-1t9fqxv{color:green;cursor:pointer}.active.red.svelte-1t9fqxv{color:orangered}select.svelte-1t9fqxv{border:none;box-shadow:none;background:inherit}");
   }
   function get_each_context8(ctx, list, i) {
@@ -10915,7 +10912,7 @@
   var Users = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance21, create_fragment30, safe_not_equal, { params: 4 }, add_css20);
+      init(this, options, instance21, create_fragment30, safe_not_equal, { params: 4 }, add_css21);
     }
   };
   var users_default = Users;
@@ -11390,7 +11387,7 @@
   });
 
   // src/pages/dosen/+approval.svelte
-  function add_css21(target) {
+  function add_css22(target) {
     append_styles(target, "svelte-1eb6cem", ".review.svelte-1eb6cem{cursor:pointer}.status.svelte-1eb6cem{text-align:center}");
   }
   function get_each_context9(ctx, list, i) {
@@ -11804,12 +11801,20 @@
   var Approval = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance25, create_fragment34, safe_not_equal, {}, add_css21);
+      init(this, options, instance25, create_fragment34, safe_not_equal, {}, add_css22);
     }
   };
   var approval_default = Approval;
 
   // src/pages/dosen/+detailproposal.svelte
+  function add_css23(target) {
+    append_styles(target, "svelte-16qu3hd", ".box-padding.svelte-16qu3hd{padding:4.724rem}");
+  }
+  function get_each_context10(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[41] = list[i];
+    return child_ctx;
+  }
   function create_if_block13(ctx) {
     let article;
     let current;
@@ -11829,9 +11834,9 @@
       },
       p(ctx2, dirty) {
         const article_changes = {};
-        if (dirty[0] & /*tab4, tab3, items, tab2, status, comment, rab, anggotaTim, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal, tab1*/
-        65535 | dirty[1] & /*$$scope*/
-        2048) {
+        if (dirty[0] & /*tab4, tab3, data, tab2, status, anggotaTim, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal, tab1*/
+        16383 | dirty[1] & /*$$scope*/
+        8192) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -11870,23 +11875,29 @@
     let t7;
     let field8;
     let t8;
-    let hr;
+    let br0;
     let t9;
-    let field9;
-    let t10;
-    let field10;
-    let t11;
-    let field11;
-    let t12;
-    let field12;
-    let updating_value;
+    let table;
+    let thead;
     let t13;
-    let br;
-    let t14;
-    let t15;
-    let t16;
+    let tbody;
+    let tr1;
     let t17;
-    let if_block3_anchor;
+    let t18;
+    let hr;
+    let t19;
+    let field9;
+    let t20;
+    let field10;
+    let t21;
+    let field11;
+    let t22;
+    let br1;
+    let t23;
+    let t24;
+    let t25;
+    let t26;
+    let if_block4_anchor;
     let current;
     field0 = new Field_default({
       props: {
@@ -11939,18 +11950,22 @@
     });
     field7 = new Field_default({
       props: {
-        name: "Anggota Tim",
+        name: "Rencana Anggaran Biaya",
         $$slots: { default: [create_default_slot_92] },
         $$scope: { ctx }
       }
     });
     field8 = new Field_default({
       props: {
-        name: "Rencana Anggaran Biaya",
+        name: "Anggota Tim",
         $$slots: { default: [create_default_slot_82] },
         $$scope: { ctx }
       }
     });
+    let if_block0 = (
+      /*anggotaTim*/
+      ctx[8].length > 0 && create_if_block_132(ctx)
+    );
     field9 = new Field_default({
       props: {
         name: "Judul",
@@ -11972,34 +11987,21 @@
         $$scope: { ctx }
       }
     });
-    function field12_value_binding(value) {
-      ctx[24](value);
-    }
-    let field12_props = { name: "Comment", textarea: true };
-    if (
-      /*comment*/
-      ctx[10] !== void 0
-    ) {
-      field12_props.value = /*comment*/
-      ctx[10];
-    }
-    field12 = new Field_default({ props: field12_props });
-    binding_callbacks.push(() => bind(field12, "value", field12_value_binding));
-    let if_block0 = (
-      /*role*/
-      ctx[16] === "Ka.Departemen" && create_if_block_112(ctx)
-    );
     let if_block1 = (
       /*role*/
-      ctx[16] === "Ka.LPPM" && create_if_block_93(ctx)
+      ctx[14] === "Ka.Departemen" && create_if_block_112(ctx)
     );
     let if_block2 = (
       /*role*/
-      ctx[16] === "reviewer" && create_if_block_73(ctx)
+      ctx[14] === "Ka.LPPM" && create_if_block_93(ctx)
     );
     let if_block3 = (
       /*role*/
-      ctx[16] === "Ka.PusatKajian" && create_if_block_53(ctx)
+      ctx[14] === "reviewer" && create_if_block_73(ctx)
+    );
+    let if_block4 = (
+      /*role*/
+      ctx[14] === "Ka.PusatKajian" && create_if_block_53(ctx)
     );
     return {
       c() {
@@ -12021,30 +12023,42 @@
         t7 = space();
         create_component(field8.$$.fragment);
         t8 = space();
-        hr = element("hr");
+        br0 = element("br");
         t9 = space();
-        create_component(field9.$$.fragment);
-        t10 = space();
-        create_component(field10.$$.fragment);
-        t11 = space();
-        create_component(field11.$$.fragment);
-        t12 = space();
-        create_component(field12.$$.fragment);
+        table = element("table");
+        thead = element("thead");
+        thead.innerHTML = `<tr><th class="is-narrow">Status</th> <th>Nama</th></tr>`;
         t13 = space();
-        br = element("br");
-        t14 = space();
+        tbody = element("tbody");
+        tr1 = element("tr");
+        tr1.innerHTML = `<td>Ketua</td> <td>...</td>`;
+        t17 = space();
         if (if_block0)
           if_block0.c();
-        t15 = space();
+        t18 = space();
+        hr = element("hr");
+        t19 = space();
+        create_component(field9.$$.fragment);
+        t20 = space();
+        create_component(field10.$$.fragment);
+        t21 = space();
+        create_component(field11.$$.fragment);
+        t22 = space();
+        br1 = element("br");
+        t23 = space();
         if (if_block1)
           if_block1.c();
-        t16 = space();
+        t24 = space();
         if (if_block2)
           if_block2.c();
-        t17 = space();
+        t25 = space();
         if (if_block3)
           if_block3.c();
-        if_block3_anchor = empty();
+        t26 = space();
+        if (if_block4)
+          if_block4.c();
+        if_block4_anchor = empty();
+        attr(table, "class", "table is-fullwidth is-striped is-hoverable is-bordered");
       },
       m(target, anchor) {
         mount_component(field0, target, anchor);
@@ -12065,146 +12079,159 @@
         insert(target, t7, anchor);
         mount_component(field8, target, anchor);
         insert(target, t8, anchor);
-        insert(target, hr, anchor);
+        insert(target, br0, anchor);
         insert(target, t9, anchor);
-        mount_component(field9, target, anchor);
-        insert(target, t10, anchor);
-        mount_component(field10, target, anchor);
-        insert(target, t11, anchor);
-        mount_component(field11, target, anchor);
-        insert(target, t12, anchor);
-        mount_component(field12, target, anchor);
-        insert(target, t13, anchor);
-        insert(target, br, anchor);
-        insert(target, t14, anchor);
+        insert(target, table, anchor);
+        append(table, thead);
+        append(table, t13);
+        append(table, tbody);
+        append(tbody, tr1);
+        append(tbody, t17);
         if (if_block0)
-          if_block0.m(target, anchor);
-        insert(target, t15, anchor);
+          if_block0.m(tbody, null);
+        insert(target, t18, anchor);
+        insert(target, hr, anchor);
+        insert(target, t19, anchor);
+        mount_component(field9, target, anchor);
+        insert(target, t20, anchor);
+        mount_component(field10, target, anchor);
+        insert(target, t21, anchor);
+        mount_component(field11, target, anchor);
+        insert(target, t22, anchor);
+        insert(target, br1, anchor);
+        insert(target, t23, anchor);
         if (if_block1)
           if_block1.m(target, anchor);
-        insert(target, t16, anchor);
+        insert(target, t24, anchor);
         if (if_block2)
           if_block2.m(target, anchor);
-        insert(target, t17, anchor);
+        insert(target, t25, anchor);
         if (if_block3)
           if_block3.m(target, anchor);
-        insert(target, if_block3_anchor, anchor);
+        insert(target, t26, anchor);
+        if (if_block4)
+          if_block4.m(target, anchor);
+        insert(target, if_block4_anchor, anchor);
         current = true;
       },
       p(ctx2, dirty) {
         const field0_changes = {};
         if (dirty[0] & /*jenisProposal*/
         2 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty[0] & /*jenisKegiatan*/
         4 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
         if (dirty[0] & /*jenisSkema*/
         8 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty[0] & /*kelompokKeahlian*/
         16 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
         if (dirty[0] & /*topik*/
         32 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
         const field5_changes = {};
         if (dirty[0] & /*tahunPelaksanaan*/
         64 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field5_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field5.$set(field5_changes);
         const field6_changes = {};
         if (dirty[0] & /*biayaPenelitian*/
         128 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
-        if (dirty[0] & /*anggotaTim*/
-        256 | dirty[1] & /*$$scope*/
-        2048) {
+        if (dirty[1] & /*$$scope*/
+        8192) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
-        if (dirty[0] & /*rab*/
-        512 | dirty[1] & /*$$scope*/
-        2048) {
+        if (dirty[1] & /*$$scope*/
+        8192) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field8.$set(field8_changes);
+        if (
+          /*anggotaTim*/
+          ctx2[8].length > 0
+        ) {
+          if (if_block0) {
+            if_block0.p(ctx2, dirty);
+          } else {
+            if_block0 = create_if_block_132(ctx2);
+            if_block0.c();
+            if_block0.m(tbody, null);
+          }
+        } else if (if_block0) {
+          if_block0.d(1);
+          if_block0 = null;
+        }
         const field9_changes = {};
-        if (dirty[0] & /*items*/
+        if (dirty[0] & /*data*/
         1 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field10_changes = {};
-        if (dirty[0] & /*items*/
+        if (dirty[0] & /*data*/
         1 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field10_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field10.$set(field10_changes);
         const field11_changes = {};
-        if (dirty[0] & /*items*/
+        if (dirty[0] & /*data*/
         1 | dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field11_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field11.$set(field11_changes);
-        const field12_changes = {};
-        if (!updating_value && dirty[0] & /*comment*/
-        1024) {
-          updating_value = true;
-          field12_changes.value = /*comment*/
-          ctx2[10];
-          add_flush_callback(() => updating_value = false);
-        }
-        field12.$set(field12_changes);
         if (
           /*role*/
-          ctx2[16] === "Ka.Departemen"
-        )
-          if_block0.p(ctx2, dirty);
-        if (
-          /*role*/
-          ctx2[16] === "Ka.LPPM"
+          ctx2[14] === "Ka.Departemen"
         )
           if_block1.p(ctx2, dirty);
         if (
           /*role*/
-          ctx2[16] === "reviewer"
+          ctx2[14] === "Ka.LPPM"
         )
           if_block2.p(ctx2, dirty);
         if (
           /*role*/
-          ctx2[16] === "Ka.PusatKajian"
+          ctx2[14] === "reviewer"
         )
           if_block3.p(ctx2, dirty);
+        if (
+          /*role*/
+          ctx2[14] === "Ka.PusatKajian"
+        )
+          if_block4.p(ctx2, dirty);
       },
       i(local) {
         if (current)
@@ -12221,11 +12248,10 @@
         transition_in(field9.$$.fragment, local);
         transition_in(field10.$$.fragment, local);
         transition_in(field11.$$.fragment, local);
-        transition_in(field12.$$.fragment, local);
-        transition_in(if_block0);
         transition_in(if_block1);
         transition_in(if_block2);
         transition_in(if_block3);
+        transition_in(if_block4);
         current = true;
       },
       o(local) {
@@ -12241,11 +12267,10 @@
         transition_out(field9.$$.fragment, local);
         transition_out(field10.$$.fragment, local);
         transition_out(field11.$$.fragment, local);
-        transition_out(field12.$$.fragment, local);
-        transition_out(if_block0);
         transition_out(if_block1);
         transition_out(if_block2);
         transition_out(if_block3);
+        transition_out(if_block4);
         current = false;
       },
       d(detaching) {
@@ -12259,18 +12284,21 @@
           detach(t6);
           detach(t7);
           detach(t8);
-          detach(hr);
+          detach(br0);
           detach(t9);
-          detach(t10);
-          detach(t11);
-          detach(t12);
-          detach(t13);
-          detach(br);
-          detach(t14);
-          detach(t15);
-          detach(t16);
-          detach(t17);
-          detach(if_block3_anchor);
+          detach(table);
+          detach(t18);
+          detach(hr);
+          detach(t19);
+          detach(t20);
+          detach(t21);
+          detach(t22);
+          detach(br1);
+          detach(t23);
+          detach(t24);
+          detach(t25);
+          detach(t26);
+          detach(if_block4_anchor);
         }
         destroy_component(field0, detaching);
         destroy_component(field1, detaching);
@@ -12281,18 +12309,19 @@
         destroy_component(field6, detaching);
         destroy_component(field7, detaching);
         destroy_component(field8, detaching);
+        if (if_block0)
+          if_block0.d();
         destroy_component(field9, detaching);
         destroy_component(field10, detaching);
         destroy_component(field11, detaching);
-        destroy_component(field12, detaching);
-        if (if_block0)
-          if_block0.d(detaching);
         if (if_block1)
           if_block1.d(detaching);
         if (if_block2)
           if_block2.d(detaching);
         if (if_block3)
           if_block3.d(detaching);
+        if (if_block4)
+          if_block4.d(detaching);
       }
     };
   }
@@ -12493,64 +12522,151 @@
     };
   }
   function create_default_slot_92(ctx) {
-    let t;
+    let button;
+    let mounted;
+    let dispose;
     return {
       c() {
-        t = text(
-          /*anggotaTim*/
-          ctx[8]
-        );
+        button = element("button");
+        button.textContent = "Download RAB";
+        attr(button, "class", "button is-link is-rounded button is-small");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, button, anchor);
+        if (!mounted) {
+          dispose = listen(button, "click", handleDownload2);
+          mounted = true;
+        }
       },
-      p(ctx2, dirty) {
-        if (dirty[0] & /*anggotaTim*/
-        256)
-          set_data(
-            t,
-            /*anggotaTim*/
-            ctx2[8]
-          );
-      },
+      p: noop,
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(button);
         }
+        mounted = false;
+        dispose();
       }
     };
   }
   function create_default_slot_82(ctx) {
-    let t;
+    let span;
     return {
       c() {
-        t = text(
-          /*rab*/
-          ctx[9]
-        );
+        span = element("span");
       },
       m(target, anchor) {
-        insert(target, t, anchor);
+        insert(target, span, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(span);
+        }
+      }
+    };
+  }
+  function create_if_block_132(ctx) {
+    let each_1_anchor;
+    let each_value = ensure_array_like(
+      /*anggotaTim*/
+      ctx[8]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block10(get_each_context10(ctx, each_value, i));
+    }
+    return {
+      c() {
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        each_1_anchor = empty();
+      },
+      m(target, anchor) {
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(target, anchor);
+          }
+        }
+        insert(target, each_1_anchor, anchor);
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*rab*/
-        512)
-          set_data(
-            t,
-            /*rab*/
-            ctx2[9]
+        if (dirty[0] & /*anggotaTim*/
+        256) {
+          each_value = ensure_array_like(
+            /*anggotaTim*/
+            ctx2[8]
           );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context10(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block10(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(each_1_anchor);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function create_each_block10(ctx) {
+    let tr;
+    let td0;
+    let t1;
+    let td1;
+    let t2_value = (
+      /*member*/
+      ctx[41].label + ""
+    );
+    let t2;
+    let t3;
+    return {
+      c() {
+        tr = element("tr");
+        td0 = element("td");
+        td0.textContent = "Anggota";
+        t1 = space();
+        td1 = element("td");
+        t2 = text(t2_value);
+        t3 = space();
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+        append(tr, td0);
+        append(tr, t1);
+        append(tr, td1);
+        append(td1, t2);
+        append(tr, t3);
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*anggotaTim*/
+        256 && t2_value !== (t2_value = /*member*/
+        ctx2[41].label + ""))
+          set_data(t2, t2_value);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
         }
       }
     };
   }
   function create_default_slot_72(ctx) {
     let t_value = (
-      /*items*/
+      /*data*/
       ctx[0].judul + ""
     );
     let t;
@@ -12562,8 +12678,8 @@
         insert(target, t, anchor);
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*items*/
-        1 && t_value !== (t_value = /*items*/
+        if (dirty[0] & /*data*/
+        1 && t_value !== (t_value = /*data*/
         ctx2[0].judul + ""))
           set_data(t, t_value);
       },
@@ -12577,7 +12693,7 @@
   function create_default_slot_62(ctx) {
     let html_tag;
     let raw_value = (
-      /*items*/
+      /*data*/
       ctx[0].abstrak + ""
     );
     let html_anchor;
@@ -12592,8 +12708,8 @@
         insert(target, html_anchor, anchor);
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*items*/
-        1 && raw_value !== (raw_value = /*items*/
+        if (dirty[0] & /*data*/
+        1 && raw_value !== (raw_value = /*data*/
         ctx2[0].abstrak + ""))
           html_tag.p(raw_value);
       },
@@ -12606,32 +12722,30 @@
     };
   }
   function create_default_slot_52(ctx) {
-    let html_tag;
+    let div;
     let raw_value = (
-      /*items*/
+      /*data*/
       ctx[0].isi + ""
     );
-    let html_anchor;
     return {
       c() {
-        html_tag = new HtmlTag(false);
-        html_anchor = empty();
-        html_tag.a = html_anchor;
+        div = element("div");
+        attr(div, "class", "box box-padding svelte-16qu3hd");
       },
       m(target, anchor) {
-        html_tag.m(raw_value, target, anchor);
-        insert(target, html_anchor, anchor);
+        insert(target, div, anchor);
+        div.innerHTML = raw_value;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*items*/
-        1 && raw_value !== (raw_value = /*items*/
+        if (dirty[0] & /*data*/
+        1 && raw_value !== (raw_value = /*data*/
         ctx2[0].isi + ""))
-          html_tag.p(raw_value);
+          div.innerHTML = raw_value;
+        ;
       },
       d(detaching) {
         if (detaching) {
-          detach(html_anchor);
-          html_tag.d();
+          detach(div);
         }
       }
     };
@@ -12641,7 +12755,7 @@
     let current;
     let if_block = (
       /*status*/
-      ctx[11] === 4 && create_if_block_122(ctx)
+      ctx[9] === 4 && create_if_block_122(ctx)
     );
     return {
       c() {
@@ -12658,12 +12772,12 @@
       p(ctx2, dirty) {
         if (
           /*status*/
-          ctx2[11] === 4
+          ctx2[9] === 4
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*status*/
-            2048) {
+            512) {
               transition_in(if_block, 1);
             }
           } else {
@@ -12719,7 +12833,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -12765,13 +12879,13 @@
               button0,
               "click",
               /*handleRevisi*/
-              ctx[17]
+              ctx[15]
             ),
             listen(
               button1,
               "click",
               /*handlePass*/
-              ctx[18]
+              ctx[16]
             )
           ];
           mounted = true;
@@ -12794,7 +12908,7 @@
     let current;
     let if_block = (
       /*status*/
-      ctx[11] === 6 && create_if_block_103(ctx)
+      ctx[9] === 6 && create_if_block_103(ctx)
     );
     return {
       c() {
@@ -12811,12 +12925,12 @@
       p(ctx2, dirty) {
         if (
           /*status*/
-          ctx2[11] === 6
+          ctx2[9] === 6
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*status*/
-            2048) {
+            512) {
               transition_in(if_block, 1);
             }
           } else {
@@ -12872,7 +12986,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -12918,13 +13032,13 @@
               button0,
               "click",
               /*handleRevisi*/
-              ctx[17]
+              ctx[15]
             ),
             listen(
               button1,
               "click",
               /*handlePass*/
-              ctx[18]
+              ctx[16]
             )
           ];
           mounted = true;
@@ -12947,7 +13061,7 @@
     let current;
     let if_block = (
       /*status*/
-      ctx[11] === 8 && create_if_block_83(ctx)
+      ctx[9] === 8 && create_if_block_83(ctx)
     );
     return {
       c() {
@@ -12964,12 +13078,12 @@
       p(ctx2, dirty) {
         if (
           /*status*/
-          ctx2[11] === 8
+          ctx2[9] === 8
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*status*/
-            2048) {
+            512) {
               transition_in(if_block, 1);
             }
           } else {
@@ -13025,7 +13139,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -13071,13 +13185,13 @@
               button0,
               "click",
               /*handleRevisi*/
-              ctx[17]
+              ctx[15]
             ),
             listen(
               button1,
               "click",
               /*handlePass*/
-              ctx[18]
+              ctx[16]
             )
           ];
           mounted = true;
@@ -13100,7 +13214,7 @@
     let current;
     let if_block = (
       /*status*/
-      ctx[11] === 10 && create_if_block_63(ctx)
+      ctx[9] === 10 && create_if_block_63(ctx)
     );
     return {
       c() {
@@ -13117,12 +13231,12 @@
       p(ctx2, dirty) {
         if (
           /*status*/
-          ctx2[11] === 10
+          ctx2[9] === 10
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*status*/
-            2048) {
+            512) {
               transition_in(if_block, 1);
             }
           } else {
@@ -13178,7 +13292,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        2048) {
+        8192) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -13232,13 +13346,13 @@
               button0,
               "click",
               /*handleRevisi*/
-              ctx[17]
+              ctx[15]
             ),
             listen(
               button2,
               "click",
               /*handlePass*/
-              ctx[18]
+              ctx[16]
             )
           ];
           mounted = true;
@@ -13270,7 +13384,7 @@
     let td1;
     let current;
     status_1 = new Status_default({ props: { code: (
-      /*items*/
+      /*data*/
       ctx[0].status
     ) } });
     return {
@@ -13302,9 +13416,9 @@
       },
       p(ctx2, dirty) {
         const status_1_changes = {};
-        if (dirty[0] & /*items*/
+        if (dirty[0] & /*data*/
         1)
-          status_1_changes.code = /*items*/
+          status_1_changes.code = /*data*/
           ctx2[0].status;
         status_1.$set(status_1_changes);
       },
@@ -13384,19 +13498,19 @@
     let dispose;
     let if_block0 = (
       /*tab1*/
-      ctx[12] === true && create_if_block_44(ctx)
+      ctx[10] === true && create_if_block_44(ctx)
     );
     let if_block1 = (
       /*tab2*/
-      ctx[13] === true && create_if_block_34(ctx)
+      ctx[11] === true && create_if_block_34(ctx)
     );
     let if_block2 = (
       /*tab3*/
-      ctx[14] === true && create_if_block_24(ctx)
+      ctx[12] === true && create_if_block_24(ctx)
     );
     let if_block3 = (
       /*tab4*/
-      ctx[15] === true && create_if_block_17(ctx)
+      ctx[13] === true && create_if_block_17(ctx)
     );
     return {
       c() {
@@ -13434,25 +13548,25 @@
           li0,
           "is-active",
           /*tab1*/
-          ctx[12]
+          ctx[10]
         );
         toggle_class(
           li1,
           "is-active",
           /*tab2*/
-          ctx[13]
+          ctx[11]
         );
         toggle_class(
           li2,
           "is-active",
           /*tab3*/
-          ctx[14]
+          ctx[12]
         );
         toggle_class(
           li3,
           "is-active",
           /*tab4*/
-          ctx[15]
+          ctx[13]
         );
         attr(div, "class", "tabs is-boxed");
       },
@@ -13488,25 +13602,25 @@
               li0,
               "click",
               /*clicktab1*/
-              ctx[19]
+              ctx[17]
             ),
             listen(
               li1,
               "click",
               /*clicktab2*/
-              ctx[20]
+              ctx[18]
             ),
             listen(
               li2,
               "click",
               /*clicktab3*/
-              ctx[21]
+              ctx[19]
             ),
             listen(
               li3,
               "click",
               /*clicktab4*/
-              ctx[22]
+              ctx[20]
             )
           ];
           mounted = true;
@@ -13514,49 +13628,49 @@
       },
       p(ctx2, dirty) {
         if (!current || dirty[0] & /*tab1*/
-        4096) {
+        1024) {
           toggle_class(
             li0,
             "is-active",
             /*tab1*/
-            ctx2[12]
+            ctx2[10]
           );
         }
         if (!current || dirty[0] & /*tab2*/
-        8192) {
+        2048) {
           toggle_class(
             li1,
             "is-active",
             /*tab2*/
-            ctx2[13]
+            ctx2[11]
           );
         }
         if (!current || dirty[0] & /*tab3*/
-        16384) {
+        4096) {
           toggle_class(
             li2,
             "is-active",
             /*tab3*/
-            ctx2[14]
+            ctx2[12]
           );
         }
         if (!current || dirty[0] & /*tab4*/
-        32768) {
+        8192) {
           toggle_class(
             li3,
             "is-active",
             /*tab4*/
-            ctx2[15]
+            ctx2[13]
           );
         }
         if (
           /*tab1*/
-          ctx2[12] === true
+          ctx2[10] === true
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty[0] & /*tab1*/
-            4096) {
+            1024) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -13574,12 +13688,12 @@
         }
         if (
           /*tab2*/
-          ctx2[13] === true
+          ctx2[11] === true
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
             if (dirty[0] & /*tab2*/
-            8192) {
+            2048) {
               transition_in(if_block1, 1);
             }
           } else {
@@ -13597,7 +13711,7 @@
         }
         if (
           /*tab3*/
-          ctx2[14] === true
+          ctx2[12] === true
         ) {
           if (if_block2) {
           } else {
@@ -13611,7 +13725,7 @@
         }
         if (
           /*tab4*/
-          ctx2[15] === true
+          ctx2[13] === true
         ) {
           if (if_block3) {
           } else {
@@ -13664,7 +13778,7 @@
     let if_block_anchor;
     let current;
     let if_block = (
-      /*items*/
+      /*data*/
       ctx[0] && create_if_block13(ctx)
     );
     return {
@@ -13681,12 +13795,12 @@
       },
       p(ctx2, dirty) {
         if (
-          /*items*/
+          /*data*/
           ctx2[0]
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
-            if (dirty[0] & /*items*/
+            if (dirty[0] & /*data*/
             1) {
               transition_in(if_block, 1);
             }
@@ -13723,13 +13837,31 @@
       }
     };
   }
+  async function handleDownload2(e) {
+    const accessToken = localStorage.getItem("token");
+    const headers = {
+      Authorization: `${accessToken}`,
+      "Content-Type": "application/json"
+    };
+    let filename = "rab.xlsx";
+    try {
+      const response = await fetch(`/api/upload/${randomFileName}`, { method: "GET", headers });
+      const blob = await response.blob();
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  }
   function instance26($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(38, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(37, $route = $$value));
     let { params } = $$props;
     const id = params["1"];
     const role = localStorage.getItem("role");
-    let items;
+    let data2;
     let ka_departemen;
     let ka_lppm;
     let reviewer;
@@ -13749,30 +13881,29 @@
       const response = await fetch("/api/ppm/" + id, { method: "GET", headers });
       const result = await response.json();
       if (response.ok) {
-        $$invalidate(0, items = result);
-        console.log(items);
-        $$invalidate(1, jenisProposal = items.jenis_proposal);
-        $$invalidate(2, jenisKegiatan = items.jenis_kegiatan);
-        $$invalidate(3, jenisSkema = items.jenis_skema);
-        $$invalidate(4, kelompokKeahlian = items.kelompok_keahlian);
-        $$invalidate(5, topik = items.topik);
-        $$invalidate(6, tahunPelaksanaan = items.tahun_pelaksanaan);
-        $$invalidate(7, biayaPenelitian = items.biaya_penelitian);
-        $$invalidate(8, anggotaTim = items.anggota_tim);
-        $$invalidate(9, rab2 = items.rab);
-        judul = items.judul;
-        abstrak = items.abstrak;
-        isi = items.isi;
-        $$invalidate(10, comment = items.comment);
-        $$invalidate(11, status = items.status);
-        kdeptSelected2 = items.uid_kdept;
-        klppmSelected2 = items.uid_klppm;
-        kpkSelected2 = items.uid_kpk;
-        reviewerSelected2 = items.uid_reviewer;
+        $$invalidate(0, data2 = result);
+        $$invalidate(1, jenisProposal = data2.jenis_proposal);
+        $$invalidate(2, jenisKegiatan = data2.jenis_kegiatan);
+        $$invalidate(3, jenisSkema = data2.jenis_skema);
+        $$invalidate(4, kelompokKeahlian = data2.kelompok_keahlian);
+        $$invalidate(5, topik = data2.topik);
+        $$invalidate(6, tahunPelaksanaan = data2.tahun_pelaksanaan);
+        $$invalidate(7, biayaPenelitian = data2.biaya_penelitian);
+        $$invalidate(8, anggotaTim = data2.anggota_tim);
+        rab2 = data2.rab;
+        judul = data2.judul;
+        abstrak = data2.abstrak;
+        isi = data2.isi;
+        comment = data2.comment;
+        $$invalidate(9, status = data2.status);
+        kdeptSelected2 = data2.uid_kdept;
+        klppmSelected2 = data2.uid_klppm;
+        kpkSelected2 = data2.uid_kpk;
+        reviewerSelected2 = data2.uid_reviewer;
+        randomFileName = data2.random_file_name;
       }
     });
     async function handleRevisi() {
-      $$invalidate(11, status = Number(items.status) - 1);
       const payload = {
         jenisProposal,
         jenisKegiatan,
@@ -13781,18 +13912,18 @@
         topik,
         tahunPelaksanaan,
         biayaPenelitian,
-        // anggotaTim,
-        // rab,
+        anggotaTim,
         id,
         judul,
         abstrak,
         isi,
-        comment,
-        status: Number(items.status) - 1,
+        comment: "",
+        status: Number(data2.status) - 1,
         kdeptSelected: kdeptSelected2,
         klppmSelected: klppmSelected2,
         kpkSelected: kpkSelected2,
-        reviewerSelected: reviewerSelected2
+        reviewerSelected: reviewerSelected2,
+        randomFileName
       };
       const response = await fetch("/api/ppm", {
         method: "PATCH",
@@ -13807,7 +13938,6 @@
       }
     }
     async function handlePass() {
-      $$invalidate(11, status = Number(items.status) + 2);
       const payload = {
         jenisProposal,
         jenisKegiatan,
@@ -13816,20 +13946,19 @@
         topik,
         tahunPelaksanaan,
         biayaPenelitian,
-        // anggotaTim,
-        // rab,
+        anggotaTim,
         id,
         judul,
         abstrak,
         isi,
         comment: "",
-        status,
+        status: Number(data2.status) + 2,
         kdeptSelected: kdeptSelected2,
         klppmSelected: klppmSelected2,
         kpkSelected: kpkSelected2,
-        reviewerSelected: reviewerSelected2
+        reviewerSelected: reviewerSelected2,
+        randomFileName
       };
-      console.log("reviewerSelected", reviewerSelected2);
       const response = await fetch("/api/ppm", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -13865,39 +13994,35 @@
     let tab3;
     let tab4;
     function clicktab1() {
-      $$invalidate(12, tab1 = true);
-      $$invalidate(13, tab2 = false);
-      $$invalidate(14, tab3 = false);
-      $$invalidate(15, tab4 = false);
+      $$invalidate(10, tab1 = true);
+      $$invalidate(11, tab2 = false);
+      $$invalidate(12, tab3 = false);
+      $$invalidate(13, tab4 = false);
     }
     function clicktab2() {
-      $$invalidate(12, tab1 = false);
-      $$invalidate(13, tab2 = true);
-      $$invalidate(14, tab3 = false);
-      $$invalidate(15, tab4 = false);
+      $$invalidate(10, tab1 = false);
+      $$invalidate(11, tab2 = true);
+      $$invalidate(12, tab3 = false);
+      $$invalidate(13, tab4 = false);
     }
     function clicktab3() {
-      $$invalidate(12, tab1 = false);
-      $$invalidate(13, tab2 = false);
-      $$invalidate(14, tab3 = true);
-      $$invalidate(15, tab4 = false);
+      $$invalidate(10, tab1 = false);
+      $$invalidate(11, tab2 = false);
+      $$invalidate(12, tab3 = true);
+      $$invalidate(13, tab4 = false);
     }
     function clicktab4() {
-      $$invalidate(12, tab1 = false);
-      $$invalidate(13, tab2 = false);
-      $$invalidate(14, tab3 = false);
-      $$invalidate(15, tab4 = true);
-    }
-    function field12_value_binding(value) {
-      comment = value;
-      $$invalidate(10, comment);
+      $$invalidate(10, tab1 = false);
+      $$invalidate(11, tab2 = false);
+      $$invalidate(12, tab3 = false);
+      $$invalidate(13, tab4 = true);
     }
     $$self.$$set = ($$props2) => {
       if ("params" in $$props2)
-        $$invalidate(23, params = $$props2.params);
+        $$invalidate(21, params = $$props2.params);
     };
     return [
-      items,
+      data2,
       jenisProposal,
       jenisKegiatan,
       jenisSkema,
@@ -13906,8 +14031,6 @@
       tahunPelaksanaan,
       biayaPenelitian,
       anggotaTim,
-      rab2,
-      comment,
       status,
       tab1,
       tab2,
@@ -13920,23 +14043,22 @@
       clicktab2,
       clicktab3,
       clicktab4,
-      params,
-      field12_value_binding
+      params
     ];
   }
   var Detailproposal = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance26, create_fragment35, safe_not_equal, { params: 23 }, null, [-1, -1]);
+      init(this, options, instance26, create_fragment35, safe_not_equal, { params: 21 }, add_css23, [-1, -1]);
     }
   };
   var detailproposal_default = Detailproposal;
 
   // src/pages/dosen/+home.svelte
-  function add_css22(target) {
+  function add_css24(target) {
     append_styles(target, "svelte-4z2166", "p.svelte-4z2166{text-align:justify}.review.svelte-4z2166{cursor:pointer}.status.svelte-4z2166{text-align:center}");
   }
-  function get_each_context10(ctx, list, i) {
+  function get_each_context11(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[2] = list[i];
     return child_ctx;
@@ -13981,7 +14103,7 @@
       }
     };
   }
-  function create_each_block10(ctx) {
+  function create_each_block11(ctx) {
     let tr;
     let td0;
     let p0;
@@ -14166,7 +14288,7 @@
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block10(get_each_context10(ctx, each_value, i));
+      each_blocks[i] = create_each_block11(get_each_context11(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -14233,12 +14355,12 @@
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context10(ctx2, each_value, i);
+            const child_ctx = get_each_context11(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block10(child_ctx);
+              each_blocks[i] = create_each_block11(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(tbody, null);
@@ -14379,13 +14501,13 @@
   var Home3 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance27, create_fragment36, safe_not_equal, {}, add_css22);
+      init(this, options, instance27, create_fragment36, safe_not_equal, {}, add_css24);
     }
   };
   var home_default3 = Home3;
 
   // src/pages/dosen/+profile.svelte
-  function get_each_context11(ctx, list, i) {
+  function get_each_context12(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[13] = list[i];
     child_ctx[14] = list;
@@ -14467,7 +14589,7 @@
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block11(get_each_context11(ctx, each_value, i));
+      each_blocks[i] = create_each_block12(get_each_context12(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -14509,12 +14631,12 @@
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context11(ctx2, each_value, i);
+            const child_ctx = get_each_context12(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block11(child_ctx);
+              each_blocks[i] = create_each_block12(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(t0.parentNode, t0);
@@ -14613,7 +14735,7 @@
       }
     };
   }
-  function create_each_block11(ctx) {
+  function create_each_block12(ctx) {
     let field;
     let current;
     field = new Field_default({
@@ -15429,7 +15551,7 @@
   var profile_default2 = Profile2;
 
   // src/pages/dosen/+proposal.svelte
-  function get_each_context12(ctx, list, i) {
+  function get_each_context13(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[32] = list[i];
     return child_ctx;
@@ -16017,7 +16139,7 @@
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block12(get_each_context12(ctx, each_value, i));
+      each_blocks[i] = create_each_block13(get_each_context13(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -16047,12 +16169,12 @@
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context12(ctx2, each_value, i);
+            const child_ctx = get_each_context13(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block12(child_ctx);
+              each_blocks[i] = create_each_block13(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
@@ -16088,7 +16210,7 @@
       }
     };
   }
-  function create_each_block12(ctx) {
+  function create_each_block13(ctx) {
     let tr;
     let td0;
     let button;
@@ -17030,14 +17152,17 @@
   var proposal_default2 = Proposal2;
 
   // src/pages/dosen/+proposals.svelte
+  function add_css25(target) {
+    append_styles(target, "svelte-16qu3hd", ".box-padding.svelte-16qu3hd{padding:4.724rem}");
+  }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[46] = list[i];
+    child_ctx[45] = list[i];
     return child_ctx;
   }
-  function get_each_context13(ctx, list, i) {
+  function get_each_context14(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[46] = list[i];
+    child_ctx[45] = list[i];
     return child_ctx;
   }
   function create_if_block17(ctx) {
@@ -17061,7 +17186,7 @@
         const article_changes = {};
         if (dirty[0] & /*tab4, tab3, data, tab2, status, view, comment, isi, abstrak, judul, anggotaTim, items, file, biayaPenelitian, tahunPelaksanaan, topik, kelompokKeahlian, jenisSkema, jenisKegiatan, jenisProposal, tab1*/
         2097151 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           article_changes.$$scope = { dirty, ctx: ctx2 };
         }
         article.$set(article_changes);
@@ -17390,61 +17515,61 @@
         const field0_changes = {};
         if (dirty[0] & /*jenisProposal*/
         4 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty[0] & /*jenisKegiatan*/
         8 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
         if (dirty[0] & /*jenisSkema*/
         16 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty[0] & /*kelompokKeahlian*/
         32 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
         if (dirty[0] & /*topik*/
         64 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
         const field5_changes = {};
         if (dirty[0] & /*tahunPelaksanaan*/
         128 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field5_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field5.$set(field5_changes);
         const field6_changes = {};
         if (dirty[0] & /*biayaPenelitian*/
         256 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
         if (dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
         if (dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field8.$set(field8_changes);
@@ -17466,21 +17591,21 @@
         const field9_changes = {};
         if (dirty[0] & /*data*/
         2 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field10_changes = {};
         if (dirty[0] & /*data*/
         2 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field10_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field10.$set(field10_changes);
         const field11_changes = {};
         if (dirty[0] & /*data*/
         2 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field11_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field11.$set(field11_changes);
@@ -17786,35 +17911,35 @@
         const field0_changes = {};
         if (dirty[0] & /*jenisProposal*/
         4 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field0_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field0.$set(field0_changes);
         const field1_changes = {};
         if (dirty[0] & /*jenisKegiatan*/
         8 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field1_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field1.$set(field1_changes);
         const field2_changes = {};
         if (dirty[0] & /*jenisSkema, jenisKegiatan*/
         24 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field2_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field2.$set(field2_changes);
         const field3_changes = {};
         if (dirty[0] & /*kelompokKeahlian*/
         32 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field3_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field3.$set(field3_changes);
         const field4_changes = {};
         if (dirty[0] & /*topik*/
         64 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field4_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field4.$set(field4_changes);
@@ -17830,21 +17955,21 @@
         const field6_changes = {};
         if (dirty[0] & /*biayaPenelitian*/
         256 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field6_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field6.$set(field6_changes);
         const field7_changes = {};
         if (dirty[0] & /*file*/
         65536 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field7_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field7.$set(field7_changes);
         const field8_changes = {};
         if (dirty[0] & /*items, anggotaTim*/
         33280 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field8_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field8.$set(field8_changes);
@@ -17874,28 +17999,28 @@
         const field9_changes = {};
         if (dirty[0] & /*judul*/
         1024 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field9_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field9.$set(field9_changes);
         const field10_changes = {};
         if (dirty[0] & /*abstrak*/
         2048 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field10_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field10.$set(field10_changes);
         const field11_changes = {};
         if (dirty[0] & /*isi*/
         4096 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field11_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field11.$set(field11_changes);
         const field12_changes = {};
         if (dirty[0] & /*comment*/
         8192 | dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field12_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field12.$set(field12_changes);
@@ -18184,7 +18309,7 @@
       m(target, anchor) {
         insert(target, button, anchor);
         if (!mounted) {
-          dispose = listen(button, "click", handleDownload2);
+          dispose = listen(button, "click", handleDownload3);
           mounted = true;
         }
       },
@@ -18279,7 +18404,7 @@
     let td1;
     let t2_value = (
       /*member*/
-      ctx[46].label + ""
+      ctx[45].label + ""
     );
     let t2;
     let t3;
@@ -18304,7 +18429,7 @@
       p(ctx2, dirty) {
         if (dirty[0] & /*anggotaTim*/
         512 && t2_value !== (t2_value = /*member*/
-        ctx2[46].label + ""))
+        ctx2[45].label + ""))
           set_data(t2, t2_value);
       },
       d(detaching) {
@@ -18372,32 +18497,30 @@
     };
   }
   function create_default_slot_153(ctx) {
-    let html_tag;
+    let div;
     let raw_value = (
       /*data*/
       ctx[1].isi + ""
     );
-    let html_anchor;
     return {
       c() {
-        html_tag = new HtmlTag(false);
-        html_anchor = empty();
-        html_tag.a = html_anchor;
+        div = element("div");
+        attr(div, "class", "box box-padding svelte-16qu3hd");
       },
       m(target, anchor) {
-        html_tag.m(raw_value, target, anchor);
-        insert(target, html_anchor, anchor);
+        insert(target, div, anchor);
+        div.innerHTML = raw_value;
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*data*/
         2 && raw_value !== (raw_value = /*data*/
         ctx2[1].isi + ""))
-          html_tag.p(raw_value);
+          div.innerHTML = raw_value;
+        ;
       },
       d(detaching) {
         if (detaching) {
-          detach(html_anchor);
-          html_tag.d();
+          detach(div);
         }
       }
     };
@@ -18985,7 +19108,7 @@
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block13(get_each_context13(ctx, each_value, i));
+      each_blocks[i] = create_each_block14(get_each_context14(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -19015,12 +19138,12 @@
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context13(ctx2, each_value, i);
+            const child_ctx = get_each_context14(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block13(child_ctx);
+              each_blocks[i] = create_each_block14(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
@@ -19056,7 +19179,7 @@
       }
     };
   }
-  function create_each_block13(ctx) {
+  function create_each_block14(ctx) {
     let tr;
     let td0;
     let button;
@@ -19069,7 +19192,7 @@
     let td2;
     let t3_value = (
       /*member*/
-      ctx[46].label + ""
+      ctx[45].label + ""
     );
     let t3;
     let t4;
@@ -19094,7 +19217,7 @@
         attr(span, "class", "icon");
         attr(button, "class", "button is-danger is-rounded is-small");
         attr(button, "data-value", button_data_value_value = /*member*/
-        ctx[46].value);
+        ctx[45].value);
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -19122,12 +19245,12 @@
       p(ctx2, dirty) {
         if (!current || dirty[0] & /*anggotaTim*/
         512 && button_data_value_value !== (button_data_value_value = /*member*/
-        ctx2[46].value)) {
+        ctx2[45].value)) {
           attr(button, "data-value", button_data_value_value);
         }
         if ((!current || dirty[0] & /*anggotaTim*/
         512) && t3_value !== (t3_value = /*member*/
-        ctx2[46].label + ""))
+        ctx2[45].label + ""))
           set_data(t3, t3_value);
       },
       i(local) {
@@ -19404,7 +19527,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -19444,7 +19567,7 @@
       p(ctx2, dirty) {
         const field_changes = {};
         if (dirty[1] & /*$$scope*/
-        1048576) {
+        524288) {
           field_changes.$$scope = { dirty, ctx: ctx2 };
         }
         field.$set(field_changes);
@@ -20216,7 +20339,7 @@
     rupiah = split[1] !== void 0 ? rupiah + "," + split[1] : rupiah;
     return prefix === void 0 ? rupiah : rupiah ? "Rp. " + rupiah : "";
   }
-  async function handleDownload2(e) {
+  async function handleDownload3(e) {
     const accessToken = localStorage.getItem("token");
     const headers = {
       Authorization: `${accessToken}`,
@@ -20238,7 +20361,7 @@
   }
   function instance30($$self, $$props, $$invalidate) {
     let $route;
-    component_subscribe($$self, route, ($$value) => $$invalidate(43, $route = $$value));
+    component_subscribe($$self, route, ($$value) => $$invalidate(42, $route = $$value));
     let { params } = $$props;
     let view;
     let data2;
@@ -20257,7 +20380,6 @@
     let isi;
     let comment;
     let status;
-    let userId;
     const id = params["1"];
     let items = [];
     let file;
@@ -20291,7 +20413,6 @@
         kpkSelected = data2.uid_kpk;
         reviewerSelected = data2.uid_reviewer;
         randomFileName = data2.random_file_name;
-        userId = data2.uid;
       } else {
         console.log(response);
       }
@@ -20454,9 +20575,7 @@
             type: file.type,
             data: base64Data
           },
-          id,
-          userId,
-          judul
+          randomFileName
         };
         try {
           const response2 = await fetch("/api/upload", {
@@ -20633,7 +20752,7 @@
   var Proposals2 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance30, create_fragment39, safe_not_equal, { params: 29 }, null, [-1, -1]);
+      init(this, options, instance30, create_fragment39, safe_not_equal, { params: 29 }, add_css25, [-1, -1]);
     }
   };
   var proposals_default2 = Proposals2;
@@ -21030,7 +21149,7 @@
       result += characters.charAt(randomIndex);
     }
     randomFileName2 = result;
-    async function handleDownload3(e) {
+    async function handleDownload4(e) {
       const accessToken = localStorage.getItem("token");
       const headers = {
         Authorization: `${accessToken}`,
@@ -21088,7 +21207,7 @@
       file,
       denganRupiahValue,
       randomFileName2,
-      handleDownload3,
+      handleDownload4,
       handleFileUpload,
       input_input_handler,
       keyup_handler,
@@ -21319,7 +21438,7 @@
   ];
 
   // src/App.svelte
-  function add_css23(target) {
+  function add_css26(target) {
     append_styles(target, "svelte-16l003y", "aside ~ main{margin-left:var(--wide)}");
   }
   function create_if_block_111(ctx) {
@@ -21575,7 +21694,7 @@
   var App = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance33, create_fragment42, safe_not_equal, {}, add_css23);
+      init(this, options, instance33, create_fragment42, safe_not_equal, {}, add_css26);
     }
   };
   var App_default = App;

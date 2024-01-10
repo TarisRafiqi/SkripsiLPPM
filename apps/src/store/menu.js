@@ -34,10 +34,6 @@ const dosen = [
       title: "Logout",
       href: "/logout",
    },
-   {
-      title: "Test",
-      href: "/dosen/select",
-   },
 ];
 export default {
    admin,
